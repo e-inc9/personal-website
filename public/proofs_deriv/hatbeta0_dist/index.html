@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distribution of hat beta_0 | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Distribution of hat beta_0</span></h1>
+
+<h2 class="date">2025/05/23</h2>
+</div>
+
+<main>
+<h2 id="deriving-the-distribution-of-hatbeta_0">Deriving the Distribution of <code>\(\hat{\beta}_0\)</code></h2>
+<p>Assume that <code>\(Y_i \sim N(\beta_0 + \beta_1 X_i, \sigma^2)\)</code> as a result of the definition<br>
+<code>\(Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i\)</code>, where each <code>\(\varepsilon_i \sim N(0, \sigma^2)\)</code>.<br>
+This is what&rsquo;s assumed under the simple linear regression model.</p>
+<p>We treat the <code>\(X_i\)</code>&rsquo;s as fixed. <code>\(Y\)</code> is treated as a random variable, owing to the error term.</p>
+\[
+\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}
+\]<p>Since <code>\(\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)\)</code>, and <code>\(\bar{X}\)</code> is a constant determined by the sample and <code>\(\bar{Y}\)</code> is normally distributed, <code>\(\hat{\beta}_0\)</code> is normally distributed.</p>
+\[
+`\begin{aligned}
+\mathbb{E}[\hat{\beta}_0] &= \mathbb{E}[\bar{Y}] - \mathbb{E}[\hat{\beta}_1 \bar{X}] \\
+&= \mathbb{E}\left[\frac{1}{n} \sum (\beta_0 + \beta_1 X_i)\right] - \mathbb{E}[\hat{\beta}_1 \bar{X}] \\
+&= \mathbb{E}\left[\beta_0 + \beta_1 \bar{X} \right] - \bar{X} \cdot \mathbb{E}[\hat{\beta}_1] \\
+&= \beta_0 + \beta_1 \bar{X} - \beta_1 \bar{X} \\
+&= \beta_0
+\end{aligned}`
+\]\[
+`\begin{aligned}
+\operatorname{Var}(\hat{\beta}_0) &= \operatorname{Var}(\bar{Y} - \bar{X} \hat{\beta}_1) \\
+&= \operatorname{Var}(\bar{Y}) + \bar{X}^2 \operatorname{Var}(\hat{\beta}_1) - 2 \bar{X} \operatorname{Cov}(\bar{Y}, \hat{\beta}_1) \\
+&= \sigma^2 \left( \frac{1}{n} \right) + \bar{X}^2 \cdot \frac{\sigma^2}{S_{xx}} \quad \text{(since } \operatorname{Cov}(\bar{Y}, \hat{\beta}_1) = 0\text{)} \\
+&= \sigma^2 \left[ \frac{1}{n} + \frac{\bar{X}^2}{S_{xx}} \right]
+\end{aligned}`
+\]<p>Thus, we arrive at</p>
+\[
+\hat{\beta}_0 \sim N\left( \beta_0,\ \sigma^2 \left[ \frac{1}{n} + \frac{\bar{X}^2}{S_{xx}} \right] \right)
+\]
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

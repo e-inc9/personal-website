@@ -1,0 +1,42 @@
+---
+title: "Distribution of hat beta_0"
+output: html_document
+date: '2025-05-23'
+categories:
+  - Proofs/derivations
+header-includes:
+  - \usepackage{graphicx}
+---
+
+## Deriving distribution of $\hat \beta_0$
+
+Assume that $Y_i \sim N(\beta_0 + \beta_1X_i, \sigma^2)$ as a result of the definition $Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i$, where each $\varepsilon_i \sim N(0, \sigma^2)$. This is what's assumed under the simple linear regression model.
+
+Recall that given a sample, $\hat \beta_0 = \bar Y - \hat \beta_1 \bar X$.
+
+Since $\hat \beta_1 \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})$, and $\bar X$ is a constant determined by the sample and $\bar Y$ is normally distributed, $\hat \beta_0$ is normally distributed.
+
+\[
+\begin{align*}
+E(\hat \beta_0) &= E(\bar Y) - E(\hat \beta_1  \bar X)  \\
+&= E\left(\frac{1}{n} \sum \beta_0 + \beta_1X\right) - E(\hat \beta_1 \bar X)\\
+&= E\left(\frac{1}{n} \left[ n \beta_0 + \beta_1 n \bar X \right]\right) - E(\hat \beta_1 \bar X)\\
+&= E(\beta_0 + \beta_1 \bar X) - E (\hat \beta_1 \bar X)\\ 
+&= \beta_0 + \beta_1 \bar X - \bar X E(\hat \beta_1) \\
+&= \beta_0 + \beta_1 \bar X - \beta_1 \bar X\\
+&= \beta_0
+\end{align*}
+\]
+
+\[
+\begin{align*}
+Var( \hat \beta_0 ) &= Var(\bar Y - \hat \beta_1 \bar X) \\
+&= Var(\bar Y ) + Var (\hat \beta_1 \bar X) -  2\bar X Cov( \bar Y, \hat \beta_1)\\  
+&= Var( \bar Y) + \bar X^2 \left(\frac{\sigma^2}{S_{xx}}\right) \text{, since } Cov(\bar{Y}, \hat{\beta}_1) = 0 \\ 
+&= \sigma^2 \left[ \frac{1}{n} + \frac{\bar X^2}{S_{xx}}\right]
+\end{align*}
+\]
+
+Thus, $\hat \beta_0 \sim N(\beta_0, \sigma^2 \left[ \frac{1}{n} + \frac{\bar X^2}{S_{xx}} \right])$
+
+

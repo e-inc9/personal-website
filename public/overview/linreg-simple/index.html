@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Linear Regression | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Simple Linear Regression</span></h1>
+
+<h2 class="date">2025/05/16</h2>
+</div>
+
+<main>
+<h1 id="mathematical-and-statistical-relations">Mathematical and statistical relations</h1>
+<p>Consider two variables <code>\(x,y\)</code> that you know to be related.</p>
+<ul>
+<li>
+<p>They are related <em>mathematically</em> if there exists a <em>deterministic</em> relationship between the two, such that <code>\(x\)</code> perfectly determines <code>\(y\)</code> and vice versa. Such relationships can be expressed with a function <code>\(Y=f(X)\)</code>. One example is the relationship between inches and centimeters <code>\(Y=2.54X\)</code>. A man who is <code>\(x=65\)</code> inches tall must be <code>\(y=165.1\)</code> centimeters tall.</p>
+</li>
+<li>
+<p>They are related <em>statistically</em> if there exists a relationship between the two, but <code>\(X\)</code> does <em>not</em> perfectly determine  <code>\(Y\)</code> and vice versa. You know the two are related in some way &ndash; whether visually or intuitively &ndash; but you cannot say you know everything about <code>\(Y\)</code> just by <code>\(X\)</code>. Take the below scatter plot relating <code>\(X\)</code>, the velocity at which a bullet is fired, and <code>\(Y\)</code>, the depth of penetration into body armor. Perhaps you didn&rsquo;t even have to look at the below graph to know that a relationship exists. Faster bullet <code>\(\implies\)</code> deeper penetration.  Yet the presence of other factors at play &ndash; angle, wind speed, freak properties of physics &ndash; make you unable to perfectly determine penetration given velocity.</p>
+</li>
+</ul>
+<p>Does that mean we should just <em>give up</em>? Forget fitting a mathematical equation to this relationship? Get scared in the face of unknowing, uncertainty, the potential of being <em>wrong</em>?  Hell no. Patterns exist, trends lurk beneath; you can fit some rules, induce some structure, make some sense of it all &ndash; potential life lesson there&hellip;</p>
+<img src="/overview/linreg-simple_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<h1 id="building-up-to-the-simple-linear-regression-model">Building up to the simple linear regression model</h1>
+<p>Our model is best understood as a <em>formal counterpart</em> for two phenomena observed in statistical relations: 1) the inexactitude of <code>\(Y\)</code> given <code>\(X\)</code> and 2) the possibility of multiple <code>\(Y\)</code>&rsquo;s for one <code>\(X\)</code>. Just because they exist doesn&rsquo;t mean we can&rsquo;t wrangle with them <em>somehow</em>.</p>
+<h2 id="basic-setup">Basic setup</h2>
+<p>Our regression model starts off similar to that of a mathematical function <code>\(Y=f(X)\)</code>. However, we add an <em>error variable</em>, <code>\(\varepsilon\)</code>, to account for the existence of <em>other variables</em> that makes the relationship between <code>\(X\)</code> and <code>\(Y\)</code> imperfect.</p>
+<p>This model assumes a relationship exists between <code>\(X\)</code> and <code>\(Y\)</code>, but concedes that it is non-mathematical and that <code>\(Y\)</code> is influenced by factors other than <code>\(X\)</code>. It is the formal counterpart to what we know from the graph and our intuition.</p>
+\[ Y =f(X) + \varepsilon \]<p>Intuition: &ldquo;$Y$ is determined by <code>\(X\)</code> and other variables represented by <code>\(\varepsilon\)</code>&rdquo;.</p>
+<h2 id="adding-assumption-of-linearity">Adding assumption of linearity</h2>
+<p>At this stage, we must define <code>\(f(X)\)</code>, the nature of the relationship between <code>\(X\)</code> and <code>\(Y\)</code>. It can&rsquo;t just be a black box function. Returning to the graph above, we could say that penetration increases linearly with velocity. The scatter does appear to mostly be a straight blob and not a curvy one.  It&rsquo;s simple and straightforward. <code>\(\beta_1\)</code> is the degree to which penetration increases when velocity increases by 1 m/sec. <code>\(\beta_0\)</code> is penetration when velocity is 0. For most purposes, <code>\(\beta_0\)</code> isn&rsquo;t useful, but since we are modelling a linear relationship, there must exist a <code>\(y\)</code>-intercept.  Note that we do not dispense with <code>\(\varepsilon\)</code>; the assumption is still that there exist other variables affecting <code>\(Y\)</code>, but <code>\(X\)</code>&rsquo;s effect on <code>\(Y\)</code> is linear.
+</p>
+\[ Y = \beta_0 + \beta_1X_i + \varepsilon \]<p>Intuition: &ldquo;$Y$ is determined by <code>\(X\)</code> and other variables, but the relationship between <code>\(X\)</code> and <code>\(Y\)</code> is linear&rdquo;.</p>
+<h2 id="assumptions-for-the-error-variable">Assumptions for the error variable</h2>
+<p>The following assumptions are crucial in making our model useful for inference.</p>
+<ul>
+<li><code>\(\varepsilon\)</code> follows a normal distribution centered at 0 with variance <code>\(\sigma^2\)</code>.
+<ul>
+<li>Thus, <code>\(E(\varepsilon)\)</code> = 0.  We&rsquo;d <em>expect</em> that everything but <code>\(x\)</code> does not affect <code>\(y\)</code>.</li>
+</ul>
+</li>
+<li><code>\(\varepsilon\)</code> has the same distribution for each <code>\(x_i\)</code>.</li>
+<li><code>\(\varepsilon\)</code> is uncorrelated; one <code>\(\varepsilon_i\)</code> is not related to another.</li>
+</ul>
+<p>There are 3 important implications that result from the above:</p>
+<ol>
+<li>
+<p>Given that <code>\(Y_i\)</code>, or <code>\(Y|X_i\)</code> can be broken into a constant <code>\(\beta_0 + \beta_1X_i\)</code> and <code>\(\varepsilon\)</code>, the distribution of <code>\(Y_i\)</code> is exactly normal.</p>
+</li>
+<li>
+<p><code>\(E(Y_i) = E(\beta_0+\beta_1X_i+\varepsilon) = \beta_0 + \beta_1X_i + 0\)</code>. The expected value of <code>\(Y\)</code> at <code>\(X_i\)</code> is solely dependent on the linear relationship we&rsquo;ve assumed!</p>
+</li>
+<li>
+<p><code>\(V(Y_i) = V(\beta_0+\beta_1X_i+\varepsilon) = V(\varepsilon) = \sigma^2\)</code>.</p>
+</li>
+</ol>
+<p>Summarily,</p>
+$$ \varepsilon_i \sim N(0, \sigma^2) \implies (\beta_0 + \beta_1X_i + \varepsilon_i)\sim N(\beta_0+\beta_1X_i+0, \sigma^2)\implies Y_i =Y|X_i \sim(\beta_0 + \beta_1 X_i, \sigma^2) $$<p>
+<code>\(Y_i\)</code> or  <code>\(Y|X_i\)</code> is normally distributed about the line describing the linear relationship between <code>\(x\)</code> and <code>\(y\)</code>. Its variance is the same across <code>\(X_i\)</code>&rsquo;s.</p>
+<p>It might seem like a huge assumption to assume that <code>\(E(\epsilon) = 0\)</code> &ndash; in other words, that on average, we&rsquo;d expect nothing else to affect <code>\(Y\)</code> but <code>\(X\)</code> &ndash; but this doesn&rsquo;t imply that the tyexpectedpical variance about the regression line is zero. Also, note that in most real-world applications of linear regression, <code>\(X\)</code> is not the only variable. See: <a href="linreg-multi.html">multivariate linear regression</a>, where once you have many variables, it&rsquo;s more plausible that the expected impact of &ldquo;everything else&rdquo; is zero. But perhaps this is a larger discussion of &ldquo;expected value&rdquo;&hellip;</p>
+<h3 id="linear-regression-model">Linear regression model</h3>
+<p>The resulting model is:</p>
+$$ Y|X = \beta_0 + \beta_1X + \varepsilon, \varepsilon \sim  N(0, \sigma^2) \implies Y|X \sim N(\beta_0+\beta_1X, \sigma^2) $$<p>
+Which puts us in the perfect position to conduct inference on <code>\(Y_i\)</code>&rsquo;s. I mean, look at the picture below. There exists a distribution for every single point!</p>
+<p>![](../../../ /stats_site/pics/3d_distrib_linreg.png)<!-- --></p>
+<h1 id="fitting-our-model-to-sample-data">Fitting our model to sample data</h1>
+<p>If there exist sample data for which we think the above model applies (<code>\(x,y\)</code> are statistically related in a <em>linear</em> fashion), we then use that data to come up with the proper coefficients <code>\(\hat \beta_0, \hat \beta_1\)</code> in <code>\(\hat Y_i = \hat \beta_0+ \hat \beta_1\)</code>.  The caret symbol denotes our estimate of <code>\(\beta_0, \beta_1\)</code>. The same logic applies to <code>\(\hat Y\)</code>.</p>
+<p>A general rule of thumb for fitting a linear regression line (the <code>\(f(X) = \beta_0 + \beta_1x\)</code> component of our model) is that it should run through our sample points such that the absolute distance between the line and the points in our data is minimized. This is called the <em>ordinary least squares (OLS)</em> method. We can express this distance as a sum of squared differences:</p>
+$$  \sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2 $$<p>
+Considering that this is a convex function, taking the first derivative of it with respect to <code>\(\hat \beta_0, \hat \beta_1\)</code>, equating both results to 0,  and solving the system of equations give us the <code>\(\hat \beta_0, \hat \beta_1\)</code> where the sum of squared differences is minimized:</p>
+$$ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X$$<p>
+</p>
+$$ \hat \beta_1 = \frac{\sum (X_iY_i) - n \bar X \bar Y}{ \sum X_i^2 - n \bar X^2} $$<p><a href="linreg-coeff.html">Here is a full derivation with steps, for those interested.</a></p>
+<p>Using the two above expressions, we can find the line of &ldquo;ordinary least squares&rdquo; for any dataset with more than 2 observations! This is pretty significant and cool.</p>
+<p>Moving forward, we&rsquo;ll use the following abbreviations.</p>
+<ul>
+<li><code>\(\sum (X_iY_i) - n \bar X \bar Y\)</code> as  <code>\(S_{xy}\)</code></li>
+<li><code>\(\sum X_i^2 - n \bar X ^2\)</code> as <code>\(S_{xx}\)</code></li>
+<li><code>\(\sum Y_i^2 - n \bar Y^2\)</code> as <code>\(S_{yy}\)</code></li>
+</ul>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

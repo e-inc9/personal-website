@@ -1,0 +1,90 @@
+---
+title: "Distribution of hat beta_1"
+output: html_document
+date: '2025-05-19'
+categories:
+  - Proofs/derivations
+---
+
+Assume that `\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)` as a result of the definition  
+`\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)`, where each `\(\varepsilon_i \sim(0, \sigma^2)\)`.  
+This is what's assumed under the simple linear regression model.
+
+Recall that given a sample,  
+\[
+\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}
+\]
+
+We treat the `\(X_i\)`'s as fixed. `\(Y\)` is treated as a random variable, owing to the error term. 
+
+### Defining `\(\hat{\beta}_1\)` Differently
+
+We can redefine the numerator `\(\sum(X_i - \bar{X})(Y_i - \bar{Y})\)` as follows:
+
+\[
+\sum(X_i - \bar{X})(Y_i - \bar{Y}) = \sum (X_i - \bar{X}) Y_i - \sum (X_i - \bar{X}) \bar{Y} = \sum (X_i - \bar{X}) Y_i
+\]
+
+The second term becomes zero by the definition of the mean. So:
+
+\[
+\hat{\beta}_1 = \frac{\sum (X_i - \bar{X}) Y_i }{\sum(X_i - \bar{X})^2} = \sum k_i Y_i
+\]
+
+where:
+
+\[
+k_i = \frac{X_i - \bar{X}}{\sum(X_i - \bar{X})^2}
+\]
+
+Each `\(k_i\)` is determined by the sample and fixed for given `\(X_i\)`. The denominator is constant across all `\(k_i\)`.
+
+---
+
+### The Useful `\(k\)`
+
+For each `\(x_i\)`, there is a `\(k_i\)`. Consider the following identities:
+
+\[
+\sum k_i = \frac{\sum (X_i - \bar{X})}{\sum(X_i - \bar{X})^2} = 0
+\]
+
+\[
+\sum k_i X_i = \frac{\sum (X_i^2 - X_i \bar{X})}{\sum(X_i - \bar{X})^2} = \frac{\sum X_i^2 - n \bar{X}^2}{\sum X_i^2 - n \bar{X}^2} = 1
+\]
+
+\[
+\sum k_i^2 = \frac{\sum (X_i - \bar{X})^2}{\left[\sum (X_i - \bar{X})^2\right]^2} = \frac{1}{\sum (X_i - \bar{X})^2}
+\]
+
+---
+
+### Back to `\(\hat{\beta}_1\)`
+
+Since `\(k_i\)` is a constant and `\(Y_i\)` is normal, `\(\hat{\beta}_1 = \sum k_i Y_i\)` is a linear combination of normals.  
+So:
+
+\[
+\hat{\beta}_1 \sim N(\mathbb{E}[\hat{\beta}_1], \text{Var}(\hat{\beta}_1))
+\]
+
+---
+
+### Expected Value and Variance of `\(\hat{\beta}_1\)`
+
+\[
+\mathbb{E}[\hat{\beta}_1] = \mathbb{E}\left[ \sum k_i Y_i \right] = \sum k_i \mathbb{E}[Y_i] = \sum k_i (\beta_0 + \beta_1 X_i)
+\]
+
+\[
+= \beta_0 \sum k_i + \beta_1 \sum k_i X_i = 0 + \beta_1 = \beta_1
+\]
+
+\[
+\text{Var}(\hat{\beta}_1) = \text{Var}\left( \sum k_i Y_i \right) = \sum k_i^2 \text{Var}(Y_i) = \sigma^2 \sum k_i^2 = \frac{\sigma^2}{\sum (X_i - \bar{X})^2}
+\]
+
+Thus:
+\[
+\hat{\beta}_1 \sim \left( \beta_1,\ \frac{\sigma^2}{\sum (X_i - \bar{X})^2} \right)
+\]

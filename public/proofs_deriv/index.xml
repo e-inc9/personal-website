@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Proofs_derivs on A minimal Hugo website</title>
+    <link>https://example.org/proofs_deriv/</link>
+    <description>Recent content in Proofs_derivs on A minimal Hugo website</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://example.org/proofs_deriv/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distribution of hat beta_0</title>
+      <link>https://example.org/proofs_deriv/hatbeta0_dist/</link>
+      <pubDate>Fri, 23 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/proofs_deriv/hatbeta0_dist/</guid>
+      <description>&lt;h2 id=&#34;deriving-the-distribution-of-hatbeta_0&#34;&gt;Deriving the Distribution of &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim N(\beta_0 + \beta_1 X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}&#xA;\]&lt;p&gt;Since &lt;code&gt;\(\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)\)&lt;/code&gt;, and &lt;code&gt;\(\bar{X}\)&lt;/code&gt; is a constant determined by the sample and &lt;code&gt;\(\bar{Y}\)&lt;/code&gt; is normally distributed, &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt; is normally distributed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Distribution of hat beta_1</title>
+      <link>https://example.org/proofs_deriv/hatbeta1_dist/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/proofs_deriv/hatbeta1_dist/</guid>
+      <description>&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;Recall that given a sample,&lt;br&gt;&#xA;&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}&#xA;\]&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Finding Coefficients for Linear Regression</title>
+      <link>https://example.org/proofs_deriv/linreg-coeff/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/proofs_deriv/linreg-coeff/</guid>
+      <description>&lt;h2 id=&#34;finding-coefficients-for-linear-regression&#34;&gt;Finding coefficients for linear regression&lt;/h2&gt;&#xA;&lt;p&gt;Recall that given a sample with observations &lt;code&gt;\(Y_1, Y_2, \dotsc Y_n\)&lt;/code&gt;, the sum of squared differences is given by:&lt;/p&gt;&#xA;$$  &#xA;\sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  &#xA;$$&lt;p&gt;We denote this sum by &lt;code&gt;\(h(\hat \beta_0, \hat \beta_1)\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;We use the first derivative to find the coefficients that minimize this sum. Since this function is convex, we know the first derivative is a minimum.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

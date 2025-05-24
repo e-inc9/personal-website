@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on A minimal Hugo website</title>
+    <link>https://example.org/</link>
+    <description>Recent content in Home on A minimal Hugo website</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distribution of hat beta_0</title>
+      <link>https://example.org/proofs_deriv/hatbeta0_dist/</link>
+      <pubDate>Fri, 23 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/proofs_deriv/hatbeta0_dist/</guid>
+      <description>&lt;h2 id=&#34;deriving-the-distribution-of-hatbeta_0&#34;&gt;Deriving the Distribution of &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim N(\beta_0 + \beta_1 X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}&#xA;\]&lt;p&gt;Since &lt;code&gt;\(\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)\)&lt;/code&gt;, and &lt;code&gt;\(\bar{X}\)&lt;/code&gt; is a constant determined by the sample and &lt;code&gt;\(\bar{Y}\)&lt;/code&gt; is normally distributed, &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt; is normally distributed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>3b1b Linear Algebra</title>
+      <link>https://example.org/misc/3b1b/</link>
+      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/misc/3b1b/</guid>
+      <description>&lt;h1 id=&#34;video-1&#34;&gt;Video 1&lt;/h1&gt;&#xA;&lt;p&gt;Start in the &lt;code&gt;\((x,y)\)&lt;/code&gt; coordinate plane. Define the basis vectors &lt;code&gt;\(i=(1,0)\)&lt;/code&gt; and &lt;code&gt;\(j=(0,1)\)&lt;/code&gt;. These are basis vectors. Note that any linear combination of the two basis vectors &lt;code&gt;\(ai + bj\)&lt;/code&gt; could reach any point on this  plane. We call this set of achievable points the &lt;strong&gt;span&lt;/strong&gt; of the two vectors.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Distribution of hat beta_1</title>
+      <link>https://example.org/proofs_deriv/hatbeta1_dist/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/proofs_deriv/hatbeta1_dist/</guid>
+      <description>&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;Recall that given a sample,&lt;br&gt;&#xA;&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}&#xA;\]&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Finding Coefficients for Linear Regression</title>
+      <link>https://example.org/proofs_deriv/linreg-coeff/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/proofs_deriv/linreg-coeff/</guid>
+      <description>&lt;h2 id=&#34;finding-coefficients-for-linear-regression&#34;&gt;Finding coefficients for linear regression&lt;/h2&gt;&#xA;&lt;p&gt;Recall that given a sample with observations &lt;code&gt;\(Y_1, Y_2, \dotsc Y_n\)&lt;/code&gt;, the sum of squared differences is given by:&lt;/p&gt;&#xA;$$  &#xA;\sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  &#xA;$$&lt;p&gt;We denote this sum by &lt;code&gt;\(h(\hat \beta_0, \hat \beta_1)\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;We use the first derivative to find the coefficients that minimize this sum. Since this function is convex, we know the first derivative is a minimum.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Intro to matrix math for multivariate stats</title>
+      <link>https://example.org/overview/matrix-math/</link>
+      <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/overview/matrix-math/</guid>
+      <description>&lt;h2 id=&#34;why-is-matrix-math-important-to-multivariate-data&#34;&gt;Why is matrix math important to multivariate data?&lt;/h2&gt;&#xA;&lt;p&gt;Consider that for observations within a sample, we can record multiple variables on a single observation. For example, for 10  students sampled from a class, we can record their height, weight, and average GPA. We can represent our findings with a matrix, where a row is an observation, and each column is a variable.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;##       Height_cm Weight_kg  GPA&#xA;##  [1,]       164        75 2.29&#xA;##  [2,]       168        68 2.83&#xA;##  [3,]       186        68 2.83&#xA;##  [4,]       171        66 2.74&#xA;##  [5,]       171        61 2.30&#xA;##  [6,]       187        79 2.28&#xA;##  [7,]       175        69 2.47&#xA;##  [8,]       157        49 2.93&#xA;##  [9,]       163        71 2.53&#xA;## [10,]       166        61 3.72&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;In matrix-math speak, we can denote our matrix by &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt;. We can express &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt; as 40 &lt;code&gt;\(y_{ij}\)&lt;/code&gt;&amp;rsquo;s, where &lt;code&gt;\(y_{ij}\)&lt;/code&gt; is the &lt;code&gt;\(i\)&lt;/code&gt;th observation&amp;rsquo;s &lt;code&gt;\(j\)&lt;/code&gt;th variable.&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Simple Linear Regression</title>
+      <link>https://example.org/overview/linreg-simple/</link>
+      <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/overview/linreg-simple/</guid>
+      <description>&lt;h1 id=&#34;mathematical-and-statistical-relations&#34;&gt;Mathematical and statistical relations&lt;/h1&gt;&#xA;&lt;p&gt;Consider two variables &lt;code&gt;\(x,y\)&lt;/code&gt; that you know to be related.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;mathematically&lt;/em&gt; if there exists a &lt;em&gt;deterministic&lt;/em&gt; relationship between the two, such that &lt;code&gt;\(x\)&lt;/code&gt; perfectly determines &lt;code&gt;\(y\)&lt;/code&gt; and vice versa. Such relationships can be expressed with a function &lt;code&gt;\(Y=f(X)\)&lt;/code&gt;. One example is the relationship between inches and centimeters &lt;code&gt;\(Y=2.54X\)&lt;/code&gt;. A man who is &lt;code&gt;\(x=65\)&lt;/code&gt; inches tall must be &lt;code&gt;\(y=165.1\)&lt;/code&gt; centimeters tall.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;statistically&lt;/em&gt; if there exists a relationship between the two, but &lt;code&gt;\(X\)&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; perfectly determine  &lt;code&gt;\(Y\)&lt;/code&gt; and vice versa. You know the two are related in some way &amp;ndash; whether visually or intuitively &amp;ndash; but you cannot say you know everything about &lt;code&gt;\(Y\)&lt;/code&gt; just by &lt;code&gt;\(X\)&lt;/code&gt;. Take the below scatter plot relating &lt;code&gt;\(X\)&lt;/code&gt;, the velocity at which a bullet is fired, and &lt;code&gt;\(Y\)&lt;/code&gt;, the depth of penetration into body armor. Perhaps you didn&amp;rsquo;t even have to look at the below graph to know that a relationship exists. Faster bullet &lt;code&gt;\(\implies\)&lt;/code&gt; deeper penetration.  Yet the presence of other factors at play &amp;ndash; angle, wind speed, freak properties of physics &amp;ndash; make you unable to perfectly determine penetration given velocity.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title> Chapter 1 - What is Deep Learning?</title>
+      <link>https://example.org/misc/dlp-1r/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/misc/dlp-1r/</guid>
+      <description>&lt;div style=&#34;background-color:#f0f0f0; padding:10px; border-left:4px solid #007ACC; margin-bottom:20px;&#34;&gt;&#xA;&lt;strong&gt;Image credit:&lt;/strong&gt; Select figures reproduced from &#xA;&lt;a href=&#34;https://www.manning.com/books/deep-learning-with-python&#34; target=&#34;_blank&#34;&gt;&#xA;&lt;em&gt;Deep Learning with Python&lt;/em&gt; by François Chollet&lt;/a&gt; (Manning Publications, 2017). &#xA;All rights reserved by the original publisher.&#xA;&lt;/div&gt;&#xA;&lt;p&gt;&lt;strong&gt;Drawing some distinctions:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Computer programming tells the computer the &amp;ldquo;rules&amp;rdquo; to obtain answers&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Rules + data =&amp;gt; answers&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Machine learning learns “statistical” rules from the answers&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Data + answers =&amp;gt; rules&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Machine learning works with large, complex data sets – is an engineering discipline. Statistics works with smaller data sets  &amp;ndash;  is a mathematical field. ML &lt;code&gt;\(\ne\)&lt;/code&gt; statistics; rather, it emerges from statistics at most&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ANOVA (in progress)</title>
+      <link>https://example.org/inference_tests/anova/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/inference_tests/anova/</guid>
+      <description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;ANOVA stands for analysis of variance. The goal of ANOVA is, for a variable measured on more than one group of data, to &lt;strong&gt;use the variance of our measurements&lt;/strong&gt; to determine whether the population mean of those groups is different between at least one pair of groups.&lt;/p&gt;&#xA;\[ H_0: \mu_1 = \mu_2 = ... =\mu_n \]&lt;p&gt;&#xA;&lt;/p&gt;&#xA;\[ H_a: \mu_i \ne \mu_j \text{ for } i \ne j \]&lt;p&gt;You might wonder why we are analyzing &lt;em&gt;variance&lt;/em&gt; to get at a truth involving means &amp;ndash; I certainly did. The best way to intuit &lt;em&gt;why&lt;/em&gt; is through a simple exercise.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Inference with simple linear regression coefficients</title>
+      <link>https://example.org/inference_tests/hatbeta1_inf/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/inference_tests/hatbeta1_inf/</guid>
+      <description>&lt;p&gt;What if I told you that just as the parameters mean and variance  follow a distribution, so do the coefficients &lt;code&gt;\(\hat \beta_0, \hat \beta_1\)&lt;/code&gt; &lt;a href=&#34;linreg-simple.html&#34;&gt;we previously found&lt;/a&gt;? Even though it can be argued that there does not exist a &amp;ldquo;true&amp;rdquo; &lt;code&gt;\(\beta_0\)&lt;/code&gt; and &lt;code&gt;\(\beta_1\)&lt;/code&gt; in the same way a true &lt;code&gt;\(\mu\)&lt;/code&gt; might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we cannot deny the fact that for different samples of a given phenomena, the line fitted will differ as well. Just as we would not state a sample mean as fact, we would not say that the observed effect of &lt;code&gt;\(\hat \beta_1\)&lt;/code&gt; is the true effect! In both cases, we acknowledge its tendency to vary, which is useful in itself.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My thoughts on statistics</title>
+      <link>https://example.org/misc/on-stats/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/misc/on-stats/</guid>
+      <description>&lt;p&gt;By definition, a statistic is information that can be gleaned from a sample. It can result from a mathematical operation performed on a sample (averaging), an arbitrary selection within it (every 5th value), or nonsensical manipulation of it (subtract 100 from each value and convert it to a string based on the starting letter of the value when converted to words).&lt;/p&gt;&#xA;&lt;p&gt;Statistics (note the s!) as a field is concerned with using a statistic from a sample to learn about the larger population from which the sample originated.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About this website</title>
+      <link>https://example.org/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.org/about/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

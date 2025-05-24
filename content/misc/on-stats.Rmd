@@ -1,0 +1,24 @@
+---
+title: "My thoughts on statistics"
+date: "2025-04-26"
+output: html_document
+categories:
+  - Misc
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+By definition, a statistic is information that can be gleaned from a sample. It can result from a mathematical operation performed on a sample (averaging), an arbitrary selection within it (every 5th value), or nonsensical manipulation of it (subtract 100 from each value and convert it to a string based on the starting letter of the value when converted to words). 
+
+Statistics (note the s!) as a field is concerned with using a statistic from a sample to learn about the larger population from which the sample originated. 
+
+A quick, non-mathy example: at a given moment in time, perhaps the millisecond in which you are reading this, there exists an average height of everyone in America. It may change from one millisecond to the next as 2 people die and 3 are born, but there _does_ exist an average height in America right now. How do you think we ought to compute this? Perhaps if we stopped time, we could have a team of people rove America and record the height of every baby, child, teen, adult, and elder, and then, once convinced that they have truly found everyone, average the heights recorded. Congrats, you now have the average height of America in millisecond 458 of the second that you started this paragraph! 
+
+Now, clearly we don't have the technology to stop time. But even if we did, we still wouldn't do the above exercise! Why? Because of constraints on time and resources (human capital, human ability, technology, etc.). This is where statistics comes in. 
+
+One way we could learn about the average height in America is to sample a fixed proportion of everyone in each state. Then, we simply average the heights (this is the application of the sample mean statistic). Using certain mathematical properties of the distribution of sample means that make it a good estimator of the population (true) mean, we go from knowing nothing about the average height in America to being able to estimate it with our samples. Do we find the true average height in America, give or take births and deaths? No. Does what we find give us enough to inform our ideas and decisions moving forward? Definitely.
+
+Statistics is not about determining truths, but about estimating them. The resources expended in the latter pursuit are a minute fraction of the resources that would be required for the former. In an age where time and energy are ever so precious, statistics and the advances in computing that have allowed it to be applied at scale are a blessing indeed.
+

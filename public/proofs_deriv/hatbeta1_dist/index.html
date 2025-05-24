@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distribution of hat beta_1 | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Distribution of hat beta_1</span></h1>
+
+<h2 class="date">2025/05/19</h2>
+</div>
+
+<main>
+<p>Assume that <code>\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)</code> as a result of the definition<br>
+<code>\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)</code>, where each <code>\(\varepsilon_i \sim(0, \sigma^2)\)</code>.<br>
+This is what&rsquo;s assumed under the simple linear regression model.</p>
+<p>Recall that given a sample,<br>
+</p>
+\[
+\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}
+\]<p>We treat the <code>\(X_i\)</code>&rsquo;s as fixed. <code>\(Y\)</code> is treated as a random variable, owing to the error term.</p>
+<h3 id="defining-hatbeta_1-differently">Defining <code>\(\hat{\beta}_1\)</code> Differently</h3>
+<p>We can redefine the numerator <code>\(\sum(X_i - \bar{X})(Y_i - \bar{Y})\)</code> as follows:</p>
+\[
+\sum(X_i - \bar{X})(Y_i - \bar{Y}) = \sum (X_i - \bar{X}) Y_i - \sum (X_i - \bar{X}) \bar{Y} = \sum (X_i - \bar{X}) Y_i
+\]<p>The second term becomes zero by the definition of the mean. So:</p>
+\[
+\hat{\beta}_1 = \frac{\sum (X_i - \bar{X}) Y_i }{\sum(X_i - \bar{X})^2} = \sum k_i Y_i
+\]<p>where:</p>
+\[
+k_i = \frac{X_i - \bar{X}}{\sum(X_i - \bar{X})^2}
+\]<p>Each <code>\(k_i\)</code> is determined by the sample and fixed for given <code>\(X_i\)</code>. The denominator is constant across all <code>\(k_i\)</code>.</p>
+<hr>
+<h3 id="the-useful-k">The Useful <code>\(k\)</code></h3>
+<p>For each <code>\(x_i\)</code>, there is a <code>\(k_i\)</code>. Consider the following identities:</p>
+\[
+\sum k_i = \frac{\sum (X_i - \bar{X})}{\sum(X_i - \bar{X})^2} = 0
+\]\[
+\sum k_i X_i = \frac{\sum (X_i^2 - X_i \bar{X})}{\sum(X_i - \bar{X})^2} = \frac{\sum X_i^2 - n \bar{X}^2}{\sum X_i^2 - n \bar{X}^2} = 1
+\]\[
+\sum k_i^2 = \frac{\sum (X_i - \bar{X})^2}{\left[\sum (X_i - \bar{X})^2\right]^2} = \frac{1}{\sum (X_i - \bar{X})^2}
+\]<hr>
+<h3 id="back-to-hatbeta_1">Back to <code>\(\hat{\beta}_1\)</code></h3>
+<p>Since <code>\(k_i\)</code> is a constant and <code>\(Y_i\)</code> is normal, <code>\(\hat{\beta}_1 = \sum k_i Y_i\)</code> is a linear combination of normals.<br>
+So:</p>
+\[
+\hat{\beta}_1 \sim N(\mathbb{E}[\hat{\beta}_1], \text{Var}(\hat{\beta}_1))
+\]<hr>
+<h3 id="expected-value-and-variance-of-hatbeta_1">Expected Value and Variance of <code>\(\hat{\beta}_1\)</code></h3>
+\[
+\mathbb{E}[\hat{\beta}_1] = \mathbb{E}\left[ \sum k_i Y_i \right] = \sum k_i \mathbb{E}[Y_i] = \sum k_i (\beta_0 + \beta_1 X_i)
+\]\[
+= \beta_0 \sum k_i + \beta_1 \sum k_i X_i = 0 + \beta_1 = \beta_1
+\]\[
+\text{Var}(\hat{\beta}_1) = \text{Var}\left( \sum k_i Y_i \right) = \sum k_i^2 \text{Var}(Y_i) = \sigma^2 \sum k_i^2 = \frac{\sigma^2}{\sum (X_i - \bar{X})^2}
+\]<p>Thus:
+</p>
+\[
+\hat{\beta}_1 \sim \left( \beta_1,\ \frac{\sigma^2}{\sum (X_i - \bar{X})^2} \right)
+\]
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overviews on A minimal Hugo website</title>
+    <link>https://example.org/overview/</link>
+    <description>Recent content in Overviews on A minimal Hugo website</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://example.org/overview/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Intro to matrix math for multivariate stats</title>
+      <link>https://example.org/overview/matrix-math/</link>
+      <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/overview/matrix-math/</guid>
+      <description>&lt;h2 id=&#34;why-is-matrix-math-important-to-multivariate-data&#34;&gt;Why is matrix math important to multivariate data?&lt;/h2&gt;&#xA;&lt;p&gt;Consider that for observations within a sample, we can record multiple variables on a single observation. For example, for 10  students sampled from a class, we can record their height, weight, and average GPA. We can represent our findings with a matrix, where a row is an observation, and each column is a variable.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;##       Height_cm Weight_kg  GPA&#xA;##  [1,]       164        75 2.29&#xA;##  [2,]       168        68 2.83&#xA;##  [3,]       186        68 2.83&#xA;##  [4,]       171        66 2.74&#xA;##  [5,]       171        61 2.30&#xA;##  [6,]       187        79 2.28&#xA;##  [7,]       175        69 2.47&#xA;##  [8,]       157        49 2.93&#xA;##  [9,]       163        71 2.53&#xA;## [10,]       166        61 3.72&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;In matrix-math speak, we can denote our matrix by &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt;. We can express &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt; as 40 &lt;code&gt;\(y_{ij}\)&lt;/code&gt;&amp;rsquo;s, where &lt;code&gt;\(y_{ij}\)&lt;/code&gt; is the &lt;code&gt;\(i\)&lt;/code&gt;th observation&amp;rsquo;s &lt;code&gt;\(j\)&lt;/code&gt;th variable.&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Simple Linear Regression</title>
+      <link>https://example.org/overview/linreg-simple/</link>
+      <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/overview/linreg-simple/</guid>
+      <description>&lt;h1 id=&#34;mathematical-and-statistical-relations&#34;&gt;Mathematical and statistical relations&lt;/h1&gt;&#xA;&lt;p&gt;Consider two variables &lt;code&gt;\(x,y\)&lt;/code&gt; that you know to be related.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;mathematically&lt;/em&gt; if there exists a &lt;em&gt;deterministic&lt;/em&gt; relationship between the two, such that &lt;code&gt;\(x\)&lt;/code&gt; perfectly determines &lt;code&gt;\(y\)&lt;/code&gt; and vice versa. Such relationships can be expressed with a function &lt;code&gt;\(Y=f(X)\)&lt;/code&gt;. One example is the relationship between inches and centimeters &lt;code&gt;\(Y=2.54X\)&lt;/code&gt;. A man who is &lt;code&gt;\(x=65\)&lt;/code&gt; inches tall must be &lt;code&gt;\(y=165.1\)&lt;/code&gt; centimeters tall.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;statistically&lt;/em&gt; if there exists a relationship between the two, but &lt;code&gt;\(X\)&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; perfectly determine  &lt;code&gt;\(Y\)&lt;/code&gt; and vice versa. You know the two are related in some way &amp;ndash; whether visually or intuitively &amp;ndash; but you cannot say you know everything about &lt;code&gt;\(Y\)&lt;/code&gt; just by &lt;code&gt;\(X\)&lt;/code&gt;. Take the below scatter plot relating &lt;code&gt;\(X\)&lt;/code&gt;, the velocity at which a bullet is fired, and &lt;code&gt;\(Y\)&lt;/code&gt;, the depth of penetration into body armor. Perhaps you didn&amp;rsquo;t even have to look at the below graph to know that a relationship exists. Faster bullet &lt;code&gt;\(\implies\)&lt;/code&gt; deeper penetration.  Yet the presence of other factors at play &amp;ndash; angle, wind speed, freak properties of physics &amp;ndash; make you unable to perfectly determine penetration given velocity.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Inference_tests on A minimal Hugo website</title>
+    <link>https://example.org/inference_tests/</link>
+    <description>Recent content in Inference_tests on A minimal Hugo website</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://example.org/inference_tests/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ANOVA (in progress)</title>
+      <link>https://example.org/inference_tests/anova/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/inference_tests/anova/</guid>
+      <description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;ANOVA stands for analysis of variance. The goal of ANOVA is, for a variable measured on more than one group of data, to &lt;strong&gt;use the variance of our measurements&lt;/strong&gt; to determine whether the population mean of those groups is different between at least one pair of groups.&lt;/p&gt;&#xA;\[ H_0: \mu_1 = \mu_2 = ... =\mu_n \]&lt;p&gt;&#xA;&lt;/p&gt;&#xA;\[ H_a: \mu_i \ne \mu_j \text{ for } i \ne j \]&lt;p&gt;You might wonder why we are analyzing &lt;em&gt;variance&lt;/em&gt; to get at a truth involving means &amp;ndash; I certainly did. The best way to intuit &lt;em&gt;why&lt;/em&gt; is through a simple exercise.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Inference with simple linear regression coefficients</title>
+      <link>https://example.org/inference_tests/hatbeta1_inf/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.org/inference_tests/hatbeta1_inf/</guid>
+      <description>&lt;p&gt;What if I told you that just as the parameters mean and variance  follow a distribution, so do the coefficients &lt;code&gt;\(\hat \beta_0, \hat \beta_1\)&lt;/code&gt; &lt;a href=&#34;linreg-simple.html&#34;&gt;we previously found&lt;/a&gt;? Even though it can be argued that there does not exist a &amp;ldquo;true&amp;rdquo; &lt;code&gt;\(\beta_0\)&lt;/code&gt; and &lt;code&gt;\(\beta_1\)&lt;/code&gt; in the same way a true &lt;code&gt;\(\mu\)&lt;/code&gt; might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we cannot deny the fact that for different samples of a given phenomena, the line fitted will differ as well. Just as we would not state a sample mean as fact, we would not say that the observed effect of &lt;code&gt;\(\hat \beta_1\)&lt;/code&gt; is the true effect! In both cases, we acknowledge its tendency to vary, which is useful in itself.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

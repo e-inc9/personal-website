@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inference with simple linear regression coefficients | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Inference with simple linear regression coefficients</span></h1>
+
+<h2 class="date">2025/04/26</h2>
+</div>
+
+<main>
+<p>What if I told you that just as the parameters mean and variance  follow a distribution, so do the coefficients <code>\(\hat \beta_0, \hat \beta_1\)</code> <a href="linreg-simple.html">we previously found</a>? Even though it can be argued that there does not exist a &ldquo;true&rdquo; <code>\(\beta_0\)</code> and <code>\(\beta_1\)</code> in the same way a true <code>\(\mu\)</code> might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we cannot deny the fact that for different samples of a given phenomena, the line fitted will differ as well. Just as we would not state a sample mean as fact, we would not say that the observed effect of <code>\(\hat \beta_1\)</code> is the true effect! In both cases, we acknowledge its tendency to vary, which is useful in itself.</p>
+<p>Something to keep in mind when exploring these distributions is that our findings are &ldquo;downstream&rdquo; of the assumptions of the linear regression model.</p>
+<h2 id="the-distribution-of-hat-beta_1-hat-beta_0">The distribution of hat beta_1, hat beta_0:</h2>
+\[
+\hat{\beta}_1 \sim \left( \beta_1,\ \frac{\sigma^2}{\sum (X_i - \bar{X})^2} \right)
+\]<p><a href="hatbeta1_dist.html">Hat beta_1&rsquo;s full derivation with steps, for those interested.</a></p>
+\[
+\hat{\beta}_0 \sim N\left( \beta_0,\ \sigma^2 \left[ \frac{1}{n} + \frac{\bar{X}^2}{S_{xx}} \right] \right)
+\]<p><a href="hatbeta0_dist.html">Hat beta_0&rsquo;s full derivation with steps, for those interested.</a></p>
+<p>Given a sample, we use the sample mean squared error &ndash; our estimate of <code>\(\varepsilon_i\)</code>&rsquo;s variance  (and by extension <code>\(Y_i\)</code>&rsquo;s) &ndash; in place of <code>\(\sigma^2\)</code>.</p>
+\[ MSE = {SSE \over n-2} = \frac{\sum(\hat Y_i - Y_i)^2}{n-2} \]<p>This give us the <em>studentized</em> distributions of <code>\(\hat \beta_1, \hat \beta_0\)</code></p>
+<h2 id="the-studentized-distribution-of-hat-beta_1-hat-beta_0">The studentized distribution of hat beta_1, hat beta_0:</h2>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

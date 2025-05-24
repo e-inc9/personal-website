@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Finding Coefficients for Linear Regression | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Finding Coefficients for Linear Regression</span></h1>
+
+<h2 class="date">2025/05/19</h2>
+</div>
+
+<main>
+<h2 id="finding-coefficients-for-linear-regression">Finding coefficients for linear regression</h2>
+<p>Recall that given a sample with observations <code>\(Y_1, Y_2, \dotsc Y_n\)</code>, the sum of squared differences is given by:</p>
+$$  
+\sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  
+$$<p>We denote this sum by <code>\(h(\hat \beta_0, \hat \beta_1)\)</code>.</p>
+<p>We use the first derivative to find the coefficients that minimize this sum. Since this function is convex, we know the first derivative is a minimum.</p>
+<p>Note that the derivative of a summation over <code>\(f(x)\)</code> is the sum of <code>\(f'(x)\)</code>:</p>
+$$
+\frac{d}{dx} \left( \sum_{i=1}^n f_i(x) \right) = \sum_{i=1}^n \frac{d}{dx} f_i(x)
+$$<h2 id="optimal-hat-beta_0">Optimal <code>\(\hat \beta_0\)</code></h2>
+<p>Using <code>\(\frac{dh}{d \hat \beta_0} = \sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1\)</code>:</p>
+\[
+`\begin{aligned}
+ \sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1 &= 0 \\ 
+ \sum (Y_i - \hat \beta_0  - \hat \beta_1X_i) &= 0 \\  
+ \sum (Y_i) - n \hat \beta_0  - \hat \beta_1 \sum (X_i) &= 0 \\  
+n \bar Y - n \hat \beta_0  - \hat \beta_1 n \bar X &= 0 \\  
+\bar Y -  \hat \beta_0  - \hat \beta_1  \bar X &= 0 \\ 
+\end{aligned}`
+\]<p>Solving for <code>\(\hat \beta_0\)</code>, we get:</p>
+$$
+\hat \beta_0 = \bar Y - \hat \beta_1 \bar X
+$$<h2 id="optimal-hat-beta_1">Optimal <code>\(\hat \beta_1\)</code></h2>
+<p>Using <code>\(\frac{dh}{d \hat \beta_1} = \sum 2(Y_i - \hat \beta_0 - \hat \beta_1X_i) \cdot  - X_i\)</code>:</p>
+\[
+`\begin{aligned}
+\sum 2(Y_i - \hat \beta_0 - \hat \beta_1X_i) \cdot - X_i &= 0 \\
+\sum (X_iY_i - \hat \beta_0 X_i - \hat \beta_1X_i^2) &= 0 \\
+\sum (X_iY_i) - \hat \beta_0 \cdot n \bar X - \hat \beta_1 \sum (X_i^2) &= 0 \\
+\end{aligned}`
+\]<p>At this stage, we plug in <code>\(\hat \beta_0\)</code>, which we found above, into the expression:</p>
+\[
+`\begin{aligned}
+\sum (X_iY_i) - (\bar Y - \hat \beta_1 \bar X) \cdot n \bar X - \hat \beta_1 \sum X_i^2 &= 0 \\
+\sum (X_iY_i) - (n \bar X \bar Y - n \hat \beta_1 \bar X^2) - \hat \beta_1 \sum X_i^2 &= 0 \\
+\sum (X_iY_i) - n \bar X \bar Y + n \hat \beta_1 \bar X^2 - \hat \beta_1 \sum X_i^2 &= 0 \\
+\sum (X_iY_i) - n \bar X \bar Y + \hat \beta_1 \left[ n \bar X^2 - \sum X_i^2 \right] &= 0 \\
+\end{aligned}`
+\]<p>Solving for the above, we arrive at:</p>
+$$
+\hat \beta_1 = \frac{- \sum (X_iY_i) - n \bar X \bar Y}{n \bar X^2 - \sum X_i^2 }
+$$<p>We apply the <code>\(-1\)</code> in the numerator to the denominator, which gives us the expression for <code>\(\hat \beta_0\)</code> in its conventional form:</p>
+$$
+\hat \beta_1 = \frac{\sum (X_iY_i) - n \bar X \bar Y}{ \sum X_i^2 - n \bar X^2 }
+$$<h2 id="abbreviated-form-of-squared-sums">Abbreviated form of squared sums</h2>
+<p>We usually denote:</p>
+<ul>
+<li><code>\(\sum (X_iY_i) - n \bar X \bar Y\)</code> by <code>\(S_{xy}\)</code></li>
+<li><code>\(\sum X_i^2 - n \bar X ^2\)</code> by <code>\(S_{xx}\)</code></li>
+<li><code>\(\sum Y_i^2 - n \bar Y^2\)</code> by <code>\(S_{yy}\)</code></li>
+</ul>
+<p>Then:</p>
+$$
+\hat \beta_1 = \frac{S_{xy}}{S_{xx}}
+$$
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+
