@@ -1,0 +1,26 @@
+{
+    "id": "6D1BA1B6",
+    "path": "~/Desktop/R/stats_blog/content/proofs_deriv/2025-05-19-hatbeta1-dist/hatbeta1_dist.Rmd",
+    "project_path": "content/proofs_deriv/2025-05-19-hatbeta1-dist/hatbeta1_dist.Rmd",
+    "type": "r_markdown",
+    "hash": "1602124968",
+    "contents": "",
+    "dirty": false,
+    "created": 1748060378067.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "75,4",
+        "scrollLine": "37"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1748050783,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1748050783,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,121 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0"," library(sasLM)"
+"2","G3;Loading required package: mvtnorm
+g"
+"0","library(dplyr)"
+"2","G3;
+Attaching package: ‘dplyr’
+
+g"
+"2","G3;The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+g"
+"2","G3;The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+g"
+"0","library(ggplot2)"
+"0","library(lmtest)"
+"2","G3;Loading required package: zoo
+g"
+"2","G3;
+Attaching package: ‘zoo’
+
+g"
+"2","G3;The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+g"
+"0","library(agricolae)"
+"0","library(vcdExtra)"
+"2","G3;Loading required package: vcd
+g"
+"2","G3;Loading required package: grid
+g"
+"2","G3;Loading required package: gnm
+g"
+"2","G3;
+Attaching package: ‘gnm’
+
+g"
+"2","G3;The following object is masked from ‘package:mvtnorm’:
+
+    Mult
+
+g"
+"2","G3;
+Attaching package: ‘vcdExtra’
+
+g"
+"2","G3;The following object is masked from ‘package:dplyr’:
+
+    summarise
+
+g"
+"0","library(car)"
+"2","G3;Loading required package: carData
+g"
+"2","G3;
+Attaching package: ‘carData’
+
+g"
+"2","G3;The following object is masked from ‘package:vcdExtra’:
+
+    Burt
+
+g"
+"2","G3;
+Attaching package: ‘car’
+
+g"
+"2","G3;The following object is masked from ‘package:dplyr’:
+
+    recode
+
+g"
+"0","library(pROC)"
+"2","G3;Type 'citation(""pROC"")' for a citation.
+g"
+"2","G3;
+Attaching package: ‘pROC’
+
+g"
+"2","G3;The following objects are masked from ‘package:stats’:
+
+    cov, smooth, var
+
+g"
+"0","library(leaps)"
+"0","library(MVN)"
+"0","library(rrcov)"
+"2","G3;Loading required package: robustbase
+g"
+"2","G3;Scalable Robust Estimators with High Breakdown Point (version 1.7-6)
+
+g"
+"0","library(biotools)"
+"2","G3;Loading required package: MASS
+g"
+"2","G3;
+Attaching package: ‘MASS’
+
+g"
+"2","G3;The following object is masked from ‘package:dplyr’:
+
+    select
+
+g"
+"2","G3;The following object is masked from ‘package:sasLM’:
+
+    bacteria
+
+g"
+"2","G3;---
+biotools version 4.3
+g"
+"0","rm(list=ls())"
+"0","set.seed(1)"

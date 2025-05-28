@@ -1,0 +1,87 @@
+---
+title: "Deriving the chi-squared pdf"
+output: pdf_document
+categories:
+  - Proofs/derivations
+date: "2025-05-20"
+header-includes:
+  - \usepackage{amsmath}
+  - \usepackage{parskip}
+  - \usepackage{enumitem}
+---
+
+
+
+
+
+
+<div id="the-chi-squared-distribution" class="section level1">
+<h1>The chi-squared distribution</h1>
+<p>By definition, the chi-squared distribution is the sum of <span class="math inline">\(k\)</span> standard normal variables squared. Let <span class="math inline">\(X\)</span> be a chi-squared variable. Then,</p>
+<p><span class="math display">\[
+X= \sum_{i=1}^k Z_i^2
+\]</span></p>
+<p>Our objective is to define its distribution. We first start with the pdf when <span class="math inline">\(k=1\)</span>. Then, seeing that its pdf is that of a Gamma, we find the pdf of a sum of Gammas. Moment generating functions come into play.</p>
+</div>
+<div id="starting-with-k1" class="section level1">
+<h1>Starting with <span class="math inline">\(k=1\)</span></h1>
+<p>If <span class="math inline">\(k=1\)</span>, then <span class="math inline">\(X = Z^2\)</span>, as we are only summing one squared standard normal variable.</p>
+<p>We find the pdf <span class="math inline">\(f_X(x)\)</span> through the cdf <span class="math inline">\(F_X(x)\)</span> (for <span class="math inline">\(x \ge 0\)</span>). Because of symmetry, the <span class="math inline">\(F_X(x)\)</span> can be expressed in terms of <span class="math inline">\(F_Z(x)\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_X(x) &amp;= P(Z^2 \le x) = P(-\sqrt{x} \le Z \le \sqrt{x}) \\
+&amp;= P(Z \le \sqrt{x}) - \left(1-P(Z \le \sqrt{x})\right) \\
+&amp;= 2F_Z( \sqrt x ) - 1
+\end{aligned}
+\]</span></p>
+<p>Next, we take the derivative of the cdf to find the pdf. Just as the cdf of Z was used above, so is the pdf of Z used here.</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_X(x) = F_X&#39;(x) &amp;= 2 F_Z&#39;(\sqrt{x}) \cdot \frac{1}{2 \sqrt{x}} \\
+&amp;= f_Z(\sqrt{x}) \cdot  \frac{1}{ \sqrt{x}} \\
+&amp;= \frac{1}{\sqrt{2\pi}} e^{{-(\sqrt{x})^2 \over 2}} \cdot \frac{1}{ \sqrt{x}} \\
+&amp;= \frac{1}{\sqrt{2\pi}} e^{{-x \over 2}} \cdot x^{{-1 \over 2}}
+\end{aligned}
+\]</span></p>
+<p>Recall that the pdf of a Gamma random variable is</p>
+<p><span class="math display">\[
+f(x) = \frac{1}{\beta^ \alpha \Gamma(\alpha)} e^{\frac{-x}{\beta}} x^{-\alpha}
+\]</span></p>
+<p>and that <span class="math inline">\(\Gamma(.5) = \sqrt \pi\)</span>.</p>
+<p>Thus, when <span class="math inline">\(k=1\)</span>, <span class="math inline">\(X \sim \text{Gamma}(\alpha = \frac{1}{2}, \beta = 2)\)</span>.</p>
+</div>
+<div id="generalizing-to-k-1" class="section level1">
+<h1>Generalizing to <span class="math inline">\(k &gt; 1\)</span></h1>
+<p>Now let <span class="math inline">\(k&gt;1\)</span>, so that <span class="math inline">\(X = Z_1^2 + Z_2^2 +\dotsc+Z_k^2\)</span>. How would we find the pdf of this sum? For many reasons, we would not simply scale the pdf we found above (one reason: the resulting “function” would not have an upper bound of 1; another reason: that wouldn’t account for the fact that for a given sum, there are multiple ways for the <span class="math inline">\(Z^2\)</span>’s to add up to it).</p>
+<p>It turns out that we can use the moment generating function (mgf) of <span class="math inline">\(f_X(x)\)</span>. Think of an mgf <span class="math inline">\(M_X(t)\)</span> as an alternative way of expressing a pdf <span class="math inline">\(f_X(x)\)</span> that makes certain mathematical operations, such as finding the pdf of a sum of <span class="math inline">\(X\)</span>’s, a lot easier. This mgf also “encodes” other properties of <span class="math inline">\(X\)</span> within itself, but that’s another story.</p>
+<p>Two important properties of mgfs we make use of:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>For a Gamma variable <span class="math inline">\(X\)</span> with <span class="math inline">\(\alpha, \beta\)</span>, its mgf is given by <span class="math display">\[
+M_X(t) = \frac{1}{(1-\beta t)^\alpha}
+\]</span> Because each mgf is unique to a given pdf, from the <span class="math inline">\(\alpha, \beta\)</span> in <span class="math inline">\(M_X(t)\)</span>, we can deduce <span class="math inline">\(f_X(x)\)</span> with certainty.</p></li>
+<li><p>The mgf of a <em>sum</em> of <span class="math inline">\(X\)</span>’s is simply the <em>product</em> of its mgfs.</p></li>
+</ol>
+<p><span class="math display">\[
+M_{X_1 + X_2 + \dotsc + X_n} = M_{X_1} \cdot M_{X_2} \dotsc \cdot M_{X_n}
+\]</span></p>
+<p>Therefore, by (a), when <span class="math inline">\(k=1\)</span>,</p>
+<p><span class="math display">\[
+M_X(t) = \frac{1}{(1- 2t)^{\frac{1}{2}}}
+\]</span></p>
+<p>By (b), when <span class="math inline">\(k&gt;1\)</span> and <span class="math inline">\(X = Z_1^2 + Z_2^2 +\dotsc+Z_k^2\)</span>,</p>
+<p><span class="math display">\[
+M_X(t) = \left( \frac{1}{(1- 2t)^{\frac{1}{2}}}\right)^k = \frac{1}{(1- 2t)^{\frac{k}{2}}}
+\]</span></p>
+<p>By the form of this mgf and the uniqueness property in (a), <span class="math inline">\(f_X\)</span> is also a Gamma, with <span class="math inline">\(\alpha = \frac{k}{2}, \beta = 2\)</span>.</p>
+<p>Thus, a chi-squared variable <span class="math inline">\(X \sim \text{Gamma}(\alpha = \frac{k}{2}, \beta = 2)\)</span>, where <span class="math inline">\(k\)</span> is the number of <span class="math inline">\(Z^2\)</span>’s summed. Because chi-squared variables only vary in their degrees of freedom <span class="math inline">\(k\)</span>, the expression</p>
+<p><span class="math display">\[
+X \sim \chi^2(k) \implies X \sim \text{Gamma}(\alpha = \frac{k}{2}, \beta = 2)
+\]</span></p>
+</div>
+<div id="expected-value-and-variance" class="section level1">
+<h1>Expected value and variance</h1>
+<p>The mean and variance of <span class="math inline">\(X\)</span> are calculated using the properties of the gamma distribution:</p>
+<p><span class="math display">\[
+E(X) = \alpha \beta = {k \over 2} \cdot 2 = k \quad \text{and} \quad V(X) = \alpha \beta^2 = {k \over 2} \cdot 2^2 = 2k
+\]</span></p>
+</div>

@@ -1,7 +1,7 @@
 ---
 title: "Inference with simple linear regression coefficients"
 output: html_document
-date: "2025-05-20"
+date: "2025-05-27"
 categories:
 - Inference/tests
 ---
@@ -12,16 +12,16 @@ Something to keep in mind when exploring these distributions is that our finding
 
 ## The distribution of hat beta_1, hat beta_0:
 \[
-\hat{\beta}_1 \sim \left( \beta_1,\ \frac{\sigma^2}{\sum (X_i - \bar{X})^2} \right)
+\hat{\beta}_1 \sim N\left( \beta_1,\ \frac{\sigma^2}{\sum (X_i - \bar{X})^2} \right)
 \]
 
-[Hat beta_1's full derivation with steps, for those interested.](/proofs_deriv/2025-05-19-hatbeta1-dist/hatbeta1_dist)
+[Hat beta_1's full derivation with steps, for those interested.](proofs_deriv/2025/05/19/distribution-of-hat-beta_1/)
 
 \[
 \hat{\beta}_0 \sim N\left( \beta_0,\ \sigma^2 \left[ \frac{1}{n} + \frac{\bar{X}^2}{S_{xx}} \right] \right)
 \]
 
-[Hat beta_0's full derivation with steps, for those interested.](/proofs_deriv/2025-05-19-hatbeta0-dist/hatbeta0_dist)
+[Hat beta_0's full derivation with steps, for those interested.](proofs_deriv/2025/05/19/distribution-of-hat-beta_1/)
 
 Given a sample, we use the sample mean squared error -- our estimate of `\(\varepsilon_i\)`'s variance  (and by extension `\(Y_i\)`'s) -- in place of `\(\sigma^2\)`. 
 

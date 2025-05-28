@@ -1,0 +1,4 @@
+"0",""
+"0","# Legend"
+"0","legend(""topleft"",  legend = c(""Group 1 Mean"", ""Group 2 Mean"", ""Grand Mean""),"
+"0","       col = c(""red"", ""blue"", ""black""), lty = c(2, 2, 3), lwd = 2, bty = ""n"")"

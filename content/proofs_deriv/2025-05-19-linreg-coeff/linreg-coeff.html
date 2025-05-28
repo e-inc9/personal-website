@@ -1,0 +1,86 @@
+---
+title: "Deriving the coefficients for linear regression"
+output: html_document
+date: '2025-05-19'
+categories:
+  - Proofs/derivations
+header-includes:
+  - \usepackage{amsmath}
+---
+
+
+
+
+<div id="finding-coefficients-for-linear-regression" class="section level2">
+<h2>Finding coefficients for linear regression</h2>
+<p>Recall that given a sample with observations <span class="math inline">\(Y_1, Y_2, \dotsc Y_n\)</span>, the sum of squared differences is given by:</p>
+<p><span class="math display">\[  
+\sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  
+\]</span></p>
+<p>We denote this sum by <span class="math inline">\(h(\hat \beta_0, \hat \beta_1)\)</span>.</p>
+<p>We use the first derivative to find the coefficients that minimize this sum. Since this function is convex, we know the first derivative is a minimum.</p>
+<p>Note that the derivative of a summation over <span class="math inline">\(f(x)\)</span> is the sum of <span class="math inline">\(f&#39;(x)\)</span>:</p>
+<p><span class="math display">\[
+\frac{d}{dx} \left( \sum_{i=1}^n f_i(x) \right) = \sum_{i=1}^n \frac{d}{dx} f_i(x)
+\]</span></p>
+</div>
+<div id="optimal-hat-beta_0" class="section level2">
+<h2>Optimal <span class="math inline">\(\hat \beta_0\)</span></h2>
+<p>Using <span class="math inline">\(\frac{dh}{d \hat \beta_0} = \sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1 &amp;= 0 \\
+\sum (Y_i - \hat \beta_0  - \hat \beta_1X_i) &amp;= 0 \\  
+\sum (Y_i) - n \hat \beta_0  - \hat \beta_1 \sum (X_i) &amp;= 0 \\  
+n \bar Y - n \hat \beta_0  - \hat \beta_1 n \bar X &amp;= 0 \\  
+\bar Y -  \hat \beta_0  - \hat \beta_1  \bar X &amp;= 0 \\
+\end{aligned}
+\]</span></p>
+<p>Solving for <span class="math inline">\(\hat \beta_0\)</span>, we get:</p>
+<p><span class="math display">\[
+\hat \beta_0 = \bar Y - \hat \beta_1 \bar X
+\]</span></p>
+</div>
+<div id="optimal-hat-beta_1" class="section level2">
+<h2>Optimal <span class="math inline">\(\hat \beta_1\)</span></h2>
+<p>Using <span class="math inline">\(\frac{dh}{d \hat \beta_1} = \sum 2(Y_i - \hat \beta_0 - \hat \beta_1X_i) \cdot  - X_i\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum 2(Y_i - \hat \beta_0 - \hat \beta_1X_i) \cdot - X_i &amp;= 0 \\
+\sum (X_iY_i - \hat \beta_0 X_i - \hat \beta_1X_i^2) &amp;= 0 \\
+\sum (X_iY_i) - \hat \beta_0 \cdot n \bar X - \hat \beta_1 \sum (X_i^2) &amp;= 0 \\
+\end{aligned}
+\]</span></p>
+<p>At this stage, we plug in <span class="math inline">\(\hat \beta_0\)</span>, which we found above, into the expression:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum (X_iY_i) - (\bar Y - \hat \beta_1 \bar X) \cdot n \bar X - \hat \beta_1 \sum X_i^2 &amp;= 0 \\
+\sum (X_iY_i) - (n \bar X \bar Y - n \hat \beta_1 \bar X^2) - \hat \beta_1 \sum X_i^2 &amp;= 0 \\
+\sum (X_iY_i) - n \bar X \bar Y + n \hat \beta_1 \bar X^2 - \hat \beta_1 \sum X_i^2 &amp;= 0 \\
+\sum (X_iY_i) - n \bar X \bar Y + \hat \beta_1 \left[ n \bar X^2 - \sum X_i^2 \right] &amp;= 0 \\
+\end{aligned}
+\]</span></p>
+<p>Solving for the above, we arrive at:</p>
+<p><span class="math display">\[
+\hat \beta_1 = \frac{- \sum (X_iY_i) - n \bar X \bar Y}{n \bar X^2 - \sum X_i^2 }
+\]</span></p>
+<p>We apply the <span class="math inline">\(-1\)</span> in the numerator to the denominator, which gives us the expression for <span class="math inline">\(\hat \beta_0\)</span> in its conventional form:</p>
+<p><span class="math display">\[
+\hat \beta_1 = \frac{\sum (X_iY_i) - n \bar X \bar Y}{ \sum X_i^2 - n \bar X^2 }
+\]</span></p>
+</div>
+<div id="abbreviated-form-of-squared-sums" class="section level2">
+<h2>Abbreviated form of squared sums</h2>
+<p>We usually denote:</p>
+<ul>
+<li><span class="math inline">\(\sum (X_iY_i) - n \bar X \bar Y\)</span> by <span class="math inline">\(S_{xy}\)</span><br />
+</li>
+<li><span class="math inline">\(\sum X_i^2 - n \bar X ^2\)</span> by <span class="math inline">\(S_{xx}\)</span><br />
+</li>
+<li><span class="math inline">\(\sum Y_i^2 - n \bar Y^2\)</span> by <span class="math inline">\(S_{yy}\)</span></li>
+</ul>
+<p>Then:</p>
+<p><span class="math display">\[
+\hat \beta_1 = \frac{S_{xy}}{S_{xx}}
+\]</span></p>
+</div>

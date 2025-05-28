@@ -1,0 +1,52 @@
+---
+title: " Chapter 1 - What is Deep Learning?"
+date: "2025-04-26"
+output: html_document
+categories:
+  - Misc
+---
+
+
+
+<div style="background-color:#f0f0f0; padding:10px; border-left:4px solid #007ACC; margin-bottom:20px;">
+<p><strong>Image credit:</strong> Select figures reproduced from
+<a href="https://www.manning.com/books/deep-learning-with-python" target="_blank">
+<em>Deep Learning with Python</em> by François Chollet</a> (Manning Publications, 2017).
+All rights reserved by the original publisher.</p>
+</div>
+<p><strong>Drawing some distinctions:</strong></p>
+<p>Computer programming tells the computer the “rules” to obtain answers</p>
+<ul>
+<li>Rules + data =&gt; answers</li>
+</ul>
+<p>Machine learning learns “statistical” rules from the answers</p>
+<ul>
+<li>Data + answers =&gt; rules</li>
+</ul>
+<p>Machine learning works with large, complex data sets – is an engineering discipline. Statistics works with smaller data sets – is a mathematical field. ML <span class="math inline">\(\ne\)</span> statistics; rather, it emerges from statistics at most</p>
+<p><strong>Required ingredients for machine learning</strong></p>
+<ol style="list-style-type: decimal">
+<li>input data</li>
+<li>expected output</li>
+<li>feedback, a measure of comparative performance – the algorithm’s output vs. the expected output</li>
+</ol>
+<p><strong>What is learning, anyway?</strong></p>
+<p>A machine learning model uses feedback to determine which representation of the input data is most performant.
+Because of computing, multiple representations can be explored within a predefined set of operations.</p>
+<p><strong>What is a representation, anyway?</strong></p>
+<p>Any type of transformation of the data. As implied above, some transformations are more useful than others in determining the model’s output.</p>
+<p>Example: say a model’s objective is to find a rule that lets it identify white dots and black dots. It can transform the raw data by rotating it such that the new coordinate axes neatly separate the black and white dots along the y-axis. This is a useful transformation that yields a rule. To find this one useful transformation, the model cycled through other transformations.</p>
+<p><img src="../pics/1.4.png" /><!-- --></p>
+<p><strong>What is DEEP learning?</strong></p>
+<p>Refers to using many layers of transformations (each layer being a “representation”) to identify rules. Each layer takes the representation that preceded it.</p>
+<p>We call this configuration of layers a <strong>neural network</strong>. It is a type of machine learning model.</p>
+<p><img src="../pics/1.5.png" /><!-- --></p>
+<p><strong>What are WEIGHTS?</strong></p>
+<p>Each representation is <em>parametrized</em> by its weights, which are numbers that determine what a representation <em>does</em> to its input.
+Thus, finding a useful neural network (useful stack of representations) is contingent on finding the optimal weights.</p>
+<p><strong>Putting it all together: weights, representations, and learning</strong></p>
+<p>Learning occurs when a neural network, which is composed of representations parametrized by weights, finds the optimal weights for translating input into the desired output.</p>
+<p><strong>What do you mean optimal?</strong></p>
+<p>The optimal set of weights is determined based on a loss function, which takes a neural network’s output <span class="math inline">\(Y&#39;\)</span> and compares it to the expected (true) output <span class="math inline">\(Y\)</span>. It comes up with a score, which is then used by an optimizer to adjust the weights.</p>
+<p>Weights are adjusted bit by bit until the weights that minimize the loss function are found.</p>
+<p><img src="../pics/1.9.png" /><!-- --></p>

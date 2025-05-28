@@ -4,6 +4,8 @@ output: html_document
 date: '2025-05-19'
 categories:
   - Proofs/derivations
+header-includes:
+  - \usepackage{amsmath}
 ---
 
 ## Finding coefficients for linear regression
@@ -29,13 +31,13 @@ $$
 Using `\(\frac{dh}{d \hat \beta_0} = \sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1\)`:
 
 \[
-`\begin{align*}
+`\begin{aligned}
  \sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1 &= 0 \\ 
  \sum (Y_i - \hat \beta_0  - \hat \beta_1X_i) &= 0 \\  
  \sum (Y_i) - n \hat \beta_0  - \hat \beta_1 \sum (X_i) &= 0 \\  
 n \bar Y - n \hat \beta_0  - \hat \beta_1 n \bar X &= 0 \\  
 \bar Y -  \hat \beta_0  - \hat \beta_1  \bar X &= 0 \\ 
-\end{align*}`
+\end{aligned}`
 \]
 
 Solving for `\(\hat \beta_0\)`, we get:

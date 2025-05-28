@@ -1,0 +1,75 @@
+---
+title: T-distribution
+date: '2025-05-27'
+slug: t-dist
+categories:
+  - Distributions
+tags: []
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(ggplot2)
+rm(list=ls())
+set.seed(1)
+```
+
+
+A t-distributed random variable with $\nu$ degrees of freedom is the ratio of a standard normal variable $Z \sim N(0,1)$ over the square root of a chi-squared variable $Y \sim \chi^2_{\nu}$ divided by its degrees of freedom.
+
+$$
+T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y
+$$
+
+Its pdf is given by
+
+\[ f(t) = \frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}\
+\cdot \frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} } \cdot \Gamma\left({\nu+1 \over 2}\right) \]
+
+[Derivation if you're interested.](/proofs_deriv/2025/05/27/deriving-the-t-pdf/)
+
+The pdf isn't as important as the distribution itself. This distribution is bell-shaped and symmetric about 0 and *approaches normality* as $\nu$ increases. 
+
+```{r, echo=FALSE}
+library(ggplot2)
+
+df_seq <- c(5, 10, 30)  # degrees of freedom for t
+x_vals <- seq(-4, 4, length.out = 500)
+
+# Create a data frame with densities
+plot_data <- do.call(rbind, lapply(df_seq, function(df) {
+  data.frame(
+    x = x_vals,
+    density = dt(x_vals, df),
+    Distribution = paste0("t (df = ", df, ")")
+  )
+}))
+
+# Add normal distribution
+normal_data <- data.frame(
+  x = x_vals,
+  density = dnorm(x_vals),
+  Distribution = "Standard Normal"
+)
+
+plot_data <- rbind(plot_data, normal_data)
+plot_data$Distribution <- factor(plot_data$Distribution,
+  levels = c(paste0("t (df = ", df_seq, ")"), "Standard Normal"))
+
+# Plot
+ggplot(plot_data, aes(x = x, y = density, color = Distribution)) +
+  geom_line(linewidth = 1) +
+  theme_minimal() +
+  labs(title = "t-distributions Converging to Normal",
+       y = "Density", x = "t / z value")
+
+```
+
+We can also demonstrate this mathematically. The denominator $\sqrt{\frac{Y}{\nu}}$ is the square root of an average of individual Gamma variables $Z_i^2 \sim Gamma(\alpha = \frac{1}{2}, \beta= 2).$ By the law of large numbers, as $\nu \rightarrow \infty$, this average $\frac{Y}{\nu} = \frac{1}{\nu} \sum Z_i^2$ becomes close to $E(Z_i^2) = \alpha \beta = 1$.
+
+Thus, as $n \rightarrow \infty, \frac{Y}{\nu} \xrightarrow{p} 1 \implies T_\nu = \frac{Z}{\sqrt{\frac{Y}{\nu}}} \xrightarrow{d} Z$.
+
+($\xrightarrow{p}$ means converges in probability and $\xrightarrow{d}$ means converges in distribution.)
+
+This t distribution pops up 

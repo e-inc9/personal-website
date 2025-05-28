@@ -1,0 +1,74 @@
+---
+title: "Distribution of hat beta_1"
+output: html_document
+date: '2025-05-19'
+categories:
+  - Proofs/derivations
+---
+
+
+
+<p>Assume that <span class="math inline">\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)</span> as a result of the definition<br />
+<span class="math inline">\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)</span>, where each <span class="math inline">\(\varepsilon_i \sim(0, \sigma^2)\)</span>.<br />
+This is what’s assumed under the simple linear regression model.</p>
+<p>Recall that given a sample,<br />
+<span class="math display">\[
+\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}
+\]</span></p>
+<p>We treat the <span class="math inline">\(X_i\)</span>’s as fixed. <span class="math inline">\(Y\)</span> is treated as a random variable, owing to the error term.</p>
+<div id="defining-hatbeta_1-differently" class="section level3">
+<h3>Defining <span class="math inline">\(\hat{\beta}_1\)</span> Differently</h3>
+<p>We can redefine the numerator <span class="math inline">\(\sum(X_i - \bar{X})(Y_i - \bar{Y})\)</span> as follows:</p>
+<p><span class="math display">\[
+\sum(X_i - \bar{X})(Y_i - \bar{Y}) = \sum (X_i - \bar{X}) Y_i - \sum (X_i - \bar{X}) \bar{Y} = \sum (X_i - \bar{X}) Y_i
+\]</span></p>
+<p>The second term becomes zero by the definition of the mean. So:</p>
+<p><span class="math display">\[
+\hat{\beta}_1 = \frac{\sum (X_i - \bar{X}) Y_i }{\sum(X_i - \bar{X})^2} = \sum k_i Y_i
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+k_i = \frac{X_i - \bar{X}}{\sum(X_i - \bar{X})^2}
+\]</span></p>
+<p>Each <span class="math inline">\(k_i\)</span> is determined by the sample and fixed for given <span class="math inline">\(X_i\)</span>. The denominator is constant across all <span class="math inline">\(k_i\)</span>.</p>
+<hr />
+</div>
+<div id="the-useful-k" class="section level3">
+<h3>The Useful <span class="math inline">\(k\)</span></h3>
+<p>For each <span class="math inline">\(x_i\)</span>, there is a <span class="math inline">\(k_i\)</span>. Consider the following identities:</p>
+<p><span class="math display">\[
+\sum k_i = \frac{\sum (X_i - \bar{X})}{\sum(X_i - \bar{X})^2} = 0
+\]</span></p>
+<p><span class="math display">\[
+\sum k_i X_i = \frac{\sum (X_i^2 - X_i \bar{X})}{\sum(X_i - \bar{X})^2} = \frac{\sum X_i^2 - n \bar{X}^2}{\sum X_i^2 - n \bar{X}^2} = 1
+\]</span></p>
+<p><span class="math display">\[
+\sum k_i^2 = \frac{\sum (X_i - \bar{X})^2}{\left[\sum (X_i - \bar{X})^2\right]^2} = \frac{1}{\sum (X_i - \bar{X})^2}
+\]</span></p>
+<hr />
+</div>
+<div id="back-to-hatbeta_1" class="section level3">
+<h3>Back to <span class="math inline">\(\hat{\beta}_1\)</span></h3>
+<p>Since <span class="math inline">\(k_i\)</span> is a constant and <span class="math inline">\(Y_i\)</span> is normal, <span class="math inline">\(\hat{\beta}_1 = \sum k_i Y_i\)</span> is a linear combination of normals.<br />
+So:</p>
+<p><span class="math display">\[
+\hat{\beta}_1 \sim N(\mathbb{E}[\hat{\beta}_1], \text{Var}(\hat{\beta}_1))
+\]</span></p>
+<hr />
+</div>
+<div id="expected-value-and-variance-of-hatbeta_1" class="section level3">
+<h3>Expected Value and Variance of <span class="math inline">\(\hat{\beta}_1\)</span></h3>
+<p><span class="math display">\[
+\mathbb{E}[\hat{\beta}_1] = \mathbb{E}\left[ \sum k_i Y_i \right] = \sum k_i \mathbb{E}[Y_i] = \sum k_i (\beta_0 + \beta_1 X_i)
+\]</span></p>
+<p><span class="math display">\[
+= \beta_0 \sum k_i + \beta_1 \sum k_i X_i = 0 + \beta_1 = \beta_1
+\]</span></p>
+<p><span class="math display">\[
+\text{Var}(\hat{\beta}_1) = \text{Var}\left( \sum k_i Y_i \right) = \sum k_i^2 \text{Var}(Y_i) = \sigma^2 \sum k_i^2 = \frac{\sigma^2}{\sum (X_i - \bar{X})^2}
+\]</span></p>
+<p>Thus:
+<span class="math display">\[
+\hat{\beta}_1 \sim \left( \beta_1,\ \frac{\sigma^2}{\sum (X_i - \bar{X})^2} \right)
+\]</span></p>
+</div>

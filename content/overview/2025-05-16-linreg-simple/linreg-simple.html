@@ -1,0 +1,85 @@
+---
+title: "Simple Linear Regression"
+output: html_document
+date: '2025-05-16'
+categories:
+  - General
+---
+
+
+
+<div id="mathematical-and-statistical-relations" class="section level1">
+<h1>Mathematical and statistical relations</h1>
+<p>Consider two variables <span class="math inline">\(x,y\)</span> that you know to be related.</p>
+<ul>
+<li><p>They are related <em>mathematically</em> if there exists a <em>deterministic</em> relationship between the two, such that <span class="math inline">\(x\)</span> perfectly determines <span class="math inline">\(y\)</span> and vice versa. Such relationships can be expressed with a function <span class="math inline">\(Y=f(X)\)</span>. One example is the relationship between inches and centimeters <span class="math inline">\(Y=2.54X\)</span>. A man who is <span class="math inline">\(x=65\)</span> inches tall must be <span class="math inline">\(y=165.1\)</span> centimeters tall.</p></li>
+<li><p>They are related <em>statistically</em> if there exists a relationship between the two, but <span class="math inline">\(X\)</span> does <em>not</em> perfectly determine <span class="math inline">\(Y\)</span> and vice versa. You know the two are related in some way – whether visually or intuitively – but you cannot say you know everything about <span class="math inline">\(Y\)</span> just by <span class="math inline">\(X\)</span>. Take the below scatter plot relating <span class="math inline">\(X\)</span>, the velocity at which a bullet is fired, and <span class="math inline">\(Y\)</span>, the depth of penetration into body armor. Perhaps you didn’t even have to look at the below graph to know that a relationship exists. Faster bullet <span class="math inline">\(\implies\)</span> deeper penetration. Yet the presence of other factors at play – angle, wind speed, freak properties of physics – make you unable to perfectly determine penetration given velocity.</p></li>
+</ul>
+<p>Does that mean we should just <em>give up</em>? Forget fitting a mathematical equation to this relationship? Get scared in the face of unknowing, uncertainty, the potential of being <em>wrong</em>? Hell no. Patterns exist, trends lurk beneath; you can fit some rules, induce some structure, make some sense of it all – potential life lesson there…</p>
+<p><img src="/overview/2025-05-16-linreg-simple/linreg-simple_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="building-up-to-the-simple-linear-regression-model" class="section level1">
+<h1>Building up to the simple linear regression model</h1>
+<p>Our model is best understood as a <em>formal counterpart</em> for two phenomena observed in statistical relations: 1) the inexactitude of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> and 2) the possibility of multiple <span class="math inline">\(Y\)</span>’s for one <span class="math inline">\(X\)</span>. Just because they exist doesn’t mean we can’t wrangle with them <em>somehow</em>.</p>
+<div id="basic-setup" class="section level2">
+<h2>Basic setup</h2>
+<p>Our regression model starts off similar to that of a mathematical function <span class="math inline">\(Y=f(X)\)</span>. However, we add an <em>error variable</em>, <span class="math inline">\(\varepsilon\)</span>, to account for the existence of <em>other variables</em> that makes the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> imperfect.</p>
+<p>This model assumes a relationship exists between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, but concedes that it is non-mathematical and that <span class="math inline">\(Y\)</span> is influenced by factors other than <span class="math inline">\(X\)</span>. It is the formal counterpart to what we know from the graph and our intuition.</p>
+<p><span class="math display">\[ Y =f(X) + \varepsilon \]</span></p>
+<p>Intuition: “<span class="math inline">\(Y\)</span> is determined by <span class="math inline">\(X\)</span> and other variables represented by <span class="math inline">\(\varepsilon\)</span>”.</p>
+</div>
+<div id="adding-assumption-of-linearity" class="section level2">
+<h2>Adding assumption of linearity</h2>
+<p>At this stage, we must define <span class="math inline">\(f(X)\)</span>, the nature of the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. It can’t just be a black box function. Returning to the graph above, we could say that penetration increases linearly with velocity. The scatter does appear to mostly be a straight blob and not a curvy one. It’s simple and straightforward. <span class="math inline">\(\beta_1\)</span> is the degree to which penetration increases when velocity increases by 1 m/sec. <span class="math inline">\(\beta_0\)</span> is penetration when velocity is 0. For most purposes, <span class="math inline">\(\beta_0\)</span> isn’t useful, but since we are modelling a linear relationship, there must exist a <span class="math inline">\(y\)</span>-intercept. Note that we do not dispense with <span class="math inline">\(\varepsilon\)</span>; the assumption is still that there exist other variables affecting <span class="math inline">\(Y\)</span>, but <span class="math inline">\(X\)</span>’s effect on <span class="math inline">\(Y\)</span> is linear.
+<span class="math display">\[ Y = \beta_0 + \beta_1X_i + \varepsilon \]</span></p>
+<p>Intuition: “<span class="math inline">\(Y\)</span> is determined by <span class="math inline">\(X\)</span> and other variables, but the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is linear”.</p>
+</div>
+<div id="assumptions-for-the-error-variable" class="section level2">
+<h2>Assumptions for the error variable</h2>
+<p>The following assumptions are crucial in making our model useful for inference.</p>
+<ul>
+<li><span class="math inline">\(\varepsilon\)</span> follows a normal distribution centered at 0 with variance <span class="math inline">\(\sigma^2\)</span>.
+<ul>
+<li>Thus, <span class="math inline">\(E(\varepsilon)\)</span> = 0. We’d <em>expect</em> that everything but <span class="math inline">\(x\)</span> does not affect <span class="math inline">\(y\)</span>.</li>
+</ul></li>
+<li><span class="math inline">\(\varepsilon\)</span> has the same distribution for each <span class="math inline">\(x_i\)</span>.</li>
+<li><span class="math inline">\(\varepsilon\)</span> is uncorrelated; one <span class="math inline">\(\varepsilon_i\)</span> is not related to another.</li>
+</ul>
+<p>There are 3 important implications that result from the above:</p>
+<ol style="list-style-type: decimal">
+<li><p>Given that <span class="math inline">\(Y_i\)</span>, or <span class="math inline">\(Y|X_i\)</span> can be broken into a constant <span class="math inline">\(\beta_0 + \beta_1X_i\)</span> and <span class="math inline">\(\varepsilon\)</span>, the distribution of <span class="math inline">\(Y_i\)</span> is exactly normal.</p></li>
+<li><p><span class="math inline">\(E(Y_i) = E(\beta_0+\beta_1X_i+\varepsilon) = \beta_0 + \beta_1X_i + 0\)</span>. The expected value of <span class="math inline">\(Y\)</span> at <span class="math inline">\(X_i\)</span> is solely dependent on the linear relationship we’ve assumed!</p></li>
+<li><p><span class="math inline">\(V(Y_i) = V(\beta_0+\beta_1X_i+\varepsilon) = V(\varepsilon) = \sigma^2\)</span>.</p></li>
+</ol>
+<p>Summarily,</p>
+<p><span class="math display">\[ \varepsilon_i \sim N(0, \sigma^2) \implies (\beta_0 + \beta_1X_i + \varepsilon_i)\sim N(\beta_0+\beta_1X_i+0, \sigma^2)\implies Y_i =Y|X_i \sim(\beta_0 + \beta_1 X_i, \sigma^2) \]</span>
+<span class="math inline">\(Y_i\)</span> or <span class="math inline">\(Y|X_i\)</span> is normally distributed about the line describing the linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Its variance is the same across <span class="math inline">\(X_i\)</span>’s.</p>
+<p>It might seem like a huge assumption to assume that <span class="math inline">\(E(\epsilon) = 0\)</span> – in other words, that on average, we’d expect nothing else to affect <span class="math inline">\(Y\)</span> but <span class="math inline">\(X\)</span> – but this doesn’t imply that the tyexpectedpical variance about the regression line is zero. Also, note that in most real-world applications of linear regression, <span class="math inline">\(X\)</span> is not the only variable. See: <a href="linreg-multi.html">multivariate linear regression</a>, where once you have many variables, it’s more plausible that the expected impact of “everything else” is zero. But perhaps this is a larger discussion of “expected value”…</p>
+<div id="linear-regression-model" class="section level3">
+<h3>Linear regression model</h3>
+<p>The resulting model is:</p>
+<p><span class="math display">\[ Y|X = \beta_0 + \beta_1X + \varepsilon, \varepsilon \sim  N(0, \sigma^2) \implies Y|X \sim N(\beta_0+\beta_1X, \sigma^2) \]</span>
+Which puts us in the perfect position to conduct inference on <span class="math inline">\(Y_i\)</span>’s. I mean, look at the picture below. There exists a distribution for every single point!</p>
+<p><img src="../../../../../../../../pics/3d_distrib_linreg.png" /><!-- --></p>
+</div>
+</div>
+</div>
+<div id="fitting-our-model-to-sample-data" class="section level1">
+<h1>Fitting our model to sample data</h1>
+<p>If there exist sample data for which we think the above model applies (<span class="math inline">\(x,y\)</span> are statistically related in a <em>linear</em> fashion), we then use that data to come up with the proper coefficients <span class="math inline">\(\hat \beta_0, \hat \beta_1\)</span> in <span class="math inline">\(\hat Y_i = \hat \beta_0+ \hat \beta_1\)</span>. The caret symbol denotes our estimate of <span class="math inline">\(\beta_0, \beta_1\)</span>. The same logic applies to <span class="math inline">\(\hat Y\)</span>.</p>
+<p>A general rule of thumb for fitting a linear regression line (the <span class="math inline">\(f(X) = \beta_0 + \beta_1x\)</span> component of our model) is that it should run through our sample points such that the absolute distance between the line and the points in our data is minimized. This is called the <em>ordinary least squares (OLS)</em> method. We can express this distance as a sum of squared differences:</p>
+<p><span class="math display">\[  \sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2 \]</span>
+Considering that this is a convex function, taking the first derivative of it with respect to <span class="math inline">\(\hat \beta_0, \hat \beta_1\)</span>, equating both results to 0, and solving the system of equations give us the <span class="math inline">\(\hat \beta_0, \hat \beta_1\)</span> where the sum of squared differences is minimized:</p>
+<p><span class="math display">\[ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X\]</span>
+<span class="math display">\[ \hat \beta_1 = \frac{\sum (X_iY_i) - n \bar X \bar Y}{ \sum X_i^2 - n \bar X^2} \]</span></p>
+<p><a href="/proofs_deriv/2025-05-19-linreg-coeff/linreg-coeff">Full derivation here, for those interested.</a>
+Using the two above expressions, we can find the line of “ordinary least squares” for any dataset with more than 2 observations! This is pretty significant and cool.</p>
+<p>Moving forward, we’ll use the following abbreviations.</p>
+<ul>
+<li><span class="math inline">\(\sum (X_iY_i) - n \bar X \bar Y\)</span> as <span class="math inline">\(S_{xy}\)</span><br />
+</li>
+<li><span class="math inline">\(\sum X_i^2 - n \bar X ^2\)</span> as <span class="math inline">\(S_{xx}\)</span><br />
+</li>
+<li><span class="math inline">\(\sum Y_i^2 - n \bar Y^2\)</span> as <span class="math inline">\(S_{yy}\)</span></li>
+</ul>
+</div>

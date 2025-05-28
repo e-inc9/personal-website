@@ -1,0 +1,4 @@
+"0",""
+"0",""
+"0","# Add vlines for group means"
+"0","abline(v = mean1_a, col = ""red"", lty = 2, lwd = 2)"

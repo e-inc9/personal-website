@@ -1,0 +1,83 @@
+---
+title: "Deriving the t pdf"
+date: "2025-05-27"
+output: pdf_document
+categories:
+  - Proofs/derivations
+header-includes:
+  - \usepackage{amsmath}
+  - \usepackage{parskip}
+  - \usepackage{enumitem}
+---
+
+By definition, a t-distributed random variable with `\(\nu\)` degrees of freedom is the ratio of a standard normal variable `\(Z \sim N(0,1)\)` over the square root of a chi-squared variable `\(Y \sim \chi^2_{\nu}\)` divided by its degrees of freedom. 
+
+\[
+T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y
+\]
+
+This is a lengthy derivation, so buckle up. We start with the cdf. We isolate `\(Z\)` since its upper and lower bounds make the inner integral easier to work with (i.e. for Leibniz' rule, the derivative of the upper bound is easy to compute). 
+
+\[
+F(t) = P\left( \frac{Z}{\sqrt{{Y \over \nu}}} \le t \right) = P \left( Z \le t \sqrt{{Y \over \nu}} \right) = \int_0^\infty \int_{-\infty}^{ t \sqrt{{Y \over \nu}}} f(z,y)\,dz\,dy
+\]
+
+Then, we take the derivative of the cdf to arrive at the pdf. Since `\(Z,Y\)` are independent, `\(f(z,y) = f(z)f(y)\)`.
+
+\[
+`\begin{aligned}
+f(t) &= \int_0^\infty \frac{d}{dt} \int_{-\infty}^{ t \sqrt{{y \over \nu}}} f(z,y)\,dz\,dy\\
+&= \int_0^\infty f( t \sqrt{{y \over \nu}}, y) \cdot \sqrt{{y \over \nu}} \, dy \quad \text{ (by Leibniz' rule)}\\
+&= \int_0^\infty \frac{1}{\sqrt{2\pi}} e^{-\frac{(t \sqrt{{y \over \nu}})^2}{2}} \cdot
+\frac{1}{\Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}} 
+e^{{-y \over 2}} y^{{\nu \over 2} - 1} 
+\cdot 
+y^{{1 \over 2}} \nu^{{-1 \over 2}} \, dy \quad \text{(standard normal pdf times gamma pdf)} \\
+&= \frac{1}{\sqrt{2\pi} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}} \nu^{{1 \over 2}}} 
+\int_0^\infty y ^{\frac{\nu +1}{2} - 1} \cdot e^{-\frac{y}{2}({t^2 \over \nu} + 1)}\,dy
+\end{aligned}`
+\]
+
+We perform integration by substitution. 
+
+\[
+`\begin{aligned}
+u &= \frac{y}{2}\left({t^2 \over \nu} + 1\right)\\
+y &= \frac{2u}{{t^2 \over \nu} + 1}\\
+\frac{du}{dy} &= \frac{1}{2}\left({t^2 \over \nu} + 1\right) \implies dy = \frac{2}{{t^2 \over \nu} + 1}\,du
+\end{aligned}`
+\]
+
+Substituting back into `\(f(t)\)`...
+
+\[
+`\begin{aligned}
+f(t) &= 
+\frac{1}{\sqrt{2\pi\nu} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}}  
+\cdot 
+\int_0^\infty  \left[  \frac{2}{{t^2 \over \nu} + 1}\right] ^{\frac{\nu +1}{2} - 1} 
+\cdot
+u ^{\frac{\nu +1}{2} - 1} \cdot e^{-u} 
+\cdot
+\frac{2}{\frac{t^2}{\nu}+1}
+\, du\\ 
+&=  
+\frac{1}{\sqrt{2\pi\nu} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}}  
+\cdot 
+\left[  \frac{2}{{t^2 \over \nu} + 1}\right] ^{\frac{\nu+1}{2}} 
+\cdot 
+\Gamma\left({\nu+1 \over 2}\right) \\
+&\quad ... \text{ and since } \frac{2^{{\nu + 1 \over 2}}}{2^{\nu \over 2}}= \sqrt{2} \\
+&= 
+\frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}  
+\cdot 
+\frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} }
+\cdot
+\Gamma\left({\nu+1 \over 2}\right)
+\end{aligned}`
+\]
+
+Yep, that's the distribution. The derivation really isn't that important, nor is the pdf worth memorizing.
+
+## Expected value and variance
+

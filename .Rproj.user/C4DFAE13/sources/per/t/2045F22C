@@ -1,0 +1,26 @@
+{
+    "id": "2045F22C",
+    "path": "~/Desktop/R/stats_blog/content/proofs_deriv/2025-05-19-linreg-coeff/linreg-coeff.Rmd",
+    "project_path": "content/proofs_deriv/2025-05-19-linreg-coeff/linreg-coeff.Rmd",
+    "type": "r_markdown",
+    "hash": "1892360290",
+    "contents": "",
+    "dirty": false,
+    "created": 1748060797214.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "37,11",
+        "scrollLine": "25"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1748061576,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1748061576242,
+    "read_only": false,
+    "read_only_alternatives": []
+}

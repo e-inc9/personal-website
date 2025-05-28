@@ -1,0 +1,8 @@
+"0",""
+"0","# Plot (b)"
+"0","stripchart(c(group1_b, group2_b) ~ factor(c(rep(1, 50), rep(2, 50))),"
+"0","           method = ""jitter"", pch = 16,"
+"0","           col = c(rep(""red"", 20), rep(""blue"", 20)),"
+"0","           vertical = FALSE,"
+"0","            xlim= c(-2,5),"
+"0","           xlab = """", ylab = """", main = ""(d) Loose scatter"")"

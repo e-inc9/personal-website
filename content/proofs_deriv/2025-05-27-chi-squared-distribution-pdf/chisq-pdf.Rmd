@@ -1,0 +1,102 @@
+---
+title: "Deriving the chi-squared pdf"
+output: pdf_document
+categories:
+  - Proofs/derivations
+date: "2025-05-20"
+header-includes:
+  - \usepackage{amsmath}
+  - \usepackage{parskip}
+  - \usepackage{enumitem}
+---
+
+# The chi-squared distribution
+
+By definition, the chi-squared distribution is the sum of $k$ standard normal variables squared. Let $X$ be a chi-squared variable. Then,
+
+$$
+X= \sum_{i=1}^k Z_i^2
+$$
+
+Our objective is to define its distribution. We first start with the pdf when $k=1$. Then, seeing that its pdf is that of a Gamma, we find the pdf of a sum of Gammas. Moment generating functions come into play.
+
+# Starting with $k=1$
+
+If $k=1$, then $X = Z^2$, as we are only summing one squared standard normal variable.
+
+We find the pdf $f_X(x)$ through the cdf $F_X(x)$ (for $x \ge 0$). Because of symmetry, the $F_X(x)$ can be expressed in terms of $F_Z(x)$.
+
+$$
+\begin{aligned}
+F_X(x) &= P(Z^2 \le x) = P(-\sqrt{x} \le Z \le \sqrt{x}) \\
+&= P(Z \le \sqrt{x}) - \left(1-P(Z \le \sqrt{x})\right) \\
+&= 2F_Z( \sqrt x ) - 1
+\end{aligned}
+$$
+
+Next, we take the derivative of the cdf to find the pdf. Just as the cdf of Z was used above, so is the pdf of Z used here.
+
+$$
+\begin{aligned}
+f_X(x) = F_X'(x) &= 2 F_Z'(\sqrt{x}) \cdot \frac{1}{2 \sqrt{x}} \\
+&= f_Z(\sqrt{x}) \cdot  \frac{1}{ \sqrt{x}} \\ 
+&= \frac{1}{\sqrt{2\pi}} e^{{-(\sqrt{x})^2 \over 2}} \cdot \frac{1}{ \sqrt{x}} \\ 
+&= \frac{1}{\sqrt{2\pi}} e^{{-x \over 2}} \cdot x^{{-1 \over 2}}
+\end{aligned}
+$$
+
+Recall that the pdf of a Gamma random variable is
+
+$$
+f(x) = \frac{1}{\beta^ \alpha \Gamma(\alpha)} e^{\frac{-x}{\beta}} x^{-\alpha}
+$$
+
+and that $\Gamma(.5) = \sqrt \pi$.
+
+Thus, when $k=1$, $X \sim \text{Gamma}(\alpha = \frac{1}{2}, \beta = 2)$.
+
+# Generalizing to $k > 1$
+
+Now let $k>1$, so that $X = Z_1^2 + Z_2^2 +\dotsc+Z_k^2$. How would we find the pdf of this sum? For many reasons, we would not simply scale the pdf we found above (one reason: the resulting "function" would not have an upper bound of 1; another reason: that wouldn't account for the fact that for a given sum, there are multiple ways for the $Z^2$'s to add up to it).
+
+It turns out that we can use the moment generating function (mgf) of $f_X(x)$. Think of an mgf $M_X(t)$ as an alternative way of expressing a pdf $f_X(x)$ that makes certain mathematical operations, such as finding the pdf of a sum of $X$'s, a lot easier. This mgf also “encodes” other properties of $X$ within itself, but that's another story.
+
+Two important properties of mgfs we make use of:
+
+a)  For a Gamma variable $X$ with $\alpha, \beta$, its mgf is given by $$
+    M_X(t) = \frac{1}{(1-\beta t)^\alpha}
+    $$ Because each mgf is unique to a given pdf, from the $\alpha, \beta$ in $M_X(t)$, we can deduce $f_X(x)$ with certainty.
+
+b)  The mgf of a *sum* of $X$'s is simply the *product* of its mgfs.
+
+$$
+M_{X_1 + X_2 + \dotsc + X_n} = M_{X_1} \cdot M_{X_2} \dotsc \cdot M_{X_n}
+$$
+
+Therefore, by (a), when $k=1$,
+
+$$
+M_X(t) = \frac{1}{(1- 2t)^{\frac{1}{2}}}
+$$
+
+By (b), when $k>1$ and $X = Z_1^2 + Z_2^2 +\dotsc+Z_k^2$,
+
+$$
+M_X(t) = \left( \frac{1}{(1- 2t)^{\frac{1}{2}}}\right)^k = \frac{1}{(1- 2t)^{\frac{k}{2}}}
+$$
+
+By the form of this mgf and the uniqueness property in (a), $f_X$ is also a Gamma, with $\alpha = \frac{k}{2}, \beta = 2$.
+
+Thus, a chi-squared variable $X \sim \text{Gamma}(\alpha = \frac{k}{2}, \beta = 2)$, where $k$ is the number of $Z^2$'s summed. Because chi-squared variables only vary in their degrees of freedom $k$, the expression
+
+$$
+X \sim \chi^2(k) \implies X \sim \text{Gamma}(\alpha = \frac{k}{2}, \beta = 2)
+$$
+
+# Expected value and variance
+
+The mean and variance of $X$ are calculated using the properties of the gamma distribution:
+
+$$
+E(X) = \alpha \beta = {k \over 2} \cdot 2 = k \quad \text{and} \quad V(X) = \alpha \beta^2 = {k \over 2} \cdot 2^2 = 2k
+$$

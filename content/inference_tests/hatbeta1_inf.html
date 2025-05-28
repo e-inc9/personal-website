@@ -1,0 +1,29 @@
+---
+title: "Inference with simple linear regression coefficients"
+output: html_document
+date: "2025-05-27"
+categories:
+- Inference/tests
+---
+
+
+
+<p>What if I told you that just as the parameters mean and variance follow a distribution, so do the coefficients <span class="math inline">\(\hat \beta_0, \hat \beta_1\)</span> <a href="/2025-05-16-linreg-simple/linreg-simple">we previously found</a>? Even though it can be argued that there does not exist a “true” <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> in the same way a true <span class="math inline">\(\mu\)</span> might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we cannot deny the fact that for different samples of a given phenomena, the line fitted will differ as well. Just as we would not state a sample mean as fact, we would not say that the observed effect of <span class="math inline">\(\hat \beta_1\)</span> is the true effect! In both cases, we acknowledge its tendency to vary, which is useful in itself.</p>
+<p>Something to keep in mind when exploring these distributions is that our findings are “downstream” of the assumptions of the linear regression model.</p>
+<div id="the-distribution-of-hat-beta_1-hat-beta_0" class="section level2">
+<h2>The distribution of hat beta_1, hat beta_0:</h2>
+<p><span class="math display">\[
+\hat{\beta}_1 \sim N\left( \beta_1,\ \frac{\sigma^2}{\sum (X_i - \bar{X})^2} \right)
+\]</span></p>
+<p><a href="/proofs_deriv/2025/05/19/distribution-of-hat-beta_1/">Hat beta_1’s full derivation with steps, for those interested.</a></p>
+<p><span class="math display">\[
+\hat{\beta}_0 \sim N\left( \beta_0,\ \sigma^2 \left[ \frac{1}{n} + \frac{\bar{X}^2}{S_{xx}} \right] \right)
+\]</span></p>
+<p><a href="/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/">Hat beta_0’s full derivation with steps, for those interested.</a></p>
+<p>Given a sample, we use the sample mean squared error – our estimate of <span class="math inline">\(\varepsilon_i\)</span>’s variance (and by extension <span class="math inline">\(Y_i\)</span>’s) – in place of <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><span class="math display">\[ MSE = {SSE \over n-2} = \frac{\sum(\hat Y_i - Y_i)^2}{n-2} \]</span></p>
+<p>This give us the <em>studentized</em> distributions of <span class="math inline">\(\hat \beta_1, \hat \beta_0\)</span></p>
+</div>
+<div id="the-studentized-distribution-of-hat-beta_1-hat-beta_0" class="section level2">
+<h2>The studentized distribution of hat beta_1, hat beta_0:</h2>
+</div>

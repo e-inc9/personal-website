@@ -1,0 +1,25 @@
+---
+title: T-distribution
+date: '2025-05-27'
+slug: t-dist
+categories:
+  - Distributions
+tags: []
+---
+
+
+
+<p>A t-distributed random variable with <span class="math inline">\(\nu\)</span> degrees of freedom is the ratio of a standard normal variable <span class="math inline">\(Z \sim N(0,1)\)</span> over the square root of a chi-squared variable <span class="math inline">\(Y \sim \chi^2_{\nu}\)</span> divided by its degrees of freedom.</p>
+<p><span class="math display">\[
+T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y
+\]</span></p>
+<p>Its pdf is given by</p>
+<p><span class="math display">\[ f(t) = \frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}\
+\cdot \frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} } \cdot \Gamma\left({\nu+1 \over 2}\right) \]</span></p>
+<p><a href="/proofs_deriv/2025/05/27/deriving-the-t-pdf/">Derivation if you’re interested.</a></p>
+<p>The pdf isn’t as important as the distribution itself. This distribution is bell-shaped and symmetric about 0 and <em>approaches normality</em> as <span class="math inline">\(\nu\)</span> increases.</p>
+<p><img src="/distrib/2025-05-27-t-distribution/t-dist_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>We can also demonstrate this mathematically. The denominator <span class="math inline">\(\sqrt{\frac{Y}{\nu}}\)</span> is the square root of an average of individual Gamma variables <span class="math inline">\(Z_i^2 \sim Gamma(\alpha = \frac{1}{2}, \beta= 2).\)</span> By the law of large numbers, as <span class="math inline">\(\nu \rightarrow \infty\)</span>, this average <span class="math inline">\(\frac{Y}{\nu} = \frac{1}{\nu} \sum Z_i^2\)</span> becomes close to <span class="math inline">\(E(Z_i^2) = \alpha \beta = 1\)</span>.</p>
+<p>Thus, as <span class="math inline">\(n \rightarrow \infty, \frac{Y}{\nu} \xrightarrow{p} 1 \implies T_\nu = \frac{Z}{\sqrt{\frac{Y}{\nu}}} \xrightarrow{d} Z\)</span>.</p>
+<p>(<span class="math inline">\(\xrightarrow{p}\)</span> means converges in probability and <span class="math inline">\(\xrightarrow{d}\)</span> means converges in distribution.)</p>
+<p>This t distribution pops up</p>
