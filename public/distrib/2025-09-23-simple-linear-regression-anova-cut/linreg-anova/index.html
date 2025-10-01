@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple linear regression (ANOVA cut) | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Simple linear regression (ANOVA cut)</span></h1>
+
+<h2 class="date">2025/09/23</h2>
+</div>
+
+<main>
+<p>Note: I encourage you to first read <a href="/overview/2025-05-16-linreg-simple/linreg-simple/">simple linear regression</a> and then <a href="/overview/simple-linear-regression-with-normality/">simple linear regression (with normality)</a>.</p>
+<p>Here we present a different <em>cut</em> to linear regression. We don&rsquo;t build on or extend what is discussed above. Rather, we build up from scratch a different way of interpreting linear regression.  Understanding this &ldquo;alternative angle&rdquo; will prove crucial in future statistical problems beyond linear regression.</p>
+<h3 id="introducing-our-y_is">Introducing our <code>\(Y_i\)</code>&rsquo;s.</h3>
+<p>Consider a response variable <code>\(Y\)</code>, and observations <code>\(Y_i\)</code> within a sample. Inevitably, we are able to calculate <code>\(\bar Y\)</code>. It will &ldquo;run through&rdquo; the middle of the sample and our <code>\(Y_i\)</code>&rsquo;s will be scattered about it. We measure this variation of our observations about the sample mean using the <em>total sum of squares</em> (SSTO).
+</p>
+$$
+SSTO = \sum(Y_i - \bar Y)^2
+$$<p>
+Insofar, SSTO measures the uncertainty of our response, <em>absent of any predictors</em>. More varied observations implies a higher SSTO, and thus more uncertainty.</p>
+<h3 id="adding-on-a-predictor-x">Adding on a predictor X</h3>
+<p>When we conduct a simple linear regression with a predictor <code>\(X\)</code>, and thus fit line <code>\(\hat Y = \beta_0 + \beta_1X\)</code> to the data, there still exists scatter. We use this scatter about the fitted line as a measure of the uncertainty of our response <em>when predictor X is taken into account</em>. This is measured by the error sum of squares (SSE).
+</p>
+$$
+SSE = \sum(Y_i - \hat Y)^2
+$$<p>
+If the line is any good, there will be less variation of our observations <code>\(Y_i\)</code> about it;  <code>\(SSE &lt; SSTO\)</code>.</p>
+<h3 id="whats-left-ssr">What&rsquo;s left? (SSR)</h3>
+<p>We have (a) SSTO and (b) SSE depicted below. Notice how we haven&rsquo;t accounted for one remaining difference, pictured in (c). This is the distance between the fitted line <code>\(\hat Y\)</code> and the sample mean <code>\(\bar Y\)</code>.
+<img src="../../../../../../../../pics/SSE_SSTO_SSR.png" width="100%" /></p>
+<p>We refer to this difference as regression sum of squares (SSR):
+</p>
+$$
+SSR =\sum(\hat Y_i - \bar Y)^2
+$$<p>
+As we can literally see, <code>\(SSR = SSTO - SSE\)</code>. It is the difference in variance about the mean and variance about the fitted line. In other words, it is the variance explained by our line <code>\(\hat Y\)</code> (and by extension, the variance explained by our predictor <code>\(X\)</code>).</p>
+<p><em>&ldquo;But what do you mean explained&rdquo;</em>? If we observe a reduction in variance when we calculate about the fitted line instead of about the sample mean, then the variance of our observations is <em>better accounted for</em> by the relationship between <code>\(X\)</code> and <code>\(Y\)</code> as described  by the fitted line.</p>
+<p>By rearranging, we get <code>\(SSTO = SSR+ SSE\)</code>. The total variance about a sample mean <code>\(SSTO\)</code> can be partitioned into
+a) <code>\(SSR\)</code> variance explained by a fitted (regression) line and
+b) <code>\(SSE\)</code> the remaining variance (error) in spite of the line.</p>
+<p>As we&rsquo;ll later see, these pieces can be used in ratios. Thus, there&rsquo;s something to be said about the <em>magnitude</em> of these values. We illustrate with an example.</p>
+<h4 id="example">Example</h4>
+<details>
+<summary> We revisit the Toluca Company sample, and compute `\(SSTO, SSR\)`, and `\(SSE\)`. </summary>
+<pre><code>## [1] &quot;SSTO:307203.04&quot;
+</code></pre>
+<pre><code>## [1] &quot;SSR:252377.58&quot;
+</code></pre>
+<pre><code>## [1] &quot;SSE:54825.46&quot;
+</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = work_hours ~ lot_size, data = toluca)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -83.876 -34.088  -5.982  38.826 103.528 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   62.366     26.177   2.382   0.0259 *  
+## lot_size       3.570      0.347  10.290 4.45e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 48.82 on 23 degrees of freedom
+## Multiple R-squared:  0.8215,	Adjusted R-squared:  0.8138 
+## F-statistic: 105.9 on 1 and 23 DF,  p-value: 4.449e-10
+</code></pre>
+<p>We see that the variance about the fitted regression line (<code>\(SSE \approx 54k\)</code>) is a small fraction of the total variance about the sample mean (<code>\(SSTO \approx 307k\)</code>). We &ldquo;back in&rdquo; to the variance explained by the regression line and find that it is very large (<code>\(SSR \approx 252k\)</code>). This implies that predictor <code>\(X\)</code> <em>explains</em> a lot of the variance about the sample mean.</p>
+</details>
+<h3 id="a-word-on-degrees-of-freedom">A word on degrees of freedom</h3>
+<p>Just as total variance about the sample mean can be partitioned, so can the degrees of freedom of <code>\(SSTO\)</code>:</p>
+<p><code>$$n-1 = n-2 + 1$$</code>.</p>
+<p><code>\(SSTO\)</code> has <code>\(n-1\)</code> degrees of freedom, being that <code>\(\sum (Y_i - \bar Y) = 0\)</code>. (If you know all but one, you can impute the remaining value).</p>
+<p><code>\(SSE\)</code> has <code>\(n-2\)</code> degrees of freedom. Since <code>\(SSE\)</code> relies on <code>\(n\)</code> observations <code>\(Y_i\)</code> (free to vary however they&rsquo;d like), but estimates parameters <code>\(\hat \beta_0, \hat \beta_1\)</code>, we subtract by 2. Each parameter estimated imposes an additional constraint on <code>\(Y_i\)</code>. More on this later.</p>
+<p><code>\(SSR\)</code> has <code>\(1\)</code> degree of freedom. We start with 2 degrees of freedom for the estimated <code>\(\hat \beta_0, \hat \beta_1\)</code>. However, recall that <code>\(SSR\)</code> involves a <strong>difference relative to <code>\(\bar Y\)</code> (the baseline)</strong>. Given that <code>\(\bar Y\)</code> is already known, this imposes a constraint on <code>\(\hat \beta_0\)</code>, the intercept estimate (<code>\(\hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)</code>), and so we subtract by 1.  This is how it &ldquo;<em>maths</em>&rdquo;, by the way. You can see that since <code>\(X\)</code> is fixed across samples, <code>\(\hat \beta_1\)</code> is the only thing free to vary.</p>
+<p><code>$$\begin{aligned} SSR =\sum(\hat Y_i - \bar Y)^2 = \sum(\hat \beta_0 + \hat \beta_1 X_i - (\hat \beta_0 + \hat \beta_1 \bar X))^2 = \sum(\hat \beta_1 X_i - \hat \beta_1 \bar X)^2 = \hat \beta_1 ^2 \sum (X_i - \bar X)^2 \end{aligned}$$</code></p>
+<p>These are important.</p>
+<h3 id="on-mse-msr">On MSE, MSR</h3>
+<p>We average our measures of variance about the mean and the regression line by the degrees of freedom they have, such that sample size is taken into account. Since <code>\(SSE\)</code> has <code>\(n-2\)</code> degrees of freedom, its <code>\(MSE \ne SSE\)</code>. <code>\(SSR\)</code> has 1 degree of freedom, so <code>\(MSR = SSR\)</code>.</p>
+<pre><code class="language-r">anova(lm1)
+</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: work_hours
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## lot_size   1 252378  252378  105.88 4.449e-10 ***
+## Residuals 23  54825    2384                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</code></pre>
+<p><code>\(MSE\)</code> and <code>\(MSR\)</code> follow distributions centered at:
+</p>
+$$
+E({MSE}) = \sigma^2\\
+E({MSR}) = \sigma^2 +  \beta_1^2 \sum (X_i - \bar X)^2
+$$<p>
+The first equation should be familiar. As we established, <code>\(MSE\)</code> is an unbiased estimator for <code>\(\sigma^2\)</code>, the variance of <code>\(\varepsilon\)</code>.</p>
+<details>
+<summary> Derivation here. </summary>
+$$ \begin{aligned}
+E(MSR) &= E\left[ \sum (\hat Y_i - \bar Y)^2 \right]\\
+&=E\left[ \hat \beta_1 ^2 \sum (X - \bar X)^2 \right]  \quad (\text{Let } \sum (X - \bar X)^2 = a)\\
+&= E(\hat \beta_1 ^2) \cdot a  \quad (\text{Invoke } \sigma^2(\hat \beta_1) = E(\hat \beta_1^2) - [E(\hat \beta_1)]^2)\\
+&= \left[ \sigma^2(\hat \beta_1) + [E(\hat \beta_1)^2] \right] \cdot a\\
+&= \left[ \frac{\sigma^2}{\sum(X_i - \bar X)^2} + \beta_1^2 \right] \sum(X_i - \bar X)^2 \\
+&= \sigma^2 + \beta_1^2 \sum(X_i - \bar X)^2 
+\end{aligned} $$
+</details>
+<p>Notice how the center of the distribution of <code>\(MSR\)</code> is greater than (to the right of) the distribution of <code>\(MSE\)</code> when <code>\(\beta_1\)</code> is non-zero. If <code>\(\beta_1 = 0\)</code>, <code>\(MSE=MSR\)</code>. This implies that we can test whether <code>\(\beta_1  = 0\)</code> by comparing <code>\(MSE\)</code> and <code>\(MSR\)</code>, and assessing the likelihood of what we observe under a null hypothesis on <code>\(\beta_1\)</code>. We proceed to the <a href="inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/">F-test</a>.</p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

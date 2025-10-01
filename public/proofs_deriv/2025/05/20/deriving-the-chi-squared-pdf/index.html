@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Deriving the chi-squared pdf | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Deriving the chi-squared pdf</span></h1>
+
+<h2 class="date">2025/05/20</h2>
+</div>
+
+<main>
+<h1 id="the-chi-squared-distribution">The chi-squared distribution</h1>
+<p>By definition, the chi-squared distribution is the sum of <code>\(k\)</code> standard normal variables squared. Let <code>\(X\)</code> be a chi-squared variable with <code>\(k\)</code> degrees of freedom. Then,</p>
+$$
+X= \sum_{i=1}^k Z_i^2
+$$<p>Our objective is to define its distribution. We first start with the pdf when <code>\(k=1\)</code>. Then, seeing that its pdf is that of a Gamma, we find the pdf of a sum of Gammas. Moment generating functions come into play.</p>
+<h1 id="starting-with-k1">Starting with <code>\(k=1\)</code></h1>
+<p>If <code>\(k=1\)</code>, then <code>\(X = Z^2\)</code>, as we are only summing one squared standard normal variable.</p>
+<p>We find the pdf <code>\(f_X(x)\)</code> through the cdf <code>\(F_X(x)\)</code> (for <code>\(x \ge 0\)</code>). Because of symmetry, the <code>\(F_X(x)\)</code> can be expressed in terms of <code>\(F_Z(x)\)</code>.</p>
+$$ \begin{aligned}
+F_X(x) &= P(Z^2 \le x) = P(-\sqrt{x} \le Z \le \sqrt{x}) \\
+&= P(Z \le \sqrt{x}) - \left(1-P(Z \le \sqrt{x})\right) \\
+&= 2F_Z( \sqrt x ) - 1
+\end{aligned} $$<p>Next, we take the derivative of the cdf to find the pdf. Just as the cdf of Z was used above, so the pdf of Z is used here.</p>
+$$ \begin{aligned}
+f_X(x) = F_X'(x) &= 2 F_Z'(\sqrt{x}) \cdot \frac{1}{2 \sqrt{x}} \\
+&= f_Z(\sqrt{x}) \cdot  \frac{1}{ \sqrt{x}} \\ 
+&= \frac{1}{\sqrt{2\pi}} e^{{-(\sqrt{x})^2 \over 2}} \cdot \frac{1}{ \sqrt{x}} \\ 
+&= \frac{1}{\sqrt{2\pi}} e^{{-x \over 2}} \cdot x^{{-1 \over 2}}
+\end{aligned} $$<p>Recall that the pdf of a Gamma random variable is</p>
+$$
+f(x) = \frac{1}{\beta^ \alpha \Gamma(\alpha)} e^{\frac{-x}{\beta}} x^{-\alpha}
+$$<p>and that <code>\(\Gamma(.5) = \sqrt \pi\)</code>.</p>
+<p>Thus, when <code>\(k=1\)</code>, <code>\(X \sim \text{Gamma}(\alpha = \frac{1}{2}, \beta = 2)\)</code>.</p>
+<h1 id="generalizing-to-k--1">Generalizing to <code>\(k &gt; 1\)</code></h1>
+<p>Now let <code>\(k&gt;1\)</code>, so that <code>\(X = Z_1^2 + Z_2^2 +\dotsc+Z_k^2\)</code>. How would we find the pdf of this sum? For many reasons, we would not simply scale the pdf we found above (one reason: each <code>\(Z_i^2\)</code> is its own random variable).</p>
+<p>It turns out that we can use the moment generating function (mgf) of <code>\(f_X(x)\)</code>. Think of an mgf <code>\(M_X(t)\)</code> as an alternative way of expressing a pdf <code>\(f_X(x)\)</code> that makes certain mathematical operations, such as finding the pdf of a sum of <code>\(X\)</code>&rsquo;s, a lot easier. This mgf also “encodes” other properties of <code>\(X\)</code> within itself, but that&rsquo;s another story.</p>
+<p>Two important properties of mgfs we make use of:</p>
+<p>a)  For a Gamma variable <code>\(X\)</code> with <code>\(\alpha, \beta\)</code>, its mgf is given by </p>
+$$
+    M_X(t) = \frac{1}{(1-\beta t)^\alpha}
+    $$<p> Because each mgf is unique to a given pdf, from the <code>\(\alpha, \beta\)</code> in <code>\(M_X(t)\)</code>, we can deduce <code>\(f_X(x)\)</code> with certainty.</p>
+<p>b)  The mgf of a <em>sum</em> of <code>\(X\)</code>&rsquo;s is simply the <em>product</em> of its mgfs.</p>
+$$
+M_{X_1 + X_2 + \dotsc + X_n} = M_{X_1} \cdot M_{X_2} \dotsc \cdot M_{X_n}
+$$<p>Therefore, by (a), when <code>\(k=1\)</code>,</p>
+$$
+M_X(t) = \frac{1}{(1- 2t)^{\frac{1}{2}}}
+$$<p>By (b), when <code>\(k&gt;1\)</code> and <code>\(X = Z_1^2 + Z_2^2 +\dotsc+Z_k^2\)</code>,</p>
+$$
+M_X(t) = \left( \frac{1}{(1- 2t)^{\frac{1}{2}}}\right)^k = \frac{1}{(1- 2t)^{\frac{k}{2}}}
+$$<p>By the form of this mgf and the uniqueness property in (a), <code>\(f_X\)</code> is also a Gamma, with <code>\(\alpha = \frac{k}{2}, \beta = 2\)</code>.</p>
+<p>Thus, a chi-squared variable <code>\(X \sim \text{Gamma}(\alpha = \frac{k}{2}, \beta = 2)\)</code>, where <code>\(k\)</code> is the number of <code>\(Z^2\)</code>&rsquo;s summed. Because chi-squared variables only vary in their degrees of freedom <code>\(k\)</code>, the expression</p>
+$$
+X \sim \chi^2(k) \implies X \sim \text{Gamma}(\alpha = \frac{k}{2}, \beta = 2)
+$$<h1 id="expected-value-and-variance">Expected value and variance</h1>
+<p>The mean and variance of <code>\(X\)</code> are calculated using the properties of the gamma distribution:</p>
+$$
+E(X) = \alpha \beta = {k \over 2} \cdot 2 = k \quad \text{and} \quad V(X) = \alpha \beta^2 = {k \over 2} \cdot 2^2 = 2k
+$$
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

@@ -73,8 +73,8 @@ u ^{\frac{\nu +1}{2} - 1} \cdot e^{-u}
 \end{aligned}
 \]</span></p>
 <p>Yep, that’s the distribution. The derivation really isn’t that important, nor is the pdf worth memorizing.</p>
-<div id="expected-value-and-variance" class="section level2">
-<h2>Expected value and variance</h2>
+<div id="expected-value" class="section level2">
+<h2>Expected value</h2>
 <p>Consider that for independent random variables <span class="math inline">\(X,Y\)</span>, <span class="math inline">\(E[h(X)g(Y)] = E[h(X)] E[g(Y)]\)</span>. Then for <span class="math inline">\(T=h(Z)g(Y)\)</span>,</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -84,7 +84,7 @@ E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right) &amp;= \sqrt{\nu} \int_0^\infty y^
 \end{aligned}
 \]</span>
 We perform substitution with <span class="math inline">\(u = {y \over 2}\)</span>.
-<span class="math display">\[
+<span class="math display">\[  q
 \begin{aligned}
 E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right)  &amp;= \sqrt{\nu} \cdot  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] 2^{({\nu \over 2} - {1 \over 2})-1} \cdot 2 \int_0^\infty \left[ e^{-u}  u^{({\nu \over 2} - {1 \over 2})-1} \right] du \\
 &amp;= \sqrt{\nu} \cdot  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] 2^{({\nu \over 2} - {1 \over 2})-1} \cdot 2 \Gamma({\nu \over 2} - {1 \over 2})\\
@@ -92,5 +92,22 @@ E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right)  &amp;= \sqrt{\nu} \cdot  \left[ \
 &amp;= \sqrt{\nu} \cdot  \left[ \frac{1}{ \Gamma({\nu \over 2})} \right] 2^{( - {1 \over 2})} \Gamma({\nu \over 2} - {1 \over 2}), \quad \nu &gt;1
 \end{aligned}
 \]</span>
-So <span class="math inline">\(E(T) = E[h(Z)] E[g(Y)] = 0\)</span>. We computed <span class="math inline">\(E[g(Y)]\)</span> to show that for <span class="math inline">\(\nu = 1\)</span>, <span class="math inline">\(T_1\)</span> exists, but <span class="math inline">\(E(T_1)\)</span> does not because <span class="math inline">\(\Gamma(0)\)</span> does not exist. A t-distribution with <span class="math inline">\(\nu = 1\)</span> is a standard Cauchy distribution!</p>
+So <span class="math inline">\(E(T) = E[h(Z)] E[g(Y)] = 0\)</span>. We computed <span class="math inline">\(E[g(Y)]\)</span> to show that for <span class="math inline">\(\nu = 1\)</span>, <span class="math inline">\(T_1\)</span> exists, but <span class="math inline">\(E(T_1)\)</span> does not because <span class="math inline">\(\Gamma(0)\)</span> does not exist. A t-distribution with <span class="math inline">\(\nu = 1\)</span> is a standard Cauchy distribution, for which one of its attributes is that it’s impossible to calculate the mean!</p>
+</div>
+<div id="variance" class="section level2">
+<h2>Variance</h2>
+<p>Consider that for a r.v. <span class="math inline">\(X\)</span>, <span class="math inline">\(V(X) = E(X^2) - \left[ E(X)^2 \right]\)</span>. The same applies to r.v. <span class="math inline">\(T\)</span>. Given that <span class="math inline">\(E(T) = 0\)</span> for <span class="math inline">\(\nu &gt; 1\)</span>, in most cases <span class="math inline">\(V(T) = E(T^2)\)</span>.
+We re-express <span class="math inline">\(E(T^2) = E\left(\frac{Z^2}{\frac{Y}{\nu}}\right) = E(Z^2) E\left(\frac{\nu}{Y}\right)\)</span>, using the properties of independence as we did above. Since <span class="math inline">\(Z^2\)</span> is a chi-squared random variable – or, in another words, a Gamma distribution with <span class="math inline">\(\alpha = \frac{\nu}{2}, \beta = 2\)</span> – its expected value <span class="math inline">\(E(Z^2) = 1\)</span>. We compute <span class="math inline">\(E\left(\frac{\nu}{Y}\right) = \nu E(Y^{-1})\)</span>. Recall that <span class="math inline">\(Y\)</span> is a chi-squared variable with <span class="math inline">\(\nu\)</span> degrees of freedom. We discussed its properties in the previous sentence.
+<span class="math display">\[
+\begin{aligned}
+  \nu E(Y^{-1}) &amp;= \nu \int_0^\infty y^{-1} \cdot \frac{e^{-y \over 2} y^{\frac{\nu}{2} - 1}}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})}dy  \\
+  &amp;=  \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \int_0^\infty e^{-y \over 2} y^{(\frac{\nu}{2} - 1) -1}dy \\
+  &amp; \text{ (substitution with $u={-y \over 2}$) }\\
+  &amp;= \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \int_0^\infty  e^{-u} (2u)^{(\frac{\nu}{2} -1)-1} 2du \\
+  &amp;= \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \cdot 2^{(\frac{\nu}{2} -1)} \int_0^\infty  e^{-u} u^{(\frac{\nu}{2} -1)-1} du\\
+  &amp;=  \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \cdot 2^{(\frac{\nu}{2} -1)} \Gamma(\frac{\nu}{2} - 1) \\
+  &amp;=  \frac{\nu}{2 (\frac{\nu}{2} - 1)} = \frac{\nu}{\nu-2}
+  \end{aligned}
+\]</span></p>
+<p>Thus, <span class="math inline">\(V(T) = E(Z^2)E\left(\frac{\mu}{Y} \right) = \frac{\nu}{\nu-2}\)</span>. Note that this means <span class="math inline">\(V(T)\)</span> is undefined for <span class="math inline">\(1 &lt; \nu \le 2\)</span>.</p>
 </div>

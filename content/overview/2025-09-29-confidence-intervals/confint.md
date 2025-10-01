@@ -1,0 +1,44 @@
+---
+title: Confidence intervals
+author: ''
+date: '2025-09-29'
+slug: confidence-intervals
+categories:
+  - General
+tags: []
+---
+
+We begin with some obvious truths: for a given estimate `\(\hat \theta\)` of parameter `\(\theta\)` -- say `\(\bar x\)` of `\(\mu\)` -- `\(\hat \theta\)` is virtually never `\(\theta\)`. Furthermore, the distance of `\(\hat \theta\)` from `\(\theta\)` is virtually unknown. If we're interested in `\(\theta\)`, `\(\hat \theta\)` is of little use on its own.
+
+We can, however, use properties of the distribution of `\(\hat \theta\)` (which are downstream of our sample) to come up with a range, or  _interval_, of plausible `\(\theta\)`'s. This, surely, is more sensible than blindly trusting `\(\hat \theta\)` as `\(\theta\)` (or anywhere close to it).
+
+## Confidence levels
+For a given sample and estimate, we distinguish one interval from another by its confidence level. The confidence level, expressed as a percentage (say, 95%) refers to the probabilistic distribution. However, as we will see, the final interpretation of confidence intervals is not in terms of probability.
+
+We begin with an unrealistic example of a `\(\mu\)` whose `\(\sigma\)` is known. Then, the distribution of `\(\bar x\)` from a sample of size `\(n\)` is normal, centered at `\(\mu\)` and has standard deviation of `\(\sqrt{\frac{\sigma}{n}}\)`. If we standardize it, we have a statistic with a normal distribution centered at 0 with standard deviation of 1. 
+
+$$
+t = \frac{\bar X - \mu}{\frac{\sigma}{\sqrt n}} \sim N(0, 1)
+$$
+
+We can then construct the following statement. The values `\(\pm 1.96\)` are the critical values of a standard normal distribution, between which 95% of the probability density lies.
+
+$$
+P\left( -1.96 < \frac{\bar X - \mu}{\frac{\sigma}{\sqrt{n}}}< 1.96\right) = 0.95
+$$ 
+...and rearrange it such that:
+$$
+P\left(-\bar X -1.96 \cdot \frac{\sigma}{\sqrt{n}} < -\mu < 1.96 \cdot \frac{\sigma}{\sqrt{n}}- \bar X \right) = P\left(\bar X - 1.96\frac{\sigma}{\sqrt{n}} < \mu < \bar X + 1.96 \frac{\sigma}{\sqrt{n}} \right) = 0.95
+$$
+What we are describing in the above inequality is a "random interval" driven by random variable `\(\bar X\)`, the midpoint. The probability that this interval includes `\(\mu\)` is 95%. A common misinterpretation is "the probability of `\(\mu\)` falling within the interval is 95%". This is false. `\(\mu\)` is not a random variable, it is a parameter. There is no probability of it taking on a certain value. 
+
+Given this probability statement, we can say that for many intervals computed from multiple `\(\bar X\)`'s, wherein upon actually obtaining `\(\bar X\)` and lower and upper bounds `\(a, b\)`, we would expect 95% of them to include `\(\mu\)`. Note that the 95% refers to the proportion of intervals constructed in the long run.
+
+Of course, once we actually obtain `\(\bar X\)` and lower and upper bounds `\(a, b\)`. our interval is no longer random, so we cannot say that there is a probability of `\(P(a < \mu < b) = .95\)` for values `\(a,b\)`. 
+
+Thus, "$P%$ confidence" is a descriptive of the long-run success rate of our intervals, with `\(P%\)` being determined by the critical values of the distribution of `\(\bar X\)`, and not a descriptive of any _actual_ interval we come up with.
+
+
+
+
+

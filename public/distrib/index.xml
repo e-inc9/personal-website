@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Distribs on A minimal Hugo website</title>
+    <link>http://localhost:4321/distrib/</link>
+    <description>Recent content in Distribs on A minimal Hugo website</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/distrib/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simple linear regression (ANOVA cut)</title>
+      <link>http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/</link>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/</guid>
+      <description>&lt;p&gt;Note: I encourage you to first read &lt;a href=&#34;http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/&#34;&gt;simple linear regression&lt;/a&gt; and then &lt;a href=&#34;http://localhost:4321/overview/simple-linear-regression-with-normality/&#34;&gt;simple linear regression (with normality)&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Here we present a different &lt;em&gt;cut&lt;/em&gt; to linear regression. We don&amp;rsquo;t build on or extend what is discussed above. Rather, we build up from scratch a different way of interpreting linear regression.  Understanding this &amp;ldquo;alternative angle&amp;rdquo; will prove crucial in future statistical problems beyond linear regression.&lt;/p&gt;&#xA;&lt;h3 id=&#34;introducing-our-y_is&#34;&gt;Introducing our &lt;code&gt;\(Y_i\)&lt;/code&gt;&amp;rsquo;s.&lt;/h3&gt;&#xA;&lt;p&gt;Consider a response variable &lt;code&gt;\(Y\)&lt;/code&gt;, and observations &lt;code&gt;\(Y_i\)&lt;/code&gt; within a sample. Inevitably, we are able to calculate &lt;code&gt;\(\bar Y\)&lt;/code&gt;. It will &amp;ldquo;run through&amp;rdquo; the middle of the sample and our &lt;code&gt;\(Y_i\)&lt;/code&gt;&amp;rsquo;s will be scattered about it. We measure this variation of our observations about the sample mean using the &lt;em&gt;total sum of squares&lt;/em&gt; (SSTO).&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>T-distribution</title>
+      <link>http://localhost:4321/distrib/2025-05-27-t-distribution/t-dist/</link>
+      <pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/distrib/2025-05-27-t-distribution/t-dist/</guid>
+      <description>&lt;p&gt;A t-distributed random variable with &lt;code&gt;\(\nu\)&lt;/code&gt; degrees of freedom is the ratio of a standard normal variable &lt;code&gt;\(Z \sim N(0,1)\)&lt;/code&gt; over the square root of a chi-squared variable &lt;code&gt;\(Y \sim \chi^2_{\nu}\)&lt;/code&gt; divided by its degrees of freedom.&lt;/p&gt;&#xA;$$&#xA;T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y&#xA;$$&lt;p&gt;Its pdf is given by&lt;/p&gt;&#xA;\[ f(t) = \frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}\&#xA;\cdot \frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} } \cdot \Gamma\left({\nu+1 \over 2}\right) \]&lt;p&gt;Its expected variance and mean are:&#xA;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

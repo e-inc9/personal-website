@@ -10,29 +10,16 @@ body {
 .menu li { display: inline-block; }
 .article-meta, .menu a {
   text-decoration: none;
-  background: #fff;
+  background: #eee;
   padding: 5px;
   border-radius: 5px;
 }
-.menu, footer{ text-align: center;}
-
+.menu, .article-meta, footer { text-align: center; }
+.title { font-size: 1.1em; }
 footer a { text-decoration: none; }
 hr {
-  color: black;
-}
-
-h1{
-  font-size: 1.5em;
-}
-h2{
-  font-size: 1em;
-}
-.article-meta {
-  font-family: Times New Roman, Times, sans-serif;
-  font-size: 20px;
-  padding-left: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  border-style: dashed;
+  color: #ddd;
 }
 
 /* code */

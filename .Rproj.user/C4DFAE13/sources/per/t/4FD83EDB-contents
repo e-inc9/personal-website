@@ -1,8 +1,0 @@
-body {
-  font-family: Times New Roman, Times, sans-serif;
-}
-
-code {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 85%;
-}

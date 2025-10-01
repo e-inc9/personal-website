@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>T-distribution | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">T-distribution</span></h1>
+
+<h2 class="date">2025/05/27</h2>
+</div>
+
+<main>
+<p>A t-distributed random variable with <code>\(\nu\)</code> degrees of freedom is the ratio of a standard normal variable <code>\(Z \sim N(0,1)\)</code> over the square root of a chi-squared variable <code>\(Y \sim \chi^2_{\nu}\)</code> divided by its degrees of freedom.</p>
+$$
+T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y
+$$<p>Its pdf is given by</p>
+\[ f(t) = \frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}\
+\cdot \frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} } \cdot \Gamma\left({\nu+1 \over 2}\right) \]<p>Its expected variance and mean are:
+</p>
+\[E(T) = E[h(Z)] E[g(Y)] = 0 \text{ for `\(\nu > 1\)` } \]\[ V(T) = E(Z^2)E\left(\frac{\mu}{Y} \right) = \frac{\nu}{\nu-2} \text{ for `\(\nu >2\)`} \]<p><a href="/proofs_deriv/2025/05/27/deriving-the-t-pdf/">Derivation if you&rsquo;re interested.</a></p>
+<p>The pdf isn&rsquo;t as important as the distribution itself. This distribution is bell-shaped and symmetric about 0 and <em>approaches standard normality</em> as <code>\(\nu\)</code> increases.</p>
+<h3 id="convergence-to-normality">Convergence to normality</h3>
+<img src="/distrib/2025-05-27-t-distribution/t-dist_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<p>We can also demonstrate this mathematically. The denominator <code>\(\sqrt{\frac{Y}{\nu}}\)</code> is the square root of an average of individual Gamma variables <code>\(Z_i^2 \sim Gamma(\alpha = \frac{1}{2}, \beta= 2).\)</code> By the law of large numbers, as <code>\(\nu \rightarrow \infty\)</code>, this average <code>\(\frac{Y}{\nu} = \frac{1}{\nu} \sum Z_i^2\)</code> becomes close to <code>\(E(Z_i^2) = \alpha \beta = 1\)</code>.</p>
+<p>Thus, as <code>\(n \rightarrow \infty, \frac{Y}{\nu} \xrightarrow{p} 1 \implies T_\nu = \frac{Z}{\sqrt{\frac{Y}{\nu}}} \xrightarrow{d} Z\)</code>.</p>
+<p>(<code>\(\xrightarrow{p}\)</code> means converges in probability and <code>\(\xrightarrow{d}\)</code> means converges in distribution.)</p>
+<h3 id="what-follows-a-t-distribution">What follows a t-distribution?</h3>
+<p>The <code>\(t\)</code>-statistic, which results from substituting an estimated sample variance in place of <code>\(\sigma^2\)</code> for a standardized normal variable, follows a <code>\(t\)</code> distribution with <code>\(n-1\)</code> d.f (if the parameter of interest is a <a href="inference_tests/2025-06-13-t-test/t-test/">sample mean</a>) and <code>\(n-2\)</code> d.f. (if the parameter of interest is <code>\(\hat \beta_1\)</code> in a linear regression).</p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

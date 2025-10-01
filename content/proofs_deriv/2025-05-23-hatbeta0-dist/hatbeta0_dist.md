@@ -10,7 +10,7 @@ header-includes:
 
 ## Deriving distribution of `\(\hat \beta_0\)`
 
-Assume that `\(Y_i \sim N(\beta_0 + \beta_1X_i, \sigma^2)\)` as a result of the definition `\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)`, where each `\(\varepsilon_i \sim N(0, \sigma^2)\)`. This is what's assumed under the simple linear regression model.
+Assume that `\(Y_i \sim N(\beta_0 + \beta_1X_i, \sigma^2)\)` as a result of the definition `\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)`, where each `\(\varepsilon_i \sim N(0, \sigma^2)\)`. This is what's assumed under the simple linear regression model,  **including the additional assumption that `\(\varepsilon\)` is normally distributed (necessary for inference).**
 
 Recall that given a sample, `\(\hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)`.
 

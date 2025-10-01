@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple linear regression | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Simple linear regression</span></h1>
+
+<h2 class="date">2025/05/16</h2>
+</div>
+
+<main>
+<h2 id="mathematical-and-statistical-relations">Mathematical and statistical relations</h2>
+<p>Consider two variables <code>\(x,y\)</code> that you know to be related.</p>
+<ul>
+<li>
+<p>They are related <em>mathematically</em> if there exists a <em>deterministic</em>
+relationship between the two, such that <code>\(x\)</code> perfectly determines <code>\(y\)</code>
+and vice versa. Such relationships can be expressed with a function
+<code>\(Y=f(X)\)</code>. One example is the relationship between inches and
+centimeters <code>\(Y=2.54X\)</code>. A man who is <code>\(x=65\)</code> inches tall must be
+<code>\(y=165.1\)</code> centimeters tall.</p>
+</li>
+<li>
+<p>They are related <em>statistically</em> if there exists a relationship
+between the two, but <code>\(X\)</code> does <em>not</em> perfectly determine <code>\(Y\)</code> and vice
+versa. You know the two are related in some way &ndash; whether visually
+or intuitively &ndash; but you cannot say you know everything about <code>\(Y\)</code>
+just by <code>\(X\)</code>. Take the below scatter plot relating <code>\(X\)</code>, the velocity
+at which a bullet is fired, and <code>\(Y\)</code>, the depth of penetration into
+body armor. Perhaps you didn&rsquo;t even have to look at the below graph
+to know that a relationship exists. Faster bullet <code>\(\implies\)</code> deeper
+penetration. Yet the presence of other factors at play &ndash; angle,
+wind speed, freak properties of physics &ndash; make you unable to
+perfectly determine penetration given velocity.</p>
+</li>
+</ul>
+<p>Does that mean we should just <em>give up</em>? Forget fitting a mathematical
+equation to this relationship? Get scared in the face of unknowing,
+uncertainty, the potential of being <em>wrong</em>? Hell no. Patterns exist,
+trends lurk beneath; you can fit some rules, induce some structure, make
+some sense of it all &ndash; potential life lesson there&hellip;</p>
+<img src="/overview/2025-05-16-linreg-simple/linreg-simple_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<h1 id="building-up-to-the-simple-linear-regression-model">Building up to the simple linear regression model</h1>
+<p>Our model is best understood as a <em>formal counterpart</em> for two phenomena
+observed in statistical relations: 1) the tendency of <code>\(Y\)</code> to vary with <code>\(X\)</code> yet 2) the inexactitude of <code>\(Y\)</code> given <code>\(X\)</code>.</p>
+<p>We can translate these observations to a probabilistic framework by saying that at a given level of <code>\(X\)</code>, <code>\(Y\)</code> will follow a probabilistic distribution. Furthermore, the mean of this distribution will differ with (moves with) <code>\(X\)</code>.</p>
+<p><img src="../../../../../../../../pics/3d_distrib_linreg.png" alt=""><!-- --></p>
+<p>In the case of simple linear regression, we&rsquo;ll make some assumptions about the nature of this distribution. For now, note that the mean of our distributions always lie along a straight line.</p>
+<h2 id="basic-setup">Basic setup</h2>
+<p>Our regression model starts off similar to that of a mathematical
+function <code>\(Y=f(X)\)</code>. However, we add an <em>error variable</em>, <code>\(\varepsilon_i\)</code>,
+to account for both randomness and the existence of <em>other variables</em> that make the
+relationship between <code>\(X\)</code> and <code>\(Y\)</code> imperfect.</p>
+<p>This model assumes a relationship exists between <code>\(X\)</code> and <code>\(Y\)</code>, but
+concedes that it is non-mathematical and that <code>\(Y\)</code> is influenced by
+factors other than <code>\(X\)</code>. It is the formal counterpart to what we know
+from the graph and our intuition.</p>
+$$ Y =f(X) + \varepsilon $$<h2 id="adding-assumption-of-linearity">Adding assumption of linearity</h2>
+<p>At this stage, we must define <code>\(f(X)\)</code>, the nature of the relationship
+between <code>\(X\)</code> and <code>\(Y\)</code>. It can&rsquo;t just be a black box function. Returning to
+the graph above, we could say that penetration increases linearly with
+velocity. The scatter does appear to mostly be a straight blob and not a
+curvy one. It&rsquo;s simple and straightforward. <code>\(\beta_1\)</code> is the degree to
+which penetration increases when velocity increases by 1 m/sec.
+<code>\(\beta_0\)</code> is penetration when velocity is 0. For most purposes,
+<code>\(\beta_0\)</code> isn&rsquo;t useful, but since we are modelling a linear
+relationship, there must be a <code>\(y\)</code>-intercept. Note that we do not
+dispense with <code>\(\varepsilon_i\)</code>; the assumption is still that there exist
+randomness and other variables affecting <code>\(Y\)</code>, but <code>\(X\)</code>&rsquo;s effect on <code>\(Y\)</code> is linear.
+</p>
+$$ Y_i = \beta_0 + \beta_1X_i + \varepsilon_i $$<p>We assume that <code>\(X_i\)</code> are known constants.</p>
+<h2 id="on-the-error-variable">On the error variable</h2>
+<p><code>\(\varepsilon_i\)</code> incorporates randomness and other variables. By definition, it is a random variable. Since <code>\(X_i\)</code> are known constants, and <code>\(\beta_0, \beta_1\)</code> are constants also, this <code>\(\varepsilon_i\)</code> is what makes <code>\(Y_i\)</code> a random variable and how we account for the inexactitude of <code>\(Y\)</code> given <code>\(X\)</code>.</p>
+<p>The following assumptions for <code>\(\varepsilon_i\)</code> are crucial:</p>
+<ul>
+<li><code>\(\varepsilon_i\)</code> follows a distribution centered at 0 with
+variance <code>\(\sigma^2\)</code>.</li>
+<li>Thus, <code>\(E(\varepsilon)\)</code> = 0.</li>
+<li><code>\(\varepsilon_i\)</code> is uncorrelated; one <code>\(\varepsilon_i\)</code> is not related to
+another.</li>
+</ul>
+<h2 id="the-resulting-model">The resulting model</h2>
+<ol>
+<li>
+<p><code>\(E(Y_i) = E(\beta_0+\beta_1X_i+\varepsilon) = \beta_0 + \beta_1X_i + 0\)</code>.
+The expected value of <code>\(Y_i\)</code> is solely dependent on <code>\(X_i\)</code>. Our fitted <code>\(\beta_0, \beta_1\)</code>, are used to predict the expected value of <code>\(Y_i\)</code> at <code>\(X_i\)</code>.</p>
+</li>
+<li>
+<p><code>\(V(Y_i) = V(\beta_0+\beta_1X_i+\varepsilon_i) = V(\varepsilon_i) = \sigma^2\)</code>. We expect <code>\(Y_i\)</code> to vary about <code>\(E(Y_i)\)</code> by the variance of <code>\(\varepsilon_i\)</code> <em>at all levels of <code>\(X_i\)</code></em>.</p>
+</li>
+<li>
+<p>Since <code>\(\varepsilon_i\)</code> is uncorrelated with <code>\(\varepsilon_j\)</code>, <code>\(Y_i, Y_j\)</code> are uncorrelated as well.</p>
+</li>
+</ol>
+<p>Summarily, <code>\(Y_i\)</code> follows a distribution centered at <code>\(\beta_0 + \beta_1X_i\)</code> with variance of <code>\(\sigma^2\)</code>. This tendency to vary comes from error term <code>\(\varepsilon_i\)</code>. <code>\(\beta_1\)</code> gives the change in the mean of this distribution with <code>\(X_i\)</code>; it tells us how we&rsquo;d <em>expect</em> <code>\(Y_i\)</code> to change with <code>\(X_i\)</code>. Any departures from <code>\(E(Y_i) = \beta_0 + \beta_1X_i\)</code> are due to <code>\(\varepsilon_i\)</code>&rsquo;s tendency to vary.</p>
+<h2 id="estimating-regression-coefficients">Estimating regression coefficients</h2>
+<p>If there exist sample data for which we think the above model applies, we then use
+that data to best estimate coefficients <code>\(\hat \beta_0, \hat \beta_1\)</code>. Recall that these two parameters are used to compute the expected <code>\(Y_i\)</code> at <code>\(X_i\)</code>. Thus, <code>\(\hat Y_i\)</code> is also an estimate of the expected <code>\(Y_i\)</code> at <code>\(X_i\)</code>.</p>
+<p>A general rule of thumb for fitting a linear regression line is that it should
+run through our sample points such that the absolute distance between
+the line and the points in our data is minimized. This is called the
+<em>ordinary least squares (OLS)</em> method. We can express this distance as a
+sum of squared differences:</p>
+$$  \sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2 $$<p>
+Considering that this is a convex function, taking the first derivative
+of it with respect to <code>\(\hat \beta_0, \hat \beta_1\)</code>, equating both
+results to 0, and solving the system of equations give us the
+<code>\(\hat \beta_0, \hat \beta_1\)</code> where the sum of squared differences is
+minimized:</p>
+$$ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X$$<p>
+</p>
+$$ \hat \beta_1 = \frac{\sum (X_iY_i) - n \bar X \bar Y}{ \sum X_i^2 - n \bar X^2} $$<p><a href="/proofs_deriv/2025/05/19/deriving-the-coefficients-for-linear-regression/">Full derivation here, for those
+interested.</a></p>
+<p>Under the <em>Gauss-Markov theorem</em>, the OLS method is the <em>best</em> way of estimating <code>\(\beta_0, \beta_1\)</code> because our estimates will be <a href="/overview/2025-09-13-point-estimation/point-estimation/">a) unbiased and b) have minimum variance out of all unbiased linear estimators.</a>. We also arrive at the same expressions for <code>\(\hat \beta_0, \hat \beta_1\)</code> when we use <a href="/overview/2025-09-15-maximum-likelihood-estimation/mle/">maximum likelihood estimation</a>.</p>
+<p>Given <code>\(\hat \beta_0, \hat \beta_1\)</code>, we have</p>
+$$ \hat{Y} = \hat \beta_0 + \hat \beta_1X $$<p>which gives us the expected or mean point estimate <code>\(\hat Y_i\)</code> for a given <code>\(X_i\)</code>. This point estimate is our fitted value. It is liable to differ from our observed value <code>\(Y_i\)</code> by <code>\(e_i = Y_i - \hat Y_i\)</code>, or the <code>\(i^{th}\)</code> residual.</p>
+<h2 id="residuals">Residuals</h2>
+<p>Note that <code>\(e_i\)</code>, the residual corresponding to a given <code>\(Y_i\)</code>, is different from <code>\(\varepsilon_i\)</code>, the random variable.</p>
+<p>We cannot know <code>\(\varepsilon_i\)</code> since it measures deviation from a &ldquo;true&rdquo; regression line which itself is unknown. We just know it&rsquo;s a random variable.</p>
+<p>On the other hand, we know <code>\(e_i\)</code> as a measure of deviation from a <em>fitted</em> regression line. It&rsquo;s downstream of our sample.</p>
+<p>Some properties of <code>\(e_i\)</code> to note.</p>
+<ol>
+<li><code>\(\sum e_i^2\)</code> is at its minimum. This is what the least squares method does.</li>
+<li><code>\(\sum e_i = 0\)</code>. The sum of residuals is 0.</li>
+<li><code>\(\sum Y_i\)</code> = <code>\(\sum \hat Y_i\)</code>.</li>
+<li><code>\(\sum \hat Y_i e_i\)</code> = <code>\(\sum X_i e_i = 0\)</code>. The sum of residuals weighted by fitted values or levels of X is 0.</li>
+<li>The fitted regression line goes through <code>\((\bar X, \bar Y)\)</code>.</li>
+</ol>
+<p>All of these are downstream from the <code>\(\hat \beta_0, \hat \beta_1\)</code> we found above.</p>
+<h2 id="returning-to-the-error-variable">Returning to the error variable</h2>
+<p>Earlier, we stated that at each level of <code>\(X\)</code>, <code>\(Y\)</code> follows a distribution centered at <code>\(E(Y_i)\)</code> with variance <code>\(\sigma^2\)</code>. Given that this variance corresponds to the ways in which observed values may deviate about a &ldquo;true&rdquo; regression line, it&rsquo;s important to get an idea of <em>its size</em>.</p>
+<p>Given a sample, we estimate the variance of <code>\(Y_i\)</code> the same way we would estimate the variance of a single population but with one difference: we divide by <code>\(n-2\)</code>, since two parameters <code>\(\beta_0, \beta_1\)</code> are estimated.</p>
+<p>Therefore, our variance estimator is:</p>
+$$
+MSE = \text{Error/Residual mean square}= s^2 = \frac{\sum(Y_i - \hat Y_i)^2}{n-2} = \frac{\sum e_i^2}{n-2}
+$$<p>
+Along with that, <code>\(s\)</code> is our estimator of standard deviation.</p>
+<p>Note that the corollary of <code>\(\bar X\)</code> when estimating the variance from a single population is <code>\(\hat Y_i\)</code>, which is our &ldquo;expected value&rdquo;/&ldquo;estimated mean&rdquo; of <code>\(Y_i\)</code>.</p>
+<p>This estimator is unbiased; <code>\(E(s^2) = \sigma^2\)</code>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Insofar, we&rsquo;ve learned about a statistical model that acknowledges a) the tendency of <code>\(Y\)</code> to vary with <code>\(X\)</code> and b) the tendency for <code>\(Y_i\)</code> to vary at <code>\(X_i\)</code>.</p>
+<p>Given sample data with observations <code>\((X,Y)\)</code>, we can fit a simple linear regression model with parameters defined by the least squares method to estimate the expected value of <code>\(Y\)</code> at <code>\(X\)</code>, and estimate the variance of <code>\(Y\)</code> at <code>\(X\)</code>.</p>
+<p>However, this is just the tip of the iceberg, because we&rsquo;ve yet to add one of the standard assumptions of real-world applications: normality of the error term <code>\(\varepsilon_i\)</code>. <a href="/overview/simple-linear-regression-with-normality/">Read here.</a></p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

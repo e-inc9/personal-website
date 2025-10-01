@@ -1,0 +1,166 @@
+---
+title: Point estimation
+date: '2025-09-13'
+slug: point-estimation
+categories:
+  - General
+tags: []
+---
+
+### Foreword 
+Consider that statistics is primarily about working with samples to learn about populations. We calculate the sample mean and sample standard deviation from our sample data to estimate the mean and standard deviation of our population.
+
+This process is formally known as point estimation. Given a parameter `\(\theta\)` (population mean, for example), we calculate a point estimate `\(\hat \theta\)` (an actual numerical value) using a point estimator (`\(\bar x\)`, which describes the mathematics of the sample mean).
+
+Our focus is on the point estimator, which is what our sample is used to compute. Why do we compute the sample mean to estimate the population mean? Why not take the average of the largest and smallest observation in the sample? Why not omit the smallest and largest values in the average? Really think about it. Why do we divide by `\(n-1\)` and not `\(n\)` when computing sample variance to estimate population variance. 
+
+As it turns out, there are mathematical measures that justify our selection of point estimators. We explore these measures below.
+
+### Point estimates are random variables
+This may seem evident, but our point estimates `\(\hat \theta\)` are _random variables_. For example, when using a sample of `\(n=16\)` observations, each observation `\(X_1 ... X_{16}\)` is a random variable. Each `\(X_i\)` has its own expected value `\(E(X_i) = \mu\)`.
+
+Thus, `\(\bar x\)`, being made up of random variables, will also be a random variable:
+
+$$
+E(\bar x) = E(\frac{1}{n} \cdot [x_1 + ... + x_n]) = \frac{1}{n} \cdot [E(x_1) + ... E(x_n)] = \frac{1}{n} \cdot n\mu = \mu
+$$
+### Accuracy (bias) and precision (variance)
+A point estimator has two "stats" we like to keep track of:
+
+1. *Unbiasedness*: Whether on average `\(\hat \theta\)` = `\(\theta\)`. An estimator where `\(E(\hat \theta) = \theta\)` is said to be unbiased. The bias of an estimator is `\(E(\hat \theta) - \theta\)`. 
+2. *Standard error*: `\(\sqrt{\sigma(\hat\theta)}\)`. The standard deviation of `\(\hat \theta\)` about its mean value `\(E(\hat \theta)\)`. If this computation involves parameters that also vary (say, `\(\mu\)`), we use our point estimator (`\(\bar x\)`) to compute the estimated standard error `\(s=\sqrt{\hat \sigma(\hat \theta)}\)`
+
+There actually exists a composite measure of accuracy (bias) and precision (variance). It's mean squared error. For a point estimator, 
+
+$$
+MSE = V(\hat \theta) + [E(\hat \theta)- \theta]^2
+$$ 
+Which is equivalent to averaging squared error `\((\theta - \theta)^2\)` over all possible samples.
+
+Proof:
+$$
+`\begin{align*}
+MSE = E[(\hat \theta - \theta)^2] &= E(\hat \theta^2 - 2 \hat \theta \theta + \theta^2)\\
+&= E(\hat \theta^2) - 2\theta E(\hat \theta)+ \theta^2\\
+&= \left[ V(\hat \theta) + E(\hat \theta)^2 \right] - 2\theta E(\hat \theta)+ \theta^2\\
+&= V(\hat \theta) + \left[ E(\hat \theta) - \theta\right]^2
+\end{align*}`
+$$
+When our point estimator `\(\hat \theta\)` is unbiased, then `\(E(\hat \theta) = \theta\)` and `\(MSE=V(\hat \theta)\)`.
+
+We can use this measure to justify some commonly used point estimators:
+
+#### Sample mean 
+We evaluate the bias (it's zero):
+$$
+E(\bar x) = E(\frac{1}{n} \cdot [x_1 + ... + x_n]) = \frac{1}{n} \cdot [E(x_1) + ... E(x_n)] = \frac{1}{n} \cdot n\mu = \mu \implies E(\bar x) - \mu = 0
+$$
+We evaluate the variance of _this point estimator_:
+$$
+V(\bar X) = V\left(\frac{X_1 + ... +X_n}{n}\right) = \frac{1}{n^2}\cdot n\sigma^2 = \frac{\sigma^2}{n}
+$$
+In practice, since we don't know `\(\sigma\)`, we substitute `\(s^2 = \frac{\sum (X_i - \bar X)^2}{n-1}\)` and calculate the estimated variance/standard deviation.
+
+$$
+\hat V(\bar X) = \frac{s^2}{n} \quad \hat S(\bar X) = \frac{s}{\sqrt n}
+$$
+
+#### Sample proportion
+We often use `\(\hat p = \frac{X}{n}\)`, where `\(X\)` is the number of successes and `\(n\)` the number of trials, to estimate the proportion of successes `\(p\)` in the population. We treat `\(X\)` as a binomial variable with mean `\(np\)` and variance `\(np(1-p)\)`.
+
+We evaluate the bias (it's zero):
+$$
+E(\hat p) = E\left(\frac{X}{n}\right) = \frac{1}{n}E(X) = \frac{np}{n} = p \implies E(\hat p) - p = 0
+$$
+
+We evaluate the variance of this point estimator: 
+$$
+V(\hat p) = V\left(\frac{X}{n}\right) = \frac{1}{n^2}\cdot np(1-p) = \frac{p(1-p)}{n} 
+$$
+We observe that the variance of the estimator decreases as the sample size increases. 
+
+In practice, since we don't know `\(p\)`, we substitute `\(\hat p\)` for `\(p\)` for the estimated variance/standard deviation.
+
+$$
+\hat V(\hat p) = \frac{\hat p (1-\hat p)}{n} 
+$$
+
+#### Sample variance
+As you saw above, we used `\(s^2 = \frac{\sum (X_i - \bar X)^2}{n-1}\)` as an estimator for `\(\sigma^2\)`.
+
+We evaluate the bias (it's zero):
+<details>
+<summary> Expand </summary>
+$$
+`\begin{align*}
+E(s^2) &= E(\frac{\sum(X_i - \bar X)^2)}{n-1}) \\
+&= E \left( \frac{\sum X_i^2 - 2 n \bar X \sum  X_i + n \bar X^2}{n-1} \right) \\
+&= \frac{1}{n-1} \left[ \sum E(X_i^2)-n E(\bar X^2) \right] \\
+&= \frac{1}{n-1} \left[ \sum E(X_i^2)-n E \left[\frac{(\sum X_i)^2}{n^2}\right] \right] \\
+&= \frac{1}{n-1} \left[ \sum E(X_i^2)-\frac{1}{n} E \left[(\sum X_i)^2\right] \right] \\
+&= \frac{1}{n-1} \left[ \sum E(X_i^2)-\frac{1}{n} \left[ V(\sum X_i) + [E(\sum X_i)]^2 \right] \right] \\
+&= \frac{1}{n-1} \left[ \sum V(X_i) + [E(\sum X_i)]^2 -\frac{1}{n} \left[ V(\sum X_i) + [n \mu]^2 \right] \right] \\
+&= \frac{1}{n-1} \left[ n \sigma^2 + n\mu^2 -\frac{1}{n} \left[ n\sigma^2 +n^2\mu^2 \right] \right] \\ 
+&=\frac{1}{n-1}\left[(n-1)(\sigma^2) +n(\mu^2 -\mu^2)\right] 
+= \sigma^2 \implies E(S^2)- \sigma^2 = 0
+\end{align*}`
+$$
+</details>
+
+_So that's why we divide by (n-1), and not n_..
+
+The variance of this estimator depends on the underlying distribution, so there's no clear-cut expression for it (thank God!).
+
+Additionally, though `\(S^2\)` is an unbiased estimator for `\(\sigma^2\)`, `\(S\)` is *not* an unbiased estimator for `\(S\)`. However, this is negligible.
+
+### But it's not that simple... 
+Some nuances to keep in mind: 
+1) An estimator's MSE may not hold across _all values_.
+2) There exist many unbiased estimators for a given parameter. For example, `\(E(\bar X) = E(X_1) = \mu\)`.
+This brings us to a general rule of thumb: **if two or more estimators for a parameter are unbiased, use the one with the least variance (the MVUE, or minimum variance unbiased estimator)**.
+3) The best estimator depends on the underlying distribution. If a distribution is normal, then `\(\bar X\)` is the MVUE for `\(\mu\)`. However, for distributions with fat tails (Cauchy), `\(\bar X\)` is horrendous. Studies have shown that trimmed sample means are generally robust across distributions.
+
+To handle these nuances, we have two more measures applicable to an estimator. 
+
+### Consistency and sufficiency
+Consistency is the tendency for an estimator to converge to the parameter as n increases. Formally, an estimator is consistent if:
+
+1. `\(E(\hat \theta) \rightarrow \theta\)` as `\(n \rightarrow \infty\)`
+-or- 
+2. `\(P(|\hat \theta - \theta| \ge \varepsilon) \rightarrow 0\)` as `\(n \rightarrow \infty\)` (for any `\(\varepsilon \ge 0\)`).
+
+
+So even though `\(X_1\)` is unbiased, it is _not_ consistent (and also has a huge variance). OTOH, `\(\bar X\)` is consistent owing to the law of large numbers. `\(\hat P\)` and `\(S\)` are also consistent.
+
+### Example
+Take the solubility sample below. We want to estimate population solubility `\(\mu\)`. Our point estimate is 985.5 using the sample mean `\(\bar x\)` point estimator.
+
+``` r
+x <- c(956, 974, 980, 980, 982, 983, 983, 985, 
+       985, 985, 987, 987, 995, 999, 1000, 1007)
+
+bar_x <- mean(x); bar_x
+```
+
+```
+## [1] 985.5
+```
+
+We use the point estimator `\(\bar x\)` because `\(E(\bar X) = \mu \implies E(\bar X) - \mu = 0\)`, and so `\(\bar X\)` is unbiased. 
+
+We know that according to the theory, `\(\sigma (\bar X) = \frac{\sigma}{n}\)`, where `\(\sigma\)` is the variance of the population. However, we don't know this `\(\sigma\)`. We can only estimate it using `\(s = \frac{\sum(X-\bar X)^2}{n-1}\)`. So, we use `\(s\)` in place of `\(\sigma\)` and calculate the estimated standard error instead. 
+
+
+``` r
+s <- sum((x-bar_x)^2)/(16-1); 
+est_se <- sqrt(s/16); est_se
+```
+
+```
+## [1] 2.914046
+```
+
+Our _estimate_ of how much our _point estimate_ 985.5 varies about `\(\mu\)` is 2.91. We conclude that the population solubility is `\(985.5 \pm 2.91\)`.
+
+
+

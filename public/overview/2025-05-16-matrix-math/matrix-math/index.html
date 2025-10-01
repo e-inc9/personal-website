@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intro to matrix math for multivariate stats | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Intro to matrix math for multivariate stats</span></h1>
+
+<h2 class="date">2025/05/16</h2>
+</div>
+
+<main>
+<h2 id="why-is-matrix-math-important-to-multivariate-data">Why is matrix math important to multivariate data?</h2>
+<p>Consider that for observations within a sample, we can record multiple variables on a single observation. For example, for 10  students sampled from a class, we can record their height, weight, and average GPA. We can represent our findings with a matrix, where a row is an observation, and each column is a variable.</p>
+<pre><code>##       Height_cm Weight_kg  GPA
+##  [1,]       164        75 2.29
+##  [2,]       168        68 2.83
+##  [3,]       186        68 2.83
+##  [4,]       171        66 2.74
+##  [5,]       171        61 2.30
+##  [6,]       187        79 2.28
+##  [7,]       175        69 2.47
+##  [8,]       157        49 2.93
+##  [9,]       163        71 2.53
+## [10,]       166        61 3.72
+</code></pre>
+<p>In matrix-math speak, we can denote our matrix by <code>\(\mathbf{Y}\)</code>. We can express <code>\(\mathbf{Y}\)</code> as 40 <code>\(y_{ij}\)</code>&rsquo;s, where <code>\(y_{ij}\)</code> is the <code>\(i\)</code>th observation&rsquo;s <code>\(j\)</code>th variable.
+</p>
+\[
+\mathbf{Y} = 
+\begin{bmatrix}
+y_{11} & y_{12} & y_{13} \\
+y_{21} & y_{22} & y_{23}  \\
+\vdots & \vdots & \vdots \\
+y_{i1} & y_{i2} & y_{i3} \\
+\vdots & \vdots & \vdots \\
+y_{10,1} & y_{10,2} & y_{10,3} 
+\end{bmatrix}
+\]<p>We can also express <code>\(\mathbf{Y}\)</code> as a collection of 10  <code>\(\mathbf{y_i'}\)</code> observation row vectors&hellip;
+</p>
+\[
+\mathbf{Y} = 
+\begin{bmatrix}
+\mathbf{y_1}'\\
+\mathbf{y_2}'\\
+\vdots \\
+\mathbf{y_{10}}'\\
+\end{bmatrix}
+\]<p>&hellip;where each observation row vector <code>\(\mathbf{y_i}\)</code> is then made up of variable values on that observation only.</p>
+\[
+\mathbf{y_1'} = 
+\begin{bmatrix}
+y_{11} &
+y_{12} &
+y_{13} &
+y_{14}
+\end{bmatrix}
+\]<p>Lastly, we can express <code>\(\mathbf{Y}\)</code> as a collection r of 4 <code>\(\mathbf{y}_{(j)}\)</code> variable column vectors&hellip;
+</p>
+\[
+\mathbf{Y} = 
+\begin{bmatrix}
+\mathbf{y}_{(1)} & \mathbf{y}_{(2)} & \mathbf{y}_{(3)} & \mathbf{y}_{(4)}
+\end{bmatrix}
+\]<p>
+&hellip; where each variable column vector <code>\(\mathbf{y}_{(j)}\)</code> contains the measurements for observations <code>\(1\)</code> through <code>\(n\)</code>.</p>
+\[
+\mathbf{y_{(1)}} = 
+\begin{bmatrix}
+y_{11} \\
+y_{21} \\
+y_{31} \\
+\vdots \\
+y_{10,1}
+\end{bmatrix}
+\]<p>Note that a bolded uppercase letter represents a matrix, a bolded lowercase letter represents a column vector, and a bolded lowercase letter + tick mark represents a row vector. A non-bolded lowercase letter represents a single value, or a scalar. <code>\(\mathbf{y}_i\)</code> denotes the ith observation vector, while <code>\(\mathbf{y}_{(j)}\)</code> denotes the jth variable vector.</p>
+<p>Representing multivariate data from a sample with matrix notation allows us to use matrix operations to express  various statistics such as the sample mean and sample variance.</p>
+<hr>
+<h2 id="calculating-the-sample-mean">Calculating the sample mean</h2>
+<p>Recall that in the univariate case (where we only observe one variable on each observation), we calculate the sample mean by averaging: <code>\(\sum y_i\)</code>.</p>
+<p>In the multivariate case, we perform the same averaging operation for each variable to calculate the sample mean row vector <code>\(\mathbf{\bar y'}\)</code>. Let there be <code>\(p\)</code> variables and <code>\(n\)</code> observations.</p>
+\[
+\mathbf{\bar y'} = 
+\begin{bmatrix}
+\bar{y}_1 & \bar{y}_2 & \cdots & \bar{y}_p
+\end{bmatrix}
+\]<p>
+We can express this mean vector as the scaled multiplication of a <code>\(1 \times n\)</code>  identity row vector <code>\(\mathbf{j'}\)</code> and sample matrix <code>\(\mathbf{Y}\)</code>:</p>
+\[
+\bar{\mathbf{y}} = \frac{1}{n} \mathbf{j'} \mathbf{Y} = \frac{1}{n}
+\begin{bmatrix}
+1 & 1 & \dotsc & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mathbf{y}^{(1)} & \mathbf{y}^{(2)} & \dotsc & \mathbf{y}^{(p)}
+\end{bmatrix} =
+\begin{bmatrix}
+\frac{1}{n} \sum_{i=1}^{n} y_{i1} &
+\frac{1}{n} \sum_{i=1}^{n} y_{i2} &
+\cdots &
+\frac{1}{n} \sum_{i=1}^{n} y_{ip}
+\end{bmatrix}
+\]<h3 id="example---sample-mean">Example - Sample mean</h3>
+<p>Consider the following sample matrix <code>\(\mathbf{Y}\)</code>:</p>
+<pre><code>##       y1   y2   y3
+##  [1,] 35  3.5 2.80
+##  [2,] 35  4.9 2.70
+##  [3,] 40 30.0 4.38
+##  [4,] 10  2.8 3.21
+##  [5,]  6  2.7 2.73
+##  [6,] 20  2.8 2.81
+##  [7,] 35  4.6 2.88
+##  [8,] 35 10.9 2.90
+##  [9,] 35  8.0 3.28
+## [10,] 30  1.6 3.20
+</code></pre>
+<p>We calculate the mean using the above math and check it with R&rsquo;s sample means function.</p>
+<pre><code class="language-r">j_row &lt;- matrix(1, nrow=1, ncol= nrow(Y))
+
+ybar_vec &lt;- (1/nrow(Y)) %*% j_row %*% Y; ybar_vec
+</code></pre>
+<pre><code>##        y1   y2    y3
+## [1,] 28.1 7.18 3.089
+</code></pre>
+<pre><code class="language-r">colMeans(Y)
+</code></pre>
+<pre><code>##     y1     y2     y3 
+## 28.100  7.180  3.089
+</code></pre>
+<hr>
+<h2 id="calculating-the-sample-covariance-matrix">Calculating the sample covariance matrix</h2>
+<p>Univariate variance, the scalar <code>\(\sigma^2\)</code>, is analogous to multivariate covariance matrix <code>\(\mathbf{\Sigma}\)</code>. Whereas univariate <code>\(\sigma^2\)</code> is the sum of squared distance <code>\(\sum (x_i - \bar{x})^2\)</code> from a sample mean for a single variable, in the multivariate case we must compute the sum of products of distance between all possible combinations of two variables, including a given variable with itself: <code>\(\sum (x_i - \bar{x})(y_i - \bar{y})\)</code>. This results in the <code>\(p \times p\)</code>  matrix <code>\(\mathbf{\Sigma}\)</code>,
+</p>
+\[
+\mathbf{\mathbf{\Sigma}} = (s_{jk}) =
+\begin{pmatrix}
+s_{11} & s_{12} & \cdots & s_{1p} \\
+s_{21} & s_{22} & \cdots & s_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+s_{p1} & s_{p2} & \cdots & s_{pp}
+\end{pmatrix}
+\]<p>Where <code>\(s_{ab}\)</code> is the covariance between the ath and bth variable. Naturally, this results in computing the variance for all variables 1 through <code>\(p\)</code> along the diagonal of <code>\(\mathbf{\Sigma}\)</code>.</p>
+<p>From <code>\(s_{ab}\)</code> expressed in vector terms, we can work up to a matrix understanding of <code>\(\mathbf{\Sigma}\)</code>. We first emphasize that the products of distance are summed over observations. Thus, we can express <code>\(\mathbf{\Sigma}\)</code> as the scaled sum of multiple matrices <code>\(\mathbf{\Sigma_1}, \mathbf{\Sigma_2},... \mathbf{\Sigma_n}\)</code>, where</p>
+\[ 
+\mathbf{\Sigma_i} =  (\mathbf{y_i} - \mathbf{\bar{y}}) (\mathbf{y_i} - \mathbf{\bar{y}})' =
+\begin{pmatrix}
+y_{i1} - \bar{y}_1 \\
+y_{i2} - \bar{y}_2 \\
+\vdots \\
+y_{ip} - \bar{y}_p \\
+\end{pmatrix}
+\begin{pmatrix}
+y_{i1} - \bar{y}_1 & y_{i2} - \bar{y}_2 & \cdots & y_{ip} - \bar{y}_p
+\end{pmatrix}
+\]<p>When you scale the sum of all <code>\(\mathbf{\Sigma_i}'s\)</code>  by <code>\(\frac{1}{n-1}\)</code>, you get the sample covariance matrix <code>\(\mathbf{\Sigma}\)</code>. This allows us to calculate the covariance using the matrix alone.
+</p>
+\[ \mathbf{\Sigma}= 
+\frac{1}{n-1}\sum_{i=1}^{n} (\mathbf{y_i} - \mathbf{\bar{y}}) (\mathbf{y_i} - \mathbf{\bar{y}})' = 
+\frac{1}{n-1}\left( \sum_{i=1}^n  \mathbf{y_i y_i'} \right) - n\mathbf{\bar y \bar y'} 
+\]<p>Using matrix math, the above can be expressed with the original matrix <code>\(\mathbf{Y}\)</code>:
+</p>
+\[\mathbf{\Sigma} = \mathbf{Y'Y}- \mathbf{Y'} \frac{\mathbf{j}}{1} \cdot \frac{\mathbf{j'}}{n} \mathbf{Y} = \mathbf{Y'}(\mathbf{I} - \frac{\mathbf{J}}{n})\mathbf{Y} \]<h3 id="example---sample-covariance-matrix">Example - Sample covariance matrix</h3>
+<p>Take the matrix above and compute it manually. Check with R. Answers should match:</p>
+<pre><code>##            y1        y2        y3
+## y1 140.544444 49.680000 1.9412222
+## y2  49.680000 72.248444 3.6760889
+## y3   1.941222  3.676089 0.2501211
+</code></pre>
+<p>Using the vector method:</p>
+<pre><code class="language-r">Y &lt;- data.frame(Y)
+ybar_vec &lt;- colMeans(Y)
+n &lt;- nrow(Y)
+
+Sigma &lt;- matrix(0, nrow=ncol(Y), ncol=ncol(Y))
+for (i in 1:n){
+  dist &lt;- as.matrix(Y[i,] - ybar_vec)
+  Sigma_n &lt;- t(dist) %*% dist
+  Sigma &lt;- Sigma + Sigma_n
+}
+
+print(Sigma/(n-1))
+</code></pre>
+<pre><code>##            y1        y2        y3
+## y1 140.544444 49.680000 1.9412222
+## y2  49.680000 72.248444 3.6760889
+## y3   1.941222  3.676089 0.2501211
+</code></pre>
+<p>Using the matrix method:</p>
+<pre><code class="language-r">Y&lt;- as.matrix(Y)
+ybar_vec &lt;- as.matrix(ybar_vec)
+Sigma &lt;-(1/(n-1)) * ( t(Y)%*%Y - n * ybar_vec %*% t(ybar_vec)); Sigma
+</code></pre>
+<pre><code>##            y1        y2        y3
+## y1 140.544444 49.680000 1.9412222
+## y2  49.680000 72.248444 3.6760889
+## y3   1.941222  3.676089 0.2501211
+</code></pre>
+<p>Using more intuitive method (courtesy of ChatGPT) where the distance of each variable measurement from the respective sample mean is subtracted out:</p>
+<pre><code class="language-r">Y &lt;- as.matrix(Y)
+Y_centered &lt;- sweep(Y,2,colMeans(Y)) #centers 
+Sigma &lt;- (1/(n-1)) * ( t(Y_centered) %*% Y_centered ); Sigma
+</code></pre>
+<pre><code>##            y1        y2        y3
+## y1 140.544444 49.680000 1.9412222
+## y2  49.680000 72.248444 3.6760889
+## y3   1.941222  3.676089 0.2501211
+</code></pre>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

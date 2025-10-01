@@ -1,0 +1,81 @@
+---
+title: F-test (ANOVA/linear regressions)
+date: '2025-09-24'
+slug: f-test
+categories: 
+  - Inference/tests
+tags: []
+---
+
+
+
+<p>In the <a href="/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/">ANOVA cut of linear regression</a>, we ended on <span class="math inline">\(MSR\)</span> and <span class="math inline">\(MSE\)</span>, which are two measures of variance. <span class="math inline">\(MSR\)</span> measures the variance explained by a fitted line, while <span class="math inline">\(MSE\)</span> measures the variance of observations about that (in spite of) the fitted line.</p>
+<p>Given that they are both random variables with centers:
+<span class="math display">\[
+E(MSE)= \sigma^2\\
+E(MSR) = \sigma^2 + \beta_1 ^2 \sum(X_i - \bar X)^2
+\]</span>
+We conclude that the distribution of <span class="math inline">\(MSR\)</span> is <em>to the right of</em> the distribution of <span class="math inline">\(MSE\)</span> if <span class="math inline">\(\beta_1 \ne 0\)</span>, and thus computed <span class="math inline">\(MSR\)</span> is likely to be greater than <span class="math inline">\(MSE\)</span>. If <span class="math inline">\(\beta_1 = 0\)</span>, then <span class="math inline">\(MSR\)</span> is likely to equal <span class="math inline">\(MSE\)</span>.</p>
+<p><strong>Note that this intuition cannot be understood (visually) from an image, as <span class="math inline">\(MSE\)</span> is <span class="math inline">\(\sum( Y_i - \hat Y_i)^2\)</span> DIVIDED by <span class="math inline">\(n-2\)</span>!</strong></p>
+<div id="the-f-statistic" class="section level3">
+<h3>The F-statistic</h3>
+<p>We test the likelihood of <span class="math inline">\(\beta_1 = 0\)</span> using <span class="math inline">\(F = \frac{MSR}{MSE}\)</span>.</p>
+<p>As discussed above, if <span class="math inline">\(\beta_1 = 0\)</span>, then <span class="math inline">\(MSR\)</span> is likely to equal <span class="math inline">\(MSE\)</span>, which means <span class="math inline">\(F\)</span> is likely to be 1. If <span class="math inline">\(\beta_1 \ne 0\)</span>, then <span class="math inline">\(MSR\)</span> is likely to be greater than <span class="math inline">\(MSE\)</span>. The greater the departure of <span class="math inline">\(\beta_1\)</span> from <span class="math inline">\(0\)</span>, the larger <span class="math inline">\(F\)</span> is likely to be.</p>
+<p>When we use the words “likely” and “likelihood”, we imply a probabilistic distribution. However, what distribution, exactly, does this ratio follow?</p>
+<p>The ratio of <span class="math inline">\(MSR\)</span> over <span class="math inline">\(MSE\)</span> is an <a href="link%20here">F-distributed</a> variable with (<span class="math inline">\(1, n-2\)</span>) degrees of freedom.</p>
+<p><span class="math display">\[\frac{\frac{SSR}{\sigma^2}}{1} \div \frac{\frac{SSE}{\sigma^2}}{n-2} = \frac{MSR}{MSE} \sim F(1, n-2)\]</span></p>
+<details>
+<summary>
+Derivation here.
+</summary>
+<p>By Cochran’s theorem, if <span class="math inline">\(n\)</span> observations <span class="math inline">\(Y_i\)</span> come from the same normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(SSTO = \sum (Y_i - \bar Y)^2\)</span> is partitioned into <span class="math inline">\(k\)</span> sums of squares <span class="math inline">\(SS_1... SS_k\)</span>, each with degrees of freedom <span class="math inline">\(df_{1}...df_k\)</span>, then <span class="math inline">\(\frac{SS_1}{\sigma^2} ... \frac{SS_k}{\sigma^2}\)</span> are independent <span class="math inline">\(\chi^2\)</span> variables with <span class="math inline">\(df_r\)</span> degrees of freedom.</p>
+<p>Under the null hypothesis where <span class="math inline">\(\beta_1 = 0\)</span>, each observation <span class="math inline">\(Y_i\)</span> has <span class="math inline">\(E(Y_i) = \beta_0 = \mu\)</span> (contrast this with <span class="math inline">\(\beta_1 \ne 0\)</span>, where we expect the mean response to vary with the predictor). Owing to the assumptions of linear regression, variance is constant <span class="math inline">\(\sigma^2\)</span>. <span class="math inline">\(SSTO\)</span>, as we know, is partitioned into <span class="math inline">\(SSR\)</span> and <span class="math inline">\(SSE\)</span>, with 1 and <span class="math inline">\(n-2\)</span> degrees of freedom, respectively.</p>
+<p>Then, <span class="math inline">\(\frac{SSR}{\sigma^2}, \frac{SSE}{\sigma^2}\)</span> are independent and follow <span class="math inline">\(\chi^2\)</span> distributions with 1 and <span class="math inline">\(n-2\)</span> degrees of freedom, respectively. If we then divide these two fractions by their degrees of freedom, we obtain:</p>
+<p><span class="math display">\[\frac{\frac{SSR}{\sigma^2}}{1}, \frac{\frac{SSE}{\sigma^2}}{n-2}\]</span></p>
+When we take the ratio of these two fractions, by the definition of an F-distributed random variable, we obtain an F-distributed random variable with <span class="math inline">\((1, n-2)\)</span> degrees of freedom.
+</details>
+<details>
+<summary>
+We examine whether <span class="math inline">\(\hat \beta_1=0\)</span> for the fitted line for the Toluca company.
+</summary>
+<pre class="r"><code>library(api2lm)
+
+lm1 &lt;- lm(work_hours~lot_size, data=toluca)
+anova(lm1)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: work_hours
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## lot_size   1 252378  252378  105.88 4.449e-10 ***
+## Residuals 23  54825    2384                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+Judging by the F-value of 105.88 in the ANOVA table (corresponding to <span class="math inline">\(p &lt; .05\)</span>), we reject the null hypothesis of <span class="math inline">\(\beta_1 = 0\)</span>. The (large) amount of variance explained by <span class="math inline">\(X\)</span> is unlikely under conditions where <span class="math inline">\(\beta_1 = 0\)</span>.
+</details>
+</div>
+<div id="relation-to-the-t-test" class="section level3">
+<h3>Relation to the t-test</h3>
+<p>If we revisit <span class="math inline">\(F = \frac{MSR}{MSE}\)</span>, we can express it in terms of a <span class="math inline">\(t\)</span> statistic. We make use of the following identities:
+<span class="math display">\[
+SSR =\sum(\hat Y_i - \bar Y)^2 = \sum(\hat \beta_0 + \hat \beta_1 X_i - (\hat \beta_0 + \hat \beta_1 \bar X))^2 = \sum(\hat \beta_1 X_i - \hat \beta_1 \bar X)^2 = \hat \beta_1 ^2 \sum (X_i - \bar X)^2 = MSR \quad \text{(divide by 1 df)} \\
+s^2({\hat \beta_1}) = \frac{MSE}{\sum(X_i - \bar X)^2} \quad \text{our estimate of } \sigma^2(\hat \beta_1)
+\]</span></p>
+<p><span class="math display">\[ \begin{aligned}
+F &amp;= \frac{MSR}{MSE} \sim F(1, n-2) \\
+&amp;= \frac{\hat \beta_1^2 \sum(X_i - \bar X)^2}{s^2(\hat \beta_1) \sum (X_i - \bar X)^2} = \left(\frac{\hat \beta_1}{s({\hat \beta_1})} \sim t(1)\right)^2  \\
+\end{aligned}\]</span></p>
+<p>In other words, an <span class="math inline">\(F\)</span> statistic (used for testing <span class="math inline">\(\beta_1 = 0\)</span>) is equivalent to a squared <span class="math inline">\(t\)</span> statistic. That means that given a <span class="math inline">\(t\)</span> statistic, you can square it to get an F-statistic. Given an <span class="math inline">\(F\)</span> statistic, you take the square root to get a t-statistic.</p>
+<p>However, what is the <em>probabilistic</em> relation of <span class="math inline">\(t\)</span> to <span class="math inline">\(F\)</span>? We define it below. We’ve established that since <span class="math inline">\(F = T^2\)</span>, <span class="math inline">\(P(F &gt; t_0) = P(T^2 &gt; t_0)\)</span>.
+Then,</p>
+<p><span class="math display">\[\begin{aligned}
+P(F &gt; t_0) &amp;= P(T^2 &gt; t_0) \\
+P(F &gt; t_0) &amp;= P(T &lt; -\sqrt t_0) + P(T &gt; \sqrt t_0) \\
+P(F &gt; t_0) &amp;= 2P(T &gt; \sqrt t_0) \quad \text{ (owing to symmetry of T) }
+\end{aligned}\]</span></p>
+<p>We conclude that the probabilistic relation is that the probability of <span class="math inline">\(F\)</span> being greater than <span class="math inline">\(t_0\)</span> is equivalent to the probability of <span class="math inline">\(t\)</span> being less than <span class="math inline">\(-\sqrt{t_0}\)</span> or greater than <span class="math inline">\(\sqrt{t_0}\)</span>.</p>
+<p><strong>In other words, a one-sided F-test using <span class="math inline">\(F\)</span> is equivalent to a two-sided t-test using <span class="math inline">\(T\)</span>.</strong></p>
+<pre class="r"><code>pf(105.88, df1=1, df2=nrow(toluca)-2, lower.tail=FALSE)</code></pre>
+<pre><code>## [1] 4.44711e-10</code></pre>
+<pre class="r"><code>pt(sqrt(105.88), df=nrow(toluca)-2, lower.tail=FALSE)*2</code></pre>
+<pre><code>## [1] 4.44711e-10</code></pre>
+</div>

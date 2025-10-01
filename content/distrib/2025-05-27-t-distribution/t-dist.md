@@ -8,33 +8,6 @@ tags: []
 ---
 
 
-``` r
-knitr::opts_chunk$set(echo = FALSE)
-library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-``` r
-library(ggplot2)
-rm(list=ls())
-set.seed(1)
-```
 
 
 A t-distributed random variable with `\(\nu\)` degrees of freedom is the ratio of a standard normal variable `\(Z \sim N(0,1)\)` over the square root of a chi-squared variable `\(Y \sim \chi^2_{\nu}\)` divided by its degrees of freedom.
@@ -48,16 +21,23 @@ Its pdf is given by
 \[ f(t) = \frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}\
 \cdot \frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} } \cdot \Gamma\left({\nu+1 \over 2}\right) \]
 
+Its expected variance and mean are: 
+\[E(T) = E[h(Z)] E[g(Y)] = 0 \text{ for `\(\nu > 1\)` } \]
+
+\[ V(T) = E(Z^2)E\left(\frac{\mu}{Y} \right) = \frac{\nu}{\nu-2} \text{ for `\(\nu >2\)`} \]
+
 [Derivation if you're interested.](/proofs_deriv/2025/05/27/deriving-the-t-pdf/)
 
-The pdf isn't as important as the distribution itself. This distribution is bell-shaped and symmetric about 0 and *approaches normality* as `\(\nu\)` increases. 
+The pdf isn't as important as the distribution itself. This distribution is bell-shaped and symmetric about 0 and *approaches standard normality* as `\(\nu\)` increases. 
 
-We can demonstrate this mathematically using the properties of `\(Y\)`, which are downstream from the properties of the Gamma distribution. 
-Given that a Gamma random variable has distribution `\(G \sim Gamma(\alpha\beta, \alpha\beta^2)\)`, we apply the law of large numbers: 
-
-\[E(Y)_{\nu \rightarrow \infty} = \sum_{1}^{\infty} E(Z^2) = \sum_{1}^{\infty} \frac{\nu 2 }{2} = \nu\]
-\[T_{\nu \rightarrow \infty} = \frac{Z}{\sqrt{{\nu \over \nu}}} = Z\]
-
+### Convergence to normality
 <img src="/distrib/2025-05-27-t-distribution/t-dist_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
+We can also demonstrate this mathematically. The denominator `\(\sqrt{\frac{Y}{\nu}}\)` is the square root of an average of individual Gamma variables `\(Z_i^2 \sim Gamma(\alpha = \frac{1}{2}, \beta= 2).\)` By the law of large numbers, as `\(\nu \rightarrow \infty\)`, this average `\(\frac{Y}{\nu} = \frac{1}{\nu} \sum Z_i^2\)` becomes close to `\(E(Z_i^2) = \alpha \beta = 1\)`.
 
+Thus, as `\(n \rightarrow \infty, \frac{Y}{\nu} \xrightarrow{p} 1 \implies T_\nu = \frac{Z}{\sqrt{\frac{Y}{\nu}}} \xrightarrow{d} Z\)`.
+
+(`\(\xrightarrow{p}\)` means converges in probability and `\(\xrightarrow{d}\)` means converges in distribution.)
+
+### What follows a t-distribution?
+The `\(t\)`-statistic, which results from substituting an estimated sample variance in place of `\(\sigma^2\)` for a standardized normal variable, follows a `\(t\)` distribution with `\(n-1\)` d.f (if the parameter of interest is a [sample mean](inference_tests/2025-06-13-t-test/t-test/)) and `\(n-2\)` d.f. (if the parameter of interest is `\(\hat \beta_1\)` in a linear regression).

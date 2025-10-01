@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Distributions on A minimal Hugo website</title>
+    <link>http://localhost:4321/categories/distributions/</link>
+    <description>Recent content in Distributions on A minimal Hugo website</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 27 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/categories/distributions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>T-distribution</title>
+      <link>http://localhost:4321/distrib/2025-05-27-t-distribution/t-dist/</link>
+      <pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/distrib/2025-05-27-t-distribution/t-dist/</guid>
+      <description>&lt;p&gt;A t-distributed random variable with &lt;code&gt;\(\nu\)&lt;/code&gt; degrees of freedom is the ratio of a standard normal variable &lt;code&gt;\(Z \sim N(0,1)\)&lt;/code&gt; over the square root of a chi-squared variable &lt;code&gt;\(Y \sim \chi^2_{\nu}\)&lt;/code&gt; divided by its degrees of freedom.&lt;/p&gt;&#xA;$$&#xA;T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y&#xA;$$&lt;p&gt;Its pdf is given by&lt;/p&gt;&#xA;\[ f(t) = \frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}\&#xA;\cdot \frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} } \cdot \Gamma\left({\nu+1 \over 2}\right) \]&lt;p&gt;Its expected variance and mean are:&#xA;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

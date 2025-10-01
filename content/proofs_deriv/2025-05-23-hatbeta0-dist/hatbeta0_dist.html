@@ -13,7 +13,7 @@ header-includes:
 
 <div id="deriving-distribution-of-hat-beta_0" class="section level2">
 <h2>Deriving distribution of <span class="math inline">\(\hat \beta_0\)</span></h2>
-<p>Assume that <span class="math inline">\(Y_i \sim N(\beta_0 + \beta_1X_i, \sigma^2)\)</span> as a result of the definition <span class="math inline">\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)</span>, where each <span class="math inline">\(\varepsilon_i \sim N(0, \sigma^2)\)</span>. This is what’s assumed under the simple linear regression model.</p>
+<p>Assume that <span class="math inline">\(Y_i \sim N(\beta_0 + \beta_1X_i, \sigma^2)\)</span> as a result of the definition <span class="math inline">\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)</span>, where each <span class="math inline">\(\varepsilon_i \sim N(0, \sigma^2)\)</span>. This is what’s assumed under the simple linear regression model, <strong>including the additional assumption that <span class="math inline">\(\varepsilon\)</span> is normally distributed (necessary for inference).</strong></p>
 <p>Recall that given a sample, <span class="math inline">\(\hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)</span>.</p>
 <p>Since <span class="math inline">\(\hat \beta_1 \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\)</span>, and <span class="math inline">\(\bar X\)</span> is a constant determined by the sample and <span class="math inline">\(\bar Y\)</span> is normally distributed, <span class="math inline">\(\hat \beta_0\)</span> is normally distributed.</p>
 <p><span class="math display">\[

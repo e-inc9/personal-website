@@ -1,0 +1,78 @@
+---
+title: 'Non-invasive functional brain imaging '
+author: ''
+date: '2025-06-29'
+slug: fnirs
+categories:
+  - Misc
+tags: []
+---
+
+
+## Non-invasive functional Brain Imaging 
+Primarily falls into two categories: 
+- Hemodynamic/Metabolic
+  - fNIRS, fMRI, POT 
+- Neuronal 
+  - EEGs, EPs/ERPs, MEG 
+  
+
+## Hemodynamic/Metabolic (fNIRS as example)
+Consider: 
+1. Oxygenated blood is rich in oxyhemoglobin (`\(HbO_2\)`) and low in deoxyhemoglobin (`\(HbO\)`);
+2. Oxyhemoglobin and deoxyhemoglobin have been shown to absorb infrared light at certain frequencies;
+3. When performing a task, there is cerebral (oxygenated) blood flow (CBF) to regions of the brain that are active during said task;
+
+And that we would like to determine, for a given task, which regions of the brain are most active based on the presence of oxygenated blood.
+
+Then: 
+
+If one were to shine infrared light at certain frequencies on multiple regions of the brain simultaneously,   differences in light absorption (as inferred from the amount of scattered light detected) could be used to identify regions with higher oxyhemoglobin concentrations and thus greater activity.
+
+However:
+
+The inference of the occurrence of _neuronal_ activity is mediated by neurovascular coupling, which introduce biophysical and biochemical "steps" between neuronal activity and the hemodynamic activity we observe. 
+
+\[ \text{Neural activity } \rightarrow \text{ Neurovascular coupling } \rightarrow \text { Blood flow } \]
+
+This introduces a time delay and variability across subjects and regions of the brain. 
+
+fNIRS companies: 
+- NIRX: primarily for research purposes, which means monitoring 
+- Kernel: Bryan Johnson founded it, explicitly for data collection
+- Mendi: monitoring focus, games component 
+
+## Neuronal
+Where what is measured is the movement of ions through and around cell membranes, which occurs during neuronal activity. 
+
+EEGs and MEGs are ways to measure EPs/ERPs (event-related potentials). Involves putting electrodes on the head and amplifying the signal. Fast, but does not give much spatial relation.
+
+Unlike invasive methods, non-invasive methods occur at a distance from the surface of the head and cannot measure individual neuronal activity. Spatial resolution not guaranteed. 
+
+EEG companies:
+- Neurable: a set of headphones (MW75) that have EEG monitors to measure brain activity. It tells you when you're *focused* and when you're *tired* -- the goal is to help people avoid burnout 
+- Cognixion: It's a walking neuro lab. Military interest is for understanding mental reactions to various environments.
+- Emotiv: another focus/wellbeing measuring headphone company 
+
+
+## Fast optical signaling 
+Involves measuring signals that are *concurrent* with neuronal changes (as opposed to following neuronal changes, as we see with hemodynamic/metabolic methods). One of these signals is the scattering coefficient of neural tissue (when photons are fired at it) when the tissue is active. 
+
+This signal can be measured as
+a) the *delay* in the flight of near-infrared photons through active areas
+b) the *intensity* of amount of light moving through active areas 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

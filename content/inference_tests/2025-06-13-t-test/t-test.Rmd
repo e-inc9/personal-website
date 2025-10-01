@@ -1,0 +1,117 @@
+---
+title: T-test (population mean)
+author: ''
+date: '2025-06-13'
+slug: t-test
+categories:
+  - Inference/tests
+tags: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(ggplot2)
+library(rmutil)
+library(kableExtra)
+library(extraDistr)
+set.seed(1)
+rm(list=ls())
+```
+The t-test can be used to make inferences regarding a population mean when we have a sample from said population. 
+
+The assumptions are that
+
+1) The sample mean follows an approximately normal distribution. This requires either $n \ge 30$ or the population to be normally distributed, either of which are ensures $\bar X \sim N$ (approximately).
+2) The numerator and denominator are independent, which can be assumed for a sample drawn from a normal population.
+
+The statistic used is 
+
+\[ T = \frac{\bar X - \mu}{\sqrt{ \frac{S^2}{n}}}\]
+
+Where $\bar X$ is the sample mean, $\mu$ is the theorized population mean, $\sqrt{ \frac{S^2}{n}}$ is our estimated standard error. 
+
+This statistic follows a [t-distribution](/distrib/2025-05-27-t-distribution/t-dist/). The proof itself is actually quite involved (hint: the numerator and denominator we're looking at -- $\bar X - \mu$, $\sqrt{S^2 \over n}$ -- aren't $\sim Z, \sim \chi^2$, respectively).
+
+In the real world, where we don't _know_ whether a population is normally distributed, we can't be certain that this statistic follows a t-distribution. Yet we need not worry. Theoretically, if $n$ is sufficiently large, the entire statistic becomes approximately standard normal (Slutsky's theorem). We can then verify this empirically: if we run simulations of t-tests when the population is non-normal and normal, the performances are relatively similar if the population's distribution is *symmetric* and *behaves well*.
+ 
+# Power tables
+
+We evaluate the ability of the t-test to reject the null hypothesis when it is false in a series of experiments where the population distribution is non-normal and the sample size varies. Each cell of the table represents the proportion of rejections out of 10,000 samples taken.
+
+Let
+\[ H_0: \mu = 5\]
+\[ H_a: \mu \ge 5  \]
+
+In actuality, $\mu = 7$ for each of the below distributions.
+
+We see that with the exception of the Cauchy and exponential distributions, the t-test's power on non-normal populations is comparable to its power on normal populations. The Cauchy is symmetrical, but it has no mean, so sample means will be volatile; some entering the rejection region and some not. The exponential distribution is extremely skewed compared to other distributions (even already skewed distributions like the chi-squared distribution). 
+
+```{r}
+n <- c(seq(10,100, by=10))
+mu <- 7 
+dist_funs <- list(
+  Normal    = function(n) rnorm(n, mean = 7, sd = 1),
+  t_shifted_7= function(n) rt(n, df = 5) + 7,  # centered at 7
+  Cauchy    = function(n) rcauchy(n, location = 7, scale = 1),
+  LogNormal = function(n) rlnorm(n, meanlog = log(7), sdlog = 0.25), # approx center near 7
+  Exponential = function(n) rexp(n, rate = 1/7),  # mean = 7
+  Uniform = function(n) runif(n, min = 0, max=14),
+  Laplace   = function(n) rmutil::rlaplace(n, m = 7, s = 1),
+  ChiSq      = function(n) rchisq(n, df = 4) + (7 - 4),                # right-skewed, mean ≈ 7
+  Triangular = function(n) extraDistr::rtriang(n, a = 0, b = 14, c = 7), # symmetric, bounded
+  Bimodal    = function(n) sample(c(rnorm(n/2, 5, 1), rnorm(n/2, 9, 1))) # symmetric bimodal
+)
+
+power_table <- as.data.frame(matrix(NA, nrow = length(dist_funs), ncol = length(n)))
+colnames(power_table) <- n
+rownames(power_table) <- names(dist_funs)
+```
+```{r}
+for(distrib in names(dist_funs)){
+  call <- dist_funs[[distrib]]
+  
+  for(ss in n){
+    # cat(distrib, ss, "\n")
+    samples <- replicate(100, call(ss))
+    p_vals <- apply(samples, 2, function(x) {t.test(x, alternative = "greater", mu = 5)$p.value})
+    prop_reject <- mean(p_vals < .05)
+    power_table[distrib, which(n==ss)] <- prop_reject
+  }
+}
+
+kable(power_table, digits=2) %>% kable_styling()
+```
+
+# Type I error table
+
+We evaluate the tendency of the t-test to reject the null hypothesis when it is true. 
+
+Let
+\[ H_0: \mu = 7\]
+\[ H_a: \mu \ge 7  \]
+
+and $\mu = 7$ for each of the below distributions. 
+
+We see that Type I error rates are relatively similar across distributions (with the exception of exponential). Generally, Type I errors are more robust to violation of assumptions. That's an asymmetry to memorize. 
+
+```{r}
+type1_table <- as.data.frame(matrix(NA, nrow = length(dist_funs), ncol = length(n)))
+colnames(type1_table) <- n
+rownames(type1_table) <- names(dist_funs)
+
+for(distrib in names(dist_funs)){
+  call <- dist_funs[[distrib]]
+  
+  for(ss in n){
+    # cat(distrib, ss, "\n")
+    samples <- replicate(100, call(ss))
+    p_vals <- apply(samples, 2, function(x) {t.test(x, alternative = "greater", mu = 7)$p.value})
+    prop_reject <- mean(p_vals < .05)
+    type1_table[distrib, which(n==ss)] <- prop_reject
+  }
+}
+
+kable(type1_table, digits=2) %>% kable_styling()
+```
+

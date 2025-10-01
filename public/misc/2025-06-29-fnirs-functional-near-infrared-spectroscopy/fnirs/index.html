@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Non-invasive functional brain imaging  | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Non-invasive functional brain imaging</span></h1>
+
+<h2 class="date">2025/06/29</h2>
+</div>
+
+<main>
+<h2 id="non-invasive-functional-brain-imaging">Non-invasive functional Brain Imaging</h2>
+<p>Primarily falls into two categories:</p>
+<ul>
+<li>Hemodynamic/Metabolic
+<ul>
+<li>fNIRS, fMRI, POT</li>
+</ul>
+</li>
+<li>Neuronal
+<ul>
+<li>EEGs, EPs/ERPs, MEG</li>
+</ul>
+</li>
+</ul>
+<h2 id="hemodynamicmetabolic-fnirs-as-example">Hemodynamic/Metabolic (fNIRS as example)</h2>
+<p>Consider:</p>
+<ol>
+<li>Oxygenated blood is rich in oxyhemoglobin (<code>\(HbO_2\)</code>) and low in deoxyhemoglobin (<code>\(HbO\)</code>);</li>
+<li>Oxyhemoglobin and deoxyhemoglobin have been shown to absorb infrared light at certain frequencies;</li>
+<li>When performing a task, there is cerebral (oxygenated) blood flow (CBF) to regions of the brain that are active during said task;</li>
+</ol>
+<p>And that we would like to determine, for a given task, which regions of the brain are most active based on the presence of oxygenated blood.</p>
+<p>Then:</p>
+<p>If one were to shine infrared light at certain frequencies on multiple regions of the brain simultaneously,   differences in light absorption (as inferred from the amount of scattered light detected) could be used to identify regions with higher oxyhemoglobin concentrations and thus greater activity.</p>
+<p>However:</p>
+<p>The inference of the occurrence of <em>neuronal</em> activity is mediated by neurovascular coupling, which introduce biophysical and biochemical &ldquo;steps&rdquo; between neuronal activity and the hemodynamic activity we observe.</p>
+\[ \text{Neural activity } \rightarrow \text{ Neurovascular coupling } \rightarrow \text { Blood flow } \]<p>This introduces a time delay and variability across subjects and regions of the brain.</p>
+<p>fNIRS companies:</p>
+<ul>
+<li>NIRX: primarily for research purposes, which means monitoring</li>
+<li>Kernel: Bryan Johnson founded it, explicitly for data collection</li>
+<li>Mendi: monitoring focus, games component</li>
+</ul>
+<h2 id="neuronal">Neuronal</h2>
+<p>Where what is measured is the movement of ions through and around cell membranes, which occurs during neuronal activity.</p>
+<p>EEGs and MEGs are ways to measure EPs/ERPs (event-related potentials). Involves putting electrodes on the head and amplifying the signal. Fast, but does not give much spatial relation.</p>
+<p>Unlike invasive methods, non-invasive methods occur at a distance from the surface of the head and cannot measure individual neuronal activity. Spatial resolution not guaranteed.</p>
+<p>EEG companies:</p>
+<ul>
+<li>Neurable: a set of headphones (MW75) that have EEG monitors to measure brain activity. It tells you when you&rsquo;re <em>focused</em> and when you&rsquo;re <em>tired</em> &ndash; the goal is to help people avoid burnout</li>
+<li>Cognixion: It&rsquo;s a walking neuro lab. Military interest is for understanding mental reactions to various environments.</li>
+<li>Emotiv: another focus/wellbeing measuring headphone company</li>
+</ul>
+<h2 id="fast-optical-signaling">Fast optical signaling</h2>
+<p>Involves measuring signals that are <em>concurrent</em> with neuronal changes (as opposed to following neuronal changes, as we see with hemodynamic/metabolic methods). One of these signals is the scattering coefficient of neural tissue (when photons are fired at it) when the tissue is active.</p>
+<p>This signal can be measured as
+a) the <em>delay</em> in the flight of near-infrared photons through active areas
+b) the <em>intensity</em> of amount of light moving through active areas</p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

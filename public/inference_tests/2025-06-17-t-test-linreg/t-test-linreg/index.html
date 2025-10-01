@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>T-test (linear regressions) | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">T-test (linear regressions)</span></h1>
+
+<h2 class="date">2025/06/17</h2>
+</div>
+
+<main>
+<p>Just as the estimators sample mean and sample variance follow a distribution, so do the estimators  <code>\(\hat \beta_0, \hat \beta_1\)</code>.</p>
+<p>Even though it can be argued that there does not exist a &ldquo;true&rdquo; <code>\(\beta_0\)</code> and <code>\(\beta_1\)</code> in the same way a true <code>\(\mu, \sigma\)</code> might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we could say that having identified phenomena for which a linear regression is applicable, there  <em>does</em> exist a regression line that exists for all existing &ldquo;population&rdquo; data on this phenomena. We&rsquo;d like to infer this <code>\(\beta_0, \beta_1\)</code> that&rsquo;s &ldquo;out there&rdquo;.</p>
+<p>Something to keep in mind when exploring these distributions is that our findings are &ldquo;downstream&rdquo; of the assumptions of the linear regression model, <strong>including (most crucially) the additional assumption that <code>\(\varepsilon\)</code> is normally distributed</strong>. Without that assumption, we cannot perform a t-test (and other inference) on our linear regression model.</p>
+<h2 id="the-distribution-of-hat-beta_1-hat-beta_0">The distribution of <code>\(\hat \beta_1, \hat \beta_0\)</code>:</h2>
+\[
+\hat{\beta}_1 \sim N\left( \beta_1,\ \frac{\sigma^2}{S_{xx}} \right)
+\]<p><a href="/proofs_deriv/2025/05/19/distribution-of-hat-beta_1/">See <code>\(\hat \beta_1\)</code>&rsquo;s full derivation with steps.</a></p>
+\[
+\hat{\beta}_0 \sim N\left( \beta_0,\ \sigma^2 \left[ \frac{1}{n} + \frac{\bar{X}^2}{S_{xx}} \right] \right)
+\]<p><a href="/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/">See <code>\(\hat \beta_0\)</code>&rsquo;s full derivation with steps.</a></p>
+<h3 id="inference-on-beta_1">Inference on <code>\(\beta_1\)</code>:</h3>
+<p>Since <code>\(\hat \beta_1\)</code> is normally distributed, we can use a standardized test statistic that is also normally distributed for inference, where <code>\(\sigma^2_{\hat \beta_1} = \frac{\sigma^2}{S_{xx}}\)</code>. Recall that <code>\(\sigma^2\)</code> is the variance of <code>\(\varepsilon_i\)</code> and <code>\(Y_i\)</code>.
+</p>
+$$
+ \frac{\hat \beta_1 - \beta_1}{\sigma_{\hat \beta_1}} \sim N(0,1)
+$$<p>
+However, as with inference on a sample mean, we don&rsquo;t know <code>\(\sigma^2_{\hat \beta_1}\)</code> because we don&rsquo;t know <code>\(\sigma^2\)</code>. So we use our estimator <code>\(MSE = \frac{\sum(Y_i - \hat Y)^2}{n-2}\)</code> in place of <code>\(\sigma^2\)</code>. This gives us a studentized t-statistic. As the name suggests, it follows a <a href="/distrib/2025-05-27-t-distribution/t-dist/"> <code>\(t\)</code> distribution</a>.</p>
+$$
+ \frac{\hat \beta_1 - \beta_1}{\sqrt{\frac{\sum(Y_i - \hat Y)^2}{(n-2)S_{xx}}}} =  \frac{\hat \beta_1 - \beta_1}{\sqrt{\frac{MSE}{S_{xx}}}} \sim t(n-2)
+$$<p>We primarily care about making inferences for <code>\(\hat \beta_1\)</code>. After all, that measures the expected effect of <code>\(X\)</code> on <code>\(Y\)</code>.</p>
+<h3 id="fitting-a-linear-regression-model-estimating-hat-beta_1-hat-beta_0">Fitting a linear regression model (estimating <code>\(\hat \beta_1, \hat \beta_0\)</code>)</h3>
+<details> 
+<summary>We look at the 25-observation dataset toluca from the api2lm library.</summary>
+<pre><code class="language-r">library(api2lm)
+tol &lt;- toluca
+head(tol)
+</code></pre>
+<pre><code>##   lot_size work_hours
+## 1       80        399
+## 2       30        121
+## 3       50        221
+## 4       90        376
+## 5       70        361
+## 6       60        224
+</code></pre>
+<pre><code class="language-r">mod &lt;- lm(work_hours~lot_size, data=tol)
+mod$coefficients 
+</code></pre>
+<pre><code>## (Intercept)    lot_size 
+##   62.365859    3.570202
+</code></pre>
+<pre><code class="language-r">b1 &lt;- unname(mod$coefficients[2])
+n &lt;- nrow(tol)
+</code></pre>
+<p>The fitted linear regression model is <code>\(\hat Y = 3.57X + 62.57\)</code>. For a 1 unit increase in lot size, we expect work hours to increase by approximately <code>\(\hat \beta_1 =  3.6\)</code> hours. Were we to obtain a different sample, this <code>\(\hat \beta_1\)</code> would differ. How do we learn about <code>\(\beta_1\)</code>, the population effect of <code>\(X\)</code>, on <code>\(Y\)</code> from our estimate of it? We can a) test what it&rsquo;s <em>not</em> or b) find a range which <code>\(\beta_1\)</code> would reside in.</p>
+</details>
+<h3 id="hypothesis-testing-value-of-beta_1">Hypothesis testing (value of <code>\(\beta_1\)</code>)</h3>
+<details>
+<summary>We test whether `\(\beta_1 = 0\)` (two-tailed test).</summary>
+\[ H_0: \beta_1 = 0\]<p>
+</p>
+\[ H_a: \beta_1 \ne 0 \]<p>Our test statistic is</p>
+\[ T= \frac{ 3.57  - 0}{ \sqrt{\frac{MSE}{S_{xx}}}} \]<p>Based on the low p-value, we reject the null hypothesis (<code>\(\alpha = .05\)</code>).</p>
+<pre><code class="language-r">SSE &lt;- sum((tol$work_hours -fitted(mod))^2)
+MSE &lt;- SSE / (n-2)
+S_xx &lt;- sum((tol$lot_size - mean(tol$lot_size))^2)
+
+#estimate of standard deviation of hat beta_1
+SE_beta1 &lt;- sqrt(MSE/S_xx)
+
+#test statistic
+stat &lt;- (b1-0)/SE_beta1; stat
+</code></pre>
+<pre><code>## [1] 10.28959
+</code></pre>
+<pre><code class="language-r">#p-value (two-sided)
+pt(stat, n-2, lower.tail=FALSE)*2
+</code></pre>
+<pre><code>## [1] 4.448828e-10
+</code></pre>
+<p>We can verify our test statistic and p-value:</p>
+<pre><code class="language-r">summary(mod)
+</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = work_hours ~ lot_size, data = tol)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -83.876 -34.088  -5.982  38.826 103.528 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   62.366     26.177   2.382   0.0259 *  
+## lot_size       3.570      0.347  10.290 4.45e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 48.82 on 23 degrees of freedom
+## Multiple R-squared:  0.8215,	Adjusted R-squared:  0.8138 
+## F-statistic: 105.9 on 1 and 23 DF,  p-value: 4.449e-10
+</code></pre>
+<p>Next, we test whether <code>\(\beta_1  \ge  2\)</code> (one-tailed test).</p>
+\[ H_0: \beta_1  = 2\]<p>
+</p>
+\[ H_a: \beta_1 >  2 \]<p>Based on the low p-value, we reject the null hypothesis (<code>\(\alpha = .05\)</code>).</p>
+<pre><code class="language-r">#test statistic
+stat &lt;- (b1-2)/SE_beta1
+
+#p-value (one-sided)
+pt(stat, n-2, lower.tail=FALSE)
+</code></pre>
+<pre><code>## [1] 7.595892e-05
+</code></pre>
+</details>
+<h3 id="95-confidence-interval">95% confidence interval:</h3>
+<details>
+<summary>Given that `\(\hat \beta_1\)` follows a t-distribution, our confidence interval is determined by the `\(1-\alpha%\)` critical values. </summary>
+<pre><code class="language-r">#critical value:
+crit &lt;- qt(.975, df=n-2, lower.tail=TRUE); crit
+</code></pre>
+<pre><code>## [1] 2.068658
+</code></pre>
+<pre><code class="language-r">#lower bound:
+b1 - crit * SE_beta1
+</code></pre>
+<pre><code>## [1] 2.852435
+</code></pre>
+<pre><code class="language-r"># upper bound:
+b1 + crit * SE_beta1
+</code></pre>
+<pre><code>## [1] 4.287969
+</code></pre>
+<p>With confidence coefficient 0.95, our estimate of the mean number of work hours increases between 2.85 and 4.28 hours for each additional unit of lot size.</p>
+</details>
+<h2 id="the-distribution-of-hat-y_h">The distribution of <code>\(\hat Y_h\)</code></h2>
+<p>Say we would like to know <code>\(Y_h\)</code> at a fixed <code>\(X_h\)</code>. Across multiple samples of size <code>\(n\)</code> with fixed <code>\(X_i\)</code>&rsquo;s, our <code>\(Y_h\)</code>&rsquo;s would necessarily vary.</p>
+<p>We do know that <code>\(Y_i\)</code> is normally distributed. Furthermore, its expected value is <code>\(E(Y_h) = \beta_0 + \beta_1X_h + 0\)</code>, the population value. Its variance is rather unwieldy.</p>
+$$
+\hat Y_h \sim N\left(E(Y_h),\quad \sigma^2\left[\frac{1}{n} + \frac{(X_h - \bar X)^2}{\sum (X_i - \bar X)^2}\right]\right)
+$$<p>Note that the variance is lessened by the dispersion of the <code>\(X_i\)</code>&rsquo;s collected, but increased by the <code>\(X_h\)</code> of interest&rsquo;s distance from <code>\(\bar X\)</code>. This latter component is visually explained below. For two fitted lines that have the same <code>\((\bar X, \bar Y)\)</code> and thus intersect at that point, the difference in <code>\(\hat Y_h\)</code>&rsquo;s for an <code>\(X_h\)</code> far from <code>\(\bar X\)</code> will be greater the further <code>\(X_h\)</code> is from <code>\(\bar X\)</code>.</p>
+<img src="../../../../../../../../pics/divergence.png" width="70%" />
+<h3 id="inference-on-ey_h">Inference on <code>\(E(Y_h)\)</code></h3>
+<p>Like <code>\(\hat \beta_1\)</code>, <code>\(\hat Y_h\)</code> is normally distributed. We can use a studentized statistic, once again subbing in MSE for <code>\(\sigma^2\)</code>. What MSE is multiplied by is a constant.</p>
+$$
+\frac{\hat Y_h - E(Y_h)}{MSE[\frac{1}{n} + \frac{(X_h - \bar X)^2}{\sum (X_i - \bar X)^2}]}\sim t(n-2)
+$$<h2 id="prediction-of-y_h">Prediction of <code>\(Y_h\)</code></h2>
+<p>In the previous section, we wanted to infer the <em>expected</em> value of <code>\(Y_h\)</code> at <code>\(X_h\)</code> &ndash;  the <code>\(Y_h\)</code> that is the <em>center</em> of the sampling distribution of <code>\(\hat Y_h\)</code>&rsquo;s that could be found across samples of size <code>\(n\)</code> and fixed values <code>\(X_i\)</code>. Now, we&rsquo;d like to predict  <code>\(Y_{hnew}\)</code>. This is different from trying to estimate the center of a distribution (a parameter). We are now trying to estimate an <em>individual outcome</em> (a random variable) on a distribution.</p>
+<p>We thus have to account for two types of variance:
+a) variance of the location of the distribution of <code>\(\hat Y_{hnew}\)</code> (which is our estimate of <code>\(Y_{hnew}=E(Y|X_{hnew})\)</code>)
+b) variance of <code>\(Y_{hnew}\)</code> about <code>\(\hat Y_{hnew}\)</code> (within the probability distribution)</p>
+<p>We can express the above in mathematical terms:</p>
+$$ \begin{aligned}
+\sigma^2({pred}) = \sigma^2({Y_h - \hat Y_h}) = \sigma^2({Y_h)} + \sigma^2({\hat Y_h}) = \sigma^2 + \sigma^2\left[\frac{1}{n} + \frac{(X_h - \bar X)^2}{\sum (X_i - \bar X)^2}\right] = \sigma^2\left[ 1+\frac{1}{n} + \frac{(X_h-\bar X)^2}{S_{xx}} \right]
+\end{aligned} $$<p>Of course, we substitute <code>\(MSE\)</code> in for <code>\(\sigma^2\)</code>. Notice how this variance is larger than that for estimating <code>\(E(\hat Y_h)\)</code>. This should make sense. An individual outcome from a distribution has higher variation than the center of said distribution.</p>
+<p>Our test statistic then looks like:
+</p>
+$$
+\frac{{Y_{hnew} - \hat Y_h}}{s_{pred}}\sim t(n-2)
+$$<p>It&rsquo;s worth noting that an interval created from this statistic is sensitive to departures from normality.</p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

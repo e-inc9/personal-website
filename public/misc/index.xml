@@ -2,31 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Miscs on A minimal Hugo website</title>
-    <link>https://example.org/misc/</link>
+    <link>http://localhost:4321/misc/</link>
     <description>Recent content in Miscs on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 May 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.org/misc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Jun 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/misc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Non-invasive functional brain imaging </title>
+      <link>http://localhost:4321/misc/2025-06-29-fnirs-functional-near-infrared-spectroscopy/fnirs/</link>
+      <pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/misc/2025-06-29-fnirs-functional-near-infrared-spectroscopy/fnirs/</guid>
+      <description>&lt;h2 id=&#34;non-invasive-functional-brain-imaging&#34;&gt;Non-invasive functional Brain Imaging&lt;/h2&gt;&#xA;&lt;p&gt;Primarily falls into two categories:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hemodynamic/Metabolic&#xA;&lt;ul&gt;&#xA;&lt;li&gt;fNIRS, fMRI, POT&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Neuronal&#xA;&lt;ul&gt;&#xA;&lt;li&gt;EEGs, EPs/ERPs, MEG&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;hemodynamicmetabolic-fnirs-as-example&#34;&gt;Hemodynamic/Metabolic (fNIRS as example)&lt;/h2&gt;&#xA;&lt;p&gt;Consider:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Oxygenated blood is rich in oxyhemoglobin (&lt;code&gt;\(HbO_2\)&lt;/code&gt;) and low in deoxyhemoglobin (&lt;code&gt;\(HbO\)&lt;/code&gt;);&lt;/li&gt;&#xA;&lt;li&gt;Oxyhemoglobin and deoxyhemoglobin have been shown to absorb infrared light at certain frequencies;&lt;/li&gt;&#xA;&lt;li&gt;When performing a task, there is cerebral (oxygenated) blood flow (CBF) to regions of the brain that are active during said task;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;And that we would like to determine, for a given task, which regions of the brain are most active based on the presence of oxygenated blood.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>3b1b Linear Algebra</title>
-      <link>https://example.org/misc/3b1b/</link>
-      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/misc/3b1b/</guid>
-      <description>&lt;h1 id=&#34;video-1&#34;&gt;Video 1&lt;/h1&gt;&#xA;&lt;p&gt;Start in the &lt;code&gt;\((x,y)\)&lt;/code&gt; coordinate plane. Define the basis vectors &lt;code&gt;\(i=(1,0)\)&lt;/code&gt; and &lt;code&gt;\(j=(0,1)\)&lt;/code&gt;. These are basis vectors. Note that any linear combination of the two basis vectors &lt;code&gt;\(ai + bj\)&lt;/code&gt; could reach any point on this  plane. We call this set of achievable points the &lt;strong&gt;span&lt;/strong&gt; of the two vectors.&lt;/p&gt;</description>
+      <link>http://localhost:4321/misc/2025-06-28-3b1b-/3b1b/</link>
+      <pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/misc/2025-06-28-3b1b-/3b1b/</guid>
+      <description>&lt;h2 id=&#34;video-1-vectors&#34;&gt;Video 1 Vectors&lt;/h2&gt;&#xA;&lt;p&gt;Start in the &lt;code&gt;\((x,y)\)&lt;/code&gt; standard coordinate plane. Define the&#xA;&lt;code&gt;\(i=[1 \quad 0 ]\)&lt;/code&gt; and &lt;code&gt;\(j=[0\quad1]\)&lt;/code&gt;. Note that any &lt;strong&gt;linear combination&lt;/strong&gt;&#xA;of the two vectors &lt;code&gt;\(ai + bj\)&lt;/code&gt; could reach any point on the plane. We call&#xA;this set of achievable points the &lt;strong&gt;span&lt;/strong&gt; of the two vectors.&lt;/p&gt;&#xA;&lt;p&gt;What&amp;rsquo;s the usefulness of vectors? They can be used to represent data,&#xA;for one thing.&lt;/p&gt;&#xA;&lt;h2 id=&#34;video-2-linear-combinations-span-and-basis-vectors&#34;&gt;Video 2 Linear combinations, span, and basis vectors&lt;/h2&gt;&#xA;&lt;p&gt;Consider vector &lt;code&gt;\(a = [2 \quad 4]\)&lt;/code&gt;, which is represented in the&#xA;coordinate plane as a point 2 points to the right and four points up. We&#xA;can break &lt;code&gt;\(a\)&lt;/code&gt; down into a sum of scaled vectors &lt;code&gt;\(i, j\)&lt;/code&gt;:&#xA;&lt;/p&gt;</description>
     </item>
     <item>
       <title> Chapter 1 - What is Deep Learning?</title>
-      <link>https://example.org/misc/dlp-1r/</link>
+      <link>http://localhost:4321/misc/2025-06-01-dlp/dlp-1r/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/misc/dlp-1r/</guid>
+      <guid>http://localhost:4321/misc/2025-06-01-dlp/dlp-1r/</guid>
       <description>&lt;div style=&#34;background-color:#f0f0f0; padding:10px; border-left:4px solid #007ACC; margin-bottom:20px;&#34;&gt;&#xA;&lt;strong&gt;Image credit:&lt;/strong&gt; Select figures reproduced from &#xA;&lt;a href=&#34;https://www.manning.com/books/deep-learning-with-python&#34; target=&#34;_blank&#34;&gt;&#xA;&lt;em&gt;Deep Learning with Python&lt;/em&gt; by François Chollet&lt;/a&gt; (Manning Publications, 2017). &#xA;All rights reserved by the original publisher.&#xA;&lt;/div&gt;&#xA;&lt;p&gt;&lt;strong&gt;Drawing some distinctions:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Computer programming tells the computer the &amp;ldquo;rules&amp;rdquo; to obtain answers&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Rules + data =&amp;gt; answers&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Machine learning learns “statistical” rules from the answers&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Data + answers =&amp;gt; rules&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Machine learning works with large, complex data sets – is an engineering discipline. Statistics works with smaller data sets  &amp;ndash;  is a mathematical field. ML &lt;code&gt;\(\ne\)&lt;/code&gt; statistics; rather, it emerges from statistics at most&lt;/p&gt;</description>
     </item>
     <item>
       <title>My thoughts on statistics</title>
-      <link>https://example.org/misc/on-stats/</link>
+      <link>http://localhost:4321/misc/2025-04-26-on-stats/on-stats/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/misc/on-stats/</guid>
+      <guid>http://localhost:4321/misc/2025-04-26-on-stats/on-stats/</guid>
       <description>&lt;p&gt;By definition, a statistic is information that can be gleaned from a sample. It can result from a mathematical operation performed on a sample (averaging), an arbitrary selection within it (every 5th value), or nonsensical manipulation of it (subtract 100 from each value and convert it to a string based on the starting letter of the value when converted to words).&lt;/p&gt;&#xA;&lt;p&gt;Statistics (note the s!) as a field is concerned with using a statistic from a sample to learn about the larger population from which the sample originated.&lt;/p&gt;</description>
     </item>
   </channel>

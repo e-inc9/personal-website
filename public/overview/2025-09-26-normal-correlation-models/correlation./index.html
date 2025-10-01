@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Normal correlation models  | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Normal correlation models</span></h1>
+
+<h2 class="date">2025/09/26</h2>
+</div>
+
+<main>
+<p>Recommended reading: <a href="/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/">Linear regression, the ANOVA cut</a>, wherein we define terms <code>\(SSR/MSR\)</code>, <code>\(SSE/MSE\)</code>, <code>\(SSTO\)</code>.</p>
+<h2 id="correlation">Correlation</h2>
+<p>We&rsquo;ll make this quick. Correlation is a measure of the <em>linear relationship</em> between variables <code>\(Y_1, Y_2\)</code>. We measure it using a) the coefficient of determination <code>\(R^2\)</code> and b) the coefficient of correlation <code>\(r\)</code>.</p>
+<details>
+<summary> On `\(R^2\)`, `\(r\)`. </summary>
+### Coefficient of determination `\(R^2\)`
+Its units are the *percentage/proportion* of variance about the mean explained by a linear regression on a sample of `\((Y_1, Y_2)\)` observations.
+$$
+R^2 = \frac{SSR}{SSTO} = 1 - \frac{SSE}{SSTO}
+$$<p>
+Some caveats:</p>
+<ol>
+<li>Correlation measures a linear relationship. A lack of correlation does not indicate a lack of a relationship, it just suggests that the relationship is not linear. The relationship could very well be exponential, logarithmic, etc.</li>
+<li>A high correlation using a sample does not indicate that a linear model fitted is necessarily good for prediction. A sample could have very high variance about the mean &ndash; a large <em>proportion</em> of which is explained by a fitted line &ndash; but that remaining variance could still make prediction difficult.</li>
+<li>Remember that this <em>sample dependent</em>. Inference on <code>\(\rho^2\)</code> is possible &ndash; more on that later.</li>
+</ol>
+<p>Fun facts:
+<code>\(R^2\)</code> <em>is</em> affected by the spacing of <code>\(X_i\)</code>. An outlying <code>\(X\)</code> value will tend to have an outlying <code>\(Y\)</code> value (in either direction). Technically, it shouldn&rsquo;t affect <code>\(SSE\)</code>, which is simply the difference between <code>\(Y_i\)</code> and <code>\(\hat Y\)</code>. However, since this <code>\(Y\)</code> value will be a marked distance from <code>\(\bar Y\)</code>, which will increase <code>\(SSTO\)</code>. As <code>\(\frac{SSE}{SSTO}\)</code> becomes smaller, <code>\(R^2\)</code> will increase.</p>
+<h3 id="correlation-of-determination-r">Correlation of determination <code>\(r\)</code></h3>
+<p>We take the square root of <code>\(R^2\)</code> and add <code>\(\pm\)</code>, depending on directionality.</p>
+</details>
+<h2 id="normal-correlation-models">Normal correlation models</h2>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

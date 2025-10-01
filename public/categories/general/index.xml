@@ -2,25 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>General on A minimal Hugo website</title>
-    <link>https://example.org/categories/general/</link>
+    <link>http://localhost:4321/categories/general/</link>
     <description>Recent content in General on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 May 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.org/categories/general/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/categories/general/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Normal correlation models </title>
+      <link>http://localhost:4321/overview/2025-09-26-normal-correlation-models/correlation./</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/2025-09-26-normal-correlation-models/correlation./</guid>
+      <description>&lt;p&gt;Recommended reading: &lt;a href=&#34;http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/&#34;&gt;Linear regression, the ANOVA cut&lt;/a&gt;, wherein we define terms &lt;code&gt;\(SSR/MSR\)&lt;/code&gt;, &lt;code&gt;\(SSE/MSE\)&lt;/code&gt;, &lt;code&gt;\(SSTO\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;correlation&#34;&gt;Correlation&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;ll make this quick. Correlation is a measure of the &lt;em&gt;linear relationship&lt;/em&gt; between variables &lt;code&gt;\(Y_1, Y_2\)&lt;/code&gt;. We measure it using a) the coefficient of determination &lt;code&gt;\(R^2\)&lt;/code&gt; and b) the coefficient of correlation &lt;code&gt;\(r\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;details&gt;&#xA;&lt;summary&gt; On `\(R^2\)`, `\(r\)`. &lt;/summary&gt;&#xA;### Coefficient of determination `\(R^2\)`&#xA;Its units are the *percentage/proportion* of variance about the mean explained by a linear regression on a sample of `\((Y_1, Y_2)\)` observations.&#xA;$$&#xA;R^2 = \frac{SSR}{SSTO} = 1 - \frac{SSE}{SSTO}&#xA;$$&lt;p&gt;&#xA;Some caveats:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Simple linear regression (ANOVA cut)</title>
+      <link>http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/</link>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/</guid>
+      <description>&lt;p&gt;Note: I encourage you to first read &lt;a href=&#34;http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/&#34;&gt;simple linear regression&lt;/a&gt; and then &lt;a href=&#34;http://localhost:4321/overview/simple-linear-regression-with-normality/&#34;&gt;simple linear regression (with normality)&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Here we present a different &lt;em&gt;cut&lt;/em&gt; to linear regression. We don&amp;rsquo;t build on or extend what is discussed above. Rather, we build up from scratch a different way of interpreting linear regression.  Understanding this &amp;ldquo;alternative angle&amp;rdquo; will prove crucial in future statistical problems beyond linear regression.&lt;/p&gt;&#xA;&lt;h3 id=&#34;introducing-our-y_is&#34;&gt;Introducing our &lt;code&gt;\(Y_i\)&lt;/code&gt;&amp;rsquo;s.&lt;/h3&gt;&#xA;&lt;p&gt;Consider a response variable &lt;code&gt;\(Y\)&lt;/code&gt;, and observations &lt;code&gt;\(Y_i\)&lt;/code&gt; within a sample. Inevitably, we are able to calculate &lt;code&gt;\(\bar Y\)&lt;/code&gt;. It will &amp;ldquo;run through&amp;rdquo; the middle of the sample and our &lt;code&gt;\(Y_i\)&lt;/code&gt;&amp;rsquo;s will be scattered about it. We measure this variation of our observations about the sample mean using the &lt;em&gt;total sum of squares&lt;/em&gt; (SSTO).&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Maximum likelihood estimation</title>
+      <link>http://localhost:4321/overview/2025-09-15-maximum-likelihood-estimation/mle/</link>
+      <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/2025-09-15-maximum-likelihood-estimation/mle/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Simple linear regression (with normality)</title>
+      <link>http://localhost:4321/overview/simple-linear-regression-with-normality/</link>
+      <pubDate>Sun, 14 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/simple-linear-regression-with-normality/</guid>
+      <description>&lt;p&gt;We make one additional assumption to the &lt;a href=&#34;http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/&#34;&gt;simple linear regression assumptions&lt;/a&gt;, which is that the error variable &lt;code&gt;\(\varepsilon_i\)&lt;/code&gt; is &lt;em&gt;normally distributed&lt;/em&gt;. Its center is still 0, and its variance is still &lt;code&gt;\(\sigma^2\)&lt;/code&gt;. It remains independent and identically distributed across levels of &lt;code&gt;\(X\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;As a result, &lt;code&gt;\(Y_i\)&lt;/code&gt; is also normally distributed with &lt;code&gt;\(E(Y_i) = \beta_0 + \beta_1X_i, V(Y_i) = \sigma^2\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;adding-the-assumption-of-normality&#34;&gt;Adding the assumption of normality&lt;/h2&gt;&#xA;$$ \varepsilon_i \sim N(0, \sigma^2) \implies (\beta_0 + \beta_1X_i + \varepsilon_i)\sim N(\beta_0+\beta_1X_i+0, \sigma^2)\implies Y_i =Y|X_i \sim(\beta_0 + \beta_1 X_i, \sigma^2) $$&lt;p&gt;&#xA;&lt;code&gt;\(Y_i\)&lt;/code&gt; or &lt;code&gt;\(Y|X_i\)&lt;/code&gt; is normally distributed about a line describing a&#xA;linear relationship. Its variance is the same across&#xA;&lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Point estimation</title>
+      <link>http://localhost:4321/overview/2025-09-13-point-estimation/point-estimation/</link>
+      <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/2025-09-13-point-estimation/point-estimation/</guid>
+      <description>&lt;h3 id=&#34;foreword&#34;&gt;Foreword&lt;/h3&gt;&#xA;&lt;p&gt;Consider that statistics is primarily about working with samples to learn about populations. We calculate the sample mean and sample standard deviation from our sample data to estimate the mean and standard deviation of our population.&lt;/p&gt;&#xA;&lt;p&gt;This process is formally known as point estimation. Given a parameter &lt;code&gt;\(\theta\)&lt;/code&gt; (population mean, for example), we calculate a point estimate &lt;code&gt;\(\hat \theta\)&lt;/code&gt; (an actual numerical value) using a point estimator (&lt;code&gt;\(\bar x\)&lt;/code&gt;, which describes the mathematics of the sample mean).&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Intro to matrix math for multivariate stats</title>
-      <link>https://example.org/overview/matrix-math/</link>
+      <link>http://localhost:4321/overview/2025-05-16-matrix-math/matrix-math/</link>
       <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/overview/matrix-math/</guid>
+      <guid>http://localhost:4321/overview/2025-05-16-matrix-math/matrix-math/</guid>
       <description>&lt;h2 id=&#34;why-is-matrix-math-important-to-multivariate-data&#34;&gt;Why is matrix math important to multivariate data?&lt;/h2&gt;&#xA;&lt;p&gt;Consider that for observations within a sample, we can record multiple variables on a single observation. For example, for 10  students sampled from a class, we can record their height, weight, and average GPA. We can represent our findings with a matrix, where a row is an observation, and each column is a variable.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;##       Height_cm Weight_kg  GPA&#xA;##  [1,]       164        75 2.29&#xA;##  [2,]       168        68 2.83&#xA;##  [3,]       186        68 2.83&#xA;##  [4,]       171        66 2.74&#xA;##  [5,]       171        61 2.30&#xA;##  [6,]       187        79 2.28&#xA;##  [7,]       175        69 2.47&#xA;##  [8,]       157        49 2.93&#xA;##  [9,]       163        71 2.53&#xA;## [10,]       166        61 3.72&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;In matrix-math speak, we can denote our matrix by &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt;. We can express &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt; as 40 &lt;code&gt;\(y_{ij}\)&lt;/code&gt;&amp;rsquo;s, where &lt;code&gt;\(y_{ij}\)&lt;/code&gt; is the &lt;code&gt;\(i\)&lt;/code&gt;th observation&amp;rsquo;s &lt;code&gt;\(j\)&lt;/code&gt;th variable.&#xA;&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Simple Linear Regression</title>
-      <link>https://example.org/overview/linreg-simple/</link>
+      <title>Simple linear regression</title>
+      <link>http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/</link>
       <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/overview/linreg-simple/</guid>
-      <description>&lt;h1 id=&#34;mathematical-and-statistical-relations&#34;&gt;Mathematical and statistical relations&lt;/h1&gt;&#xA;&lt;p&gt;Consider two variables &lt;code&gt;\(x,y\)&lt;/code&gt; that you know to be related.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;mathematically&lt;/em&gt; if there exists a &lt;em&gt;deterministic&lt;/em&gt; relationship between the two, such that &lt;code&gt;\(x\)&lt;/code&gt; perfectly determines &lt;code&gt;\(y\)&lt;/code&gt; and vice versa. Such relationships can be expressed with a function &lt;code&gt;\(Y=f(X)\)&lt;/code&gt;. One example is the relationship between inches and centimeters &lt;code&gt;\(Y=2.54X\)&lt;/code&gt;. A man who is &lt;code&gt;\(x=65\)&lt;/code&gt; inches tall must be &lt;code&gt;\(y=165.1\)&lt;/code&gt; centimeters tall.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;statistically&lt;/em&gt; if there exists a relationship between the two, but &lt;code&gt;\(X\)&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; perfectly determine  &lt;code&gt;\(Y\)&lt;/code&gt; and vice versa. You know the two are related in some way &amp;ndash; whether visually or intuitively &amp;ndash; but you cannot say you know everything about &lt;code&gt;\(Y\)&lt;/code&gt; just by &lt;code&gt;\(X\)&lt;/code&gt;. Take the below scatter plot relating &lt;code&gt;\(X\)&lt;/code&gt;, the velocity at which a bullet is fired, and &lt;code&gt;\(Y\)&lt;/code&gt;, the depth of penetration into body armor. Perhaps you didn&amp;rsquo;t even have to look at the below graph to know that a relationship exists. Faster bullet &lt;code&gt;\(\implies\)&lt;/code&gt; deeper penetration.  Yet the presence of other factors at play &amp;ndash; angle, wind speed, freak properties of physics &amp;ndash; make you unable to perfectly determine penetration given velocity.&lt;/p&gt;</description>
+      <guid>http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/</guid>
+      <description>&lt;h2 id=&#34;mathematical-and-statistical-relations&#34;&gt;Mathematical and statistical relations&lt;/h2&gt;&#xA;&lt;p&gt;Consider two variables &lt;code&gt;\(x,y\)&lt;/code&gt; that you know to be related.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;mathematically&lt;/em&gt; if there exists a &lt;em&gt;deterministic&lt;/em&gt;&#xA;relationship between the two, such that &lt;code&gt;\(x\)&lt;/code&gt; perfectly determines &lt;code&gt;\(y\)&lt;/code&gt;&#xA;and vice versa. Such relationships can be expressed with a function&#xA;&lt;code&gt;\(Y=f(X)\)&lt;/code&gt;. One example is the relationship between inches and&#xA;centimeters &lt;code&gt;\(Y=2.54X\)&lt;/code&gt;. A man who is &lt;code&gt;\(x=65\)&lt;/code&gt; inches tall must be&#xA;&lt;code&gt;\(y=165.1\)&lt;/code&gt; centimeters tall.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;statistically&lt;/em&gt; if there exists a relationship&#xA;between the two, but &lt;code&gt;\(X\)&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; perfectly determine &lt;code&gt;\(Y\)&lt;/code&gt; and vice&#xA;versa. You know the two are related in some way &amp;ndash; whether visually&#xA;or intuitively &amp;ndash; but you cannot say you know everything about &lt;code&gt;\(Y\)&lt;/code&gt;&#xA;just by &lt;code&gt;\(X\)&lt;/code&gt;. Take the below scatter plot relating &lt;code&gt;\(X\)&lt;/code&gt;, the velocity&#xA;at which a bullet is fired, and &lt;code&gt;\(Y\)&lt;/code&gt;, the depth of penetration into&#xA;body armor. Perhaps you didn&amp;rsquo;t even have to look at the below graph&#xA;to know that a relationship exists. Faster bullet &lt;code&gt;\(\implies\)&lt;/code&gt; deeper&#xA;penetration. Yet the presence of other factors at play &amp;ndash; angle,&#xA;wind speed, freak properties of physics &amp;ndash; make you unable to&#xA;perfectly determine penetration given velocity.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

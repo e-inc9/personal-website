@@ -2,87 +2,164 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on A minimal Hugo website</title>
-    <link>https://example.org/</link>
+    <link>http://localhost:4321/</link>
     <description>Recent content in Home on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 May 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Distribution of hat beta_0</title>
-      <link>https://example.org/proofs_deriv/hatbeta0_dist/</link>
-      <pubDate>Fri, 23 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/proofs_deriv/hatbeta0_dist/</guid>
-      <description>&lt;h2 id=&#34;deriving-the-distribution-of-hatbeta_0&#34;&gt;Deriving the Distribution of &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim N(\beta_0 + \beta_1 X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}&#xA;\]&lt;p&gt;Since &lt;code&gt;\(\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)\)&lt;/code&gt;, and &lt;code&gt;\(\bar{X}\)&lt;/code&gt; is a constant determined by the sample and &lt;code&gt;\(\bar{Y}\)&lt;/code&gt; is normally distributed, &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt; is normally distributed.&lt;/p&gt;</description>
+      <title>Normal correlation models </title>
+      <link>http://localhost:4321/overview/2025-09-26-normal-correlation-models/correlation./</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/2025-09-26-normal-correlation-models/correlation./</guid>
+      <description>&lt;p&gt;Recommended reading: &lt;a href=&#34;http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/&#34;&gt;Linear regression, the ANOVA cut&lt;/a&gt;, wherein we define terms &lt;code&gt;\(SSR/MSR\)&lt;/code&gt;, &lt;code&gt;\(SSE/MSE\)&lt;/code&gt;, &lt;code&gt;\(SSTO\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;correlation&#34;&gt;Correlation&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;ll make this quick. Correlation is a measure of the &lt;em&gt;linear relationship&lt;/em&gt; between variables &lt;code&gt;\(Y_1, Y_2\)&lt;/code&gt;. We measure it using a) the coefficient of determination &lt;code&gt;\(R^2\)&lt;/code&gt; and b) the coefficient of correlation &lt;code&gt;\(r\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;details&gt;&#xA;&lt;summary&gt; On `\(R^2\)`, `\(r\)`. &lt;/summary&gt;&#xA;### Coefficient of determination `\(R^2\)`&#xA;Its units are the *percentage/proportion* of variance about the mean explained by a linear regression on a sample of `\((Y_1, Y_2)\)` observations.&#xA;$$&#xA;R^2 = \frac{SSR}{SSTO} = 1 - \frac{SSE}{SSTO}&#xA;$$&lt;p&gt;&#xA;Some caveats:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>F-test (ANOVA/linear regressions)</title>
+      <link>http://localhost:4321/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/</link>
+      <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/</guid>
+      <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/&#34;&gt;ANOVA cut of linear regression&lt;/a&gt;, we ended on &lt;code&gt;\(MSR\)&lt;/code&gt; and &lt;code&gt;\(MSE\)&lt;/code&gt;, which are two measures of variance. &lt;code&gt;\(MSR\)&lt;/code&gt; measures the variance explained by a fitted line, while &lt;code&gt;\(MSE\)&lt;/code&gt; measures the variance of observations about that (in spite of) the fitted line.&lt;/p&gt;&#xA;&lt;p&gt;Given that they are both random variables with centers:&#xA;&lt;/p&gt;&#xA;$$&#xA;E(MSE)= \sigma^2\\&#xA;E(MSR) = \sigma^2 + \beta_1 ^2 \sum(X_i - \bar X)^2&#xA;$$&lt;p&gt;&#xA;We conclude that the distribution of &lt;code&gt;\(MSR\)&lt;/code&gt; is &lt;em&gt;to the right of&lt;/em&gt; the distribution of &lt;code&gt;\(MSE\)&lt;/code&gt; if &lt;code&gt;\(\beta_1 \ne 0\)&lt;/code&gt;, and thus computed &lt;code&gt;\(MSR\)&lt;/code&gt; is likely to be greater than &lt;code&gt;\(MSE\)&lt;/code&gt;. If &lt;code&gt;\(\beta_1 = 0\)&lt;/code&gt;, then &lt;code&gt;\(MSR\)&lt;/code&gt; is likely to equal &lt;code&gt;\(MSE\)&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Simple linear regression (ANOVA cut)</title>
+      <link>http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/</link>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/</guid>
+      <description>&lt;p&gt;Note: I encourage you to first read &lt;a href=&#34;http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/&#34;&gt;simple linear regression&lt;/a&gt; and then &lt;a href=&#34;http://localhost:4321/overview/simple-linear-regression-with-normality/&#34;&gt;simple linear regression (with normality)&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Here we present a different &lt;em&gt;cut&lt;/em&gt; to linear regression. We don&amp;rsquo;t build on or extend what is discussed above. Rather, we build up from scratch a different way of interpreting linear regression.  Understanding this &amp;ldquo;alternative angle&amp;rdquo; will prove crucial in future statistical problems beyond linear regression.&lt;/p&gt;&#xA;&lt;h3 id=&#34;introducing-our-y_is&#34;&gt;Introducing our &lt;code&gt;\(Y_i\)&lt;/code&gt;&amp;rsquo;s.&lt;/h3&gt;&#xA;&lt;p&gt;Consider a response variable &lt;code&gt;\(Y\)&lt;/code&gt;, and observations &lt;code&gt;\(Y_i\)&lt;/code&gt; within a sample. Inevitably, we are able to calculate &lt;code&gt;\(\bar Y\)&lt;/code&gt;. It will &amp;ldquo;run through&amp;rdquo; the middle of the sample and our &lt;code&gt;\(Y_i\)&lt;/code&gt;&amp;rsquo;s will be scattered about it. We measure this variation of our observations about the sample mean using the &lt;em&gt;total sum of squares&lt;/em&gt; (SSTO).&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Maximum likelihood estimation</title>
+      <link>http://localhost:4321/overview/2025-09-15-maximum-likelihood-estimation/mle/</link>
+      <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/2025-09-15-maximum-likelihood-estimation/mle/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Simple linear regression (with normality)</title>
+      <link>http://localhost:4321/overview/simple-linear-regression-with-normality/</link>
+      <pubDate>Sun, 14 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/simple-linear-regression-with-normality/</guid>
+      <description>&lt;p&gt;We make one additional assumption to the &lt;a href=&#34;http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/&#34;&gt;simple linear regression assumptions&lt;/a&gt;, which is that the error variable &lt;code&gt;\(\varepsilon_i\)&lt;/code&gt; is &lt;em&gt;normally distributed&lt;/em&gt;. Its center is still 0, and its variance is still &lt;code&gt;\(\sigma^2\)&lt;/code&gt;. It remains independent and identically distributed across levels of &lt;code&gt;\(X\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;As a result, &lt;code&gt;\(Y_i\)&lt;/code&gt; is also normally distributed with &lt;code&gt;\(E(Y_i) = \beta_0 + \beta_1X_i, V(Y_i) = \sigma^2\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;adding-the-assumption-of-normality&#34;&gt;Adding the assumption of normality&lt;/h2&gt;&#xA;$$ \varepsilon_i \sim N(0, \sigma^2) \implies (\beta_0 + \beta_1X_i + \varepsilon_i)\sim N(\beta_0+\beta_1X_i+0, \sigma^2)\implies Y_i =Y|X_i \sim(\beta_0 + \beta_1 X_i, \sigma^2) $$&lt;p&gt;&#xA;&lt;code&gt;\(Y_i\)&lt;/code&gt; or &lt;code&gt;\(Y|X_i\)&lt;/code&gt; is normally distributed about a line describing a&#xA;linear relationship. Its variance is the same across&#xA;&lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Point estimation</title>
+      <link>http://localhost:4321/overview/2025-09-13-point-estimation/point-estimation/</link>
+      <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/overview/2025-09-13-point-estimation/point-estimation/</guid>
+      <description>&lt;h3 id=&#34;foreword&#34;&gt;Foreword&lt;/h3&gt;&#xA;&lt;p&gt;Consider that statistics is primarily about working with samples to learn about populations. We calculate the sample mean and sample standard deviation from our sample data to estimate the mean and standard deviation of our population.&lt;/p&gt;&#xA;&lt;p&gt;This process is formally known as point estimation. Given a parameter &lt;code&gt;\(\theta\)&lt;/code&gt; (population mean, for example), we calculate a point estimate &lt;code&gt;\(\hat \theta\)&lt;/code&gt; (an actual numerical value) using a point estimator (&lt;code&gt;\(\bar x\)&lt;/code&gt;, which describes the mathematics of the sample mean).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Non-invasive functional brain imaging </title>
+      <link>http://localhost:4321/misc/2025-06-29-fnirs-functional-near-infrared-spectroscopy/fnirs/</link>
+      <pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/misc/2025-06-29-fnirs-functional-near-infrared-spectroscopy/fnirs/</guid>
+      <description>&lt;h2 id=&#34;non-invasive-functional-brain-imaging&#34;&gt;Non-invasive functional Brain Imaging&lt;/h2&gt;&#xA;&lt;p&gt;Primarily falls into two categories:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hemodynamic/Metabolic&#xA;&lt;ul&gt;&#xA;&lt;li&gt;fNIRS, fMRI, POT&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Neuronal&#xA;&lt;ul&gt;&#xA;&lt;li&gt;EEGs, EPs/ERPs, MEG&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;hemodynamicmetabolic-fnirs-as-example&#34;&gt;Hemodynamic/Metabolic (fNIRS as example)&lt;/h2&gt;&#xA;&lt;p&gt;Consider:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Oxygenated blood is rich in oxyhemoglobin (&lt;code&gt;\(HbO_2\)&lt;/code&gt;) and low in deoxyhemoglobin (&lt;code&gt;\(HbO\)&lt;/code&gt;);&lt;/li&gt;&#xA;&lt;li&gt;Oxyhemoglobin and deoxyhemoglobin have been shown to absorb infrared light at certain frequencies;&lt;/li&gt;&#xA;&lt;li&gt;When performing a task, there is cerebral (oxygenated) blood flow (CBF) to regions of the brain that are active during said task;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;And that we would like to determine, for a given task, which regions of the brain are most active based on the presence of oxygenated blood.&lt;/p&gt;</description>
     </item>
     <item>
       <title>3b1b Linear Algebra</title>
-      <link>https://example.org/misc/3b1b/</link>
+      <link>http://localhost:4321/misc/2025-06-28-3b1b-/3b1b/</link>
+      <pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/misc/2025-06-28-3b1b-/3b1b/</guid>
+      <description>&lt;h2 id=&#34;video-1-vectors&#34;&gt;Video 1 Vectors&lt;/h2&gt;&#xA;&lt;p&gt;Start in the &lt;code&gt;\((x,y)\)&lt;/code&gt; standard coordinate plane. Define the&#xA;&lt;code&gt;\(i=[1 \quad 0 ]\)&lt;/code&gt; and &lt;code&gt;\(j=[0\quad1]\)&lt;/code&gt;. Note that any &lt;strong&gt;linear combination&lt;/strong&gt;&#xA;of the two vectors &lt;code&gt;\(ai + bj\)&lt;/code&gt; could reach any point on the plane. We call&#xA;this set of achievable points the &lt;strong&gt;span&lt;/strong&gt; of the two vectors.&lt;/p&gt;&#xA;&lt;p&gt;What&amp;rsquo;s the usefulness of vectors? They can be used to represent data,&#xA;for one thing.&lt;/p&gt;&#xA;&lt;h2 id=&#34;video-2-linear-combinations-span-and-basis-vectors&#34;&gt;Video 2 Linear combinations, span, and basis vectors&lt;/h2&gt;&#xA;&lt;p&gt;Consider vector &lt;code&gt;\(a = [2 \quad 4]\)&lt;/code&gt;, which is represented in the&#xA;coordinate plane as a point 2 points to the right and four points up. We&#xA;can break &lt;code&gt;\(a\)&lt;/code&gt; down into a sum of scaled vectors &lt;code&gt;\(i, j\)&lt;/code&gt;:&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>T-test (linear regressions)</title>
+      <link>http://localhost:4321/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/</guid>
+      <description>&lt;p&gt;Just as the estimators sample mean and sample variance follow a distribution, so do the estimators  &lt;code&gt;\(\hat \beta_0, \hat \beta_1\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Even though it can be argued that there does not exist a &amp;ldquo;true&amp;rdquo; &lt;code&gt;\(\beta_0\)&lt;/code&gt; and &lt;code&gt;\(\beta_1\)&lt;/code&gt; in the same way a true &lt;code&gt;\(\mu, \sigma\)&lt;/code&gt; might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we could say that having identified phenomena for which a linear regression is applicable, there  &lt;em&gt;does&lt;/em&gt; exist a regression line that exists for all existing &amp;ldquo;population&amp;rdquo; data on this phenomena. We&amp;rsquo;d like to infer this &lt;code&gt;\(\beta_0, \beta_1\)&lt;/code&gt; that&amp;rsquo;s &amp;ldquo;out there&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>T-test (population mean)</title>
+      <link>http://localhost:4321/inference_tests/2025-06-13-t-test/t-test/</link>
+      <pubDate>Fri, 13 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-06-13-t-test/t-test/</guid>
+      <description>&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;p&gt;The t-test can be used to make inferences regarding a population mean when we have a sample from said population.&lt;/p&gt;&#xA;&lt;p&gt;The assumptions are that&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;The sample mean follows an approximately normal distribution. This requires either &lt;code&gt;\(n \ge 30\)&lt;/code&gt; or the population to be normally distributed, either of which are ensures &lt;code&gt;\(\bar X \sim N\)&lt;/code&gt; (approximately).&lt;/li&gt;&#xA;&lt;li&gt;The numerator and denominator are independent, which can be assumed for a sample drawn from a normal population.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;The statistic used is&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deriving the t pdf</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/27/deriving-the-t-pdf/</link>
+      <pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/27/deriving-the-t-pdf/</guid>
+      <description>&lt;p&gt;By definition, a t-distributed random variable with &lt;code&gt;\(\nu\)&lt;/code&gt; degrees of freedom is the ratio of a standard normal variable &lt;code&gt;\(Z \sim N(0,1)\)&lt;/code&gt; over the square root of a chi-squared variable &lt;code&gt;\(Y \sim \chi^2_{\nu}\)&lt;/code&gt; divided by its degrees of freedom.&lt;/p&gt;&#xA;\[&#xA;T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y&#xA;\]&lt;p&gt;This is a lengthy derivation, so buckle up. We start with the cdf. We isolate &lt;code&gt;\(Z\)&lt;/code&gt; since its upper and lower bounds make the inner integral easier to work with (i.e. for Leibniz&amp;rsquo; rule, the derivative of the upper bound is easy to compute).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>T-distribution</title>
+      <link>http://localhost:4321/distrib/2025-05-27-t-distribution/t-dist/</link>
+      <pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/distrib/2025-05-27-t-distribution/t-dist/</guid>
+      <description>&lt;p&gt;A t-distributed random variable with &lt;code&gt;\(\nu\)&lt;/code&gt; degrees of freedom is the ratio of a standard normal variable &lt;code&gt;\(Z \sim N(0,1)\)&lt;/code&gt; over the square root of a chi-squared variable &lt;code&gt;\(Y \sim \chi^2_{\nu}\)&lt;/code&gt; divided by its degrees of freedom.&lt;/p&gt;&#xA;$$&#xA;T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y&#xA;$$&lt;p&gt;Its pdf is given by&lt;/p&gt;&#xA;\[ f(t) = \frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}\&#xA;\cdot \frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} } \cdot \Gamma\left({\nu+1 \over 2}\right) \]&lt;p&gt;Its expected variance and mean are:&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Distribution of hat beta_0</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/</link>
+      <pubDate>Fri, 23 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/</guid>
+      <description>&lt;h2 id=&#34;deriving-distribution-of-hat-beta_0&#34;&gt;Deriving distribution of &lt;code&gt;\(\hat \beta_0\)&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim N(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition &lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;. This is what&amp;rsquo;s assumed under the simple linear regression model,  &lt;strong&gt;including the additional assumption that &lt;code&gt;\(\varepsilon\)&lt;/code&gt; is normally distributed (necessary for inference).&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Recall that given a sample, &lt;code&gt;\(\hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Since &lt;code&gt;\(\hat \beta_1 \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\)&lt;/code&gt;, and &lt;code&gt;\(\bar X\)&lt;/code&gt; is a constant determined by the sample and &lt;code&gt;\(\bar Y\)&lt;/code&gt; is normally distributed, &lt;code&gt;\(\hat \beta_0\)&lt;/code&gt; is normally distributed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deriving the chi-squared pdf</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/20/deriving-the-chi-squared-pdf/</link>
       <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/misc/3b1b/</guid>
-      <description>&lt;h1 id=&#34;video-1&#34;&gt;Video 1&lt;/h1&gt;&#xA;&lt;p&gt;Start in the &lt;code&gt;\((x,y)\)&lt;/code&gt; coordinate plane. Define the basis vectors &lt;code&gt;\(i=(1,0)\)&lt;/code&gt; and &lt;code&gt;\(j=(0,1)\)&lt;/code&gt;. These are basis vectors. Note that any linear combination of the two basis vectors &lt;code&gt;\(ai + bj\)&lt;/code&gt; could reach any point on this  plane. We call this set of achievable points the &lt;strong&gt;span&lt;/strong&gt; of the two vectors.&lt;/p&gt;</description>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/20/deriving-the-chi-squared-pdf/</guid>
+      <description>&lt;h1 id=&#34;the-chi-squared-distribution&#34;&gt;The chi-squared distribution&lt;/h1&gt;&#xA;&lt;p&gt;By definition, the chi-squared distribution is the sum of &lt;code&gt;\(k\)&lt;/code&gt; standard normal variables squared. Let &lt;code&gt;\(X\)&lt;/code&gt; be a chi-squared variable with &lt;code&gt;\(k\)&lt;/code&gt; degrees of freedom. Then,&lt;/p&gt;&#xA;$$&#xA;X= \sum_{i=1}^k Z_i^2&#xA;$$&lt;p&gt;Our objective is to define its distribution. We first start with the pdf when &lt;code&gt;\(k=1\)&lt;/code&gt;. Then, seeing that its pdf is that of a Gamma, we find the pdf of a sum of Gammas. Moment generating functions come into play.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Distribution of hat beta_1</title>
-      <link>https://example.org/proofs_deriv/hatbeta1_dist/</link>
+      <title>Deriving the coefficients for linear regression</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/19/deriving-the-coefficients-for-linear-regression/</link>
       <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/proofs_deriv/hatbeta1_dist/</guid>
-      <description>&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;Recall that given a sample,&lt;br&gt;&#xA;&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}&#xA;\]&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Finding Coefficients for Linear Regression</title>
-      <link>https://example.org/proofs_deriv/linreg-coeff/</link>
-      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/proofs_deriv/linreg-coeff/</guid>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/19/deriving-the-coefficients-for-linear-regression/</guid>
       <description>&lt;h2 id=&#34;finding-coefficients-for-linear-regression&#34;&gt;Finding coefficients for linear regression&lt;/h2&gt;&#xA;&lt;p&gt;Recall that given a sample with observations &lt;code&gt;\(Y_1, Y_2, \dotsc Y_n\)&lt;/code&gt;, the sum of squared differences is given by:&lt;/p&gt;&#xA;$$  &#xA;\sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  &#xA;$$&lt;p&gt;We denote this sum by &lt;code&gt;\(h(\hat \beta_0, \hat \beta_1)\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;We use the first derivative to find the coefficients that minimize this sum. Since this function is convex, we know the first derivative is a minimum.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Distribution of hat beta_1</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/19/distribution-of-hat-beta_1/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/19/distribution-of-hat-beta_1/</guid>
+      <description>&lt;p&gt;We want to know the distribution of &lt;code&gt;\(\hat \beta_1\)&lt;/code&gt; across all possible samples where we treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed each time.&lt;/p&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This is what&amp;rsquo;s assumed under the simple linear regression model, &lt;strong&gt;including the additional assumption that &lt;code&gt;\(\varepsilon\)&lt;/code&gt; is normally distributed (necessary for inference).&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Intro to matrix math for multivariate stats</title>
-      <link>https://example.org/overview/matrix-math/</link>
+      <link>http://localhost:4321/overview/2025-05-16-matrix-math/matrix-math/</link>
       <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/overview/matrix-math/</guid>
+      <guid>http://localhost:4321/overview/2025-05-16-matrix-math/matrix-math/</guid>
       <description>&lt;h2 id=&#34;why-is-matrix-math-important-to-multivariate-data&#34;&gt;Why is matrix math important to multivariate data?&lt;/h2&gt;&#xA;&lt;p&gt;Consider that for observations within a sample, we can record multiple variables on a single observation. For example, for 10  students sampled from a class, we can record their height, weight, and average GPA. We can represent our findings with a matrix, where a row is an observation, and each column is a variable.&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;##       Height_cm Weight_kg  GPA&#xA;##  [1,]       164        75 2.29&#xA;##  [2,]       168        68 2.83&#xA;##  [3,]       186        68 2.83&#xA;##  [4,]       171        66 2.74&#xA;##  [5,]       171        61 2.30&#xA;##  [6,]       187        79 2.28&#xA;##  [7,]       175        69 2.47&#xA;##  [8,]       157        49 2.93&#xA;##  [9,]       163        71 2.53&#xA;## [10,]       166        61 3.72&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;In matrix-math speak, we can denote our matrix by &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt;. We can express &lt;code&gt;\(\mathbf{Y}\)&lt;/code&gt; as 40 &lt;code&gt;\(y_{ij}\)&lt;/code&gt;&amp;rsquo;s, where &lt;code&gt;\(y_{ij}\)&lt;/code&gt; is the &lt;code&gt;\(i\)&lt;/code&gt;th observation&amp;rsquo;s &lt;code&gt;\(j\)&lt;/code&gt;th variable.&#xA;&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Simple Linear Regression</title>
-      <link>https://example.org/overview/linreg-simple/</link>
+      <title>Simple linear regression</title>
+      <link>http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/</link>
       <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/overview/linreg-simple/</guid>
-      <description>&lt;h1 id=&#34;mathematical-and-statistical-relations&#34;&gt;Mathematical and statistical relations&lt;/h1&gt;&#xA;&lt;p&gt;Consider two variables &lt;code&gt;\(x,y\)&lt;/code&gt; that you know to be related.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;mathematically&lt;/em&gt; if there exists a &lt;em&gt;deterministic&lt;/em&gt; relationship between the two, such that &lt;code&gt;\(x\)&lt;/code&gt; perfectly determines &lt;code&gt;\(y\)&lt;/code&gt; and vice versa. Such relationships can be expressed with a function &lt;code&gt;\(Y=f(X)\)&lt;/code&gt;. One example is the relationship between inches and centimeters &lt;code&gt;\(Y=2.54X\)&lt;/code&gt;. A man who is &lt;code&gt;\(x=65\)&lt;/code&gt; inches tall must be &lt;code&gt;\(y=165.1\)&lt;/code&gt; centimeters tall.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;statistically&lt;/em&gt; if there exists a relationship between the two, but &lt;code&gt;\(X\)&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; perfectly determine  &lt;code&gt;\(Y\)&lt;/code&gt; and vice versa. You know the two are related in some way &amp;ndash; whether visually or intuitively &amp;ndash; but you cannot say you know everything about &lt;code&gt;\(Y\)&lt;/code&gt; just by &lt;code&gt;\(X\)&lt;/code&gt;. Take the below scatter plot relating &lt;code&gt;\(X\)&lt;/code&gt;, the velocity at which a bullet is fired, and &lt;code&gt;\(Y\)&lt;/code&gt;, the depth of penetration into body armor. Perhaps you didn&amp;rsquo;t even have to look at the below graph to know that a relationship exists. Faster bullet &lt;code&gt;\(\implies\)&lt;/code&gt; deeper penetration.  Yet the presence of other factors at play &amp;ndash; angle, wind speed, freak properties of physics &amp;ndash; make you unable to perfectly determine penetration given velocity.&lt;/p&gt;</description>
+      <guid>http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/</guid>
+      <description>&lt;h2 id=&#34;mathematical-and-statistical-relations&#34;&gt;Mathematical and statistical relations&lt;/h2&gt;&#xA;&lt;p&gt;Consider two variables &lt;code&gt;\(x,y\)&lt;/code&gt; that you know to be related.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;mathematically&lt;/em&gt; if there exists a &lt;em&gt;deterministic&lt;/em&gt;&#xA;relationship between the two, such that &lt;code&gt;\(x\)&lt;/code&gt; perfectly determines &lt;code&gt;\(y\)&lt;/code&gt;&#xA;and vice versa. Such relationships can be expressed with a function&#xA;&lt;code&gt;\(Y=f(X)\)&lt;/code&gt;. One example is the relationship between inches and&#xA;centimeters &lt;code&gt;\(Y=2.54X\)&lt;/code&gt;. A man who is &lt;code&gt;\(x=65\)&lt;/code&gt; inches tall must be&#xA;&lt;code&gt;\(y=165.1\)&lt;/code&gt; centimeters tall.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;They are related &lt;em&gt;statistically&lt;/em&gt; if there exists a relationship&#xA;between the two, but &lt;code&gt;\(X\)&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; perfectly determine &lt;code&gt;\(Y\)&lt;/code&gt; and vice&#xA;versa. You know the two are related in some way &amp;ndash; whether visually&#xA;or intuitively &amp;ndash; but you cannot say you know everything about &lt;code&gt;\(Y\)&lt;/code&gt;&#xA;just by &lt;code&gt;\(X\)&lt;/code&gt;. Take the below scatter plot relating &lt;code&gt;\(X\)&lt;/code&gt;, the velocity&#xA;at which a bullet is fired, and &lt;code&gt;\(Y\)&lt;/code&gt;, the depth of penetration into&#xA;body armor. Perhaps you didn&amp;rsquo;t even have to look at the below graph&#xA;to know that a relationship exists. Faster bullet &lt;code&gt;\(\implies\)&lt;/code&gt; deeper&#xA;penetration. Yet the presence of other factors at play &amp;ndash; angle,&#xA;wind speed, freak properties of physics &amp;ndash; make you unable to&#xA;perfectly determine penetration given velocity.&lt;/p&gt;</description>
     </item>
     <item>
       <title> Chapter 1 - What is Deep Learning?</title>
-      <link>https://example.org/misc/dlp-1r/</link>
+      <link>http://localhost:4321/misc/2025-06-01-dlp/dlp-1r/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/misc/dlp-1r/</guid>
+      <guid>http://localhost:4321/misc/2025-06-01-dlp/dlp-1r/</guid>
       <description>&lt;div style=&#34;background-color:#f0f0f0; padding:10px; border-left:4px solid #007ACC; margin-bottom:20px;&#34;&gt;&#xA;&lt;strong&gt;Image credit:&lt;/strong&gt; Select figures reproduced from &#xA;&lt;a href=&#34;https://www.manning.com/books/deep-learning-with-python&#34; target=&#34;_blank&#34;&gt;&#xA;&lt;em&gt;Deep Learning with Python&lt;/em&gt; by François Chollet&lt;/a&gt; (Manning Publications, 2017). &#xA;All rights reserved by the original publisher.&#xA;&lt;/div&gt;&#xA;&lt;p&gt;&lt;strong&gt;Drawing some distinctions:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Computer programming tells the computer the &amp;ldquo;rules&amp;rdquo; to obtain answers&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Rules + data =&amp;gt; answers&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Machine learning learns “statistical” rules from the answers&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Data + answers =&amp;gt; rules&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Machine learning works with large, complex data sets – is an engineering discipline. Statistics works with smaller data sets  &amp;ndash;  is a mathematical field. ML &lt;code&gt;\(\ne\)&lt;/code&gt; statistics; rather, it emerges from statistics at most&lt;/p&gt;</description>
     </item>
     <item>
       <title>ANOVA (in progress)</title>
-      <link>https://example.org/inference_tests/anova/</link>
+      <link>http://localhost:4321/inference_tests/anova/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/inference_tests/anova/</guid>
+      <guid>http://localhost:4321/inference_tests/anova/</guid>
       <description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;ANOVA stands for analysis of variance. The goal of ANOVA is, for a variable measured on more than one group of data, to &lt;strong&gt;use the variance of our measurements&lt;/strong&gt; to determine whether the population mean of those groups is different between at least one pair of groups.&lt;/p&gt;&#xA;\[ H_0: \mu_1 = \mu_2 = ... =\mu_n \]&lt;p&gt;&#xA;&lt;/p&gt;&#xA;\[ H_a: \mu_i \ne \mu_j \text{ for } i \ne j \]&lt;p&gt;You might wonder why we are analyzing &lt;em&gt;variance&lt;/em&gt; to get at a truth involving means &amp;ndash; I certainly did. The best way to intuit &lt;em&gt;why&lt;/em&gt; is through a simple exercise.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Inference with simple linear regression coefficients</title>
-      <link>https://example.org/inference_tests/hatbeta1_inf/</link>
-      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/inference_tests/hatbeta1_inf/</guid>
-      <description>&lt;p&gt;What if I told you that just as the parameters mean and variance  follow a distribution, so do the coefficients &lt;code&gt;\(\hat \beta_0, \hat \beta_1\)&lt;/code&gt; &lt;a href=&#34;linreg-simple.html&#34;&gt;we previously found&lt;/a&gt;? Even though it can be argued that there does not exist a &amp;ldquo;true&amp;rdquo; &lt;code&gt;\(\beta_0\)&lt;/code&gt; and &lt;code&gt;\(\beta_1\)&lt;/code&gt; in the same way a true &lt;code&gt;\(\mu\)&lt;/code&gt; might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we cannot deny the fact that for different samples of a given phenomena, the line fitted will differ as well. Just as we would not state a sample mean as fact, we would not say that the observed effect of &lt;code&gt;\(\hat \beta_1\)&lt;/code&gt; is the true effect! In both cases, we acknowledge its tendency to vary, which is useful in itself.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>My thoughts on statistics</title>
-      <link>https://example.org/misc/on-stats/</link>
+      <link>http://localhost:4321/misc/2025-04-26-on-stats/on-stats/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/misc/on-stats/</guid>
+      <guid>http://localhost:4321/misc/2025-04-26-on-stats/on-stats/</guid>
       <description>&lt;p&gt;By definition, a statistic is information that can be gleaned from a sample. It can result from a mathematical operation performed on a sample (averaging), an arbitrary selection within it (every 5th value), or nonsensical manipulation of it (subtract 100 from each value and convert it to a string based on the starting letter of the value when converted to words).&lt;/p&gt;&#xA;&lt;p&gt;Statistics (note the s!) as a field is concerned with using a statistic from a sample to learn about the larger population from which the sample originated.&lt;/p&gt;</description>
     </item>
     <item>
       <title>About this website</title>
-      <link>https://example.org/about/</link>
+      <link>http://localhost:4321/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://example.org/about/</guid>
+      <guid>http://localhost:4321/about/</guid>
       <description></description>
     </item>
   </channel>

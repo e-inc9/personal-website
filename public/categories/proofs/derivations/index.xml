@@ -2,32 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Proofs/Derivations on A minimal Hugo website</title>
-    <link>https://example.org/categories/proofs/derivations/</link>
+    <link>http://localhost:4321/categories/proofs/derivations/</link>
     <description>Recent content in Proofs/Derivations on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 May 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.org/categories/proofs/derivations/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/categories/proofs/derivations/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deriving the t pdf</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/27/deriving-the-t-pdf/</link>
+      <pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/27/deriving-the-t-pdf/</guid>
+      <description>&lt;p&gt;By definition, a t-distributed random variable with &lt;code&gt;\(\nu\)&lt;/code&gt; degrees of freedom is the ratio of a standard normal variable &lt;code&gt;\(Z \sim N(0,1)\)&lt;/code&gt; over the square root of a chi-squared variable &lt;code&gt;\(Y \sim \chi^2_{\nu}\)&lt;/code&gt; divided by its degrees of freedom.&lt;/p&gt;&#xA;\[&#xA;T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y&#xA;\]&lt;p&gt;This is a lengthy derivation, so buckle up. We start with the cdf. We isolate &lt;code&gt;\(Z\)&lt;/code&gt; since its upper and lower bounds make the inner integral easier to work with (i.e. for Leibniz&amp;rsquo; rule, the derivative of the upper bound is easy to compute).&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Distribution of hat beta_0</title>
-      <link>https://example.org/proofs_deriv/hatbeta0_dist/</link>
+      <link>http://localhost:4321/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/</link>
       <pubDate>Fri, 23 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/proofs_deriv/hatbeta0_dist/</guid>
-      <description>&lt;h2 id=&#34;deriving-the-distribution-of-hatbeta_0&#34;&gt;Deriving the Distribution of &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim N(\beta_0 + \beta_1 X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}&#xA;\]&lt;p&gt;Since &lt;code&gt;\(\hat{\beta}_1 \sim N\left(\beta_1, \frac{\sigma^2}{S_{xx}}\right)\)&lt;/code&gt;, and &lt;code&gt;\(\bar{X}\)&lt;/code&gt; is a constant determined by the sample and &lt;code&gt;\(\bar{Y}\)&lt;/code&gt; is normally distributed, &lt;code&gt;\(\hat{\beta}_0\)&lt;/code&gt; is normally distributed.&lt;/p&gt;</description>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/</guid>
+      <description>&lt;h2 id=&#34;deriving-distribution-of-hat-beta_0&#34;&gt;Deriving distribution of &lt;code&gt;\(\hat \beta_0\)&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim N(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition &lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;. This is what&amp;rsquo;s assumed under the simple linear regression model,  &lt;strong&gt;including the additional assumption that &lt;code&gt;\(\varepsilon\)&lt;/code&gt; is normally distributed (necessary for inference).&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Recall that given a sample, &lt;code&gt;\(\hat \beta_0 = \bar Y - \hat \beta_1 \bar X\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Since &lt;code&gt;\(\hat \beta_1 \sim N(\beta_1, \frac{\sigma^2}{S_{xx}})\)&lt;/code&gt;, and &lt;code&gt;\(\bar X\)&lt;/code&gt; is a constant determined by the sample and &lt;code&gt;\(\bar Y\)&lt;/code&gt; is normally distributed, &lt;code&gt;\(\hat \beta_0\)&lt;/code&gt; is normally distributed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deriving the chi-squared pdf</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/20/deriving-the-chi-squared-pdf/</link>
+      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/20/deriving-the-chi-squared-pdf/</guid>
+      <description>&lt;h1 id=&#34;the-chi-squared-distribution&#34;&gt;The chi-squared distribution&lt;/h1&gt;&#xA;&lt;p&gt;By definition, the chi-squared distribution is the sum of &lt;code&gt;\(k\)&lt;/code&gt; standard normal variables squared. Let &lt;code&gt;\(X\)&lt;/code&gt; be a chi-squared variable with &lt;code&gt;\(k\)&lt;/code&gt; degrees of freedom. Then,&lt;/p&gt;&#xA;$$&#xA;X= \sum_{i=1}^k Z_i^2&#xA;$$&lt;p&gt;Our objective is to define its distribution. We first start with the pdf when &lt;code&gt;\(k=1\)&lt;/code&gt;. Then, seeing that its pdf is that of a Gamma, we find the pdf of a sum of Gammas. Moment generating functions come into play.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deriving the coefficients for linear regression</title>
+      <link>http://localhost:4321/proofs_deriv/2025/05/19/deriving-the-coefficients-for-linear-regression/</link>
+      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/19/deriving-the-coefficients-for-linear-regression/</guid>
+      <description>&lt;h2 id=&#34;finding-coefficients-for-linear-regression&#34;&gt;Finding coefficients for linear regression&lt;/h2&gt;&#xA;&lt;p&gt;Recall that given a sample with observations &lt;code&gt;\(Y_1, Y_2, \dotsc Y_n\)&lt;/code&gt;, the sum of squared differences is given by:&lt;/p&gt;&#xA;$$  &#xA;\sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  &#xA;$$&lt;p&gt;We denote this sum by &lt;code&gt;\(h(\hat \beta_0, \hat \beta_1)\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;We use the first derivative to find the coefficients that minimize this sum. Since this function is convex, we know the first derivative is a minimum.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Distribution of hat beta_1</title>
-      <link>https://example.org/proofs_deriv/hatbeta1_dist/</link>
+      <link>http://localhost:4321/proofs_deriv/2025/05/19/distribution-of-hat-beta_1/</link>
       <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/proofs_deriv/hatbeta1_dist/</guid>
-      <description>&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;br&gt;&#xA;&lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim(0, \sigma^2)\)&lt;/code&gt;.&lt;br&gt;&#xA;This is what&amp;rsquo;s assumed under the simple linear regression model.&lt;/p&gt;&#xA;&lt;p&gt;Recall that given a sample,&lt;br&gt;&#xA;&lt;/p&gt;&#xA;\[&#xA;\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}&#xA;\]&lt;p&gt;We treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed. &lt;code&gt;\(Y\)&lt;/code&gt; is treated as a random variable, owing to the error term.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Finding Coefficients for Linear Regression</title>
-      <link>https://example.org/proofs_deriv/linreg-coeff/</link>
-      <pubDate>Mon, 19 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/proofs_deriv/linreg-coeff/</guid>
-      <description>&lt;h2 id=&#34;finding-coefficients-for-linear-regression&#34;&gt;Finding coefficients for linear regression&lt;/h2&gt;&#xA;&lt;p&gt;Recall that given a sample with observations &lt;code&gt;\(Y_1, Y_2, \dotsc Y_n\)&lt;/code&gt;, the sum of squared differences is given by:&lt;/p&gt;&#xA;$$  &#xA;\sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  &#xA;$$&lt;p&gt;We denote this sum by &lt;code&gt;\(h(\hat \beta_0, \hat \beta_1)\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;We use the first derivative to find the coefficients that minimize this sum. Since this function is convex, we know the first derivative is a minimum.&lt;/p&gt;</description>
+      <guid>http://localhost:4321/proofs_deriv/2025/05/19/distribution-of-hat-beta_1/</guid>
+      <description>&lt;p&gt;We want to know the distribution of &lt;code&gt;\(\hat \beta_1\)&lt;/code&gt; across all possible samples where we treat the &lt;code&gt;\(X_i\)&lt;/code&gt;&amp;rsquo;s as fixed each time.&lt;/p&gt;&#xA;&lt;p&gt;Assume that &lt;code&gt;\(Y_i \sim(\beta_0 + \beta_1X_i, \sigma^2)\)&lt;/code&gt; as a result of the definition&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;\(Y_i= \beta_0 + \beta_1 X_i + \varepsilon_i\)&lt;/code&gt;, where each &lt;code&gt;\(\varepsilon_i \sim N(0, \sigma^2)\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This is what&amp;rsquo;s assumed under the simple linear regression model, &lt;strong&gt;including the additional assumption that &lt;code&gt;\(\varepsilon\)&lt;/code&gt; is normally distributed (necessary for inference).&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

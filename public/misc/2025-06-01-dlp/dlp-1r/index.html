@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Chapter 1 - What is Deep Learning? | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Chapter 1 - What is Deep Learning?</span></h1>
+
+<h2 class="date">2025/04/26</h2>
+</div>
+
+<main>
+<div style="background-color:#f0f0f0; padding:10px; border-left:4px solid #007ACC; margin-bottom:20px;">
+<strong>Image credit:</strong> Select figures reproduced from 
+<a href="https://www.manning.com/books/deep-learning-with-python" target="_blank">
+<em>Deep Learning with Python</em> by François Chollet</a> (Manning Publications, 2017). 
+All rights reserved by the original publisher.
+</div>
+<p><strong>Drawing some distinctions:</strong></p>
+<p>Computer programming tells the computer the &ldquo;rules&rdquo; to obtain answers</p>
+<ul>
+<li>Rules + data =&gt; answers</li>
+</ul>
+<p>Machine learning learns “statistical” rules from the answers</p>
+<ul>
+<li>Data + answers =&gt; rules</li>
+</ul>
+<p>Machine learning works with large, complex data sets – is an engineering discipline. Statistics works with smaller data sets  &ndash;  is a mathematical field. ML <code>\(\ne\)</code> statistics; rather, it emerges from statistics at most</p>
+<p><strong>Required ingredients for machine learning</strong></p>
+<ol>
+<li>input data</li>
+<li>expected output</li>
+<li>feedback, a measure of comparative performance &ndash; the algorithm&rsquo;s output vs. the expected output</li>
+</ol>
+<p><strong>What is learning, anyway?</strong></p>
+<p>A machine learning model uses feedback to determine which representation of the input data is most performant.
+Because of computing, multiple representations can be explored within a predefined set of operations.</p>
+<p><strong>What is a representation, anyway?</strong></p>
+<p>Any type of transformation of the data. As implied above, some transformations are more useful than others in determining the  model&rsquo;s output.</p>
+<p>Example: say a model&rsquo;s objective is to find a rule that lets it identify white dots and black dots. It can transform the raw data by rotating it such that the new coordinate axes neatly separate the black and white dots along the y-axis. This is a useful transformation that yields a rule. To find this one useful transformation, the model cycled through other transformations.</p>
+<p><img src="../../pics/1.4.png" alt=""><!-- --></p>
+<p><strong>What is DEEP learning?</strong></p>
+<p>Refers to using many layers of transformations (each layer being a &ldquo;representation&rdquo;) to identify rules. Each layer takes the representation that preceded it.</p>
+<p>We call this configuration of layers a <strong>neural network</strong>. It is a type of machine learning model.</p>
+<p><img src="../../pics/1.5.png" alt=""><!-- --></p>
+<p><strong>What are WEIGHTS?</strong></p>
+<p>Each representation is <em>parametrized</em> by its weights, which are numbers that determine what a representation <em>does</em> to its input.
+Thus, finding a useful neural network (useful stack of representations) is contingent on finding the optimal weights.</p>
+<p><strong>Putting it all together: weights, representations, and learning</strong></p>
+<p>Learning occurs when a neural network, which is composed of representations parametrized by weights, finds the optimal weights for translating input into the desired output.</p>
+<p><strong>What do you mean optimal?</strong></p>
+<p>The optimal set of weights is determined based on a loss function, which takes a neural network&rsquo;s output <code>\(Y'\)</code> and compares it to the expected (true) output <code>\(Y\)</code>. It comes up with a score, which is then used by an optimizer to adjust the weights.</p>
+<p>Weights are adjusted bit by bit until the weights that minimize the loss function are found.</p>
+<p><img src="../../pics/1.9.png" alt=""><!-- --></p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

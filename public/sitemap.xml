@@ -2,68 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.org/categories/</loc>
+    <loc>http://localhost:4321/categories/</loc>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/categories/general/</loc>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/</loc>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/overview/2025-09-26-normal-correlation-models/correlation./</loc>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/overview/</loc>
+    <lastmod>2025-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/</loc>
+    <lastmod>2025-09-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/inference_tests/</loc>
+    <lastmod>2025-09-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/categories/inference/tests/</loc>
+    <lastmod>2025-09-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/distrib/</loc>
+    <lastmod>2025-09-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/</loc>
+    <lastmod>2025-09-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/overview/2025-09-15-maximum-likelihood-estimation/mle/</loc>
+    <lastmod>2025-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/overview/simple-linear-regression-with-normality/</loc>
+    <lastmod>2025-09-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/overview/2025-09-13-point-estimation/point-estimation/</loc>
+    <lastmod>2025-09-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/categories/misc/</loc>
+    <lastmod>2025-06-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/misc/</loc>
+    <lastmod>2025-06-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/misc/2025-06-29-fnirs-functional-near-infrared-spectroscopy/fnirs/</loc>
+    <lastmod>2025-06-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/misc/2025-06-28-3b1b-/3b1b/</loc>
+    <lastmod>2025-06-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/</loc>
+    <lastmod>2025-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/inference_tests/2025-06-13-t-test/t-test/</loc>
+    <lastmod>2025-06-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/proofs_deriv/2025/05/27/deriving-the-t-pdf/</loc>
+    <lastmod>2025-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/categories/distributions/</loc>
+    <lastmod>2025-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/proofs_deriv/</loc>
+    <lastmod>2025-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/categories/proofs/derivations/</loc>
+    <lastmod>2025-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/distrib/2025-05-27-t-distribution/t-dist/</loc>
+    <lastmod>2025-05-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/</loc>
     <lastmod>2025-05-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/proofs_deriv/hatbeta0_dist/</loc>
-    <lastmod>2025-05-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/</loc>
-    <lastmod>2025-05-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/proofs_deriv/</loc>
-    <lastmod>2025-05-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/categories/proofs/derivations/</loc>
-    <lastmod>2025-05-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/misc/3b1b/</loc>
+    <loc>http://localhost:4321/proofs_deriv/2025/05/20/deriving-the-chi-squared-pdf/</loc>
     <lastmod>2025-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/misc/</loc>
-    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/misc/</loc>
-    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/proofs_deriv/hatbeta1_dist/</loc>
+    <loc>http://localhost:4321/proofs_deriv/2025/05/19/deriving-the-coefficients-for-linear-regression/</loc>
     <lastmod>2025-05-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/proofs_deriv/linreg-coeff/</loc>
+    <loc>http://localhost:4321/proofs_deriv/2025/05/19/distribution-of-hat-beta_1/</loc>
     <lastmod>2025-05-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/general/</loc>
+    <loc>http://localhost:4321/overview/2025-05-16-matrix-math/matrix-math/</loc>
     <lastmod>2025-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/overview/matrix-math/</loc>
+    <loc>http://localhost:4321/overview/2025-05-16-linreg-simple/linreg-simple/</loc>
     <lastmod>2025-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/overview/</loc>
-    <lastmod>2025-05-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/overview/linreg-simple/</loc>
-    <lastmod>2025-05-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/misc/dlp-1r/</loc>
+    <loc>http://localhost:4321/misc/2025-06-01-dlp/dlp-1r/</loc>
     <lastmod>2025-04-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/inference_tests/anova/</loc>
+    <loc>http://localhost:4321/inference_tests/anova/</loc>
     <lastmod>2025-04-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/inference_tests/hatbeta1_inf/</loc>
+    <loc>http://localhost:4321/misc/2025-04-26-on-stats/on-stats/</loc>
     <lastmod>2025-04-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/inference_tests/</loc>
-    <lastmod>2025-04-26T00:00:00+00:00</lastmod>
+    <loc>http://localhost:4321/about/</loc>
   </url><url>
-    <loc>https://example.org/categories/inference/tests/</loc>
-    <lastmod>2025-04-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/misc/on-stats/</loc>
-    <lastmod>2025-04-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://example.org/about/</loc>
-  </url><url>
-    <loc>https://example.org/tags/</loc>
+    <loc>http://localhost:4321/tags/</loc>
   </url>
 </urlset>

@@ -1,0 +1,131 @@
+---
+title: 'Normal correlation models '
+author: ''
+date: '2025-09-26'
+slug: correlation.
+categories:
+  - General
+tags: []
+---
+
+
+## A key distinction 
+One key assumption in the classical derivation of [inference using simple linear regression models](/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/) is that across repeated samples, `\(X\)` is fixed. In other words, under this assumption, when we conduct inference using simple linreg, we're assuming that we could repeatedly take `\(Y_i\)` at `\(X_1, ... X_n\)` repeatedly. Maybe (?) this is a product of the experiments that were being run way back when. 
+
+However, in many observational settings, this assumption isn't feasibly possible. For example, if we had a dataset with the mean daily temperature as the predictor, we couldn't fix the mean daily temperature of our observations across samples, since it would also be a random variable. 
+
+Historically, one would approach this problem using the normal correlation model, which is based on the bivariate normal distribution pictured below. We actually find that **if we break the bivariate normal distribution down into conditional distributions**, we arrive back at the linear regression model.
+
+So this post is basically justifying the use of linear regression even when `\(X\)` is treated as a random variable.
+
+## Bivariate normal distribution
+<img src="../../../../../../../../pics/bivar_n.png" width="40%" />
+
+For a bivariate normal distribution consisting of variables `\(Y_1, Y_2\)`, we find that the marginal distributions of `\(Y_1\)` given `\(Y_2\)` (and vice versa) are also normally distributed. That being said, if `\(Y_1\)`, `\(Y_2\)` are individually normally distributed, they do not necessarily follow a joint distribution. Say, religiosity and wealth.
+
+$$
+f(Y_1, Y_2)
+= \frac{1}{2\pi \sigma_1 \sigma_2 \sqrt{1-\rho_{12}^2}}
+  \exp\!\left\{
+  -\frac{1}{2(1-\rho_{12}^2)}
+  \left[
+    \left(\frac{Y_1-\mu_1}{\sigma_1}\right)^{\!2}
+    -2\rho_{12}
+      \left(\frac{Y_1-\mu_1}{\sigma_1}\right)
+      \left(\frac{Y_2-\mu_2}{\sigma_2}\right)
+    +\left(\frac{Y_2-\mu_2}{\sigma_2}\right)^{\!2}
+  \right]
+  \right\}
+$$
+In this whopper of a pdf, the parameters `\(\mu_1, \sigma_1\)` and `\(\mu_2, \sigma_2\)` are with regards to the marginal distributions of `\(Y_1, Y_2\)`, respectively. `\(\rho_{12}\)` is the (population) correlation between the two, where
+
+$$
+\rho_{12} = \frac{\sigma_{12}}{\sigma_1 \sigma_2} \text{ to be proved one day... }
+$$
+The marginal distributions are below:
+\[
+f_{1}(Y_{1})
+= \frac{1}{\sqrt{2\pi}\,\sigma_{1}}
+  \exp\!\left[
+    -\frac{1}{2}
+    \left(
+      \frac{Y_{1}-\mu_{1}}{\sigma_{1}}
+    \right)^{2}
+  \right]
+\]
+
+\[
+f_{2}(Y_{2})
+= \frac{1}{\sqrt{2\pi}\,\sigma_{2}}
+  \exp\!\left[
+    -\frac{1}{2}
+    \left(
+      \frac{Y_{2}-\mu_{2}}{\sigma_{2}}
+    \right)^{2}
+  \right]
+\]
+
+Given these two marginal pdfs, we can still come up with conditional distributions using the general property 
+
+$$
+f(Y_1 | Y_2) = \frac{f(Y_1, Y_2)}{f_{Y_2}(Y_2)} \quad \left(\text{recall } P(A|B) = \frac{P(A \cap B)}{P(B)}\right)
+$$
+
+The conditional distribution of `\(Y_1\)` given `\(Y_2\)` and vice versa are below. 
+<details>
+<summary> Expand </summary>
+$$ \begin{aligned}
+f(Y_{1}\mid Y_{2})
+  &= \frac{1}{\sqrt{2\pi}\,\sigma_{1\mid 2}}
+    \exp\!\left[
+      -\frac12
+      \left(
+        \frac{Y_{1}-\alpha_{1\mid 2}-\beta_{1\mid 2}Y_{2}}
+             {\sigma_{1\mid 2}}
+      \right)^{2}
+    \right] \text{ , where }\\
+\alpha_{1\mid 2} &= \mu_{1} - \mu_{2}\,\rho_{12}\,\frac{\sigma_{1}}{\sigma_{2}} \\
+\beta_{1\mid 2} &= \rho_{12}\,\frac{\sigma_{1}}{\sigma_{2}} \\
+\sigma^{2}_{1\mid 2} &= \sigma_{1}^{2}\bigl(1-\rho_{12}^{2}\bigr)
+\end{aligned} $$
+
+$$ \begin{aligned}
+f(Y_{2}\mid Y_{1})
+  &= \frac{1}{\sqrt{2\pi}\,\sigma_{2\mid 1}}
+    \exp\!\left[
+      -\frac12
+      \left(
+        \frac{Y_{2}-\alpha_{2\mid 1}-\beta_{2\mid 1}Y_{1}}
+             {\sigma_{2\mid 1}}
+      \right)^{2}
+    \right] \text{ , where }\\
+\alpha_{2\mid 1} &= \mu_{2} - \mu_{1}\,\rho_{12}\,\frac{\sigma_{2}}{\sigma_{1}} \\
+\beta_{2\mid 1} &= \rho_{12}\,\frac{\sigma_{2}}{\sigma_{1}} \\
+\sigma^{2}_{2\mid 1} &= \sigma_{2}^{2}\bigl(1-\rho_{12}^{2}\bigr)
+\end{aligned} $$
+</details> 
+
+Notice how (we denote `\(X\)` for the conditioning variable):
+
+a) the conditional distributions of two jointly normal variables are _also_ normal
+
+b) within both pdfs, the (conditional) mean is `\((\alpha + \beta X)\)`, so it varies (linearly!) with `\(X\)`
+
+c) the (conditional) variance `\(\sigma^2\)` remains constant across `\(X\)`
+
+d) the parameters `\(\alpha, \beta, \sigma^2\)` for both conditional distributions are expressed in terms of the joint pdf above
+
+As we can see,  `\(Y_1|Y_2\)` (and vice versa), in having an expected value that changes linearly with `\(Y_2 (Y_1)\)`, yet has a constant variance `\(\sigma^2\)`, falls within the assumptions and structure of the simple linear regression model! 
+
+Thus, the conditional bivariate normal correlation model used to estimate $Y|X \sim N(\alpha + \beta_X, \sigma^2) $ is equivalent to the linear regression model `\(\hat Y\sim N(\beta_0 + \beta_1 X, \sigma^2)\)`. 
+
+So if we have variables `\(X,Y\)` which are bivariate normal, we have the "all clear" to proceed with linear regression and perform inference _even if_ `\(X\)` is treated as a random variable. 
+
+More generally, however, `\(X,Y\)` need not be bivariate normal; 
+
+If
+1) `\(Y_i|X_i\)` is *normal and independent* with conditional means `\(\alpha + \beta_1 X_i\)` and conditional variance `\(\sigma^2\)`
+
+2) `\(X\)`, the predictor variable, does not involve the regression parameters `\(\alpha, \beta, \sigma^2\)` (safe to say this is usually not the case)
+
+Then we can perform simple linear regression for estimating, testing, and prediction.

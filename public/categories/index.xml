@@ -2,38 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on A minimal Hugo website</title>
-    <link>https://example.org/categories/</link>
+    <link>http://localhost:4321/categories/</link>
     <description>Recent content in Categories on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 May 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.org/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Proofs/Derivations</title>
-      <link>https://example.org/categories/proofs/derivations/</link>
-      <pubDate>Fri, 23 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/categories/proofs/derivations/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Misc</title>
-      <link>https://example.org/categories/misc/</link>
-      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/categories/misc/</guid>
-      <description></description>
-    </item>
+    <lastBuildDate>Fri, 26 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>General</title>
-      <link>https://example.org/categories/general/</link>
-      <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/categories/general/</guid>
+      <link>http://localhost:4321/categories/general/</link>
+      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/categories/general/</guid>
       <description></description>
     </item>
     <item>
       <title>Inference/Tests</title>
-      <link>https://example.org/categories/inference/tests/</link>
-      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/categories/inference/tests/</guid>
+      <link>http://localhost:4321/categories/inference/tests/</link>
+      <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/categories/inference/tests/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Misc</title>
+      <link>http://localhost:4321/categories/misc/</link>
+      <pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/categories/misc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Distributions</title>
+      <link>http://localhost:4321/categories/distributions/</link>
+      <pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/categories/distributions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Proofs/Derivations</title>
+      <link>http://localhost:4321/categories/proofs/derivations/</link>
+      <pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/categories/proofs/derivations/</guid>
       <description></description>
     </item>
   </channel>

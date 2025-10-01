@@ -1,0 +1,434 @@
+---
+title: "3b1b Linear Algebra"
+output: html**document
+date: "2025-06-28"
+categories:
+  - Misc
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+<div id="video-1-vectors" class="section level2">
+<h2>Video 1 Vectors</h2>
+<p>Start in the <span class="math inline">\((x,y)\)</span> standard coordinate plane. Define the
+<span class="math inline">\(i=[1 \quad 0 ]\)</span> and <span class="math inline">\(j=[0\quad1]\)</span>. Note that any <strong>linear combination</strong>
+of the two vectors <span class="math inline">\(ai + bj\)</span> could reach any point on the plane. We call
+this set of achievable points the <strong>span</strong> of the two vectors.</p>
+<p>What’s the usefulness of vectors? They can be used to represent data,
+for one thing.</p>
+</div>
+<div id="video-2-linear-combinations-span-and-basis-vectors" class="section level2">
+<h2>Video 2 Linear combinations, span, and basis vectors</h2>
+<p>Consider vector <span class="math inline">\(a = [2 \quad 4]\)</span>, which is represented in the
+coordinate plane as a point 2 points to the right and four points up. We
+can break <span class="math inline">\(a\)</span> down into a sum of scaled vectors <span class="math inline">\(i, j\)</span>:
+<span class="math display">\[ [2 \quad 4] = 2i + 4j \]</span></p>
+<p>This applies not just to <span class="math inline">\(a\)</span>, but any vector in the coordinate plane.
+Thus, <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are commonly known as the <strong>basis vectors</strong> of the
+coordinate plane. Basis vectors are defined differently for different
+spaces, so knowing what the basis vectors of <span class="math inline">\(a = [2 \quad 4]\)</span> are (i.e.
+what is being scaled by 2 and 4), is essential for “placing” <span class="math inline">\(a\)</span>.</p>
+<div id="original-ij" class="section level3">
+<h3>Original <span class="math inline">\(i,j\)</span></h3>
+<p><img src="/misc/2025-06-28 3b1b/3b1b_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="different-i-j" class="section level3">
+<h3>Different <span class="math inline">\(i, j\)</span></h3>
+<p><img src="/misc/2025-06-28 3b1b/3b1b_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Let’s consider vectors <span class="math inline">\(a\)</span> and <span class="math inline">\(b = wb\)</span> , where <span class="math inline">\(b\)</span> simply a scaled
+version of <span class="math inline">\(a\)</span>. The span of <span class="math inline">\(a,b\)</span> is simply a line along <span class="math inline">\(a\)</span> (or <span class="math inline">\(b\)</span>).
+The span of <span class="math inline">\(a\)</span> is equal to the span of <span class="math inline">\(b\)</span> is equal to the span of
+<span class="math inline">\(a,b\)</span>.</p>
+<p>We use the term <strong>linearly dependent</strong> to refer to groups of vectors
+where the removal of one does not change the span. This implies that the
+vector that could be removed is simply a linear combination of the other
+vectors, and thus exists on the span defined by the other vectors. This
+definition applies to <span class="math inline">\(a, b\)</span>.</p>
+<p><strong>Linear independence</strong>, then, refers to groups of vectors where the
+removal of one vector <em>does</em> change the span. This is equivalent to
+saying that each vector adds a new dimension to the span. Thus, this one
+vector cannot be expressed as a linear combination of the other vectors.</p>
+<p>The basis vector(s) of a vector space, then, are the linearly
+independent vector(s) that span the full space. In the vector space
+defined by the linear combinations of <span class="math inline">\(a, b\)</span>, there is only one basis
+vector.</p>
+</div>
+</div>
+<div id="video-3-matrix-transformations" class="section level2">
+<h2>Video 3 Matrix transformations</h2>
+<p>We can think of a 2x2 matrix <span class="math inline">\(T\)</span> as describing with its two columns the
+results of a transformation on <span class="math inline">\(i, j\)</span> (defined above) that span the 2d
+vector space.</p>
+<p><span class="math display">\[ T =
+\begin{bmatrix}
+5 &amp; 4 \\
+-2 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>Where the transformation resulted in <span class="math inline">\(i\)</span> becoming <span class="math inline">\([5 \quad -2]\)</span> and <span class="math inline">\(j\)</span>
+becoming <span class="math inline">\([4 \quad 1 ]\)</span>. This transformation is linear; the origin is
+centered at 0 and the grid lines remain parallel.</p>
+<p><img src="/misc/2025-06-28 3b1b/3b1b_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Given a vector <span class="math inline">\(v = -1i + 2j = [-1 \quad 2]\)</span> in the original vector
+space, the transformation applied to (multiplied by) <span class="math inline">\(v\)</span> results in a
+new vector just as it did for the basis vectors.</p>
+<p><img src="/misc/2025-06-28 3b1b/3b1b_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>We can find the coordinates of the transformed <span class="math inline">\(v\)</span> by simply
+<em>calculating the linear combination of the transformed basis vectors
+when using the original scalars</em>. Just as <span class="math inline">\(v = -1i + 2j\)</span>,</p>
+<p><span class="math display">\[ \text{ new vector } = -1 \cdot [5 \quad -2 ] + 2 \cdot [4 \quad 1] = [-5+8 \quad 2+2] = [3 \quad 4 ] \]</span></p>
+<pre><code>## [1] &quot;Transformation T:&quot;</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    5    4
+## [2,]   -2    1</code></pre>
+<pre><code>## [1] &quot;-1 * T[,1] + 2 * T[,2]&quot;</code></pre>
+<pre><code>## [1] 3 4</code></pre>
+<p>This is equivalent to saying that <strong>the result of a transformation</strong> <span class="math inline">\(T\)</span>
+on vector <span class="math inline">\(v\)</span> (where <span class="math inline">\(v\)</span> is understood to be a linear combination of
+basis vectors <span class="math inline">\(i,j\)</span>) is the linear combination of the transformed basis
+vectors using the same scalars as in <span class="math inline">\(v\)</span>. The transformed basis vectors
+are the columns of <span class="math inline">\(T\)</span>. In essence, given transformation matrix <span class="math inline">\(T\)</span></p>
+<p><span class="math display">\[ T =
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\]</span></p>
+<p>and vector <span class="math inline">\(v = [ x \quad y]\)</span>, the transformation <span class="math inline">\(T\)</span> applied to <span class="math inline">\(v\)</span> can
+be expressed as:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\begin{bmatrix}
+x \\ y
+\end {bmatrix} =
+x\begin{bmatrix} a \\ c \end{bmatrix} +
+y  \begin{bmatrix} b \\ d \end{bmatrix}
+=  \begin{bmatrix} a x + b y \\ c x + d y
+\end{bmatrix} \]</span></p>
+<p>You saw that right – the operation we’ve been describing is
+matrix-vector multiplication! <strong>To multiply a matrix by a vector (where
+the matrix is on the left) is to transform a vector in the manner
+defined by the matrix.</strong></p>
+</div>
+<div id="video-4-matrix-multiplication" class="section level2">
+<h2>Video 4 Matrix multiplication</h2>
+<p>Let’s consider the multiplication operation below. What we’re seeing is
+two transformations applied to a vector. The matrix with <span class="math inline">\(e,f,g,h\)</span> is
+first applied, and then the matrix <span class="math inline">\(a,b,c,d\)</span> is applied to the result of
+the initial operation.<span class="math display">\[
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\begin{bmatrix} e&amp; f \\ g &amp;h
+\end{bmatrix}
+\begin{bmatrix}
+x \\ y
+\end {bmatrix}   \]</span></p>
+<p>Transformations are not commutative; <span class="math inline">\(T_1 T_2  v \ne T_2 T_1 v\)</span>.
+However, they are associative; <span class="math inline">\(T_1(T_2 T_3) = (T_1 T_2) T_3\)</span>.</p>
+</div>
+<div id="video-5-linear-transformations-in-3d-space" class="section level2">
+<h2>Video 5 Linear transformations in 3d space</h2>
+<p>For transformations in 3d space, we’d expect the matrix to have 3
+columns and 3 rows; one for each basis vector.</p>
+</div>
+<div id="video-6-determinants" class="section level2">
+<h2>Video 6 Determinants</h2>
+<p>The determinant of a matrix is how much its transformation scales the
+area of a 1x1 unit in the original vector space. This factor can be
+generalized to any shape in the original space.</p>
+<p><span class="math display">\[
+det \left( \begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix} \right) =ad - bc
+\]</span></p>
+<p><span class="math inline">\(a, d\)</span> represent how much an area is scaled in the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>
+direction.</p>
+<p><span class="math inline">\(b,c\)</span>, which are subtracted, account for diagonal transformations.</p>
+<p>A negative determinant represents an inversion. A determinant of 0
+represents a reduction in dimensions.</p>
+<p>Let’s confirm that negative determinants correspond to inversion and
+zero determinants represent a reduction.</p>
+<div id="inversion-negative-determinant" class="section level4">
+<h4>Inversion (negative determinant)</h4>
+<p><span class="math display">\[
+det \left( \begin{bmatrix}
+-2 &amp; 0 \\
+0 &amp; 2
+\end{bmatrix} \right) = -4
+\]</span></p>
+<p>The first basis vector is scaled in the negative direction by 2 units
+while the second basis vector is scaled by a factor of 2 in the positive
+direction. The first basis vector, instead of being to the right of the
+second basis vector, is now to the left of it. This is an inversion that
+also scales areas in the vector space by 4.</p>
+<p><img src="/misc/2025-06-28 3b1b/3b1b_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="reduction-in-dimensions-aka-singular-transformation-zero-determinant" class="section level4">
+<h4>Reduction in dimensions aka singular transformation (zero determinant)</h4>
+<p><span class="math display">\[
+det \left( \begin{bmatrix}
+3 &amp; 2 \\
+0 &amp; 0
+\end{bmatrix} \right) = 0
+\]</span></p>
+<p>This transformation takes the (square) area created by the initial basis
+vectors. Since this transformation turns <span class="math inline">\(j\)</span> into a basis vector along
+the x-axis, the 2 dimensional space is transformed into a one
+dimensional line. All points now exist along the x-axis. The matrix is
+linearly dependent. Following the transformation, there is only one
+basis vector.</p>
+<p><img src="/misc/2025-06-28 3b1b/3b1b_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+</div>
+<div id="video-7-inverse-matrices-rank-and-null-space" class="section level2">
+<h2>Video 7 Inverse matrices, rank, and null space</h2>
+<p>One of the useful things about matrices is that they can be used to
+interpret and solve <strong>systems of linear equations</strong> where the number of
+equations equals the number of unknowns.</p>
+<p>Case in point: <span class="math display">\[
+\begin{aligned}
+2x + 5y + 3z &amp;= -3 \\
+4x + 0y + 8z &amp;= 0 \\
+1x + 3y + 0z &amp;= 2
+\end{aligned}
+\quad \Rightarrow \quad
+\begin{bmatrix}
+2 &amp; 5 &amp; 3 \\
+4 &amp; 0 &amp; 8 \\
+1 &amp; 3 &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}=
+\begin{bmatrix}
+-3 \\
+0 \\
+2
+\end{bmatrix}
+\]</span></p>
+<p>Whatever the system of linear equation relates to on the right, when
+cast in matrix form it has a geometric interpretation; the solution
+vector <span class="math inline">\(v\)</span> is the vector that, when transformed, becomes
+<span class="math inline">\([ -3 \quad 0 \quad 2]\)</span>.</p>
+<p>How would we solve for this <span class="math inline">\(v\)</span>? Given that we have the transformation
+<span class="math inline">\(T\)</span> and the result <span class="math inline">\(w\)</span>, we could apply the <strong>inverse transformation of</strong>
+<span class="math inline">\(T\)</span>, denoted by <span class="math inline">\(T^{-1}\)</span>, to <span class="math inline">\(w\)</span>. It would bring us “back” to <span class="math inline">\(v\)</span>.
+Formally speaking,</p>
+<p><span class="math display">\[ T^{-1}(T(\vec{v})) = \vec{v} \]</span></p>
+<p>Thus, we can solve for <span class="math inline">\(v\)</span> in the following manner:</p>
+<p><span class="math display">\[
+\begin{aligned}
+T \cdot \vec{v} &amp;= \vec{w} \\
+T^{-1} \cdot T \cdot \vec{v} &amp;= T^{-1} \cdot \vec{w}\\
+\vec{v} &amp;= T^{-1} \cdot \vec{w}
+\end{aligned}
+\]</span></p>
+<p>The reason <span class="math inline">\(T^{-1} \cdot T\)</span> “disappears” is because if one applied a
+transformation <span class="math inline">\(T\)</span> and then its inverse <span class="math inline">\(T^{-1}\)</span> to a vector, they would
+be back to where they started. Thus, <span class="math inline">\(T^{-1} \cdot  T = I\)</span>, where <span class="math inline">\(I\)</span> is
+the <strong>identity matrix</strong>. Multiplying this identity matrix by anything
+does nothing. This should be evident from its columns (recall that the
+columns of a matrix are how its basis vectors are transformed). In the
+case of <span class="math inline">\(I\)</span>, the basis vectors are the default basis vectors for our
+space.</p>
+<p><span class="math display">\[
+I =  \begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<div id="an-important-caveat-regarding-the-inverse" class="section level4">
+<h4>An important caveat regarding the inverse</h4>
+<p>We cannot assume that for every transformation <span class="math inline">\(T\)</span>, there exists an
+inverse <span class="math inline">\(T^{-1}\)</span>. If the determinant of a (square) transformation is 0,
+there exists no inverse. This is because in order to collapse a space
+into a smaller dimension, more than one vector in the larger dimension
+corresponds to a single vector in the smaller dimension. For a vector
+<span class="math inline">\(w\)</span> in the smaller dimension, there exists no <span class="math inline">\(T^{-1}\)</span> that, when
+applied to <span class="math inline">\(w\)</span>, would necessarily give you the <span class="math inline">\(v\)</span> pre-transformation.</p>
+<p><span class="math display">\[
+\not\exists\, T^{-1} \;\; \text{such that } T^{-1}(T(\vec{v})) = \vec{v} \quad \forall \vec{v}
+\]</span></p>
+<p><span class="math display">\[
+\exists \, \vec{v}_1 \ne \vec{v}_2 \quad \text{such that} \quad T(\vec{v}_1) = T(\vec{v}_2)
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow \; T^{-1}(T(\vec{v}_1)) \; \text{is ambiguous — no unique } \vec{v}_1
+\]</span></p>
+<p><strong>rank</strong>: the number of dimensions in the output of a transformation. A
+singular transformation <span class="math inline">\(T_s\)</span> on a vector in an <span class="math inline">\(n-\)</span>dimensional space
+has rank <span class="math inline">\(&lt;n\)</span>.</p>
+<p><strong>null space</strong>: Given a transformation <span class="math inline">\(T\)</span>, the set of vectors <span class="math inline">\(\vec{v}\)</span>
+for which <span class="math inline">\(T \cdot \vec{v} = \vec{0}\)</span>, where <span class="math inline">\(\vec{0}\)</span> is the 0 vector
+(the origin). For a linear transformation, the null space always
+contains the origin <span class="math inline">\([0 \quad 0], [0 \quad 0 \quad 0 ], \text{ etc.}\)</span>.
+In the event that a transformation is singular, the null space will
+contain more than just <span class="math inline">\(\vec{0}\)</span>, as the number of vectors that collapse
+onto the origin will be greater than 1. From 3d to 2d, the null space is
+a plane; from 2d to a line, the null space is a line.</p>
+<p><strong>column space</strong> : the set of all possible outputs of a transformation
+– the span of the columns of the transformation matrix.</p>
+<p><strong>rank</strong>, then, is the number of dimensions in the column space.
+<span class="math inline">\(\vec{0}\)</span> is always in the column space.</p>
+</div>
+</div>
+<div id="video-8-non-square-matrices" class="section level2">
+<h2>Video 8 Non-square matrices</h2>
+<p><span class="math inline">\(x \times y\)</span> non-square matrices have the effect of mapping the basis
+vectors in <span class="math inline">\(x\)</span> dimensions in a space with <span class="math inline">\(y\)</span> dimensions. This is
+consistent with the observation that the columns in a matrix
+representing a transformation are the transformed basis vectors.</p>
+</div>
+<div id="video-9-dot-products-and-duality" class="section level2">
+<h2>Video 9 Dot products and duality</h2>
+<p>A dot product of two vectors is the result of the operation</p>
+<p><span class="math display">\[
+\vec{v} \cdot \vec{w} =  
+\begin{bmatrix} a_1 \\ a_2 \end{bmatrix} \cdot \begin{bmatrix} b_1 \\ b_2  \end{bmatrix} = a_1 b_1 + a_2 b_2
+\]</span></p>
+<p>Note that the algorithm described above is identical to the result of
+applying a transformation from 2 dimensions to 1 dimension to a vector:</p>
+<p><span class="math display">\[
+\begin{bmatrix} a_1  \quad a_2 \end{bmatrix} \cdot \begin{bmatrix} b_1 \\ b_2  \end{bmatrix} = a_1 b_1 + a_2 b_2
+\]</span></p>
+<p><strong>What’s suggested is that each dot product represents a linear
+transformation of some kind!</strong></p>
+<p>But how do we understand this linear transformation as represented by
+<span class="math inline">\(\vec{v}\)</span>?</p>
+<p>Here goes: By definition, the dot product is also</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>The length of <span class="math inline">\(\vec{v}\)</span> times the length of projection <span class="math inline">\(\vec{w}\)</span> on
+<span class="math inline">\(\vec{v}\)</span>.</p></li>
+<li><p>The length of <span class="math inline">\(\vec{w}\)</span> times the length of projection <span class="math inline">\(\vec{v}\)</span> on
+<span class="math inline">\(\vec{w}\)</span>.</p></li>
+</ol>
+<p>Which implies that the dot product of
+<span class="math inline">\(\vec{v} \cdot \vec{w} = \vec{w} \cdot \vec{v}\)</span>.</p>
+<p>(Recall that a projection of <span class="math inline">\(\vec{v}\)</span> on <span class="math inline">\(\vec{w}\)</span> is the vector on a
+line running through <span class="math inline">\(\vec{w}\)</span> pointing to where the distance between
+the tip of <span class="math inline">\(\vec{v}\)</span> and the line running through <span class="math inline">\(\vec{w}\)</span> is
+minimized. This is the location of an orthogonal line segment connecting
+the tip of <span class="math inline">\(\vec{v}\)</span> and the line.)</p>
+<p><img src="/misc/2025-06-28 3b1b/3b1b_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Let’s consider a vector <span class="math inline">\(\vec{u}\)</span>. We can say that its tip pointing to
+<span class="math inline">\((u_x, u_y)\)</span> correspond to where basis vectors <span class="math inline">\(\vec{i}, \vec{j}\)</span> land
+following some 2d-to-1d transformation that is equivalent to the
+projection of the two onto <span class="math inline">\(\vec{u}\)</span>. Thus, this
+transformation/projection can be described as
+<span class="math inline">\(\vec{u} = [u_x \quad u_y]\)</span>. Furthermore, following the projection, we
+characterize <span class="math inline">\(\vec{u}\)</span> as pointing to the unit vector <span class="math inline">\(\vec{u}\)</span> in the
+1st dimension; meaning, it points to coordinate 1 on the “new” number
+line that is the post-transformation span. Thus, we can think of the
+length of <span class="math inline">\(\vec{u}\)</span> as 1.</p>
+<p>Given that <span class="math inline">\(\vec{u}\)</span> describes the location of basis vectors
+post-transformation, if we apply <span class="math inline">\(\vec{u}\)</span> to <span class="math inline">\(\vec{v}\)</span>, where <span class="math inline">\(\vec{v}\)</span>
+is necessarily a linear combination of basis vectors, then we obtain the
+projection of <span class="math inline">\(\vec{v}\)</span> onto <span class="math inline">\(\vec{u}\)</span>. Where it points to on the tick
+mark is also its length <span class="math inline">\(||\vec{v}||\)</span>.</p>
+<p>Since we are working with unit vectors, the projection of <span class="math inline">\(\vec{v}\)</span> on
+<span class="math inline">\(\vec{u}\)</span>, in giving us the location of transformed <span class="math inline">\(\vec{v}\)</span> on the
+number line, also gives us the product of the length of <span class="math inline">\(\vec{u}\)</span> and
+the length of projected <span class="math inline">\(\vec{v}\)</span>.</p>
+<p><span class="math display">\[
+\vec{u} \cdot \vec{v} = \begin{bmatrix} a_1  \quad a_2 \end{bmatrix} \cdot \begin{bmatrix} b_1 \\ b_2  \end{bmatrix} = a_1 b_1 + a_2 b_2 = || \vec{v}|| \cdot 1
+\]</span></p>
+<p>Now consider the case where <span class="math inline">\(\vec{u}\)</span> is not a unit vector. It’s our
+original <span class="math inline">\(\vec{w}\)</span> and it has a length that isn’t 1. It’s a <em>scalar</em>
+<span class="math inline">\(m\cdot 1\)</span>. Owing to linearity, whatever transformation <span class="math inline">\(\vec{u}\)</span>
+corresponds to unit length 1, then the scaled transformation <span class="math inline">\(m \vec{u}\)</span>
+must correspond to length <span class="math inline">\(m\)</span>. Thus:</p>
+<p><span class="math display">\[
+m \vec{u} \cdot \vec{v} = \begin{bmatrix} ma_1  \quad ma_2 \end{bmatrix} \cdot \begin{bmatrix} b_1 \\ b_2  \end{bmatrix} = ma_1 b_1  + ma_2 b_2 = m(a_1b_1 + a_2b_2) = m \cdot || \vec{v}||
+\]</span></p>
+<p>Dot products can be used to determine whether two vectors
+<span class="math inline">\(\vec{v}, \vec{w}\)</span> are pointed in the same (positive), different
+(negative), or orthogonal (0) directions.</p>
+<div id="video-10-11-cross-products" class="section level3">
+<h3>Video 10-11 Cross products</h3>
+<div id="two-dimensional-cross-products" class="section level4">
+<h4>Two dimensional cross products</h4>
+<p>Consider the cross product <span class="math inline">\(\vec{v} \times \vec{w}\)</span>. The result is a scalar equal to the change to the unit area following the transformation
+<span class="math inline">\([\vec{v} \quad \vec{w}]\)</span>. As we established, this value is the determinant.</p>
+<p><span class="math display">\[ p =\vec{det \left(  [\vec{v} \quad \vec{w}] \right)} \]</span></p>
+<p>Note that <span class="math inline">\(\vec{v} \times \vec{w} = - \vec{w} \times \vec{v}\)</span>. In other
+words, order matters. If <span class="math inline">\(\vec{v}\)</span> is a clockwise rotation away from
+<span class="math inline">\(\vec{w}\)</span>, the cross product is positive.</p>
+</div>
+<div id="three-dimensional-cross-products" class="section level4">
+<h4>Three dimensional cross products</h4>
+<p>In three dimensions, which is where cross products usually apply, the
+cross product is a vector <span class="math inline">\(\vec{z}\)</span>. It points in a direction orthogonal
+to <span class="math inline">\(\vec{v}, \vec{w}\)</span>, which means <span class="math inline">\(\vec{z}\)</span> exists in an additional
+dimension.</p>
+<p>Its direction can be determined using the hand rule.</p>
+<p>With three dimensions, the definition is a little more involved:
+<span class="math display">\[ \left[ \begin{array}{c} v_1 \\ v_2 \\ v_3 \end{array} \right] \times \left[ \begin{array}{c} w_1 \\ w_2 \\ w_3 \end{array} \right] = \det \left( \left[ \begin{array}{ccc} \hat{i} &amp; v_1 &amp; w_1 \\ \hat{j} &amp; v_2 &amp; w_2 \\ \hat{k} &amp; v_3 &amp; w_3 \end{array} \right] \right) \]</span></p>
+<p>Such that the cross product, <span class="math inline">\(\vec{p}\)</span>, can be computed (if you use the
+algorithm for computing the determinant for 3-by-3 matrices) as:
+<span class="math display">\[ \vec {P} = \hat{i} \underbrace{(v_2 w_3 - v_3 w_2)}_{\text{Some number}} + \hat{j} \underbrace{(v_3 w_1 - v_1 w_3)}_{\text{Some number}} + \hat{k} \underbrace{(v_1 w_2 - v_2 w_1)}_{\text{Some number}} \]</span></p>
+<p>“But what actually is a cross product?” What’s actually going on in the
+above definition?</p>
+<p>Recall duality – that for every transformation that can be performed on
+a vector, there exists a corresponding matrix (vector if the
+transformation is to a number line) that encodes the same
+transformation, such that taking the dot product gives you the
+post-transformation vector.</p>
+<p>The equation for <span class="math inline">\(\vec{P}\)</span> we saw above is the same as the solution to the below expression:</p>
+<p><span class="math display">\[ \vec{\mathbf{p}} \cdot \begin{bmatrix} p_1 \\ p_2 \\ p_3 \end{bmatrix} \cdot \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \det \left( \begin{bmatrix} x &amp; v_1 &amp; w_1 \\ y &amp; v_2 &amp; w_2 \\ z &amp; v_3 &amp; w_3 \end{bmatrix} \right) \]</span></p>
+<p>We are essentially solving for the vector <span class="math inline">\(\vec{P}\)</span> that when dotted with any vector <span class="math inline">\(\vec{u}\)</span>, gives the volume of the parallelepiped defined by <span class="math inline">\(\vec{v}, \vec{w}, \vec{u}\)</span>. As we previously established, this vector represents a transformation to the number line.</p>
+<p>By the rules of a parallelepiped, if <span class="math inline">\(\vec{u}\)</span> is the third edge of a parallelepiped (not the <span class="math inline">\(\vec{v}, \vec{w}\)</span> defining the base), then if <span class="math inline">\(\vec{u} \cdot \vec{p} = || \vec{u} || * ||\vec{v}|| = V(parallelepiped)\)</span>, then <span class="math inline">\(|| \vec{p} ||\)</span> must be equal to the area of the parallelogram defining the base of the parallelepiped. Additionally, this <span class="math inline">\(\vec{p}\)</span> must be perpendicular to the <span class="math inline">\(\vec{v}, \vec{w}\)</span> that define the base.</p>
+</div>
+</div>
+<div id="video-12-cramers-rule" class="section level3">
+<h3>Video 12 Cramer’s Rule</h3>
+<p>Consider the setup <span class="math inline">\(A\vec{v} = \vec{b}\)</span>, where <span class="math inline">\(A\)</span> and <span class="math inline">\(\vec{b}\)</span> are known. We want to find <span class="math inline">\(\vec{v}\)</span>. In essence, we want to find the <em>input vector</em> such that when transformed by matrix <span class="math inline">\(A\)</span>, we get <span class="math inline">\(\vec{b}\)</span>. <em>Assume <span class="math inline">\(A\)</span> is a non-singular transformation.</em> We could solve this using <span class="math inline">\(A^{-1}\)</span>. However, there is another way of doing this that relies on representing the coordinates of our input vector using the area of parallelograms.</p>
+<p>Consider <span class="math inline">\(\vec{v}\)</span> with unknown <span class="math inline">\((x,y)\)</span> coordinates.</p>
+<p>We can represent the <span class="math inline">\(x\)</span> coordinate using the area of the parallelogram created by the basis vector <span class="math inline">\(\vec{j} = [0 \quad 1]\)</span> and <span class="math inline">\(\vec{x}\)</span>. This area is given by <span class="math inline">\(det \left( [ \vec{v} \quad \vec{j} ] \right) = x(1) - 0(y) = x\)</span>.</p>
+<p>We can represent the <span class="math inline">\(y\)</span> coordinate using the area of the parallelogram created by the basis vector <span class="math inline">\(\vec{i} = [1 \quad 0 ]\)</span> and <span class="math inline">\(\vec{v}\)</span>. This area is given by <span class="math inline">\(det \left( [ \vec{i} \quad \vec{v} ] \right) = 1(y) - x(0) = y\)</span>.</p>
+<p>The general algorithm here is <strong>replace column corresponding to basis vector of desired coordinate with input vector</strong>.</p>
+<p>Note the ordering of the columns in the two matrices we take the determinant of. This ordering <em>matters</em> because it gives us the correct non-signed coordinate.</p>
+<p>Consider that the transformation <span class="math inline">\(A\)</span>, being linear, scales all shapes in the original vector space by <span class="math inline">\(det(A)\)</span>, <em>including</em> the two parallelograms we created above!</p>
+<p>The “new” parallelograms formed by the transformed basis vectors and <span class="math inline">\(\vec{b}\)</span> can be computed using the columns of <span class="math inline">\(A\)</span>, which give us the locations of the new basis vectors, and the resulting vector <span class="math inline">\(\vec{b}\)</span>. Thus,</p>
+<p>The parallelogram created by the basis vector <span class="math inline">\(\vec{v}\)</span> and <span class="math inline">\(\vec{j} = [0 \quad 1]\)</span> (whose area is <span class="math inline">\(x\)</span>) is transformed to a new parallelogram created by the transformed basis vector <span class="math inline">\(\vec{b}\)</span> and <span class="math inline">\(A_{(2)}\)</span> (second column of <span class="math inline">\(A\)</span>). Its area, which is the area of the original parallelogram scaled by <span class="math inline">\(det(A)\)</span>, is <span class="math inline">\(det([\vec{b} \quad A_{(2)}])\)</span>.</p>
+<p>The paralellogram created by the basis vector <span class="math inline">\(\vec{i} = [1 \quad 0]\)</span> and <span class="math inline">\(\vec{v}\)</span> (whose area is <span class="math inline">\(y\)</span>) is transformed to a new parallelogram created by the transformed basis vector <span class="math inline">\(A_{(1)}\)</span> (first column of <span class="math inline">\(A\)</span>) and <span class="math inline">\(\vec{b}\)</span>. Its area is <span class="math inline">\(det([A_{(1)} \quad \vec{b} ])\)</span>.</p>
+<p>Retain the basis, input/output vector ordering used to calculate the original areas.</p>
+<p>Given that both of these new areas are the original areas scaled by <span class="math inline">\(det(A)\)</span>, we can divide these new areas by that scale factor to arrive at our original areas – which, if you remember, are equal to the <span class="math inline">\(x,y\)</span> coordinates of <span class="math inline">\(\vec{v}\)</span>.</p>
+<p>In essence, given <span class="math inline">\(A \vec{v} = \vec{b}\)</span></p>
+<p><span class="math display">\[v_i = \frac{det([\dotsc \quad A_{(i-1)} \quad b \quad A_{(i+1)} \dotsc ])}{det(A)}\]</span></p>
+<p>Regarding the matrix in the numerator, it takes <span class="math inline">\(A\)</span> and replaces the <span class="math inline">\(i\)</span>th column corresponding to the <span class="math inline">\(i\)</span>th coordinate with <span class="math inline">\(\vec{b}\)</span>. This matrix represents the transformed parallelepiped whose original volume was equal to the <span class="math inline">\(i\)</span>th coordinate of interest. We divide out the new volume by the change in volume engendered by transformation <span class="math inline">\(A\)</span> to arrive at the original volume and <span class="math inline">\(i\)</span>th coordinate of interest.</p>
+</div>
+<div id="video-13-change-of-basis" class="section level3">
+<h3>Video 13 Change of basis</h3>
+<p>Earlier we considered that for the vector <span class="math inline">\(\vec{v} = [ 2 \quad 1 ]\)</span>, its orientation in space was dependent on the basis vectors of that space. Any linear combination of <em>our</em> basis vectors <span class="math inline">\(\vec{i}, \vec{j}\)</span>, which corresponded to <span class="math inline">\([1 \quad 0], [0 \quad 1]\)</span> in our space, could map to a different location in our vector space when using <em>Jennifer’s</em> basis vectors. We need a way to see our basis vectors using Jennifer’s basis vectors (and vice versa), such that we can then see any linear combination of our basis vectors (any vector in our space) as a linear combination of Jennifer’s basis vectors (any vector in her space) (and vice versa).</p>
+<p>We can first think of any transformation as the coordinates of another space’s basis vectors in our language. For example, is what our basis vectors turn into in another vector space. It is still expressed in “our language” (the language of our coordinate system). Let’s have this be Jennifer’s basis vectors. Her basis vectors, which would look like <span class="math inline">\([1 \quad 0], [0 \quad 1]\)</span> to her, are <span class="math inline">\([2 \quad 1], [-1 \quad 1]\)</span> in our coordinate system.</p>
+<p><span class="math display">\[A = \begin{bmatrix}
+2 &amp; -1 \\
+1 &amp; 1
+\end{bmatrix}\]</span></p>
+<p>Then, it follows that the operation <span class="math inline">\(A \vec{x} = \vec{b}\)</span> tells us that <span class="math inline">\(\vec{x}\)</span> in her system corresponds to <span class="math inline">\(\vec{b}\)</span> in our system. Case in point:</p>
+<p><span class="math display">\[ \begin{bmatrix}
+2 &amp; -1 \\
+1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix} =
+\begin{bmatrix}
+2 \\
+0
+\end{bmatrix} \]</span></p>
+<p>Her basis vector <span class="math inline">\(\vec{i} = [1 \quad 0 ]\)</span> corresponds to <span class="math inline">\([2 \quad 1 ]\)</span> in our coordinate system. You can do this for any <span class="math inline">\([x \quad y ]\)</span> vector.</p>
+</div>
+</div>

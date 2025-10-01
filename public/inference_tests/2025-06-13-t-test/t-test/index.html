@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>T-test (population mean) | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">T-test (population mean)</span></h1>
+
+<h2 class="date">2025/06/13</h2>
+</div>
+
+<main>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+<p>The t-test can be used to make inferences regarding a population mean when we have a sample from said population.</p>
+<p>The assumptions are that</p>
+<ol>
+<li>The sample mean follows an approximately normal distribution. This requires either <code>\(n \ge 30\)</code> or the population to be normally distributed, either of which are ensures <code>\(\bar X \sim N\)</code> (approximately).</li>
+<li>The numerator and denominator are independent, which can be assumed for a sample drawn from a normal population.</li>
+</ol>
+<p>The statistic used is</p>
+\[ T = \frac{\bar X - \mu}{\sqrt{ \frac{S^2}{n}}}\]<p>Where <code>\(\bar X\)</code> is the sample mean, <code>\(\mu\)</code> is the theorized population mean, <code>\(\sqrt{ \frac{S^2}{n}}\)</code> is our estimated standard error.</p>
+<p>This statistic follows a <a href="/distrib/2025-05-27-t-distribution/t-dist/">t-distribution</a>. The proof itself is actually quite involved (hint: the numerator and denominator we&rsquo;re looking at &ndash; <code>\(\bar X - \mu\)</code>, <code>\(\sqrt{S^2 \over n}\)</code> &ndash; aren&rsquo;t <code>\(\sim Z, \sim \chi^2\)</code>, respectively).</p>
+<p>In the real world, where we don&rsquo;t <em>know</em> whether a population is normally distributed, we can&rsquo;t be certain that this statistic follows a t-distribution. Yet we need not worry. Theoretically, if <code>\(n\)</code> is sufficiently large, the entire statistic becomes approximately standard normal (Slutsky&rsquo;s theorem). We can then verify this empirically: if we run simulations of t-tests when the population is non-normal and normal, the performances are relatively similar if the population&rsquo;s distribution is <em>symmetric</em> and <em>behaves well</em>.</p>
+<h1 id="power-tables">Power tables</h1>
+<p>We evaluate the ability of the t-test to reject the null hypothesis when it is false in a series of experiments where the population distribution is non-normal and the sample size varies. Each cell of the table represents the proportion of rejections out of 10,000 samples taken.</p>
+<p>Let
+</p>
+\[ H_0: \mu = 5\]<p>
+</p>
+\[ H_a: \mu \ge 5  \]<p>In actuality, <code>\(\mu = 7\)</code> for each of the below distributions.</p>
+<p>We see that with the exception of the Cauchy and exponential distributions, the t-test&rsquo;s power on non-normal populations is comparable to its power on normal populations. The Cauchy is symmetrical, but it has no mean, so sample means will be volatile; some entering the rejection region and some not. The exponential distribution is extremely skewed compared to other distributions (even already skewed distributions like the chi-squared distribution).</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">  </th>
+   <th style="text-align:right;"> 10 </th>
+   <th style="text-align:right;"> 20 </th>
+   <th style="text-align:right;"> 30 </th>
+   <th style="text-align:right;"> 40 </th>
+   <th style="text-align:right;"> 50 </th>
+   <th style="text-align:right;"> 60 </th>
+   <th style="text-align:right;"> 70 </th>
+   <th style="text-align:right;"> 80 </th>
+   <th style="text-align:right;"> 90 </th>
+   <th style="text-align:right;"> 100 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Normal </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> t_shifted_7 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Cauchy </td>
+   <td style="text-align:right;"> 0.49 </td>
+   <td style="text-align:right;"> 0.58 </td>
+   <td style="text-align:right;"> 0.52 </td>
+   <td style="text-align:right;"> 0.54 </td>
+   <td style="text-align:right;"> 0.59 </td>
+   <td style="text-align:right;"> 0.44 </td>
+   <td style="text-align:right;"> 0.50 </td>
+   <td style="text-align:right;"> 0.60 </td>
+   <td style="text-align:right;"> 0.57 </td>
+   <td style="text-align:right;"> 0.49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> LogNormal </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Exponential </td>
+   <td style="text-align:right;"> 0.07 </td>
+   <td style="text-align:right;"> 0.27 </td>
+   <td style="text-align:right;"> 0.51 </td>
+   <td style="text-align:right;"> 0.66 </td>
+   <td style="text-align:right;"> 0.63 </td>
+   <td style="text-align:right;"> 0.70 </td>
+   <td style="text-align:right;"> 0.77 </td>
+   <td style="text-align:right;"> 0.86 </td>
+   <td style="text-align:right;"> 0.88 </td>
+   <td style="text-align:right;"> 0.95 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Uniform </td>
+   <td style="text-align:right;"> 0.42 </td>
+   <td style="text-align:right;"> 0.65 </td>
+   <td style="text-align:right;"> 0.83 </td>
+   <td style="text-align:right;"> 0.95 </td>
+   <td style="text-align:right;"> 0.98 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Laplace </td>
+   <td style="text-align:right;"> 0.97 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ChiSq </td>
+   <td style="text-align:right;"> 0.78 </td>
+   <td style="text-align:right;"> 0.98 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Triangular </td>
+   <td style="text-align:right;"> 0.66 </td>
+   <td style="text-align:right;"> 0.90 </td>
+   <td style="text-align:right;"> 0.98 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bimodal </td>
+   <td style="text-align:right;"> 0.97 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+  </tr>
+</tbody>
+</table>
+<h1 id="type-i-error-table">Type I error table</h1>
+<p>We evaluate the tendency of the t-test to reject the null hypothesis when it is true.</p>
+<p>Let
+</p>
+\[ H_0: \mu = 7\]<p>
+</p>
+\[ H_a: \mu \ge 7  \]<p>and <code>\(\mu = 7\)</code> for each of the below distributions.</p>
+<p>We see that Type I error rates are relatively similar across distributions (with the exception of exponential). Generally, Type I errors are more robust to violation of assumptions. That&rsquo;s an asymmetry to memorize.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">  </th>
+   <th style="text-align:right;"> 10 </th>
+   <th style="text-align:right;"> 20 </th>
+   <th style="text-align:right;"> 30 </th>
+   <th style="text-align:right;"> 40 </th>
+   <th style="text-align:right;"> 50 </th>
+   <th style="text-align:right;"> 60 </th>
+   <th style="text-align:right;"> 70 </th>
+   <th style="text-align:right;"> 80 </th>
+   <th style="text-align:right;"> 90 </th>
+   <th style="text-align:right;"> 100 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Normal </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.08 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.04 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> t_shifted_7 </td>
+   <td style="text-align:right;"> 0.06 </td>
+   <td style="text-align:right;"> 0.07 </td>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.07 </td>
+   <td style="text-align:right;"> 0.06 </td>
+   <td style="text-align:right;"> 0.08 </td>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.09 </td>
+   <td style="text-align:right;"> 0.04 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Cauchy </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.02 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> LogNormal </td>
+   <td style="text-align:right;"> 0.07 </td>
+   <td style="text-align:right;"> 0.13 </td>
+   <td style="text-align:right;"> 0.10 </td>
+   <td style="text-align:right;"> 0.21 </td>
+   <td style="text-align:right;"> 0.23 </td>
+   <td style="text-align:right;"> 0.23 </td>
+   <td style="text-align:right;"> 0.26 </td>
+   <td style="text-align:right;"> 0.27 </td>
+   <td style="text-align:right;"> 0.29 </td>
+   <td style="text-align:right;"> 0.36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Exponential </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.02 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Uniform </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.06 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.07 </td>
+   <td style="text-align:right;"> 0.08 </td>
+   <td style="text-align:right;"> 0.06 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.09 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Laplace </td>
+   <td style="text-align:right;"> 0.09 </td>
+   <td style="text-align:right;"> 0.06 </td>
+   <td style="text-align:right;"> 0.08 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.08 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ChiSq </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.05 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.02 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Triangular </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 0.06 </td>
+   <td style="text-align:right;"> 0.06 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.04 </td>
+   <td style="text-align:right;"> 0.07 </td>
+   <td style="text-align:right;"> 0.08 </td>
+   <td style="text-align:right;"> 0.06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bimodal </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.00 </td>
+  </tr>
+</tbody>
+</table>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

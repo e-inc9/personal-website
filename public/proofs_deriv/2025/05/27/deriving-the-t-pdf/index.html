@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Deriving the t pdf | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Deriving the t pdf</span></h1>
+
+<h2 class="date">2025/05/27</h2>
+</div>
+
+<main>
+<p>By definition, a t-distributed random variable with <code>\(\nu\)</code> degrees of freedom is the ratio of a standard normal variable <code>\(Z \sim N(0,1)\)</code> over the square root of a chi-squared variable <code>\(Y \sim \chi^2_{\nu}\)</code> divided by its degrees of freedom.</p>
+\[
+T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y
+\]<p>This is a lengthy derivation, so buckle up. We start with the cdf. We isolate <code>\(Z\)</code> since its upper and lower bounds make the inner integral easier to work with (i.e. for Leibniz&rsquo; rule, the derivative of the upper bound is easy to compute).</p>
+\[
+F(t) = P\left( \frac{Z}{\sqrt{{Y \over \nu}}} \le t \right) = P \left( Z \le t \sqrt{{Y \over \nu}} \right) = \int_0^\infty \int_{-\infty}^{ t \sqrt{{Y \over \nu}}} f(z,y)dzdy
+\]<p>Then, we take the derivative of the cdf to arrive at the pdf. Since <code>\(Z,Y\)</code> are independent, <code>\(f(z,y) = f(z)f(y)\)</code>.</p>
+\[
+\begin{aligned}
+f(t) &= \int_0^\infty \frac{d}{dt} \int_{-\infty}^{ t \sqrt{{y \over \nu}}} f(z,y)dzdy\\
+ &= \int_0^\infty \left[ \frac{d}{dt} \int_{-\infty}^{ t \sqrt{{y \over \nu}}} f(z) dz \right] f(y)dy\\
+&= \int_0^\infty f\left( t \sqrt{{y \over \nu}}\right) \cdot \sqrt{{y \over \nu}}  \cdot f(y) dy \quad \text{ (by Leibniz' rule)}\\
+&= \int_0^\infty \frac{1}{\sqrt{2\pi}} e^{-\frac{(t \sqrt{{y \over \nu}})^2}{2}} \cdot
+\frac{1}{\Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}} 
+e^{{-y \over 2}} y^{{\nu \over 2} - 1} 
+\cdot 
+y^{{1 \over 2}} \nu^{{-1 \over 2}}  dy \quad \text{(standard normal pdf times gamma pdf)} \\
+&= \frac{1}{\sqrt{2\pi} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}} \nu^{{1 \over 2}}} 
+\int_0^\infty y ^{\frac{\nu +1}{2} - 1} \cdot e^{-\frac{y}{2}({t^2 \over \nu} + 1)} dy
+\end{aligned}
+\]<p>We perform integration by substitution.</p>
+\[
+\begin{aligned}
+u &= \frac{y}{2}\left({t^2 \over \nu} + 1\right)\\
+y &= \frac{2u}{{t^2 \over \nu} + 1}\\
+\frac{du}{dy} &= \frac{1}{2}\left({t^2 \over \nu} + 1\right) \implies dy = \frac{2}{{t^2 \over \nu} + 1}du
+\end{aligned}
+\]<p>Substituting back into <code>\(f(t)\)</code>&hellip;</p>
+\[
+\begin{aligned}
+f(t) &= 
+\frac{1}{\sqrt{2\pi\nu} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}}  
+\cdot 
+\int_0^\infty  \left[  \frac{2}{{t^2 \over \nu} + 1}\right] ^{\frac{\nu +1}{2} - 1} 
+\cdot
+u ^{\frac{\nu +1}{2} - 1} \cdot e^{-u} 
+\cdot
+\frac{2}{\frac{t^2}{\nu}+1}
+ du\\ 
+&=  
+\frac{1}{\sqrt{2\pi\nu} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}}  
+\cdot 
+\left[  \frac{2}{{t^2 \over \nu} + 1}\right] ^{\frac{\nu+1}{2}} 
+\cdot 
+\Gamma\left({\nu+1 \over 2}\right) \\
+&\quad ... \text{ and since } \frac{2^{{\nu + 1 \over 2}}}{2^{\nu \over 2}}= \sqrt{2} \\
+&= 
+\frac{1}{\sqrt{\pi\nu} \Gamma({\nu \over 2})}  
+\cdot 
+\frac{1}{\left({t^2 \over \nu} + 1\right)^{\frac{\nu+1}{2}} }
+\cdot
+\Gamma\left({\nu+1 \over 2}\right)
+\end{aligned}
+\]<p>Yep, that&rsquo;s the distribution. The derivation really isn&rsquo;t that important, nor is the pdf worth memorizing.</p>
+<h2 id="expected-value">Expected value</h2>
+<p>Consider that for independent random variables <code>\(X,Y\)</code>, <code>\(E[h(X)g(Y)] = E[h(X)] E[g(Y)]\)</code>. Then for <code>\(T=h(Z)g(Y)\)</code>,</p>
+\[
+\begin{aligned}
+E(Z) &= 0 \\ 
+E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right) &= \sqrt{\nu} \int_0^\infty y^{-1 \over 2} \frac{1}{2 ^ {\nu \over 2} \Gamma({\nu \over 2})} e^{-y \over 2} y ^{{\nu \over 2} - 1}  dy \\ 
+  &= \sqrt{\nu}  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] \int_0^\infty \left[  e^{-y \over 2}  y ^{{-1 \over 2}+[{\nu \over 2} - 1]} \right] dy \\
+\end{aligned} 
+\]<p>
+We perform substitution with <code>\(u = {y \over 2}\)</code>.
+</p>
+\[  
+\begin{aligned} 
+E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right)  &= \sqrt{\nu} \cdot  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] 2^{({\nu \over 2} - {1 \over 2})-1} \cdot 2 \int_0^\infty \left[ e^{-u}  u^{({\nu \over 2} - {1 \over 2})-1} \right] du \\
+&= \sqrt{\nu} \cdot  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] 2^{({\nu \over 2} - {1 \over 2})-1} \cdot 2 \Gamma({\nu \over 2} - {1 \over 2})\\
+&= \sqrt{\nu} \cdot  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] 2^{({\nu \over 2} - {1 \over 2})} \Gamma({\nu \over 2} - {1 \over 2})\\
+&= \sqrt{\nu} \cdot  \left[ \frac{1}{ \Gamma({\nu \over 2})} \right] 2^{( - {1 \over 2})} \Gamma({\nu \over 2} - {1 \over 2}), \quad \nu >1 
+\end{aligned} 
+\]<p>
+So <code>\(E(T) = E[h(Z)] E[g(Y)] = 0\)</code>. We computed <code>\(E[g(Y)]\)</code> to show that for <code>\(\nu = 1\)</code>, <code>\(T_1\)</code> exists, but <code>\(E(T_1)\)</code> does not because <code>\(\Gamma(0)\)</code> does not exist. A t-distribution with <code>\(\nu = 1\)</code> is a standard Cauchy distribution, for which one of its attributes is that it&rsquo;s impossible to calculate the mean!</p>
+<h2 id="variance">Variance</h2>
+<p>Consider that for a r.v. <code>\(X\)</code>, <code>\(V(X) = E(X^2) - \left[ E(X)^2 \right]\)</code>. The same applies to r.v. <code>\(T\)</code>. Given that <code>\(E(T) = 0\)</code> for <code>\(\nu &gt; 1\)</code>, in most cases <code>\(V(T) = E(T^2)\)</code>.
+We re-express <code>\(E(T^2) = E\left(\frac{Z^2}{\frac{Y}{\nu}}\right) = E(Z^2) E\left(\frac{\nu}{Y}\right)\)</code>, using the properties of independence as we did above. Since <code>\(Z^2\)</code> is a chi-squared random variable &ndash; or, in another words, a Gamma distribution with <code>\(\alpha = \frac{\nu}{2}, \beta = 2\)</code> &ndash; its expected value <code>\(E(Z^2) = 1\)</code>. We compute <code>\(E\left(\frac{\nu}{Y}\right) = \nu E(Y^{-1})\)</code>. Recall that <code>\(Y\)</code> is a chi-squared variable with <code>\(\nu\)</code> degrees of freedom. We discussed its properties in the previous sentence.
+</p>
+\[ 
+\begin{aligned}
+  \nu E(Y^{-1}) &= \nu \int_0^\infty y^{-1} \cdot \frac{e^{-y \over 2} y^{\frac{\nu}{2} - 1}}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})}dy  \\
+  &=  \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \int_0^\infty e^{-y \over 2} y^{(\frac{\nu}{2} - 1) -1}dy \\
+  & \text{ substitution with } u={-y \over 2}\\
+  &= \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \int_0^\infty  e^{-u} (2u)^{(\frac{\nu}{2} -1)-1} 2du \\ 
+  &= \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \cdot 2^{(\frac{\nu}{2} -1)} \int_0^\infty  e^{-u} u^{(\frac{\nu}{2} -1)-1} du\\
+  &=  \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \cdot 2^{(\frac{\nu}{2} -1)} \Gamma(\frac{\nu}{2} - 1) \\
+  &=  \frac{\nu}{2 (\frac{\nu}{2} - 1)} = \frac{\nu}{\nu-2}
+  \end{aligned}
+\]<p>Thus, <code>\(V(T) = E(Z^2)E\left(\frac{\mu}{Y} \right) = \frac{\nu}{\nu-2}\)</code>. Note that this means <code>\(V(T)\)</code> is undefined for <code>\(1 &lt; \nu \le 2\)</code>.</p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

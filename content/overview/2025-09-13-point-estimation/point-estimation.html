@@ -1,0 +1,141 @@
+---
+title: Point estimation
+date: '2025-09-13'
+slug: point-estimation
+categories:
+  - General
+tags: []
+---
+
+
+
+<div id="foreword" class="section level3">
+<h3>Foreword</h3>
+<p>Consider that statistics is primarily about working with samples to learn about populations. We calculate the sample mean and sample standard deviation from our sample data to estimate the mean and standard deviation of our population.</p>
+<p>This process is formally known as point estimation. Given a parameter <span class="math inline">\(\theta\)</span> (population mean, for example), we calculate a point estimate <span class="math inline">\(\hat \theta\)</span> (an actual numerical value) using a point estimator (<span class="math inline">\(\bar x\)</span>, which describes the mathematics of the sample mean).</p>
+<p>Our focus is on the point estimator, which is what our sample is used to compute. Why do we compute the sample mean to estimate the population mean? Why not take the average of the largest and smallest observation in the sample? Why not omit the smallest and largest values in the average? Really think about it. Why do we divide by <span class="math inline">\(n-1\)</span> and not <span class="math inline">\(n\)</span> when computing sample variance to estimate population variance.</p>
+<p>As it turns out, there are mathematical measures that justify our selection of point estimators. We explore these measures below.</p>
+</div>
+<div id="point-estimates-are-random-variables" class="section level3">
+<h3>Point estimates are random variables</h3>
+<p>This may seem evident, but our point estimates <span class="math inline">\(\hat \theta\)</span> are <em>random variables</em>. For example, when using a sample of <span class="math inline">\(n=16\)</span> observations, each observation <span class="math inline">\(X_1 ... X_{16}\)</span> is a random variable. Each <span class="math inline">\(X_i\)</span> has its own expected value <span class="math inline">\(E(X_i) = \mu\)</span>.</p>
+<p>Thus, <span class="math inline">\(\bar x\)</span>, being made up of random variables, will also be a random variable:</p>
+<p><span class="math display">\[
+E(\bar x) = E(\frac{1}{n} \cdot [x_1 + ... + x_n]) = \frac{1}{n} \cdot [E(x_1) + ... E(x_n)] = \frac{1}{n} \cdot n\mu = \mu
+\]</span>
+### Accuracy (bias) and precision (variance)
+A point estimator has two “stats” we like to keep track of:</p>
+<ol style="list-style-type: decimal">
+<li><em>Unbiasedness</em>: Whether on average <span class="math inline">\(\hat \theta\)</span> = <span class="math inline">\(\theta\)</span>. An estimator where <span class="math inline">\(E(\hat \theta) = \theta\)</span> is said to be unbiased. The bias of an estimator is <span class="math inline">\(E(\hat \theta) - \theta\)</span>.</li>
+<li><em>Standard error</em>: <span class="math inline">\(\sqrt{\sigma(\hat\theta)}\)</span>. The standard deviation of <span class="math inline">\(\hat \theta\)</span> about its mean value <span class="math inline">\(E(\hat \theta)\)</span>. If this computation involves parameters that also vary (say, <span class="math inline">\(\mu\)</span>), we use our point estimator (<span class="math inline">\(\bar x\)</span>) to compute the estimated standard error <span class="math inline">\(s=\sqrt{\hat \sigma(\hat \theta)}\)</span></li>
+</ol>
+<p>There actually exists a composite measure of accuracy (bias) and precision (variance). It’s mean squared error. For a point estimator,</p>
+<p><span class="math display">\[
+MSE = V(\hat \theta) + [E(\hat \theta)- \theta]^2
+\]</span>
+Which is equivalent to averaging squared error <span class="math inline">\((\theta - \theta)^2\)</span> over all possible samples.</p>
+<p>Proof:
+<span class="math display">\[
+\begin{align*}
+MSE = E[(\hat \theta - \theta)^2] &amp;= E(\hat \theta^2 - 2 \hat \theta \theta + \theta^2)\\
+&amp;= E(\hat \theta^2) - 2\theta E(\hat \theta)+ \theta^2\\
+&amp;= \left[ V(\hat \theta) + E(\hat \theta)^2 \right] - 2\theta E(\hat \theta)+ \theta^2\\
+&amp;= V(\hat \theta) + \left[ E(\hat \theta) - \theta\right]^2
+\end{align*}
+\]</span>
+When our point estimator <span class="math inline">\(\hat \theta\)</span> is unbiased, then <span class="math inline">\(E(\hat \theta) = \theta\)</span> and <span class="math inline">\(MSE=V(\hat \theta)\)</span>.</p>
+<p>We can use this measure to justify some commonly used point estimators:</p>
+<div id="sample-mean" class="section level4">
+<h4>Sample mean</h4>
+<p>We evaluate the bias (it’s zero):
+<span class="math display">\[
+E(\bar x) = E(\frac{1}{n} \cdot [x_1 + ... + x_n]) = \frac{1}{n} \cdot [E(x_1) + ... E(x_n)] = \frac{1}{n} \cdot n\mu = \mu \implies E(\bar x) - \mu = 0
+\]</span>
+We evaluate the variance of <em>this point estimator</em>:
+<span class="math display">\[
+V(\bar X) = V\left(\frac{X_1 + ... +X_n}{n}\right) = \frac{1}{n^2}\cdot n\sigma^2 = \frac{\sigma^2}{n}
+\]</span>
+In practice, since we don’t know <span class="math inline">\(\sigma\)</span>, we substitute <span class="math inline">\(s^2 = \frac{\sum (X_i - \bar X)^2}{n-1}\)</span> and calculate the estimated variance/standard deviation.</p>
+<p><span class="math display">\[
+\hat V(\bar X) = \frac{s^2}{n} \quad \hat S(\bar X) = \frac{s}{\sqrt n}
+\]</span></p>
+</div>
+<div id="sample-proportion" class="section level4">
+<h4>Sample proportion</h4>
+<p>We often use <span class="math inline">\(\hat p = \frac{X}{n}\)</span>, where <span class="math inline">\(X\)</span> is the number of successes and <span class="math inline">\(n\)</span> the number of trials, to estimate the proportion of successes <span class="math inline">\(p\)</span> in the population. We treat <span class="math inline">\(X\)</span> as a binomial variable with mean <span class="math inline">\(np\)</span> and variance <span class="math inline">\(np(1-p)\)</span>.</p>
+<p>We evaluate the bias (it’s zero):
+<span class="math display">\[
+E(\hat p) = E\left(\frac{X}{n}\right) = \frac{1}{n}E(X) = \frac{np}{n} = p \implies E(\hat p) - p = 0
+\]</span></p>
+<p>We evaluate the variance of this point estimator:
+<span class="math display">\[
+V(\hat p) = V\left(\frac{X}{n}\right) = \frac{1}{n^2}\cdot np(1-p) = \frac{p(1-p)}{n}
+\]</span>
+We observe that the variance of the estimator decreases as the sample size increases.</p>
+<p>In practice, since we don’t know <span class="math inline">\(p\)</span>, we substitute <span class="math inline">\(\hat p\)</span> for <span class="math inline">\(p\)</span> for the estimated variance/standard deviation.</p>
+<p><span class="math display">\[
+\hat V(\hat p) = \frac{\hat p (1-\hat p)}{n}
+\]</span></p>
+</div>
+<div id="sample-variance" class="section level4">
+<h4>Sample variance</h4>
+<p>As you saw above, we used <span class="math inline">\(s^2 = \frac{\sum (X_i - \bar X)^2}{n-1}\)</span> as an estimator for <span class="math inline">\(\sigma^2\)</span>.</p>
+We evaluate the bias (it’s zero):
+<details>
+<summary>
+Expand
+</summary>
+<span class="math display">\[
+\begin{align*}
+E(s^2) &amp;= E(\frac{\sum(X_i - \bar X)^2)}{n-1}) \\
+&amp;= E \left( \frac{\sum X_i^2 - 2 n \bar X \sum  X_i + n \bar X^2}{n-1} \right) \\
+&amp;= \frac{1}{n-1} \left[ \sum E(X_i^2)-n E(\bar X^2) \right] \\
+&amp;= \frac{1}{n-1} \left[ \sum E(X_i^2)-n E \left[\frac{(\sum X_i)^2}{n^2}\right] \right] \\
+&amp;= \frac{1}{n-1} \left[ \sum E(X_i^2)-\frac{1}{n} E \left[(\sum X_i)^2\right] \right] \\
+&amp;= \frac{1}{n-1} \left[ \sum E(X_i^2)-\frac{1}{n} \left[ V(\sum X_i) + [E(\sum X_i)]^2 \right] \right] \\
+&amp;= \frac{1}{n-1} \left[ \sum V(X_i) + [E(\sum X_i)]^2 -\frac{1}{n} \left[ V(\sum X_i) + [n \mu]^2 \right] \right] \\
+&amp;= \frac{1}{n-1} \left[ n \sigma^2 + n\mu^2 -\frac{1}{n} \left[ n\sigma^2 +n^2\mu^2 \right] \right] \\
+&amp;=\frac{1}{n-1}\left[(n-1)(\sigma^2) +n(\mu^2 -\mu^2)\right]
+= \sigma^2 \implies E(S^2)- \sigma^2 = 0
+\end{align*}
+\]</span>
+</details>
+<p><em>So that’s why we divide by (n-1), and not n</em>..</p>
+<p>The variance of this estimator depends on the underlying distribution, so there’s no clear-cut expression for it (thank God!).</p>
+<p>Additionally, though <span class="math inline">\(S^2\)</span> is an unbiased estimator for <span class="math inline">\(\sigma^2\)</span>, <span class="math inline">\(S\)</span> is <em>not</em> an unbiased estimator for <span class="math inline">\(S\)</span>. However, this is negligible.</p>
+</div>
+</div>
+<div id="but-its-not-that-simple" class="section level3">
+<h3>But it’s not that simple…</h3>
+<p>Some nuances to keep in mind:
+1) An estimator’s MSE may not hold across <em>all values</em>.
+2) There exist many unbiased estimators for a given parameter. For example, <span class="math inline">\(E(\bar X) = E(X_1) = \mu\)</span>.
+This brings us to a general rule of thumb: <strong>if two or more estimators for a parameter are unbiased, use the one with the least variance (the MVUE, or minimum variance unbiased estimator)</strong>.
+3) The best estimator depends on the underlying distribution. If a distribution is normal, then <span class="math inline">\(\bar X\)</span> is the MVUE for <span class="math inline">\(\mu\)</span>. However, for distributions with fat tails (Cauchy), <span class="math inline">\(\bar X\)</span> is horrendous. Studies have shown that trimmed sample means are generally robust across distributions.</p>
+<p>To handle these nuances, we have two more measures applicable to an estimator.</p>
+</div>
+<div id="consistency-and-sufficiency" class="section level3">
+<h3>Consistency and sufficiency</h3>
+<p>Consistency is the tendency for an estimator to converge to the parameter as n increases. Formally, an estimator is consistent if:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(E(\hat \theta) \rightarrow \theta\)</span> as <span class="math inline">\(n \rightarrow \infty\)</span>
+-or-</li>
+<li><span class="math inline">\(P(|\hat \theta - \theta| \ge \varepsilon) \rightarrow 0\)</span> as <span class="math inline">\(n \rightarrow \infty\)</span> (for any <span class="math inline">\(\varepsilon \ge 0\)</span>).</li>
+</ol>
+<p>So even though <span class="math inline">\(X_1\)</span> is unbiased, it is <em>not</em> consistent (and also has a huge variance). OTOH, <span class="math inline">\(\bar X\)</span> is consistent owing to the law of large numbers. <span class="math inline">\(\hat P\)</span> and <span class="math inline">\(S\)</span> are also consistent.</p>
+</div>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<p>Take the solubility sample below. We want to estimate population solubility <span class="math inline">\(\mu\)</span>. Our point estimate is 985.5 using the sample mean <span class="math inline">\(\bar x\)</span> point estimator.</p>
+<pre class="r"><code>x &lt;- c(956, 974, 980, 980, 982, 983, 983, 985, 
+       985, 985, 987, 987, 995, 999, 1000, 1007)
+
+bar_x &lt;- mean(x); bar_x</code></pre>
+<pre><code>## [1] 985.5</code></pre>
+<p>We use the point estimator <span class="math inline">\(\bar x\)</span> because <span class="math inline">\(E(\bar X) = \mu \implies E(\bar X) - \mu = 0\)</span>, and so <span class="math inline">\(\bar X\)</span> is unbiased.</p>
+<p>We know that according to the theory, <span class="math inline">\(\sigma (\bar X) = \frac{\sigma}{n}\)</span>, where <span class="math inline">\(\sigma\)</span> is the variance of the population. However, we don’t know this <span class="math inline">\(\sigma\)</span>. We can only estimate it using <span class="math inline">\(s = \frac{\sum(X-\bar X)^2}{n-1}\)</span>. So, we use <span class="math inline">\(s\)</span> in place of <span class="math inline">\(\sigma\)</span> and calculate the estimated standard error instead.</p>
+<pre class="r"><code>s &lt;- sum((x-bar_x)^2)/(16-1); 
+est_se &lt;- sqrt(s/16); est_se</code></pre>
+<pre><code>## [1] 2.914046</code></pre>
+<p>Our <em>estimate</em> of how much our <em>point estimate</em> 985.5 varies about <span class="math inline">\(\mu\)</span> is 2.91. We conclude that the population solubility is <span class="math inline">\(985.5 \pm 2.91\)</span>.</p>
+</div>

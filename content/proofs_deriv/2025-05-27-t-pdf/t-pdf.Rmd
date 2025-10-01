@@ -19,22 +19,23 @@ T_\nu = \frac{Z}{\sqrt{{Y \over \nu}}}, \quad Z \perp Y
 This is a lengthy derivation, so buckle up. We start with the cdf. We isolate $Z$ since its upper and lower bounds make the inner integral easier to work with (i.e. for Leibniz' rule, the derivative of the upper bound is easy to compute). 
 
 \[
-F(t) = P\left( \frac{Z}{\sqrt{{Y \over \nu}}} \le t \right) = P \left( Z \le t \sqrt{{Y \over \nu}} \right) = \int_0^\infty \int_{-\infty}^{ t \sqrt{{Y \over \nu}}} f(z,y)\,dz\,dy
+F(t) = P\left( \frac{Z}{\sqrt{{Y \over \nu}}} \le t \right) = P \left( Z \le t \sqrt{{Y \over \nu}} \right) = \int_0^\infty \int_{-\infty}^{ t \sqrt{{Y \over \nu}}} f(z,y)dzdy
 \]
 
 Then, we take the derivative of the cdf to arrive at the pdf. Since $Z,Y$ are independent, $f(z,y) = f(z)f(y)$.
 
 \[
 \begin{aligned}
-f(t) &= \int_0^\infty \frac{d}{dt} \int_{-\infty}^{ t \sqrt{{y \over \nu}}} f(z,y)\,dz\,dy\\
-&= \int_0^\infty f( t \sqrt{{y \over \nu}}, y) \cdot \sqrt{{y \over \nu}} \, dy \quad \text{ (by Leibniz' rule)}\\
+f(t) &= \int_0^\infty \frac{d}{dt} \int_{-\infty}^{ t \sqrt{{y \over \nu}}} f(z,y)dzdy\\
+ &= \int_0^\infty \left[ \frac{d}{dt} \int_{-\infty}^{ t \sqrt{{y \over \nu}}} f(z) dz \right] f(y)dy\\
+&= \int_0^\infty f\left( t \sqrt{{y \over \nu}}\right) \cdot \sqrt{{y \over \nu}}  \cdot f(y) dy \quad \text{ (by Leibniz' rule)}\\
 &= \int_0^\infty \frac{1}{\sqrt{2\pi}} e^{-\frac{(t \sqrt{{y \over \nu}})^2}{2}} \cdot
 \frac{1}{\Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}} 
 e^{{-y \over 2}} y^{{\nu \over 2} - 1} 
 \cdot 
-y^{{1 \over 2}} \nu^{{-1 \over 2}} \, dy \quad \text{(standard normal pdf times gamma pdf)} \\
+y^{{1 \over 2}} \nu^{{-1 \over 2}}  dy \quad \text{(standard normal pdf times gamma pdf)} \\
 &= \frac{1}{\sqrt{2\pi} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}} \nu^{{1 \over 2}}} 
-\int_0^\infty y ^{\frac{\nu +1}{2} - 1} \cdot e^{-\frac{y}{2}({t^2 \over \nu} + 1)}\,dy
+\int_0^\infty y ^{\frac{\nu +1}{2} - 1} \cdot e^{-\frac{y}{2}({t^2 \over \nu} + 1)} dy
 \end{aligned}
 \]
 
@@ -44,7 +45,7 @@ We perform integration by substitution.
 \begin{aligned}
 u &= \frac{y}{2}\left({t^2 \over \nu} + 1\right)\\
 y &= \frac{2u}{{t^2 \over \nu} + 1}\\
-\frac{du}{dy} &= \frac{1}{2}\left({t^2 \over \nu} + 1\right) \implies dy = \frac{2}{{t^2 \over \nu} + 1}\,du
+\frac{du}{dy} &= \frac{1}{2}\left({t^2 \over \nu} + 1\right) \implies dy = \frac{2}{{t^2 \over \nu} + 1}du
 \end{aligned}
 \]
 
@@ -60,7 +61,7 @@ f(t) &=
 u ^{\frac{\nu +1}{2} - 1} \cdot e^{-u} 
 \cdot
 \frac{2}{\frac{t^2}{\nu}+1}
-\, du\\ 
+ du\\ 
 &=  
 \frac{1}{\sqrt{2\pi\nu} \Gamma({\nu \over 2}) 2 ^{{\nu \over 2}}}  
 \cdot 
@@ -79,7 +80,7 @@ u ^{\frac{\nu +1}{2} - 1} \cdot e^{-u}
 
 Yep, that's the distribution. The derivation really isn't that important, nor is the pdf worth memorizing.
 
-## Expected value and variance
+## Expected value
 Consider that for independent random variables $X,Y$, $E[h(X)g(Y)] = E[h(X)] E[g(Y)]$. Then for $T=h(Z)g(Y)$,
 
 \[
@@ -90,7 +91,7 @@ E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right) &= \sqrt{\nu} \int_0^\infty y^{-1 
 \end{aligned} 
 \]
 We perform substitution with $u = {y \over 2}$. 
-\[ 
+\[  
 \begin{aligned} 
 E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right)  &= \sqrt{\nu} \cdot  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] 2^{({\nu \over 2} - {1 \over 2})-1} \cdot 2 \int_0^\infty \left[ e^{-u}  u^{({\nu \over 2} - {1 \over 2})-1} \right] du \\
 &= \sqrt{\nu} \cdot  \left[ \frac{1}{2^ {\nu \over 2} \Gamma({\nu \over 2})} \right] 2^{({\nu \over 2} - {1 \over 2})-1} \cdot 2 \Gamma({\nu \over 2} - {1 \over 2})\\
@@ -98,4 +99,21 @@ E\left(\frac{1}{\sqrt{{Y \over \nu}}} \right)  &= \sqrt{\nu} \cdot  \left[ \frac
 &= \sqrt{\nu} \cdot  \left[ \frac{1}{ \Gamma({\nu \over 2})} \right] 2^{( - {1 \over 2})} \Gamma({\nu \over 2} - {1 \over 2}), \quad \nu >1 
 \end{aligned} 
 \]
-So $E(T) = E[h(Z)] E[g(Y)] = 0$. We computed $E[g(Y)]$ to show that for $\nu = 1$, $T_1$ exists, but $E(T_1)$ does not because $\Gamma(0)$ does not exist. A t-distribution with $\nu = 1$ is a standard Cauchy distribution! 
+So $E(T) = E[h(Z)] E[g(Y)] = 0$. We computed $E[g(Y)]$ to show that for $\nu = 1$, $T_1$ exists, but $E(T_1)$ does not because $\Gamma(0)$ does not exist. A t-distribution with $\nu = 1$ is a standard Cauchy distribution, for which one of its attributes is that it's impossible to calculate the mean! 
+
+## Variance
+Consider that for a r.v. $X$, $V(X) = E(X^2) - \left[ E(X)^2 \right]$. The same applies to r.v. $T$. Given that $E(T) = 0$ for $\nu > 1$, in most cases $V(T) = E(T^2)$. 
+We re-express $E(T^2) = E\left(\frac{Z^2}{\frac{Y}{\nu}}\right) = E(Z^2) E\left(\frac{\nu}{Y}\right)$, using the properties of independence as we did above. Since $Z^2$ is a chi-squared random variable -- or, in another words, a Gamma distribution with $\alpha = \frac{\nu}{2}, \beta = 2$ -- its expected value $E(Z^2) = 1$. We compute $E\left(\frac{\nu}{Y}\right) = \nu E(Y^{-1})$. Recall that $Y$ is a chi-squared variable with $\nu$ degrees of freedom. We discussed its properties in the previous sentence.
+\[ 
+\begin{aligned}
+  \nu E(Y^{-1}) &= \nu \int_0^\infty y^{-1} \cdot \frac{e^{-y \over 2} y^{\frac{\nu}{2} - 1}}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})}dy  \\
+  &=  \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \int_0^\infty e^{-y \over 2} y^{(\frac{\nu}{2} - 1) -1}dy \\
+  & \text{ substitution with } u={-y \over 2}\\
+  &= \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \int_0^\infty  e^{-u} (2u)^{(\frac{\nu}{2} -1)-1} 2du \\ 
+  &= \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \cdot 2^{(\frac{\nu}{2} -1)} \int_0^\infty  e^{-u} u^{(\frac{\nu}{2} -1)-1} du\\
+  &=  \frac{\nu}{2^{\nu \over 2} \Gamma(\frac{\nu}{2})} \cdot 2^{(\frac{\nu}{2} -1)} \Gamma(\frac{\nu}{2} - 1) \\
+  &=  \frac{\nu}{2 (\frac{\nu}{2} - 1)} = \frac{\nu}{\nu-2}
+  \end{aligned}
+\]
+
+Thus, $V(T) = E(Z^2)E\left(\frac{\mu}{Y} \right) = \frac{\nu}{\nu-2}$. Note that this means $V(T)$ is undefined for $1 < \nu \le 2$.

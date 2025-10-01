@@ -1,0 +1,8 @@
+---
+title: 'Maximum likelihood estimation'
+date: '2025-09-15'
+slug: mle
+categories:
+  - General
+tags: []
+---

@@ -1,0 +1,34 @@
+---
+title: Confidence intervals
+author: ''
+date: '2025-09-29'
+slug: confidence-intervals
+categories:
+  - General
+tags: []
+---
+
+
+
+<p>We begin with some obvious truths: for a given estimate <span class="math inline">\(\hat \theta\)</span> of parameter <span class="math inline">\(\theta\)</span> – say <span class="math inline">\(\bar x\)</span> of <span class="math inline">\(\mu\)</span> – <span class="math inline">\(\hat \theta\)</span> is virtually never <span class="math inline">\(\theta\)</span>. Furthermore, the distance of <span class="math inline">\(\hat \theta\)</span> from <span class="math inline">\(\theta\)</span> is virtually unknown. If we’re interested in <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\hat \theta\)</span> is of little use on its own.</p>
+<p>We can, however, use properties of the distribution of <span class="math inline">\(\hat \theta\)</span> (which are downstream of our sample) to come up with a range, or <em>interval</em>, of plausible <span class="math inline">\(\theta\)</span>’s. This, surely, is more sensible than blindly trusting <span class="math inline">\(\hat \theta\)</span> as <span class="math inline">\(\theta\)</span> (or anywhere close to it).</p>
+<div id="confidence-levels" class="section level2">
+<h2>Confidence levels</h2>
+<p>For a given sample and estimate, we distinguish one interval from another by its confidence level. The confidence level, expressed as a percentage (say, 95%) refers to the probabilistic distribution. However, as we will see, the final interpretation of confidence intervals is not in terms of probability.</p>
+<p>We begin with an unrealistic example of a <span class="math inline">\(\mu\)</span> whose <span class="math inline">\(\sigma\)</span> is known. Then, the distribution of <span class="math inline">\(\bar x\)</span> from a sample of size <span class="math inline">\(n\)</span> is normal, centered at <span class="math inline">\(\mu\)</span> and has standard deviation of <span class="math inline">\(\sqrt{\frac{\sigma}{n}}\)</span>. If we standardize it, we have a statistic with a normal distribution centered at 0 with standard deviation of 1.</p>
+<p><span class="math display">\[
+t = \frac{\bar X - \mu}{\frac{\sigma}{\sqrt n}} \sim N(0, 1)
+\]</span></p>
+<p>We can then construct the following statement. The values <span class="math inline">\(\pm 1.96\)</span> are the critical values of a standard normal distribution, between which 95% of the probability density lies.</p>
+<p><span class="math display">\[
+P\left( -1.96 &lt; \frac{\bar X - \mu}{\frac{\sigma}{\sqrt{n}}}&lt; 1.96\right) = 0.95
+\]</span>
+…and rearrange it such that:
+<span class="math display">\[
+P\left(-\bar X -1.96 \cdot \frac{\sigma}{\sqrt{n}} &lt; -\mu &lt; 1.96 \cdot \frac{\sigma}{\sqrt{n}}- \bar X \right) = P\left(\bar X - 1.96\frac{\sigma}{\sqrt{n}} &lt; \mu &lt; \bar X + 1.96 \frac{\sigma}{\sqrt{n}} \right) = 0.95
+\]</span>
+What we are describing in the above inequality is a “random interval” driven by random variable <span class="math inline">\(\bar X\)</span>, the midpoint. The probability that this interval includes <span class="math inline">\(\mu\)</span> is 95%. A common misinterpretation is “the probability of <span class="math inline">\(\mu\)</span> falling within the interval is 95%”. This is false. <span class="math inline">\(\mu\)</span> is not a random variable, it is a parameter. There is no probability of it taking on a certain value.</p>
+<p>Given this probability statement, we can say that for many intervals computed from multiple <span class="math inline">\(\bar X\)</span>’s, wherein upon actually obtaining <span class="math inline">\(\bar X\)</span> and lower and upper bounds <span class="math inline">\(a, b\)</span>, we would expect 95% of them to include <span class="math inline">\(\mu\)</span>. Note that the 95% refers to the proportion of intervals constructed in the long run.</p>
+<p>Of course, once we actually obtain <span class="math inline">\(\bar X\)</span> and lower and upper bounds <span class="math inline">\(a, b\)</span>. our interval is no longer random, so we cannot say that there is a probability of <span class="math inline">\(P(a &lt; \mu &lt; b) = .95\)</span> for values <span class="math inline">\(a,b\)</span>.</p>
+<p>Thus, “<span class="math inline">\(P%\)</span> confidence” is a descriptive of the long-run success rate of our intervals, with <span class="math inline">\(P%\)</span> being determined by the critical values of the distribution of <span class="math inline">\(\bar X\)</span>, and not a descriptive of any <em>actual</em> interval we come up with.</p>
+</div>

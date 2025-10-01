@@ -2,25 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Inference/Tests on A minimal Hugo website</title>
-    <link>https://example.org/categories/inference/tests/</link>
+    <link>http://localhost:4321/categories/inference/tests/</link>
     <description>Recent content in Inference/Tests on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Apr 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.org/categories/inference/tests/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:4321/categories/inference/tests/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ANOVA (in progress)</title>
-      <link>https://example.org/inference_tests/anova/</link>
-      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/inference_tests/anova/</guid>
-      <description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;ANOVA stands for analysis of variance. The goal of ANOVA is, for a variable measured on more than one group of data, to &lt;strong&gt;use the variance of our measurements&lt;/strong&gt; to determine whether the population mean of those groups is different between at least one pair of groups.&lt;/p&gt;&#xA;\[ H_0: \mu_1 = \mu_2 = ... =\mu_n \]&lt;p&gt;&#xA;&lt;/p&gt;&#xA;\[ H_a: \mu_i \ne \mu_j \text{ for } i \ne j \]&lt;p&gt;You might wonder why we are analyzing &lt;em&gt;variance&lt;/em&gt; to get at a truth involving means &amp;ndash; I certainly did. The best way to intuit &lt;em&gt;why&lt;/em&gt; is through a simple exercise.&lt;/p&gt;</description>
+      <title>F-test (ANOVA/linear regressions)</title>
+      <link>http://localhost:4321/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/</link>
+      <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/</guid>
+      <description>&lt;p&gt;In the &lt;a href=&#34;http://localhost:4321/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/&#34;&gt;ANOVA cut of linear regression&lt;/a&gt;, we ended on &lt;code&gt;\(MSR\)&lt;/code&gt; and &lt;code&gt;\(MSE\)&lt;/code&gt;, which are two measures of variance. &lt;code&gt;\(MSR\)&lt;/code&gt; measures the variance explained by a fitted line, while &lt;code&gt;\(MSE\)&lt;/code&gt; measures the variance of observations about that (in spite of) the fitted line.&lt;/p&gt;&#xA;&lt;p&gt;Given that they are both random variables with centers:&#xA;&lt;/p&gt;&#xA;$$&#xA;E(MSE)= \sigma^2\\&#xA;E(MSR) = \sigma^2 + \beta_1 ^2 \sum(X_i - \bar X)^2&#xA;$$&lt;p&gt;&#xA;We conclude that the distribution of &lt;code&gt;\(MSR\)&lt;/code&gt; is &lt;em&gt;to the right of&lt;/em&gt; the distribution of &lt;code&gt;\(MSE\)&lt;/code&gt; if &lt;code&gt;\(\beta_1 \ne 0\)&lt;/code&gt;, and thus computed &lt;code&gt;\(MSR\)&lt;/code&gt; is likely to be greater than &lt;code&gt;\(MSE\)&lt;/code&gt;. If &lt;code&gt;\(\beta_1 = 0\)&lt;/code&gt;, then &lt;code&gt;\(MSR\)&lt;/code&gt; is likely to equal &lt;code&gt;\(MSE\)&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Inference with simple linear regression coefficients</title>
-      <link>https://example.org/inference_tests/hatbeta1_inf/</link>
+      <title>T-test (linear regressions)</title>
+      <link>http://localhost:4321/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/</link>
+      <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/</guid>
+      <description>&lt;p&gt;Just as the estimators sample mean and sample variance follow a distribution, so do the estimators  &lt;code&gt;\(\hat \beta_0, \hat \beta_1\)&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Even though it can be argued that there does not exist a &amp;ldquo;true&amp;rdquo; &lt;code&gt;\(\beta_0\)&lt;/code&gt; and &lt;code&gt;\(\beta_1\)&lt;/code&gt; in the same way a true &lt;code&gt;\(\mu, \sigma\)&lt;/code&gt; might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we could say that having identified phenomena for which a linear regression is applicable, there  &lt;em&gt;does&lt;/em&gt; exist a regression line that exists for all existing &amp;ldquo;population&amp;rdquo; data on this phenomena. We&amp;rsquo;d like to infer this &lt;code&gt;\(\beta_0, \beta_1\)&lt;/code&gt; that&amp;rsquo;s &amp;ldquo;out there&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>T-test (population mean)</title>
+      <link>http://localhost:4321/inference_tests/2025-06-13-t-test/t-test/</link>
+      <pubDate>Fri, 13 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-06-13-t-test/t-test/</guid>
+      <description>&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;script src=&#34;http://localhost:4321/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;&#xA;&lt;link href=&#34;http://localhost:4321/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;&#xA;&lt;p&gt;The t-test can be used to make inferences regarding a population mean when we have a sample from said population.&lt;/p&gt;&#xA;&lt;p&gt;The assumptions are that&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;The sample mean follows an approximately normal distribution. This requires either &lt;code&gt;\(n \ge 30\)&lt;/code&gt; or the population to be normally distributed, either of which are ensures &lt;code&gt;\(\bar X \sim N\)&lt;/code&gt; (approximately).&lt;/li&gt;&#xA;&lt;li&gt;The numerator and denominator are independent, which can be assumed for a sample drawn from a normal population.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;The statistic used is&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ANOVA (in progress)</title>
+      <link>http://localhost:4321/inference_tests/anova/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.org/inference_tests/hatbeta1_inf/</guid>
-      <description>&lt;p&gt;What if I told you that just as the parameters mean and variance  follow a distribution, so do the coefficients &lt;code&gt;\(\hat \beta_0, \hat \beta_1\)&lt;/code&gt; &lt;a href=&#34;linreg-simple.html&#34;&gt;we previously found&lt;/a&gt;? Even though it can be argued that there does not exist a &amp;ldquo;true&amp;rdquo; &lt;code&gt;\(\beta_0\)&lt;/code&gt; and &lt;code&gt;\(\beta_1\)&lt;/code&gt; in the same way a true &lt;code&gt;\(\mu\)&lt;/code&gt; might (the former comes from an assumption-laden construct that we use to interpret reality while the other objectively exists in reality), we cannot deny the fact that for different samples of a given phenomena, the line fitted will differ as well. Just as we would not state a sample mean as fact, we would not say that the observed effect of &lt;code&gt;\(\hat \beta_1\)&lt;/code&gt; is the true effect! In both cases, we acknowledge its tendency to vary, which is useful in itself.&lt;/p&gt;</description>
+      <guid>http://localhost:4321/inference_tests/anova/</guid>
+      <description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;ANOVA stands for analysis of variance. The goal of ANOVA is, for a variable measured on more than one group of data, to &lt;strong&gt;use the variance of our measurements&lt;/strong&gt; to determine whether the population mean of those groups is different between at least one pair of groups.&lt;/p&gt;&#xA;\[ H_0: \mu_1 = \mu_2 = ... =\mu_n \]&lt;p&gt;&#xA;&lt;/p&gt;&#xA;\[ H_a: \mu_i \ne \mu_j \text{ for } i \ne j \]&lt;p&gt;You might wonder why we are analyzing &lt;em&gt;variance&lt;/em&gt; to get at a truth involving means &amp;ndash; I certainly did. The best way to intuit &lt;em&gt;why&lt;/em&gt; is through a simple exercise.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

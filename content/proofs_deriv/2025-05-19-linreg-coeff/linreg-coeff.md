@@ -1,5 +1,5 @@
 ---
-title: "Finding Coefficients for Linear Regression"
+title: "Deriving the coefficients for linear regression"
 output: html_document
 date: '2025-05-19'
 categories:
