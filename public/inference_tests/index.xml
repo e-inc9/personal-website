@@ -6,8 +6,36 @@
     <description>Recent content in Inference_tests on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:4321/inference_tests/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lack of fit (F-test)</title>
+      <link>http://localhost:4321/inference_tests/2025-10-10-lack-of-fit-f-test/lof/</link>
+      <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-10-10-lack-of-fit-f-test/lof/</guid>
+      <description>&lt;p&gt;We introduce a test to determine whether a given regression (not necessarily linear) adequately fits the data.&lt;/p&gt;&#xA;&lt;div id=&#34;assumptions&#34; class=&#34;section level3&#34;&gt;&#xA;&lt;h3&gt;Assumptions&lt;/h3&gt;&#xA;&lt;ol style=&#34;list-style-type: decimal&#34;&gt;&#xA;&lt;li&gt;Observations &lt;span class=&#34;math inline&#34;&gt;\((X,Y)\)&lt;/span&gt; are independent, normally distributed, and &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; has the same variance &lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/li&gt;&#xA;&lt;li&gt;Data have repeat observations (replicates) at one or more &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; levels (replications).&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;This test involves two models. The first is a “full” model, which we compare against, and a “reduced” model, which is a given regression model. The goal is to compare the _______ of the reduced model vs. the full model through a ratio, which follows an &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; distribution.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Constancy of variance</title>
+      <link>http://localhost:4321/inference_tests/2025-10-06-constancy-of-variance/const_var/</link>
+      <pubDate>Mon, 06 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-10-06-constancy-of-variance/const_var/</guid>
+      <description>&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rm(list=ls())&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;Given a sample from a population, we’d often like to know whether that sample comes from a normally distributed population. We present two tests. The Brown-Forsythe test, and the Breusch-Pagan test. The former makes no assumptions about the population, the latter does make assumptions about the population.&lt;/p&gt;&#xA;&lt;div id=&#34;brown-forsythe&#34; class=&#34;section level2&#34;&gt;&#xA;&lt;h2&gt;Brown-Forsythe&lt;/h2&gt;&#xA;&lt;p&gt;Say we’d like to see if &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; has a constant variance in the population. Based on sampled &lt;span class=&#34;math inline&#34;&gt;\(y_1... y_n\)&lt;/span&gt;,&lt;/p&gt;&#xA;&lt;p&gt;We&#xA;1) divide the data into two groups consisting of &lt;span class=&#34;math inline&#34;&gt;\(y_{1i}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y_{2i}\)&lt;/span&gt;&#xA;2) within each group, calculate &lt;span class=&#34;math inline&#34;&gt;\(d_{1i}=|y_{1i} - median(y_1)|\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(d_{2i} = |y_{2i} - median(y_2)|\)&lt;/span&gt;&#xA;3) calculate the sample means of said absolute departures from each group&#xA;4) The test statistic:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Confidence intervals</title>
+      <link>http://localhost:4321/inference_tests/2025-09-29-confidence-intervals/confidence-intervals/</link>
+      <pubDate>Mon, 29 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-09-29-confidence-intervals/confidence-intervals/</guid>
+      <description>&lt;p&gt;We begin with some obvious truths: for a given estimate &lt;code&gt;\(\hat \theta\)&lt;/code&gt; of parameter &lt;code&gt;\(\theta\)&lt;/code&gt; &amp;ndash; say &lt;code&gt;\(\bar x\)&lt;/code&gt; of &lt;code&gt;\(\mu\)&lt;/code&gt; &amp;ndash; &lt;code&gt;\(\hat \theta\)&lt;/code&gt; is virtually never &lt;code&gt;\(\theta\)&lt;/code&gt;. Furthermore, the distance of &lt;code&gt;\(\hat \theta\)&lt;/code&gt; from &lt;code&gt;\(\theta\)&lt;/code&gt; is virtually unknown. If we&amp;rsquo;re interested in &lt;code&gt;\(\theta\)&lt;/code&gt;, &lt;code&gt;\(\hat \theta\)&lt;/code&gt; is of little use on its own.&lt;/p&gt;&#xA;&lt;p&gt;We can, however, use properties of the distribution of &lt;code&gt;\(\hat \theta\)&lt;/code&gt; (which are downstream of our sample) to come up with a range, or  &lt;em&gt;interval&lt;/em&gt;, of plausible &lt;code&gt;\(\theta\)&lt;/code&gt;&amp;rsquo;s. This, surely, is more sensible than blindly trusting &lt;code&gt;\(\hat \theta\)&lt;/code&gt; as &lt;code&gt;\(\theta\)&lt;/code&gt; (or anywhere close to it).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Correlation</title>
+      <link>http://localhost:4321/inference_tests/2025-09-28-t-test-correlation/t-test-corr/</link>
+      <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/inference_tests/2025-09-28-t-test-correlation/t-test-corr/</guid>
+      <description>&lt;h2 id=&#34;correlation&#34;&gt;Correlation&lt;/h2&gt;&#xA;&lt;p&gt;We consider the definition of population correlation between variables &lt;code&gt;\(X,Y\)&lt;/code&gt;&lt;/p&gt;&#xA;$$&#xA;\rho_{XY} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}&#xA;$$&lt;h2 id=&#34;estimator&#34;&gt;Estimator&lt;/h2&gt;&#xA;&lt;p&gt;The Pearson product-moment correlation coefficient &amp;ndash; &lt;code&gt;\(r_{XY}\)&lt;/code&gt; &amp;ndash; is an estimator for &lt;code&gt;\(\rho_{XY}\)&lt;/code&gt;. It is biased, but the bias is small when &lt;code&gt;\(n\)&lt;/code&gt; is large. Like &lt;code&gt;\(\rho\)&lt;/code&gt;, it has range &lt;code&gt;\([-1, 1]\)&lt;/code&gt; and the interpretation is the same.&lt;/p&gt;&#xA;$$&#xA;r_{XY} = \frac{ \sum(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\sum(X_i - \bar X)^2}\sqrt{\sum(Y_i - \bar Y)^2} }&#xA;$$&lt;h2 id=&#34;inference&#34;&gt;Inference&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;When &lt;code&gt;\(X,Y\)&lt;/code&gt; are bivariate normally distributed&lt;/strong&gt; (and with appropriately large n), an appropriate test statistic is&lt;/p&gt;</description>
+    </item>
     <item>
       <title>F-test (ANOVA/linear regressions)</title>
       <link>http://localhost:4321/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/</link>

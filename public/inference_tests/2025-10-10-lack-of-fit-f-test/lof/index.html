@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lack of fit (F-test) | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Lack of fit (F-test)</span></h1>
+
+<h2 class="date">2025/10/10</h2>
+</div>
+
+<main>
+
+
+
+<p>We introduce a test to determine whether a given regression (not necessarily linear) adequately fits the data.</p>
+<div id="assumptions" class="section level3">
+<h3>Assumptions</h3>
+<ol style="list-style-type: decimal">
+<li>Observations <span class="math inline">\((X,Y)\)</span> are independent, normally distributed, and <span class="math inline">\(Y\)</span> has the same variance <span class="math inline">\(\sigma^2\)</span></li>
+<li>Data have repeat observations (replicates) at one or more <span class="math inline">\(X\)</span> levels (replications).</li>
+</ol>
+<p>This test involves two models. The first is a “full” model, which we compare against, and a “reduced” model, which is a given regression model. The goal is to compare the _______ of the reduced model vs. the full model through a ratio, which follows an <span class="math inline">\(F\)</span> distribution.</p>
+</div>
+<div id="notation" class="section level3">
+<h3>Notation</h3>
+<p>Let’s say within our sample, there exist <span class="math inline">\(c\)</span> levels of replications, each with <span class="math inline">\(n_c\)</span> replicates, such that <span class="math inline">\(\sum_{1}^{c} n_c = n\)</span> (the sum of the number of replicates at each replication equals the total size of the sample).</p>
+<p>Within level <span class="math inline">\(j\)</span> of replications, we refer to the <span class="math inline">\(i_{th}\)</span> replicate using the notation <span class="math inline">\(Y_{ij}\)</span> (the <span class="math inline">\(i_{th}\)</span> replicate in the <span class="math inline">\(j_{th}\)</span> replication level). It follows that <span class="math inline">\(\bar Y_j\)</span> refers to the mean of the replicates at a given replication level.</p>
+</div>
+<div id="full-model" class="section level3">
+<h3>Full model</h3>
+<p>The full model assumes that for every <span class="math inline">\(Y_{ij}\)</span>,
+<span class="math display">\[
+Y_{ij} = \mu_j + \varepsilon_{ij} \quad \varepsilon_{ij}\sim N(0,\sigma^2)
+\]</span></p>
+<p>This is essentially saying that for a given replication level, the response is determined by the population mean at said level plus <span class="math inline">\(\varepsilon_{ij}\)</span> – randomness unique to that response specifically. It follows, then, that <span class="math inline">\(E(Y_{ij}) = \mu_j\)</span>.</p>
+<p>This model does involve variation with <span class="math inline">\(X\)</span>, as we can tell by <span class="math inline">\(\mu_j\)</span>, but it does not say the variation is linear. <span class="math inline">\(Y\)</span> does not move in one direction with <span class="math inline">\(X\)</span>, nor does it move in any systematic way. The full model is “extremely fluid”.</p>
+<p>When fitting the full model, we use the sample mean at each replication level to estimate <span class="math inline">\(\mu_j\)</span>.</p>
+<p>We can measure the variance of our observations about the full model by calculating the <span class="math inline">\(SSPE\)</span>, or pure error sum of squares.</p>
+<p><span class="math display">\[
+SSPE = SSE(F) = \sum_j \sum_i\left(Y_{ij} - \bar Y_j\right)^2
+\]</span>
+Note how this measure only includes how well the full model estimates observations for replication levels with more than one replicate. For a replication level <span class="math inline">\(j\)</span> with <span class="math inline">\(i=1\)</span> only, <span class="math inline">\((Y_{ij} - \bar Y_j)^2 =0\)</span> since <span class="math inline">\(Y_{1j} = \bar Y_j\)</span>.</p>
+<p>The degrees of freedom of <span class="math inline">\(SSPE\)</span> is a sum of the degrees of freedom at each replication level (<span class="math inline">\(n_j\)</span> unique observations, less 1 d.f. for the sample mean <span class="math inline">\(\bar Y_j\)</span>). In other words,</p>
+<p><span class="math display">\[
+\sum_j (n_j - 1) = \sum_j n_j - c = n-c
+\]</span></p>
+</div>
+<div id="reduced-model" class="section level3">
+<h3>Reduced model</h3>
+<p>As stated above, our reduced model is whatever regression we have. In the case of a <a href="/overview/simple-linear-regression-with-normality/">simple linear regression with normality</a>, the reduced model is familiar in form. However, we modify the response and <span class="math inline">\(\varepsilon\)</span> to allow for the existence of replications.</p>
+<p><span class="math display">\[
+Y_{ij} = \beta_0 + \beta_1X_j + \varepsilon_{ij} \quad \varepsilon_{ij} \sim N(0, \sigma^2)
+\]</span>
+Where <span class="math inline">\(E(Y_{ij}) = \mu_j= \beta_0 + \beta_1X_j\)</span>. As we know, the population response is related linearly to <span class="math inline">\(X\)</span>.</p>
+<p>We calculate the variance of our observations about the reduced model using <span class="math inline">\(SSE\)</span>, as should be familiar already:</p>
+<p><span class="math display">\[
+SSE(R) = SSE  = \sum_{j} \sum_{i} (Y_{ij} - \hat Y_i) = \sum_j \sum_i (Y_{ij} - \hat \beta_0  - \hat \beta_1X_j)
+\]</span>
+At each replication level, there are <span class="math inline">\(n_j\)</span> degrees of freedom. Since each replicaiton level relies on the same two estimates <span class="math inline">\(\hat \beta_0, \hat \beta_1\)</span>, the degrees of freedom are <span class="math inline">\(n-2\)</span>, as should be familiar also.</p>
+</div>
+<div id="interpreting-sspe-sse" class="section level2">
+<h2>Interpreting SSPE, SSE</h2>
+<p><span class="math inline">\(SSLF\)</span> is the lack of fit sum of squares. <span class="math inline">\(SSLF = SSE - SSPE \implies SSE = SSPE + SSLF\)</span>. It is the variance about the reduced model, less the variance about the full model. This difference is positive when the sum of distances between replicates and that predicted by the reduced model is greater than the sum of distances between replicates and the sample mean at each replication level. We’d expect</p>
+</div>
+<div id="test-statistic" class="section level2">
+<h2>Test statistic</h2>
+<p>Similar to what we observed with the <a href="/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/">F-test for correlation</a>, the test statistic for the lack of fit test involves a ratio.
+<span class="math display">\[
+F* = \frac{SSLF}{c-2} \div \frac{SSPE}{n-c} =  \frac{MSLF}{MSPE} \sim F(c-2, n-c)
+\]</span></p>
+</div>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

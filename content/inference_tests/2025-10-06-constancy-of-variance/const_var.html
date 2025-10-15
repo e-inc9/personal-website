@@ -1,0 +1,67 @@
+---
+title: Constancy of variance
+author: ''
+date: '2025-10-06'
+slug: const_var
+categories:
+  - Inference/tests
+tags: []
+---
+
+
+
+<pre class="r"><code>rm(list=ls())</code></pre>
+<p>Given a sample from a population, we’d often like to know whether that sample comes from a normally distributed population. We present two tests. The Brown-Forsythe test, and the Breusch-Pagan test. The former makes no assumptions about the population, the latter does make assumptions about the population.</p>
+<div id="brown-forsythe" class="section level2">
+<h2>Brown-Forsythe</h2>
+<p>Say we’d like to see if <span class="math inline">\(Y\)</span> has a constant variance in the population. Based on sampled <span class="math inline">\(y_1... y_n\)</span>,</p>
+<p>We
+1) divide the data into two groups consisting of <span class="math inline">\(y_{1i}\)</span> and <span class="math inline">\(y_{2i}\)</span>
+2) within each group, calculate <span class="math inline">\(d_{1i}=|y_{1i} - median(y_1)|\)</span>, <span class="math inline">\(d_{2i} = |y_{2i} - median(y_2)|\)</span>
+3) calculate the sample means of said absolute departures from each group
+4) The test statistic:</p>
+<p><span class="math display">\[
+t^* = \frac{\bar{d_1} - \bar{d_2}}{s \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \sim t(n-2)
+\]</span>
+Where <span class="math display">\[s^2 = \frac{\sum(d_{1i} - \bar d_1)^2 + \sum(d_{2i} - \bar d_2)^2}{n-2}\]</span></p>
+<p>Example:</p>
+<pre class="r"><code>library(api2lm)
+library(dplyr) </code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>n &lt;- nrow(toluca)
+lm1 &lt;- lm(work_hours~lot_size, data=toluca)
+
+tol &lt;- toluca %&gt;% mutate(resid = work_hours - fitted(lm1),
+                         group = factor(ifelse(lot_size &lt; 80, 1, 2)))
+tol_g &lt;- group_split(tol %&gt;% group_by(group))
+
+tol1 &lt;- tol_g[[1]] %&gt;% mutate(
+                              d = abs(resid - median(resid)),
+                              ssd = (d-mean(d))^2) %&gt;% arrange(lot_size)
+tol2 &lt;- tol_g[[2]] %&gt;% mutate(
+                              d = abs(resid - median(resid)),
+                              ssd = (d-mean(d))^2) %&gt;% arrange(lot_size)
+
+
+s_sq &lt;- (sum(tol1$ssd) + sum(tol2$ssd))/(n-2)
+
+t &lt;- (mean(tol1$d) - mean(tol2$d))/(sqrt(s_sq) * sqrt(1/nrow(tol1) + 1/nrow(tol2)))
+
+pt(t, df=n-2, lower.tail=FALSE)*2</code></pre>
+<pre><code>## [1] 0.2009812</code></pre>
+<pre class="r"><code>MSE &lt;- 2384
+n &lt;- nrow(tol)
+qq &lt;- data.frame(resid_sort = sort(tol$resid),
+                 rank = 1:nrow(tol),
+                 exp_val = sqrt(MSE)*qnorm(((1:nrow(tol))-.375)/(n+.25))
+                 )
+cor(qq$resid_sort, qq$exp_val)</code></pre>
+<pre><code>## [1] 0.9915055</code></pre>
+</div>

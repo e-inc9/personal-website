@@ -35,17 +35,15 @@ There actually exists a composite measure of accuracy (bias) and precision (vari
 $$
 MSE = V(\hat \theta) + [E(\hat \theta)- \theta]^2
 $$ 
-Which is equivalent to averaging squared error $(\theta - \theta)^2$ over all possible samples.
+Which is equivalent to averaging squared error $(\hat \theta - \theta)^2$ over all possible samples. 
 
 Proof:
-$$
-\begin{align*}
+$$\begin{align*}
 MSE = E[(\hat \theta - \theta)^2] &= E(\hat \theta^2 - 2 \hat \theta \theta + \theta^2)\\
 &= E(\hat \theta^2) - 2\theta E(\hat \theta)+ \theta^2\\
 &= \left[ V(\hat \theta) + E(\hat \theta)^2 \right] - 2\theta E(\hat \theta)+ \theta^2\\
 &= V(\hat \theta) + \left[ E(\hat \theta) - \theta\right]^2
-\end{align*}
-$$
+\end{align*}$$
 When our point estimator $\hat \theta$ is unbiased, then $E(\hat \theta) = \theta$ and $MSE=V(\hat \theta)$.
 
 We can use this measure to justify some commonly used point estimators:
@@ -91,8 +89,7 @@ As you saw above, we used $s^2 = \frac{\sum (X_i - \bar X)^2}{n-1}$ as an estima
 We evaluate the bias (it's zero):
 <details>
 <summary> Expand </summary>
-$$
-\begin{align*}
+$$ \begin{align*}
 E(s^2) &= E(\frac{\sum(X_i - \bar X)^2)}{n-1}) \\
 &= E \left( \frac{\sum X_i^2 - 2 n \bar X \sum  X_i + n \bar X^2}{n-1} \right) \\
 &= \frac{1}{n-1} \left[ \sum E(X_i^2)-n E(\bar X^2) \right] \\
@@ -103,8 +100,7 @@ E(s^2) &= E(\frac{\sum(X_i - \bar X)^2)}{n-1}) \\
 &= \frac{1}{n-1} \left[ n \sigma^2 + n\mu^2 -\frac{1}{n} \left[ n\sigma^2 +n^2\mu^2 \right] \right] \\ 
 &=\frac{1}{n-1}\left[(n-1)(\sigma^2) +n(\mu^2 -\mu^2)\right] 
 = \sigma^2 \implies E(S^2)- \sigma^2 = 0
-\end{align*}
-$$
+\end{align*} $$
 </details>
 
 _So that's why we divide by (n-1), and not n_..

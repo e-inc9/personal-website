@@ -4,7 +4,7 @@ author: ''
 date: '2025-09-29'
 slug: confidence-intervals
 categories:
-  - General
+  - Inference/tests
 tags: []
 ---
 
@@ -38,6 +38,8 @@ Of course, once we actually obtain $\bar X$ and lower and upper bounds $a, b$. o
 
 Thus, "$P%$ confidence" is a descriptive of the long-run success rate of our intervals, with $P%$ being determined by the critical values of the distribution of $\bar X$, and not a descriptive of any _actual_ interval we come up with.
 
+## In practice
+Since our above example was under the assumption that $\sigma$ of the population was known, which is never the case in real life, we make the necessary adjustments to our critical values to reflect that of the [t-distribution](/distrib/2025-05-27-t-distribution/t-dist/), which is the distribution of a test statistic computed using standard error in place of standard deviation.
 
 
 

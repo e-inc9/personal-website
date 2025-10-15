@@ -28,28 +28,105 @@
 </div>
 
 <main>
-<p>Recommended reading: <a href="/distrib/2025-09-23-simple-linear-regression-anova-cut/linreg-anova/">Linear regression, the ANOVA cut</a>, wherein we define terms <code>\(SSR/MSR\)</code>, <code>\(SSE/MSE\)</code>, <code>\(SSTO\)</code>.</p>
-<h2 id="correlation">Correlation</h2>
-<p>We&rsquo;ll make this quick. Correlation is a measure of the <em>linear relationship</em> between variables <code>\(Y_1, Y_2\)</code>. We measure it using a) the coefficient of determination <code>\(R^2\)</code> and b) the coefficient of correlation <code>\(r\)</code>.</p>
-<details>
-<summary> On `\(R^2\)`, `\(r\)`. </summary>
-### Coefficient of determination `\(R^2\)`
-Its units are the *percentage/proportion* of variance about the mean explained by a linear regression on a sample of `\((Y_1, Y_2)\)` observations.
+<h2 id="a-key-distinction">A key distinction</h2>
+<p>One key assumption in the classical derivation of <a href="/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/">inference using simple linear regression models</a> is that across repeated samples, <code>\(X\)</code> is fixed. In other words, under this assumption, when we conduct inference using simple linreg, we&rsquo;re assuming that we could repeatedly take <code>\(Y_i\)</code> at <code>\(X_1, ... X_n\)</code> repeatedly. Maybe (?) this is a product of the experiments that were being run way back when.</p>
+<p>However, in many observational settings, this assumption isn&rsquo;t feasibly possible. For example, if we had a dataset with the mean daily temperature as the predictor, we couldn&rsquo;t fix the mean daily temperature of our observations across samples, since it would also be a random variable.</p>
+<p>Historically, one would approach this problem using the normal correlation model, which is based on the bivariate normal distribution pictured below. We actually find that <strong>if we break the bivariate normal distribution down into conditional distributions</strong>, we arrive back at the linear regression model.</p>
+<p>So this post is basically justifying the use of linear regression even when <code>\(X\)</code> is treated as a random variable.</p>
+<h2 id="bivariate-normal-distribution">Bivariate normal distribution</h2>
+<img src="../../../../../../../../pics/bivar_n.png" width="40%" />
+<p>For a bivariate normal distribution consisting of variables <code>\(Y_1, Y_2\)</code>, we find that the marginal distributions of <code>\(Y_1\)</code> given <code>\(Y_2\)</code> (and vice versa) are also normally distributed. That being said, if <code>\(Y_1\)</code>, <code>\(Y_2\)</code> are individually normally distributed, they do not necessarily follow a joint distribution. Say, religiosity and wealth.</p>
 $$
-R^2 = \frac{SSR}{SSTO} = 1 - \frac{SSE}{SSTO}
+f(Y_1, Y_2)
+= \frac{1}{2\pi \sigma_1 \sigma_2 \sqrt{1-\rho_{12}^2}}
+  \exp\!\left\{
+  -\frac{1}{2(1-\rho_{12}^2)}
+  \left[
+    \left(\frac{Y_1-\mu_1}{\sigma_1}\right)^{\!2}
+    -2\rho_{12}
+      \left(\frac{Y_1-\mu_1}{\sigma_1}\right)
+      \left(\frac{Y_2-\mu_2}{\sigma_2}\right)
+    +\left(\frac{Y_2-\mu_2}{\sigma_2}\right)^{\!2}
+  \right]
+  \right\}
 $$<p>
-Some caveats:</p>
+In this whopper of a pdf, the parameters <code>\(\mu_1, \sigma_1\)</code> and <code>\(\mu_2, \sigma_2\)</code> are with regards to the marginal distributions of <code>\(Y_1, Y_2\)</code>, respectively. <code>\(\rho_{12}\)</code> is the (population) correlation between the two, where</p>
+$$
+\rho_{12} = \frac{\sigma_{12}}{\sigma_1 \sigma_2} \text{ to be proved one day... }
+$$<p>
+The marginal distributions are below:
+</p>
+\[
+f_{1}(Y_{1})
+= \frac{1}{\sqrt{2\pi}\,\sigma_{1}}
+  \exp\!\left[
+    -\frac{1}{2}
+    \left(
+      \frac{Y_{1}-\mu_{1}}{\sigma_{1}}
+    \right)^{2}
+  \right]
+\]\[
+f_{2}(Y_{2})
+= \frac{1}{\sqrt{2\pi}\,\sigma_{2}}
+  \exp\!\left[
+    -\frac{1}{2}
+    \left(
+      \frac{Y_{2}-\mu_{2}}{\sigma_{2}}
+    \right)^{2}
+  \right]
+\]<p>Given these two marginal pdfs, we can still come up with conditional distributions using the general property</p>
+$$
+f(Y_1 | Y_2) = \frac{f(Y_1, Y_2)}{f_{Y_2}(Y_2)} \quad \left(\text{recall } P(A|B) = \frac{P(A \cap B)}{P(B)}\right)
+$$<p>The conditional distribution of <code>\(Y_1\)</code> given <code>\(Y_2\)</code> and vice versa are below.</p>
+<details>
+<summary> Expand </summary>
+$$ \begin{aligned}
+f(Y_{1}\mid Y_{2})
+  &= \frac{1}{\sqrt{2\pi}\,\sigma_{1\mid 2}}
+    \exp\!\left[
+      -\frac12
+      \left(
+        \frac{Y_{1}-\alpha_{1\mid 2}-\beta_{1\mid 2}Y_{2}}
+             {\sigma_{1\mid 2}}
+      \right)^{2}
+    \right] \text{ , where }\\
+\alpha_{1\mid 2} &= \mu_{1} - \mu_{2}\,\rho_{12}\,\frac{\sigma_{1}}{\sigma_{2}} \\
+\beta_{1\mid 2} &= \rho_{12}\,\frac{\sigma_{1}}{\sigma_{2}} \\
+\sigma^{2}_{1\mid 2} &= \sigma_{1}^{2}\bigl(1-\rho_{12}^{2}\bigr)
+\end{aligned} $$
+$$ \begin{aligned}
+f(Y_{2}\mid Y_{1})
+  &= \frac{1}{\sqrt{2\pi}\,\sigma_{2\mid 1}}
+    \exp\!\left[
+      -\frac12
+      \left(
+        \frac{Y_{2}-\alpha_{2\mid 1}-\beta_{2\mid 1}Y_{1}}
+             {\sigma_{2\mid 1}}
+      \right)^{2}
+    \right] \text{ , where }\\
+\alpha_{2\mid 1} &= \mu_{2} - \mu_{1}\,\rho_{12}\,\frac{\sigma_{2}}{\sigma_{1}} \\
+\beta_{2\mid 1} &= \rho_{12}\,\frac{\sigma_{2}}{\sigma_{1}} \\
+\sigma^{2}_{2\mid 1} &= \sigma_{2}^{2}\bigl(1-\rho_{12}^{2}\bigr)
+\end{aligned} $$</details> 
+<p>Notice how (we denote <code>\(X\)</code> for the conditioning variable):</p>
+<p>a) the conditional distributions of two jointly normal variables are <em>also</em> normal</p>
+<p>b) within both pdfs, the (conditional) mean is <code>\((\alpha + \beta X)\)</code>, so it varies (linearly!) with <code>\(X\)</code></p>
+<p>c) the (conditional) variance <code>\(\sigma^2\)</code> remains constant across <code>\(X\)</code></p>
+<p>d) the parameters <code>\(\alpha, \beta, \sigma^2\)</code> for both conditional distributions are expressed in terms of the joint pdf above</p>
+<p>As we can see,  <code>\(Y_1|Y_2\)</code> (and vice versa), in having an expected value that changes linearly with <code>\(Y_2 (Y_1)\)</code>, yet has a constant variance <code>\(\sigma^2\)</code>, falls within the assumptions and structure of the simple linear regression model!</p>
+<p>Thus, the conditional bivariate normal correlation model used to estimate $Y|X \sim N(\alpha + \beta_X, \sigma^2) $ is equivalent to the linear regression model <code>\(\hat Y\sim N(\beta_0 + \beta_1 X, \sigma^2)\)</code>.</p>
+<p>So if we have variables <code>\(X,Y\)</code> which are bivariate normal, we have the &ldquo;all clear&rdquo; to proceed with linear regression and perform inference <em>even if</em> <code>\(X\)</code> is treated as a random variable.</p>
+<p>More generally, however, <code>\(X,Y\)</code> need not be bivariate normal;</p>
+<p>If</p>
 <ol>
-<li>Correlation measures a linear relationship. A lack of correlation does not indicate a lack of a relationship, it just suggests that the relationship is not linear. The relationship could very well be exponential, logarithmic, etc.</li>
-<li>A high correlation using a sample does not indicate that a linear model fitted is necessarily good for prediction. A sample could have very high variance about the mean &ndash; a large <em>proportion</em> of which is explained by a fitted line &ndash; but that remaining variance could still make prediction difficult.</li>
-<li>Remember that this <em>sample dependent</em>. Inference on <code>\(\rho^2\)</code> is possible &ndash; more on that later.</li>
+<li>
+<p><code>\(Y_i|X_i\)</code> is <em>normal and independent</em> with conditional means <code>\(\alpha + \beta_1 X_i\)</code> and conditional variance <code>\(\sigma^2\)</code></p>
+</li>
+<li>
+<p><code>\(X\)</code>, the predictor variable, does not involve the regression parameters <code>\(\alpha, \beta, \sigma^2\)</code> (safe to say this is usually not the case)</p>
+</li>
 </ol>
-<p>Fun facts:
-<code>\(R^2\)</code> <em>is</em> affected by the spacing of <code>\(X_i\)</code>. An outlying <code>\(X\)</code> value will tend to have an outlying <code>\(Y\)</code> value (in either direction). Technically, it shouldn&rsquo;t affect <code>\(SSE\)</code>, which is simply the difference between <code>\(Y_i\)</code> and <code>\(\hat Y\)</code>. However, since this <code>\(Y\)</code> value will be a marked distance from <code>\(\bar Y\)</code>, which will increase <code>\(SSTO\)</code>. As <code>\(\frac{SSE}{SSTO}\)</code> becomes smaller, <code>\(R^2\)</code> will increase.</p>
-<h3 id="correlation-of-determination-r">Correlation of determination <code>\(r\)</code></h3>
-<p>We take the square root of <code>\(R^2\)</code> and add <code>\(\pm\)</code>, depending on directionality.</p>
-</details>
-<h2 id="normal-correlation-models">Normal correlation models</h2>
+<p>Then we can perform simple linear regression for estimating, testing, and prediction.</p>
 
 </main>
 

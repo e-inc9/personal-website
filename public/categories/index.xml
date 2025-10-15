@@ -6,20 +6,20 @@
     <description>Recent content in Categories on A minimal Hugo website</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:4321/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>General</title>
-      <link>http://localhost:4321/categories/general/</link>
-      <pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:4321/categories/general/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Inference/Tests</title>
       <link>http://localhost:4321/categories/inference/tests/</link>
-      <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:4321/categories/inference/tests/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>General</title>
+      <link>http://localhost:4321/categories/general/</link>
+      <pubDate>Mon, 29 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/categories/general/</guid>
       <description></description>
     </item>
     <item>

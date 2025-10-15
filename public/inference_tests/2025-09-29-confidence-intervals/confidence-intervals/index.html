@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Confidence intervals | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Confidence intervals</span></h1>
+
+<h2 class="date">2025/09/29</h2>
+</div>
+
+<main>
+<p>We begin with some obvious truths: for a given estimate <code>\(\hat \theta\)</code> of parameter <code>\(\theta\)</code> &ndash; say <code>\(\bar x\)</code> of <code>\(\mu\)</code> &ndash; <code>\(\hat \theta\)</code> is virtually never <code>\(\theta\)</code>. Furthermore, the distance of <code>\(\hat \theta\)</code> from <code>\(\theta\)</code> is virtually unknown. If we&rsquo;re interested in <code>\(\theta\)</code>, <code>\(\hat \theta\)</code> is of little use on its own.</p>
+<p>We can, however, use properties of the distribution of <code>\(\hat \theta\)</code> (which are downstream of our sample) to come up with a range, or  <em>interval</em>, of plausible <code>\(\theta\)</code>&rsquo;s. This, surely, is more sensible than blindly trusting <code>\(\hat \theta\)</code> as <code>\(\theta\)</code> (or anywhere close to it).</p>
+<h2 id="confidence-levels">Confidence levels</h2>
+<p>For a given sample and estimate, we distinguish one interval from another by its confidence level. The confidence level, expressed as a percentage (say, 95%) refers to the probabilistic distribution. However, as we will see, the final interpretation of confidence intervals is not in terms of probability.</p>
+<p>We begin with an unrealistic example of a <code>\(\mu\)</code> whose <code>\(\sigma\)</code> is known. Then, the distribution of <code>\(\bar x\)</code> from a sample of size <code>\(n\)</code> is normal, centered at <code>\(\mu\)</code> and has standard deviation of <code>\(\sqrt{\frac{\sigma}{n}}\)</code>. If we standardize it, we have a statistic with a normal distribution centered at 0 with standard deviation of 1.</p>
+$$
+t = \frac{\bar X - \mu}{\frac{\sigma}{\sqrt n}} \sim N(0, 1)
+$$<p>We can then construct the following statement. The values <code>\(\pm 1.96\)</code> are the critical values of a standard normal distribution, between which 95% of the probability density lies.</p>
+$$
+P\left( -1.96 < \frac{\bar X - \mu}{\frac{\sigma}{\sqrt{n}}}< 1.96\right) = 0.95
+$$<p>
+&hellip;and rearrange it such that:
+</p>
+$$
+P\left(-\bar X -1.96 \cdot \frac{\sigma}{\sqrt{n}} < -\mu < 1.96 \cdot \frac{\sigma}{\sqrt{n}}- \bar X \right) = P\left(\bar X - 1.96\frac{\sigma}{\sqrt{n}} < \mu < \bar X + 1.96 \frac{\sigma}{\sqrt{n}} \right) = 0.95
+$$<p>
+What we are describing in the above inequality is a &ldquo;random interval&rdquo; driven by random variable <code>\(\bar X\)</code>, the midpoint. The probability that this interval includes <code>\(\mu\)</code> is 95%. A common misinterpretation is &ldquo;the probability of <code>\(\mu\)</code> falling within the interval is 95%&rdquo;. This is false. <code>\(\mu\)</code> is not a random variable, it is a parameter. There is no probability of it taking on a certain value.</p>
+<p>Given this probability statement, we can say that for many intervals computed from multiple <code>\(\bar X\)</code>&rsquo;s, wherein upon actually obtaining <code>\(\bar X\)</code> and lower and upper bounds <code>\(a, b\)</code>, we would expect 95% of them to include <code>\(\mu\)</code>. Note that the 95% refers to the proportion of intervals constructed in the long run.</p>
+<p>Of course, once we actually obtain <code>\(\bar X\)</code> and lower and upper bounds <code>\(a, b\)</code>. our interval is no longer random, so we cannot say that there is a probability of <code>\(P(a &lt; \mu &lt; b) = .95\)</code> for values <code>\(a,b\)</code>.</p>
+<p>Thus, &ldquo;$P%$ confidence&rdquo; is a descriptive of the long-run success rate of our intervals, with <code>\(P%\)</code> being determined by the critical values of the distribution of <code>\(\bar X\)</code>, and not a descriptive of any <em>actual</em> interval we come up with.</p>
+
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

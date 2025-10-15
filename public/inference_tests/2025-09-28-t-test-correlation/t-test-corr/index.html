@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Correlation | A minimal Hugo website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Correlation</span></h1>
+
+<h2 class="date">2025/09/28</h2>
+</div>
+
+<main>
+<h2 id="correlation">Correlation</h2>
+<p>We consider the definition of population correlation between variables <code>\(X,Y\)</code></p>
+$$
+\rho_{XY} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
+$$<h2 id="estimator">Estimator</h2>
+<p>The Pearson product-moment correlation coefficient &ndash; <code>\(r_{XY}\)</code> &ndash; is an estimator for <code>\(\rho_{XY}\)</code>. It is biased, but the bias is small when <code>\(n\)</code> is large. Like <code>\(\rho\)</code>, it has range <code>\([-1, 1]\)</code> and the interpretation is the same.</p>
+$$
+r_{XY} = \frac{ \sum(X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\sum(X_i - \bar X)^2}\sqrt{\sum(Y_i - \bar Y)^2} }
+$$<h2 id="inference">Inference</h2>
+<p><strong>When <code>\(X,Y\)</code> are bivariate normally distributed</strong> (and with appropriately large n), an appropriate test statistic is</p>
+<p>If we wish to test
+</p>
+$$
+H_0: \rho = 0 \\
+H_a: \rho \ne 0 
+$$<p>We can use test statistic
+</p>
+$$
+t = \frac{r_{XY}\sqrt{n-2}}{\sqrt{1-r^2_{XY}}} \sim t(n-2)
+$$<p>It turns out that the above <code>\(H_0, H_a\)</code> is equivalent to testing whether <code>\(\beta_{XY} = \beta_{YX} = 0\)</code> and vice versa. So we could use <a href="http://localhost:4321/inference_tests/2025-06-17-t-test-linreg/t-test-linreg/">t-tests for the slope of linear regression</a> to test <code>\(\rho_{XY}\)</code> as well.</p>
+<p>This is because under the bivariate normal distribution assumption, we use <a href="/overview/2025-09-26-normal-correlation-models/correlation./">normal correlation models</a> whose conditional distributions have the same structure as simple linear regression, with</p>
+$$ 
+E[Y|X] = \alpha_{Y|X} + \beta_{Y|X} X
+$$<p>Where <code>\(\beta_{Y|X} = \rho_{XY} \frac{\sigma_X}{\sigma_Y}\)</code>.</p>
+<h2 id="interval-estimation-fishers-z-transformation">Interval estimation (Fisher&rsquo;s z-transformation)</h2>
+<p>The above test is applicable when we test for <code>\(H_0: \rho=0\)</code>. If we&rsquo;d like to test whether <code>\(H_0: \rho = \rho_0\)</code>, where <code>\(\rho_0\)</code> is non-zero, we cannot use the above test. We have to use Fisher&rsquo;s z-transformation.</p>
+<p>This is a departure from situations where we&rsquo;re testing a different parameter, like <code>\(\mu\)</code>. In that case, we know that the shape of the distribution of the estimator is normal (owing to CLT), and it remains normal across <code>\(\mu_0\)</code>. So when we estimate <code>\(\bar x\)</code>, we use the critical values of a normal distribution to determine the confidence interval.</p>
+<p>However, when we attempt to perform inference as to <code>\(\rho_0\)</code>, the distribution of <code>\(r\)</code> depends on <code>\(\rho\)</code> itself. If <code>\(\rho\)</code> is near 1, our <code>\(r\)</code> certainly does not follow a normal distribution (it cannot exceed 1), and thus is compressed and skewed. Thus, we cannot proceed with a test statistic that assumes symmetry and unbounded-ness.</p>
+<p>What we can do, however, is come up with a transformation involving <code>\(r\)</code> that follows a normal distribution. This is Fisher&rsquo;s z transformation, which maps each <code>\(r\)</code> to a unique <code>\(z'\)</code>. The resulting distribution of <code>\(z'\)</code> is approximately normal when <code>\(n \ge 25\)</code>.</p>
+$$
+z' = \frac{1}{2}log_e\left( \frac{1+r_{12}}{1-r_{12}} \right) \\ 
+E\{z'\} = \xi = \tfrac12 \log_{e}\!\left(\frac{1+\rho_{12}}{\,1-\rho_{12}\,}\right)\\
+\sigma^{2}\{z'\} = \frac{1}{\,n-3\,}
+$$
+</main>
+
+  <footer>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/math-code.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/katex.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/render-katex.js" defer></script>
+
+<script src="//cdn.jsdelivr.net/npm/@xiee/utils/js/center-img.min.js" defer></script>
+
+  
+  <hr/>
+  © 2025
+  
+  </footer>
+  </body>
+</html>
+

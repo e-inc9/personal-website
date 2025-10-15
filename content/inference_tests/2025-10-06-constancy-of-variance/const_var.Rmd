@@ -1,0 +1,69 @@
+---
+title: Constancy of variance
+author: ''
+date: '2025-10-06'
+slug: const_var
+categories:
+  - Inference/tests
+tags: []
+---
+```{r}
+rm(list=ls())
+```
+
+Given a sample from a population, we'd often like to know whether that sample comes from a normally distributed population. We present two tests. The Brown-Forsythe test, and the Breusch-Pagan test. The former makes no assumptions about the population, the latter does make assumptions about the population. 
+
+## Brown-Forsythe
+Say we'd like to see if $Y$ has a constant variance in the population. Based on sampled $y_1... y_n$,
+
+We
+1) divide the data into two groups consisting of $y_{1i}$ and $y_{2i}$
+2) within each group, calculate $d_{1i}=|y_{1i} - median(y_1)|$, $d_{2i} = |y_{2i} - median(y_2)|$
+3) calculate the sample means of said absolute departures from each group
+4) The test statistic:
+
+$$
+t^* = \frac{\bar{d_1} - \bar{d_2}}{s \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \sim t(n-2)
+$$
+Where $$s^2 = \frac{\sum(d_{1i} - \bar d_1)^2 + \sum(d_{2i} - \bar d_2)^2}{n-2}$$
+
+
+Example:
+```{r}
+library(api2lm)
+library(dplyr) 
+n <- nrow(toluca)
+lm1 <- lm(work_hours~lot_size, data=toluca)
+
+tol <- toluca %>% mutate(resid = work_hours - fitted(lm1),
+                         group = factor(ifelse(lot_size < 80, 1, 2)))
+tol_g <- group_split(tol %>% group_by(group))
+
+tol1 <- tol_g[[1]] %>% mutate(
+                              d = abs(resid - median(resid)),
+                              ssd = (d-mean(d))^2) %>% arrange(lot_size)
+tol2 <- tol_g[[2]] %>% mutate(
+                              d = abs(resid - median(resid)),
+                              ssd = (d-mean(d))^2) %>% arrange(lot_size)
+
+
+s_sq <- (sum(tol1$ssd) + sum(tol2$ssd))/(n-2)
+
+t <- (mean(tol1$d) - mean(tol2$d))/(sqrt(s_sq) * sqrt(1/nrow(tol1) + 1/nrow(tol2)))
+
+pt(t, df=n-2, lower.tail=FALSE)*2
+
+
+```
+
+```{r}
+MSE <- 2384
+n <- nrow(tol)
+qq <- data.frame(resid_sort = sort(tol$resid),
+                 rank = 1:nrow(tol),
+                 exp_val = sqrt(MSE)*qnorm(((1:nrow(tol))-.375)/(n+.25))
+                 )
+cor(qq$resid_sort, qq$exp_val)
+
+```
+

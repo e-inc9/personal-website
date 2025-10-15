@@ -1,0 +1,162 @@
+---
+title: Lack of fit (F-test)
+author: ''
+date: '2025-10-10'
+slug: lof
+categories:
+  - Inference/tests
+tags: []
+---
+
+
+
+<p>We introduce a test to determine whether a given regression (not necessarily linear) adequately fits the data.</p>
+<div id="assumptions" class="section level3">
+<h3>Assumptions</h3>
+<ol style="list-style-type: decimal">
+<li>Observations <span class="math inline">\((X,Y)\)</span> are independent, normally distributed, and <span class="math inline">\(Y\)</span> has the same variance <span class="math inline">\(\sigma^2\)</span></li>
+<li>Data have repeat observations (replicates) at one or more <span class="math inline">\(X\)</span> levels (replications).</li>
+</ol>
+<p>This test involves two models. The first is a “full” model, which we compare against, and a “reduced” model, which is a given regression model.</p>
+<p><span class="math display">\[
+H_0:\text{ reduced model describes } E(Y|X_i) \\
+H_a: \text{ reduced model does not describe }  E(Y|X_i)
+\]</span></p>
+<p>The goal is to compare the _______ of the reduced model vs. the full model through a ratio, which follows an <span class="math inline">\(F\)</span> distribution.</p>
+</div>
+<div id="notation" class="section level3">
+<h3>Notation</h3>
+<p>Let’s say within our sample, there exist <span class="math inline">\(c\)</span> levels of replications, each with <span class="math inline">\(n_c\)</span> replicates, such that <span class="math inline">\(\sum_{1}^{c} n_c = n\)</span> (the sum of the number of replicates at each replication equals the total size of the sample).</p>
+<p>Within level <span class="math inline">\(j\)</span> of replications, we refer to the <span class="math inline">\(i_{th}\)</span> replicate using the notation <span class="math inline">\(Y_{ij}\)</span> (the <span class="math inline">\(i_{th}\)</span> replicate in the <span class="math inline">\(j_{th}\)</span> replication level). It follows that <span class="math inline">\(\bar Y_j\)</span> refers to the mean of the replicates at a given replication level.</p>
+</div>
+<div id="full-model" class="section level3">
+<h3>Full model</h3>
+<p>The full model assumes that for every <span class="math inline">\(Y_{ij}\)</span>,
+<span class="math display">\[
+Y_{ij} = \mu_j + \varepsilon_{ij} \quad \varepsilon_{ij}\sim N(0,\sigma^2)
+\]</span></p>
+<p>This is essentially saying that for a given replication level, the response is determined by the population mean at said level plus <span class="math inline">\(\varepsilon_{ij}\)</span> – randomness unique to that response specifically. It follows, then, that <span class="math inline">\(E(Y_{ij}) = \mu_j\)</span>.</p>
+<p>This model does involve variation with <span class="math inline">\(X\)</span>, as we can tell by <span class="math inline">\(\mu_j\)</span>, but it does not say the variation is linear. <span class="math inline">\(Y\)</span> does not move in one direction with <span class="math inline">\(X\)</span>, nor does it move in any systematic way. The full model is “extremely fluid”.</p>
+<p>When fitting the full model, we use the sample mean at each replication level to estimate <span class="math inline">\(\mu_j\)</span>.</p>
+<p>We can measure the variance of our observations about the full model by calculating the <span class="math inline">\(SSPE\)</span>, or pure error sum of squares.</p>
+<p><span class="math display">\[
+SSPE = SSE(F) = \sum_j \sum_i\left(Y_{ij} - \bar Y_j\right)^2
+\]</span>
+Note how this measure only includes how well the full model estimates observations for replication levels with more than one replicate. For a replication level <span class="math inline">\(j\)</span> with <span class="math inline">\(i=1\)</span> only, <span class="math inline">\((Y_{ij} - \bar Y_j)^2 =0\)</span> since <span class="math inline">\(Y_{1j} = \bar Y_j\)</span>.</p>
+<p>The degrees of freedom of <span class="math inline">\(SSPE\)</span> is a sum of the degrees of freedom at each replication level (<span class="math inline">\(n_j\)</span> unique observations, less 1 d.f. for the sample mean <span class="math inline">\(\bar Y_j\)</span>). Over all replication levels, these <span class="math inline">\(n_j - 1\)</span>’s add up:</p>
+<p><span class="math display">\[
+\sum_j (n_j - 1) = \sum_j n_j - c = n-c
+\]</span></p>
+</div>
+<div id="reduced-model" class="section level3">
+<h3>Reduced model</h3>
+<p>As stated above, our reduced model is whatever regression we have. In the case of a <a href="/overview/simple-linear-regression-with-normality/">simple linear regression with normality</a>, the reduced model is familiar in form. However, we modify the response and <span class="math inline">\(\varepsilon\)</span> to allow for the existence of replications.</p>
+<p><span class="math display">\[
+Y_{ij} = \beta_0 + \beta_1X_j + \varepsilon_{ij} \quad \varepsilon_{ij} \sim N(0, \sigma^2)
+\]</span>
+Where <span class="math inline">\(E(Y_{ij}) = \mu_j= \beta_0 + \beta_1X_j\)</span>. As we know, the population response is related linearly to <span class="math inline">\(X\)</span>.</p>
+<p>We calculate the variance of our observations about the reduced model using <span class="math inline">\(SSE\)</span>, as should be familiar already:</p>
+<p><span class="math display">\[
+SSE(R) = SSE  = \sum_{j} \sum_{i} (Y_{ij} - \hat Y_{ij}) = \sum_j \sum_i (Y_{ij} - \hat \beta_0  - \hat \beta_1X_j)
+\]</span>
+At each replication level, there are <span class="math inline">\(n_j\)</span> degrees of freedom. Since each replicaiton level relies on the same two estimates <span class="math inline">\(\hat \beta_0, \hat \beta_1\)</span>, the degrees of freedom are <span class="math inline">\(n-2\)</span>, as should be familiar also.</p>
+</div>
+<div id="interpreting-sspe-sse" class="section level2">
+<h2>Interpreting SSPE, SSE</h2>
+<p>Consider that <span class="math inline">\(SSE\)</span> is the sum of squares of <span class="math inline">\((Y_{ij} - \hat Y_{ij})\)</span>.</p>
+<p>Given the existence of replicates at <span class="math inline">\(j\)</span> such that <span class="math inline">\(Y_{ij} \ne \bar Y_j\)</span>, this distance, which we call total error, can be partitioned into pure error and lack of fit. Pure error measures the distance between the sample mean at a given replication level and an observation, while lack of fit measures the distance between the sample mean at a given replication level and that fitted by the reduced model.</p>
+<p><span class="math display">\[
+\underbrace{(Y_{ij} - \hat{Y}_{ij})}_{\text{: total error}} \;=\; \underbrace{(Y_{ij} \;-\; \bar{Y}_{j})}_{\text{: pure error}} \;+\; \underbrace{(\bar{Y}_{j} \;-\; \hat{Y}_{ij})}_{\text{: lack of fit}}
+\\
+\underbrace{(\bar{Y}_{j} - \hat{Y}_{ij})}_{\text{: lack of fit}}  \;=\;  \underbrace{(Y_{ij} \;-\; \hat{Y}_{ij})}_{\text{: total error}} \;-\; \underbrace{(Y_{ij} \;-\; \bar{Y}_{j})}_{\text{: pure error}}
+\]</span></p>
+<p>If we square these and sum them over <span class="math inline">\(\sum_j, \sum_i\)</span>, we get</p>
+<p><span class="math display">\[
+\sum_j \sum_i (Y_{ij} - \hat{Y}_{ij})^2  = \sum_j \sum_i (Y_{ij} - \bar{Y}_j)^2 + \sum_j \sum_i (\bar{Y}_j - \hat{Y}_{ij})^2
+\\
+\sum_j \sum_i (\bar{Y}_j - \hat{Y}_{j})^2 = \sum_j \sum_i (Y_{ij} - \hat{Y}_{ij})^2 - \sum_j \sum_i (Y_{ij} - \bar{Y}_j)^2
+\]</span></p>
+<p>In simpler terms, <span class="math inline">\(SSLF\)</span> increases as the reduced model is farther from the sample mean. <em>If</em> the reduced model was comparable to the full model, its predictions would be near the sample means.</p>
+<p>Rearranging <span class="math inline">\(SSLF\)</span> shows about as much:</p>
+<p><span class="math display">\[SSLF = \sum_j \sum_i (\bar Y_j - \hat Y_{ij})^2 = n_j (\bar Y_j - \hat Y_j)^2\]</span></p>
+<p><span class="math inline">\(SSLF\)</span> has <span class="math inline">\(c-2\)</span> degrees of freedom; <span class="math inline">\(c\)</span> for each replication level involving a sample mean of replicates, less 2 for <span class="math inline">\(\hat \beta_0, \hat \beta_1\)</span>.
+<img src="../../../../../../../../pics/SSLF.png" width="75%" /></p>
+</div>
+<div id="test-statistic" class="section level2">
+<h2>Test statistic</h2>
+<p>Similar to what we observed with the <a href="/inference_tests/2025-09-24-f-test-anova-linear-regressions/f-test/">F-test for correlation</a>, the test statistic for the lack of fit test involves a ratio.
+<span class="math display">\[
+F* = \frac{SSLF}{c-2} \div \frac{SSPE}{n-c} =  \frac{MSLF}{MSPE} \sim F(c-2, n-c)
+\]</span>
+The greater <span class="math inline">\(SSLF\)</span> is (and/or the lesser <span class="math inline">\(SSPE\)</span> is), the closer the sample mean at a given replication level is to the observation relative to the reduced model. Thus, a greater <span class="math inline">\(F*\)</span> is observed. Larger values support <span class="math inline">\(H_a\)</span>, that the reduced model is inappropriate.</p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>This is an important example to read, since it actually SHOWS you how to do this in R and interpret the output.</p>
+<p>Recall that the <code>toluca</code> dataset has duplicates, as shown below:</p>
+<pre class="r"><code>library(api2lm)
+df &lt;- toluca
+
+n &lt;- nrow(toluca)
+c &lt;- length(unique(toluca$lot_size))
+# A tibble: 1 × 1
+# Reduced Model 
+lm1 &lt;- lm(work_hours~lot_size, data=df)
+
+# Full model
+lm_f &lt;- lm(work_hours~factor(lot_size), data=df)
+summary(lm_f)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = work_hours ~ factor(lot_size), data = df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -81.0  -25.5    0.0   33.5   71.0 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           113.00      51.81   2.181 0.046732 *  
+## factor(lot_size)30     89.00      59.83   1.488 0.159017    
+## factor(lot_size)40     89.00      63.45   1.403 0.182529    
+## factor(lot_size)50    102.33      59.83   1.711 0.109227    
+## factor(lot_size)60    111.00      73.27   1.515 0.152041    
+## factor(lot_size)70    199.00      59.83   3.326 0.004994 ** 
+## factor(lot_size)80    251.33      59.83   4.201 0.000889 ***
+## factor(lot_size)90    289.50      57.93   4.998 0.000195 ***
+## factor(lot_size)100   273.50      63.45   4.310 0.000719 ***
+## factor(lot_size)110   315.00      63.45   4.964 0.000208 ***
+## factor(lot_size)120   433.00      73.27   5.910  3.8e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 51.81 on 14 degrees of freedom
+## Multiple R-squared:  0.8777,	Adjusted R-squared:  0.7903 
+## F-statistic: 10.04 on 10 and 14 DF,  p-value: 8.614e-05</code></pre>
+<p>If you look at the coefficients of the full model, you’ll find that the <span class="math inline">\(\beta_0 + \beta_{j}\)</span> for replication level <span class="math inline">\(j\)</span> equals the sample mean at that replication level. This follows the essence of what we said the full model was earlier. Recall that our estimates <span class="math inline">\(\hat Y_j\)</span> are <a href="/overview/2025-09-13-point-estimation/point-estimation/">unbiased estimators of <span class="math inline">\(\mu_j\)</span></a>.</p>
+<p>To conduct a lack of fit test, we need to calculate the test statistic <span class="math inline">\(F*\)</span>, and in the process calculate <span class="math inline">\(SSLF, SSPE\)</span>. Unsurprisingly, because these measures all involve variance about “something”, we use <code>anova()</code>.</p>
+<pre class="r"><code>anova(lm1, lm_f)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: work_hours ~ lot_size
+## Model 2: work_hours ~ factor(lot_size)
+##   Res.Df   RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     23 54825                           
+## 2     14 37581  9     17245 0.7138 0.6893</code></pre>
+<p>The column RSS in both rows refers to the <em>residual sum of squares</em> <span class="math inline">\(\sum (Y_{ij} - \hat Y_{model_{ij}})^2\)</span>. For the reduced model (the first row), <span class="math inline">\(RSS_{r} = \sum_j \sum_i (Y_ij - \hat Y_ij)^2)\)</span>. For the full model (the second row), <span class="math inline">\(RSS_{f} = \sum_j \sum_i (Y_ij - \bar Y_j)^2 = SSPE\)</span>. Recall that:</p>
+<p><span class="math display">\[
+\sum_j \sum_i (\bar{Y}_j - \hat{Y}_{j})^2  =  \sum_j \sum_i (Y_{ij} - \hat{Y}_{ij})^2 - \sum_j \sum_i (Y_{ij} - \bar{Y}_j)^2
+\]</span></p>
+<p>So, <span class="math inline">\(RSS_{r} - RSS_{f} = SSLF\)</span>!</p>
+<pre class="r"><code>SSPE &lt;- 37581
+SSLF &lt;- 54825-37581; SSLF</code></pre>
+<pre><code>## [1] 17244</code></pre>
+<p>With <span class="math inline">\(SSLF\)</span>, we can compute the F-statistic and p-value.</p>
+<pre class="r"><code>MSLF &lt;- (SSLF/(c-2))
+MSPE &lt;-  (SSPE/(n-c))
+F_star &lt;- MSLF/MSPE; F_star</code></pre>
+<pre><code>## [1] 0.7137649</code></pre>
+<pre class="r"><code>pf(F_star, c-2, n-c, lower.tail=FALSE) #reject</code></pre>
+<pre><code>## [1] 0.6893063</code></pre>
+<p>We fail to reject <span class="math inline">\(H_0:\text{ reduced model describes } E(Y|X_i)\)</span>. Were the null hypothesis true, and <span class="math inline">\(E(Y|X_i) = \beta_0 + \beta_1X_i\)</span>, the probability of obtaining our <span class="math inline">\(F*\)</span> is high.</p>
+</div>

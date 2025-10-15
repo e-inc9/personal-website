@@ -33,16 +33,14 @@ A point estimator has two “stats” we like to keep track of:</p>
 <p><span class="math display">\[
 MSE = V(\hat \theta) + [E(\hat \theta)- \theta]^2
 \]</span>
-Which is equivalent to averaging squared error <span class="math inline">\((\theta - \theta)^2\)</span> over all possible samples.</p>
+Which is equivalent to averaging squared error <span class="math inline">\((\hat \theta - \theta)^2\)</span> over all possible samples.</p>
 <p>Proof:
-<span class="math display">\[
-\begin{align*}
+<span class="math display">\[\begin{align*}
 MSE = E[(\hat \theta - \theta)^2] &amp;= E(\hat \theta^2 - 2 \hat \theta \theta + \theta^2)\\
 &amp;= E(\hat \theta^2) - 2\theta E(\hat \theta)+ \theta^2\\
 &amp;= \left[ V(\hat \theta) + E(\hat \theta)^2 \right] - 2\theta E(\hat \theta)+ \theta^2\\
 &amp;= V(\hat \theta) + \left[ E(\hat \theta) - \theta\right]^2
-\end{align*}
-\]</span>
+\end{align*}\]</span>
 When our point estimator <span class="math inline">\(\hat \theta\)</span> is unbiased, then <span class="math inline">\(E(\hat \theta) = \theta\)</span> and <span class="math inline">\(MSE=V(\hat \theta)\)</span>.</p>
 <p>We can use this measure to justify some commonly used point estimators:</p>
 <div id="sample-mean" class="section level4">
@@ -85,8 +83,7 @@ We evaluate the bias (it’s zero):
 <summary>
 Expand
 </summary>
-<span class="math display">\[
-\begin{align*}
+<span class="math display">\[ \begin{align*}
 E(s^2) &amp;= E(\frac{\sum(X_i - \bar X)^2)}{n-1}) \\
 &amp;= E \left( \frac{\sum X_i^2 - 2 n \bar X \sum  X_i + n \bar X^2}{n-1} \right) \\
 &amp;= \frac{1}{n-1} \left[ \sum E(X_i^2)-n E(\bar X^2) \right] \\
@@ -97,8 +94,7 @@ E(s^2) &amp;= E(\frac{\sum(X_i - \bar X)^2)}{n-1}) \\
 &amp;= \frac{1}{n-1} \left[ n \sigma^2 + n\mu^2 -\frac{1}{n} \left[ n\sigma^2 +n^2\mu^2 \right] \right] \\
 &amp;=\frac{1}{n-1}\left[(n-1)(\sigma^2) +n(\mu^2 -\mu^2)\right]
 = \sigma^2 \implies E(S^2)- \sigma^2 = 0
-\end{align*}
-\]</span>
+\end{align*} \]</span>
 </details>
 <p><em>So that’s why we divide by (n-1), and not n</em>..</p>
 <p>The variance of this estimator depends on the underlying distribution, so there’s no clear-cut expression for it (thank God!).</p>
