@@ -173,10 +173,10 @@ s_{p1} & s_{p2} & \cdots & s_{pp}
 
 Where `\(s_{ab}\)` is the covariance between the ath and bth variable. Naturally, this results in computing the variance for all variables 1 through `\(p\)` along the diagonal of `\(\mathbf{\Sigma}\)`.
 
-From `\(s_{ab}\)` expressed in vector terms, we can work up to a matrix understanding of `\(\mathbf{\Sigma}\)`. We first emphasize that the products of distance are summed over observations. Thus, we can express `\(\mathbf{\Sigma}\)` as the scaled sum of multiple matrices `\(\mathbf{\Sigma_1}, \mathbf{\Sigma_2},... \mathbf{\Sigma_n}\)`, where
+From `\(s_{ab}\)` expressed in vector terms, we can work up to a matrix understanding of `\(\mathbf{\Sigma}\)`. We first emphasize that the products of distance are summed over `\(n\)` observations. Thus, we can express `\(\mathbf{\Sigma}\)` as the scaled sum of multiple matrices `\(\mathbf{M_1}, \mathbf{M_2},... \mathbf{M_n}\)`, where
 
 \[ 
-\mathbf{\Sigma_i} =  (\mathbf{y_i} - \mathbf{\bar{y}}) (\mathbf{y_i} - \mathbf{\bar{y}})' =
+\mathbf{M_i} =  (\mathbf{y_i} - \mathbf{\bar{y}}) (\mathbf{y_i} - \mathbf{\bar{y}})' =
 \begin{pmatrix}
 y_{i1} - \bar{y}_1 \\
 y_{i2} - \bar{y}_2 \\
@@ -188,14 +188,64 @@ y_{i1} - \bar{y}_1 & y_{i2} - \bar{y}_2 & \cdots & y_{ip} - \bar{y}_p
 \end{pmatrix}
 \]
 
-When you scale the sum of all `\(\mathbf{\Sigma_i}'s\)`  by `\(\frac{1}{n-1}\)`, you get the sample covariance matrix `\(\mathbf{\Sigma}\)`. This allows us to calculate the covariance using the matrix alone.
+What this means is that for observation `\(j\)`, we subtract the `colmeans()` corresponding to each variable from `\(j's\)` recorded values. We then multiply the resulting row `\((\mathbf{y_i} - \mathbf{\bar{y}})\)` by the column `\((\mathbf{y_i} - \mathbf{\bar{y}})'\)` to get the product `\(\sum (x_i - \bar{x})(y_i - \bar{y})\)` for all possible combinations of variables. This gives us a matrix `\(\mathbf{M}\)`. We add each `\(\mathbf{M}\)` matrix. Thus, the resulting matrix `\(\sum \mathbf{M_i}\)` is a sum of deviations (all possible combinations of them) over `\(n\)` observations. 
+
+When you scale `\(\sum \mathbf{M_i}\)`  by `\(\frac{1}{n-1}\)`, you get the sample covariance matrix `\(\mathbf{\Sigma}\)`. This allows us to calculate the covariance using the matrix alone.
 \[ \mathbf{\Sigma}= 
-\frac{1}{n-1}\sum_{i=1}^{n} (\mathbf{y_i} - \mathbf{\bar{y}}) (\mathbf{y_i} - \mathbf{\bar{y}})' = 
-\frac{1}{n-1}\left( \sum_{i=1}^n  \mathbf{y_i y_i'} \right) - n\mathbf{\bar y \bar y'} 
+\frac{1}{n-1}\sum_{i=1}^{n} (\mathbf{y_i} - \mathbf{\bar{y}}) (\mathbf{y_i} - \mathbf{\bar{y}})' \]
+
+Which can be simplified to (see p.67 of Rencher and Christensen; requires recasting the above equation on the individual observation `\(s_{jk}\)` level)
+
+\[
+\mathbf{\Sigma}= \frac{1}{n-1}\left( \sum_{i=1}^n  \mathbf{y_i y_i'} \right) - n\mathbf{\bar y \bar y'} 
 \]
 
 Using matrix math, the above can be expressed with the original matrix `\(\mathbf{Y}\)`:
 \[\mathbf{\Sigma} = \mathbf{Y'Y}- \mathbf{Y'} \frac{\mathbf{j}}{1} \cdot \frac{\mathbf{j'}}{n} \mathbf{Y} = \mathbf{Y'}(\mathbf{I} - \frac{\mathbf{J}}{n})\mathbf{Y} \]
+
+<details>
+<summary> Demonstration of the "matrix math" </summary>
+Namely, that `\(\sum_{i=1}^n \mathbf{y_i y_i'} = \mathbf{Y'Y}\)`...
+It was driving me up a wall. 
+
+``` r
+# Matrix 'A'
+a <- matrix(c(1,5,2,1,3,3,4,2,5,6,9,3), byrow=TRUE,nrow=3)
+
+# Observations $y_1... y_3$
+first <- as.matrix(a[1,], nrow=1); second <- as.matrix(a[2,], nrow = 1); third <- as.matrix(a[3,], nrow=1)
+```
+`\(\sum_{i=1}^n \mathbf{y_i y_i'}\)` uses observation rows, then adds up over observations
+
+``` r
+first %*% t(first) + second %*% t(second) + third %*% t(third)
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]   35   44   59   22
+## [2,]   44   70   76   29
+## [3,]   59   76  101   37
+## [4,]   22   29   37   14
+```
+
+$ \mathbf{Y'Y}$ uses variable columns (hence, `\(\mathbf{Y'}\)` leads)
+
+``` r
+t(a) %*% (a)
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]   35   44   59   22
+## [2,]   44   70   76   29
+## [3,]   59   76  101   37
+## [4,]   22   29   37   14
+```
+
+In general, for two matrices `\(A,B\)`, product `\(AB\)` is equivalent to the sum of outer products formed by the `\(k_{th}\)` column of `\(A\)` and the `\(k_{th}\)` row of `\(B\)`.
+
+</details>
 
 ### Example - Sample covariance matrix 
 Take the matrix above and compute it manually. Check with R. Answers should match:

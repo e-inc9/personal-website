@@ -1,5 +1,5 @@
 ---
-title: "Deriving the coefficients for linear regression"
+title: "Deriving the coefficients for linear regression (OLS)"
 output: html_document
 date: '2025-05-19'
 categories:
@@ -11,8 +11,8 @@ header-includes:
 
 
 
-<div id="finding-coefficients-for-linear-regression" class="section level2">
-<h2>Finding coefficients for linear regression</h2>
+<p>We hereby describe the ordinary least squares method.
+## Finding coefficients for linear regression (OLS)</p>
 <p>Recall that given a sample with observations <span class="math inline">\(Y_1, Y_2, \dotsc Y_n\)</span>, the sum of squared differences is given by:</p>
 <p><span class="math display">\[  
 \sum_{i=1}^{n} (Y_i - \hat Y_i)^2 = \sum_{i=1}^n(Y_i - (\hat \beta_0 + \hat \beta_1 X_i))^2  
@@ -23,43 +23,37 @@ header-includes:
 <p><span class="math display">\[
 \frac{d}{dx} \left( \sum_{i=1}^n f_i(x) \right) = \sum_{i=1}^n \frac{d}{dx} f_i(x)
 \]</span></p>
-</div>
 <div id="optimal-hat-beta_0" class="section level2">
 <h2>Optimal <span class="math inline">\(\hat \beta_0\)</span></h2>
 <p>Using <span class="math inline">\(\frac{dh}{d \hat \beta_0} = \sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[ \begin{aligned}
 \sum 2(Y_i - \hat \beta_0  - \hat \beta_1X_i) \cdot -1 &amp;= 0 \\
 \sum (Y_i - \hat \beta_0  - \hat \beta_1X_i) &amp;= 0 \\  
 \sum (Y_i) - n \hat \beta_0  - \hat \beta_1 \sum (X_i) &amp;= 0 \\  
 n \bar Y - n \hat \beta_0  - \hat \beta_1 n \bar X &amp;= 0 \\  
 \bar Y -  \hat \beta_0  - \hat \beta_1  \bar X &amp;= 0 \\
-\end{aligned}
-\]</span></p>
+\end{aligned} \]</span></p>
 <p>Solving for <span class="math inline">\(\hat \beta_0\)</span>, we get:</p>
 <p><span class="math display">\[
 \hat \beta_0 = \bar Y - \hat \beta_1 \bar X
 \]</span></p>
+<p><a href="/proofs_deriv/2025/05/23/distribution-of-hat-beta_0/">The distribution of this estimator</a>.</p>
 </div>
 <div id="optimal-hat-beta_1" class="section level2">
 <h2>Optimal <span class="math inline">\(\hat \beta_1\)</span></h2>
 <p>Using <span class="math inline">\(\frac{dh}{d \hat \beta_1} = \sum 2(Y_i - \hat \beta_0 - \hat \beta_1X_i) \cdot  - X_i\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \sum 2(Y_i - \hat \beta_0 - \hat \beta_1X_i) \cdot - X_i &amp;= 0 \\
 \sum (X_iY_i - \hat \beta_0 X_i - \hat \beta_1X_i^2) &amp;= 0 \\
 \sum (X_iY_i) - \hat \beta_0 \cdot n \bar X - \hat \beta_1 \sum (X_i^2) &amp;= 0 \\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>At this stage, we plug in <span class="math inline">\(\hat \beta_0\)</span>, which we found above, into the expression:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[ \begin{aligned}
 \sum (X_iY_i) - (\bar Y - \hat \beta_1 \bar X) \cdot n \bar X - \hat \beta_1 \sum X_i^2 &amp;= 0 \\
 \sum (X_iY_i) - (n \bar X \bar Y - n \hat \beta_1 \bar X^2) - \hat \beta_1 \sum X_i^2 &amp;= 0 \\
 \sum (X_iY_i) - n \bar X \bar Y + n \hat \beta_1 \bar X^2 - \hat \beta_1 \sum X_i^2 &amp;= 0 \\
 \sum (X_iY_i) - n \bar X \bar Y + \hat \beta_1 \left[ n \bar X^2 - \sum X_i^2 \right] &amp;= 0 \\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Solving for the above, we arrive at:</p>
 <p><span class="math display">\[
 \hat \beta_1 = \frac{- \sum (X_iY_i) - n \bar X \bar Y}{n \bar X^2 - \sum X_i^2 }
@@ -67,10 +61,9 @@ n \bar Y - n \hat \beta_0  - \hat \beta_1 n \bar X &amp;= 0 \\
 <p>We apply the <span class="math inline">\(-1\)</span> in the numerator to the denominator, which gives us the expression for <span class="math inline">\(\hat \beta_0\)</span> in its conventional form:</p>
 <p><span class="math display">\[
 \hat \beta_1 = \frac{\sum (X_iY_i) - n \bar X \bar Y}{ \sum X_i^2 - n \bar X^2 }
-\]</span></p>
-</div>
-<div id="abbreviated-form-of-squared-sums" class="section level2">
-<h2>Abbreviated form of squared sums</h2>
+\]</span>
+<a href="/proofs_deriv/2025/05/19/distribution-of-hat-beta_1">The distribution of this estimator</a>.
+## Abbreviated form of squared sums</p>
 <p>We usually denote:</p>
 <ul>
 <li><span class="math inline">\(\sum (X_iY_i) - n \bar X \bar Y\)</span> by <span class="math inline">\(S_{xy}\)</span><br />
@@ -83,4 +76,16 @@ n \bar Y - n \hat \beta_0  - \hat \beta_1 n \bar X &amp;= 0 \\
 <p><span class="math display">\[
 \hat \beta_1 = \frac{S_{xy}}{S_{xx}}
 \]</span></p>
+</div>
+<div id="important-note" class="section level2">
+<h2>Important note</h2>
+<p>Note that this method of taking the derivative <span class="math inline">\(\sum_{i=1}^{n} (Y_i - \hat Y_i)^2\)</span> does <em>NOT</em> just apply to when <span class="math inline">\(\hat Y_i = \hat \beta_0 + \hat \beta_1 X_i\)</span>. It can be used for any model that is linear in the parameters, such as:</p>
+<p><span class="math display">\[ \begin{aligned}
+&amp;Y = \beta_0 + \beta_1 X \\
+&amp;Y = \beta_0 + \beta_1 X + \beta_2 X^2 \\
+&amp;Y = \beta_0 + \beta_1 \ln(X) \\
+&amp;Y = \beta_0 + \beta_1 e^{X} \\[10pt]
+\end{aligned} \]</span></p>
+<p>As an example, we could use the OLS method on <span class="math inline">\(\hat Y_i = \hat \beta_1 X_i\)</span>, when we wish to fit a line through the origin. It will still give us the single coefficient <span class="math inline">\(\hat \beta_1\)</span> that minimizes the distance between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(\hat Y_i = \hat \beta_1 X_i\)</span>.</p>
+<p>However, when we don’t estimate an intercept, there are consequences: <span class="math inline">\(\sum e_i \ne 0\)</span>, which has other effects such as <span class="math inline">\(SSTO \ne SSE + SSR\)</span>, which means that we cannot interpret <span class="math inline">\(R^2\)</span>, for example, as a proportion of variance explained.</p>
 </div>

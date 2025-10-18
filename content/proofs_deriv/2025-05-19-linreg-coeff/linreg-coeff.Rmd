@@ -1,5 +1,5 @@
 ---
-title: "Deriving the coefficients for linear regression"
+title: "Deriving the coefficients for linear regression (OLS)"
 output: html_document
 date: '2025-05-19'
 categories:
@@ -8,7 +8,8 @@ header-includes:
   - \usepackage{amsmath}
 ---
 
-## Finding coefficients for linear regression
+We hereby describe the ordinary least squares method. 
+## Finding coefficients for linear regression (OLS)
 
 Recall that given a sample with observations $Y_1, Y_2, \dotsc Y_n$, the sum of squared differences is given by:
 
@@ -90,3 +91,18 @@ Then:
 $$
 \hat \beta_1 = \frac{S_{xy}}{S_{xx}}
 $$
+
+## Important note
+
+Note that this method of taking the derivative $\sum_{i=1}^{n} (Y_i - \hat Y_i)^2$ does _NOT_ just apply to when $\hat Y_i = \hat \beta_0 + \hat \beta_1 X_i$. It can  be used for any model that is linear in the parameters, such as: 
+
+\[ \begin{aligned}
+&Y = \beta_0 + \beta_1 X \\
+&Y = \beta_0 + \beta_1 X + \beta_2 X^2 \\
+&Y = \beta_0 + \beta_1 \ln(X) \\
+&Y = \beta_0 + \beta_1 e^{X} \\[10pt]
+\end{aligned} \]
+
+As an example, we could use the OLS method on $\hat Y_i = \hat \beta_1 X_i$, when we wish to fit a line through the origin. It will still give us the single coefficient $\hat \beta_1$ that minimizes the distance between $Y_i$  and $\hat Y_i = \hat \beta_1 X_i$. 
+
+However, when we don't estimate an intercept, there are consequences: $\sum e_i \ne 0$, which has other effects such as $SSTO \ne SSE + SSR$, which means that we cannot interpret $R^2$, for example, as a proportion of variance explained.

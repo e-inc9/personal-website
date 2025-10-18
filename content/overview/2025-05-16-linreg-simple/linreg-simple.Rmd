@@ -160,8 +160,7 @@ $$ \hat \beta_1 = \frac{\sum (X_iY_i) - n \bar X \bar Y}{ \sum X_i^2 - n \bar X^
 [Full derivation here, for those
 interested.](/proofs_deriv/2025/05/19/deriving-the-coefficients-for-linear-regression/)
 
-Under the _Gauss-Markov theorem_, the OLS method is the _best_ way of estimating $\beta_0, \beta_1$ because our estimates will be [a) unbiased and b) have minimum variance out of all unbiased linear estimators.](/overview/2025-09-13-point-estimation/point-estimation/). We also arrive at the same expressions for $\hat \beta_0, \hat \beta_1$ when we use [maximum likelihood estimation](/overview/2025-09-15-maximum-likelihood-estimation/mle/).
-
+Under the _Gauss-Markov theorem_, the OLS method is the _best_ way of estimating $\beta_0, \beta_1$ because our estimates will be [a) unbiased and b) have minimum variance out of all unbiased **linear** estimators.](/overview/2025-09-13-point-estimation/point-estimation/). We also arrive at the same expressions for $\hat \beta_0, \hat \beta_1$ when we use [maximum likelihood estimation](/overview/2025-09-15-maximum-likelihood-estimation/mle/).
 
 Given $\hat \beta_0, \hat \beta_1$, we have 
 
